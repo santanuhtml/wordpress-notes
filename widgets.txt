@@ -1,0 +1,263 @@
+CUSTOM WIDGETS OPTION:
+
+I:
+register a widgets and display it:
+register:
+
+function office_master_widgets() {
+  register_sidebar( array(
+    'name'          => 'Home right sidebar',
+    'id'            => 'office_master_widgts1',
+  ) );
+}
+add_action('widgets_init', 'office_master_widgets');
+
+
+display:
+
+<?php 
+  if(!dynamic_sidebar( 'office_master_widgts1' ) ){
+    echo "Not Found!";
+  }
+?>
+
+II:
+Now we will create our custom widgets. To do it we need to understand
+about OOP of php.
+
+//custom widgets
+  class class_name extends WP_Widget{
+      public function __construct(){
+        parent::__construct(
+          'widgetId',
+          'name of this widgets',
+          array(
+              'description' => 'This is testing widgets',
+            )
+          );
+      }
+
+      public function widget(){
+        echo "This is from custom widgets";
+      }
+  }
+
+
+AND REGISTER IT
+
+function office_master_widgets() {
+    register_sidebar( array(
+      'name'          => 'Home right sidebar',
+      'id'            => 'office_master_widgts1',
+    ) );
+
+    //Register here
+    register_widget('class_name');
+  }
+  add_action('widgets_init', 'office_master_widgets');
+
+
+Note:
+1.first public function is used to bring this custom widgets option. 
+2.second public function is used to bring main custom widgets content.
+3.register this custom widget in office_master_widgets();
+
+next we will add a shortcode in point no 2.
+
+
+ public function widget(){
+    echo do_shortcode('[sliderShortcode id="0"]');
+  }
+
+after this we will get our custom widgets. But when we bring same widget
+again then there will be some id related problame.
+solve this problame given below:
+
+crate another public function:
+
+ public function form(){
+  ?>
+    <label for="">ID</label>
+    <input class="widefat" type="text" name="" id="" value="0">
+  <?php
+  }
+
+
+Now we will make it dynamic:
+
+public function form($value){
+?>
+  <label for="<?php echo $this->get_field_id('id_name'); ?>">ID</label>
+  <input class="widefat" type="text" name="<?php echo $this->get_field_name('name1_id'); ?>" id="<?php echo $this->get_field_id('id_name'); ?>" value="<?php echo $value['name1_id']; ?>">
+<?php
+}
+
+
+Note:
+1.<?php echo $this->get_field_id('id_name'); ?>
+call this in both 'for' and 'id'
+
+2.<?php echo $this->get_field_name('name1_id'); ?>
+call this in 'name' field
+
+3.in this function has only one parameter '$value' and we will call it in 
+'value' 
+<?php echo $value['']; ?>
+now we will add  'name1_id' in it
+<?php echo $value['name1_id']; ?>
+
+-------
+After make this dynamic we will crate another public function:
+
+public function update($new,$old){
+  $old['name1_id'] = $new['name1_id'];
+  return $old;
+}
+
+End of all we have to update public function widget()
+public function widget($v1,$v2){
+  echo do_shortcode('[sliderShortcode id="'.$v2['name1_id'].'"]');
+} 
+
+Note:here v2 us usable, to use we add this first parameter.
+
+
+FULL CODE:
+
+ //custom widgets
+  class class_name extends WP_Widget{
+      public function __construct(){
+        parent::__construct(
+          'widgetId',
+          'name of this widgets',
+          array(
+              'description' => 'This is testing widgets',
+            )
+          );
+      }
+
+      public function form($value){
+      ?>
+        <label for="<?php echo $this->get_field_id('id_name'); ?>">ID</label>
+        <input class="widefat" type="text" name="<?php echo $this->get_field_name('name1_id'); ?>" id="<?php echo $this->get_field_id('id_name'); ?>" value="<?php echo $value['name1_id']; ?>">
+      <?php
+      }
+
+      public function update($new,$old){
+        $old['name1_id'] = $new['name1_id'];
+        return $old;
+      }
+
+      public function widget($v1,$v2){
+        echo do_shortcode('[sliderShortcode id="'.$v2['name1_id'].'"]');
+      }
+  }
+
+--------------------------------
+ADD QUERY IN CUSTOM WIDGETS
+
+We may copy privious FULL CODE and past it, and just rename 
+'class_name' and 'widgetsId'
+
+now here we do not use any short code under  public function widget($v1,$v2)
+here we will create our own query.
+
+public function widget($v1,$v2){
+  //code
+}
+
+naw inside of this we will add 
+
+public function widget($v1,$v2){
+  $post_query = null;
+  $post_query = new WP_Query(array(
+    'post_type' => 'post',
+    'post_per_page' => -1,
+  ));
+  if($post_query->have_posts()){
+    echo '<ul>';
+    while($post_query->have_posts()){
+        $post_query->the_post();
+        echo '<li><a href="'. get_the_permalink() .'">'. get_the_title() .'</a></li>';
+    }
+    echo '</ul>';
+  }
+  wp_reset_postdata();
+  $post_query = null;
+  }
+
+
+FULL CODE:
+
+class class_name2 extends WP_Widget{
+      public function __construct(){
+        parent::__construct(
+          'widgetId2',
+          'name of this widgets2',
+          array(
+              'description' => 'This is testing widgets2',
+            )
+          );
+      }
+
+      public function form($value){
+      ?>
+        <label for="<?php echo $this->get_field_id('id_name'); ?>">ID</label>
+        <input class="widefat" type="text" name="<?php echo $this->get_field_name('name1_id'); ?>" id="<?php echo $this->get_field_id('id_name'); ?>" value="<?php echo $value['name1_id']; ?>">
+      <?php
+      }
+
+      public function update($new,$old){
+        $old['name1_id'] = $new['name1_id'];
+        return $old;
+      }
+
+      public function widget($v1,$v2){
+        $post_query = null;
+        $post_query = new WP_Query(array(
+          'post_type' => 'post',
+          'post_per_page' => -1,
+        ));
+        if($post_query->have_posts()){
+          echo '<ul>';
+          while($post_query->have_posts()){
+              $post_query->the_post();
+              echo '<li><a href="'. get_the_permalink() .'">'. get_the_title() .'</a></li>';
+          }
+          echo '</ul>';
+        }
+        wp_reset_postdata();
+        $post_query = null;
+        }
+      }
+
+----------
+
+
+Now we have to register this widget:
+
+function office_master_widgets() {
+    
+    //ragister sidebare
+    register_sidebar( array(
+      'name'          => 'Home right sidebar',
+      'id'            => 'office_master_widgts1',
+    ) );
+
+    //Register widget
+    register_widget('class_name');
+
+    //Again Register widget here <--------------
+    register_widget('class_name2');
+  }
+  add_action('widgets_init', 'office_master_widgets');
+
+
+----------
+Also we can add our post type as a Widgets.
+
+See at 9:00 min of tutorial no. 53
+
+
+
+

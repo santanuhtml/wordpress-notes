@@ -1,0 +1,696 @@
+						*** WORDPRESS NOTES II ***
+						
+
+I.PROJECT SETTINGS
+****************************************
+
+1.copy project and pest it on :
+
+wordpress/wp-content/themes/YOUR-project
+
+----------------------------
+2.Add Project Image:
+
+add a project image name 'screenShot.png' 
+
+----------------------------
+3.Add style.css
+
+Create 'style.css' page.
+
+now add Theme Stylesheet content in it to get theme related information
+
+----------------------------
+4.Add wordpress functions
+
+To use WordPress head we have to use a function just befor </head> tag:
+wp_head();
+
+similarly to use footer we have to add another function just before </body> tag:
+wp_footer();
+
+----------------------------
+5.Add language attributes:
+
+<html <?php language_attributes(); ?>>
+
+----------------------------
+6.Add Blog info:
+
+bloginfo('charset');
+
+example:
+<meta charset="<?php bloginfo('charset'); ?>">
+
+----------------------------
+To use/call any function we have to use a hook:
+add_action();
+----------------------------
+7.Add dynamic <title></title> tag:
+
+step:1
+create a functions.php page and placed this function given below:
+
+function basicTheme_setup(){
+	add_theme_support('title-tag');
+}
+add_action('after_setup_theme','basicTheme_setup');
+
+step:2
+remove <title></title> tags.
+
+---------------------------
+
+8.Add css and js:
+
+function basicTheme_scripts() {
+	//add css
+	wp_enqueue_style('basicTheme-second-style', get_template_directory_uri().'/css/second-style.css', null, 'v.1.0', 'all');
+
+	//add style.css with ***depandancy, see notes below
+	wp_enqueue_style('basicTheme-style', get_stylesheet_uri(), array('basicTheme-second-style'), 'v.1.0', 'all');
+
+
+	//add js
+	wp_enqueue_script('basicTheme-script', get_template_directory_uri().'/js/javascript.js', null, 'v.1.0', true);
+
+	//add js libary
+	wp_enqueue_script('jquery');
+
+}
+add_action('wp_enqueue_scripts','basicTheme_scripts');
+
+
+
+----------------------------
+9.Add additional scripts in footer after all scripts tags:
+
+function footer_extra_scripts(){ 
+?>
+
+ <script>
+  new WOW().init();
+</script>
+
+<?php
+}
+add_action('wp_footer','footer_extra_scripts',30);
+
+---------------------------
+10.Add header page and footer page
+
+Create header.php and footer.php pages.
+
+connect it with get_header(); & get_footer();
+
+---------------------------
+11. We may also add project title logo as our need
+and to get it dynamically:
+
+<a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a>
+
+---------------------------
+
+
+
+
+
+
+II.ADD PROJECT MENU
+************************************
+
+step1: register
+
+keep this code under basicTheme_setup() function
+CODE:
+
+register_nav_menus(array(
+  'header_menu' => 'Main menu',
+  'footer_menu' => 'footer menu'
+));
+
+---------------
+
+step2: display
+
+i.After create this we will see menu option on our dashboard. After this 
+we will create a menu as our need from dashboard. 
+
+ii.add header menu in header.php
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'header_menu',
+)); ?>
+
+
+add footer menu in footer.php
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'footer_menu',
+)); ?>
+
+---------------
+
+step3: fallback menu:
+
+To get proper menu as our html design we have to create a fallback menu.
+for this we have to create a new function and put menu code inside this
+function
+CODE:
+
+//Add fall back menu
+	function office_master_fallback_menu(){ ?>
+
+	<ul class="nav navbar-nav pull-right">
+        <li class="active">
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">About</a>
+        </li>
+        <li>
+            <a href="#">Blog</a>
+        </li>
+        <li>
+            <a href="#">Team</a>
+        </li>
+        <li>
+            <a href="#"><span>Contact</span></a>
+        </li>
+    </ul>
+
+	<?php }
+
+----------------------
+
+step4:
+
+Now call this under 'wp_nav_menu' by using 'fallback_cb' key.
+After this we can see our menu as our html design.
+**NOTE: If any menu has been already set then it will be not happen, to 
+get it we have to delete this set menu from DASHBORD.
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'header_menu',
+  'fallback_cb' => 'office_master_fallback_menu'
+)); ?>
+
+
+step5:
+Create a menu from DASHBORD and we will see an error design.
+now we have to remove Unnecessary default 'div' from menu code,
+example:
+<div class="menu-header-menu-container"> is the unnecessary div
+
+to remove this we have to add a new key under 'wp_nav_menu()' called
+'container'
+example:
+
+'container' => ''
+
+
+step6:
+To add our nav css we need to add another key called 'menu_class'
+example:
+
+'menu_class' => 'nav navbar-nav pull-right'
+
+
+step7:
+CSS Adjusment:
+End of all we may work with css if we need, here we need to add 'active'
+class on newly created MENU. Here under newly created Menu has an class
+called 'current_page_item' which is represent 'active' class, so we my 
+overlap 'active' css under 'current_page_item'.
+
+example:
+this is our active class under html file,
+
+//.active {
+    //background: #74B9B9 !important;
+    //color: white;
+//}
+
+and have to add this style under 'current_page_item' css on 'style.css' page
+
+
+.current_page_item {
+    background: #74B9B9 !important;
+    color: white;
+}
+
+--------------------------------
+
+
+III.ADD BOOTSTRAP SLIDER
+************************************
+
+step1:
+
+Register custom post:
+
+
+	function basicTheme_custom_post(){
+
+    register_post_type('slider_post',array(
+        'labels' => array(
+            'name' => 'Menu Slider',
+            'menu_name' => 'Slider Menu',
+            'all_items' => 'All Sliders',
+            'add_new' => 'Add New Slider',
+            'add_new_item' => 'Add New Slider Item',
+          ),
+        'public' => true,
+        'supports' => array(
+            'title','thumbnail','revisions','custom-fields','page-attributes'
+          )
+      ));
+  }
+  add_action('init','basicTheme_custom_post');
+
+
+  step2:
+  
+  Display:
+
+  <?php
+
+      $basicTheme = null;
+      $basicTheme = new WP_Query(array(
+
+      'post_type' => 'slider_post', 
+      'posts_per_page' => -1,
+      'order' => 'ASC'
+      ));
+
+      if ($basicTheme->have_posts()) {
+        $x = 0;
+        while($basicTheme->have_posts()){
+          $basicTheme->the_post();
+          $slider_caption = get_post_meta(get_the_ID(),'slider_caption',true);
+          $x++;
+          ?>
+         <!-- slider -->
+        <div class="item <?php if($x==1){echo 'active';} ?>">
+          <?php the_post_thumbnail('slider-size'); ?>
+          <div class="carousel-caption">
+              <h3 class="carousel-title hidden-xs"><?php the_title(); ?></h3>
+              <p class="carousel-body"><?php echo $slider_caption; ?></p>
+          </div>
+        </div>
+        <!-- /slider -->
+        <?php
+      }
+    }
+    wp_reset_postdata(); 
+
+
+    ?>
+       
+    </div>
+
+     <!-- Indicators -->
+    <ol class="carousel-indicators visible-lg">
+      <?php
+       for($i=0; $i<$x; $i++){?>
+        <li data-target="#carousel-1" data-slide-to="<?php echo $i; ?>" class="<?php if($i==0){echo 'actice';} ?>"></li>
+
+      <?php  }
+      ?>
+        
+    </ol>
+
+
+    *** NOTE:
+    Custom field is more important part of wordpress, so practice it as much as
+    possible. It may apply in different way, everything is not possible to note 
+    down, so keep in practive. all the best.
+
+    *To make custom post more user friendly in Dashbord we will use cmb2 plugin
+
+---------------------------
+
+IV.CREATE PAGES:
+************************************
+i.Create  all pages from dashbord according the html template
+example:home,about,services,team,blog,contact etc.
+
+ii.set front page:HOME from dashbord settings options
+
+iii.front-page.php
+rename index.php -> front-page.php
+
+v.index.php
+now create new index.php and connect it with get_header(); & get_footer();
+our blog post will be placed here.
+
+
+III.BLOG PAGES:
+************************************
+i.
+before creating a blog page we need to delete our index.php page and reaplace
+blog.html into index.php page, because in wordpress we use index.php page a 
+blog page.
+
+ii.
+Also we have to set 
+front page:home
+post page:blog
+from the dashbord using settings.
+
+iii.
+Important codes:
+title: the_title();
+blog img: the_post_thumbnail();
+some content: the_excerpt();
+date: echo get_the_date('Y-m-d H:i:s');
+tags: the_tags();
+
+NOTE:
+<?php the_tags('<span class="label label-default">',
+	       '</span> <span class="label label-primary">',
+	       '</span>'); ?>
+
+
+iv.
+To bring a banner image we will use WP_Query to gate it, because
+we will use our default query in our posts.
+CODE:
+------------------
+<?php
+        $blogBanner = null;
+        $blogBanner = new WP_Query(array(
+
+       'post_type' => 'page',
+       'posts_per_page' => -1,
+       ));
+
+        if ($blogBanner->have_posts()) {
+            while($blogBanner->have_posts()){
+               $blogBanner->the_post(); 
+
+               if(get_the_ID()==286){
+
+                  $banner_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID() ), 'full' );
+
+                  ?>
+
+                  <div class="row container-kamn">
+                     <img src="<?php echo $banner_image[0]; ?>" class="blog-post" alt="Feature-img" align="right" width="100%"> 
+                  </div>
+
+                  <?php
+
+               }
+                
+            }
+        }
+        else{
+            echo "no image set";
+        }
+
+    ?>
+
+-----------------
+
+v. To bring post content we my use simple post codes. 
+important codes are given in point no iii.
+
+-----------------
+
+
+Add Pagination
+************************************
+Step1:Just end of while loop add this:
+CODE:
+
+the_posts_pagination();
+
+LOCATION OF IT IN POST CODE:
+
+  }
+
+  the_posts_pagination();
+
+  }
+  else{
+      echo "Not post yeat";
+  }
+
+Step2:Now edit this visible pagination edit using css same as the
+design.
+
+Step3:
+add those code as our need:
+code:
+
+ the_posts_pagination(array(
+  'prev_text' => '«',
+  'next_text' =>'»',
+  'mid_size' =>'3'
+  ));
+
+Step4:
+remove html code from design
+
+--------------------
+
+Create Team page using Variable Template
+************************************
+We can create variable template when we are going to create a page, for this
+we need to get 'slag name' of this page.
+
+example:
+To create team page goto dashbord -> all pages -> team -> permalink -> /team/
+
+now we will reaplace our 'team.html' page to 'page-team.php'
+remove head and footer position and add get_head(); & get_footer();
+After this when we click on team option from menu then we get this page.
+
+----------------------------
+
+Create About Page: using Custom Templage
+************************************
+
+we already create team page using 'variable template', but this kinds of template
+is fixed for any perticular page.
+But now we will use 'custom templage' method to create About page. Advantage of this type
+templage is we can careate another similar template using this and we don't need to create 
+another templage.
+For this:
+step1:
+rename 'about.html' to 'template-about.php'
+after this add get_header() and get_footer() and Just before get_header() add this code:
+CODE:
+
+<?php 
+/*
+Template Name: For About Page
+*/
+get_header(); ?>
+
+
+using this we can get an additional features in 'page attribute'. Just go to the 
+dashbord -> page -> about -> page attribute -> template: For About Page
+
+
+step2:
+now we can bring the content using post code, but we are already use this code to 
+bring banner image in this page. so we will bring this content with help of this 
+banner code area.
+CODE:
+
+<?php 
+if(have_posts()){
+    the_post();
+    $banner_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID() ), 'full' );
+
+    $content = get_the_content();
+?>
+
+Now echo this '$content' variable where we want to display our content.
+CODE:
+
+<?php echo $content; ?>
+
+NOTE:
+the_content() function use to display the content directly.
+get_the_content() function store this value in a variable atfirst and then dispay
+the content with help of thie variable.
+
+--------------------
+
+Create single.php page for single post
+************************************
+(i)to bring a banner image in Single page we may take help of redux frem work.
+(ii) code will be like index page.but here we don't use while loop
+
+Code example:
+
+<?php 
+get_header(); 
+?>
+    <div class="row container-kamn">  
+        <img src="http://via.placeholder.com/1200x400" width="100%" class="blog-post" alt="Feature-img" align="right" width="100%"> 
+    </div>
+    <!--End Header -->
+    <div id="banners"></div>
+    <div class="container">   
+      <div class="row">
+        <div class="col-sm-12">
+          <?php 
+            if(have_posts()){
+                the_post(); ?>
+                <div class="blog-post">
+                  <h1 class="blog-title">
+                    <i class="fa fa-file-text"></i>
+                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                  </h1>
+                  <br>
+                  <?php echo the_post_thumbnail('post-size'); ?>
+                  <br>
+                  <?php the_content() ?>
+                  <div>
+                    <span class="badge">Posted <?php echo get_the_date('Y-m-d H:i:s'); ?></span>
+                    <div class="pull-right">
+                      <?php the_tags('<span class="label label-default">','</span> 
+                                <span class="label label-primary">','</span>'); ?>
+                    </div>         
+                  </div>
+                </div>
+              <?php
+                 
+            }
+          ?>
+        </div>  
+      </div>    
+    </div>  
+  <!--End Main Container -->
+
+<?php get_footer(); 
+?>
+
+
+Create contact page
+************************************
+To create a contact page we need to use two plugins, one 'contact form 7' use
+to create contact form and send value into the database, and second one 
+'contact form 7 db' use to careat a database to store data.
+
+Contact form 7:
+i. first we need to download this plugin and install in to our wordpress, after
+this make it active.
+ii. create a new form and remame it as we want, after this we may see some of 
+demo code inside the form tab, we will delete all of those.
+iii. Now go to the contact page and copy all codes which is placed under form.
+<form>....code.... </form> 
+and past this code inside the form tab.
+iv. now a 'short-code' will be generated, copy this code and past it on any post/page
+ where we want using dashbord. we will see this form.
+
+v.To insert this 'short-code' on our html code we need to insert this function:
+code:
+
+<?php echo do_shortcode( $content ) ?>
+
+in place of $content we will add our 'short-code'
+
+<?php echo do_shortcode( '[contact-form-7 id="454" title="contact form"]' ) ?>
+
+vi.
+Edit: Now go to the form tab of the plugin and edit this from.
+
+vii. We may also edit MESSAGE BODY:
+-----------------------------------
+
+<html><body>
+ <h2>Contact Details of BRAND</h2>
+ <table border="1">
+    <tr><th>NAME</th><td>[your-name]</td></tr>
+    <tr><th>EMAIL</th><td>[your-email]</td></tr>
+    <tr><th>PHONE</th><td>[your-phone]</td></tr>
+    <tr><th>SUBJECT</th><td>[your-subject]</td></tr>
+    <tr><th>MESSAGE</th><td>[your-message]</td></tr>
+ </table>
+</body></html>
+<p> -- <br />
+This e-mail was sent from a contact form on E Buy (http://BRANDNAME.COM/contact-us) </p>
+
+-------------------------------
+
+NOTE: TUTORIL 41 OF EBIT
+-------------------------------
+
+CUSTOM READ MORE OPTION CAREAE ON POST PAGE:
+************************************
+Basic concept:
+CODE:
+
+$var = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
+
+$var = explode(' ',$var,6);
+array_pop($var);
+array_push($var,'<a href="#">Read more</a>');
+$var = implode(' ',$var);
+print_r($var);
+
+Output:
+
+It is a long established Read more
+
+NOTE:
+i.first we convert this string in to array using explode() function
+where we sheparet this array by a space ' ' and  keep only 6 words.
+ii.now we will remove above 6 words so we use array_pop();
+iii.to add a extra content end of the sentence we use array_push()
+iv.to convert this array in to the sentence we use againg implod.
+
+basic2:
+Code:
+
+  function custom_excerpt($number=50,$readmore='read'){
+    $newNumber = $number + 1;
+    $var = explode(' ',strip_tags( get_the_content() ),$newNumber);
+    if(count($var)>=$newNumber){
+      array_pop($var);
+    }
+    array_push($var,'<a href="'.get_the_permalink().'">'. $readmore . '</a>');
+    $var = implode(' ',$var);
+    return $var;
+  }
+
+Call it in index.php
+
+<?php echo custom_excerpt(20,'Learn More'); ?>
+
+-------------------------------
+
+WP BOOTSTRAP NAVWALKER
+********************************
+1.linke this on functions.php page.
+---------------------------------
+
+require_once('wp-bootstrap-navwalker.php');
+
+---------------------------------
+2. add this in header.php page
+---------------------------------
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'header_menu',
+  'fallback_cb' => 'growthmates_fallback_menu',
+  'container' => '',
+  'menu_class' => 'nav navbar-nav navbar-right',
+
+  /* -------------- add this ---------------- */
+  
+  'depth'             => 4,
+  'container_class'   => 'collapse navbar-collapse',
+  'container_id'      => 'bs-example-navbar-collapse-1',
+  'walker'            => new WP_Bootstrap_Navwalker(),
+
+  /* -------------- add this ---------------- */
+
+)); ?>
+
+

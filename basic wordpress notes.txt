@@ -1,0 +1,714 @@
+						*** WORDPRESS NOTES I ***
+
+LEFT TUTORIALS:42,43
+
+To add header:
+get_header();
+
+-------------------
+To add footer:
+get_footer();
+
+-------------------
+Basic pages:
+ 
+index.php
+page.php
+front-page.php
+single.php
+search.php
+archive.php
+404.php
+header.php
+footer.php
+functions.php
+style.css
+screenShot.png
+
+-------------------
+To use WordPress head we have to use a function just befor </head> tag:
+wp_head();
+
+similarly to use footer we have to add another function just before </body> tag:
+wp_footer();
+
+-------------------
+To use/call any function we have to use a hook:
+add_action();
+
+it has some parameters, we will discuss soon.
+
+
+-------------------
+To create dynamic <title></title> tag:
+
+step:1
+create a functions.php page and placed this function given below:
+
+function basicTheme_setup(){
+	add_theme_support('title-tag');
+}
+add_action('after_setup_theme','basicTheme_setup');
+//1st parameter use to apply this functions after setup this theme.
+
+step:2
+remove <title></title> tags.
+
+
+----------------------------
+Add language attributes:
+
+<html <?php language_attributes(); ?>>
+
+----------------------------
+Blog info:
+
+bloginfo('charset');
+
+example:
+<meta charset="<?php bloginfo('charset'); ?>">
+
+-------------------
+To add css and js:
+
+step:1
+create a folder called 'css' and create a new file called 'second-style.css'.
+create another folder called 'js' and create a new file called 'javascript.js'.
+
+step:2
+function basicTheme_scripts() {
+	//add css
+	wp_enqueue_style('basicTheme-second-style', get_template_directory_uri().'/css/second-style.css', null, 'v.1.0', 'all');
+
+	//add style.css with ***depandancy, see notes below
+	wp_enqueue_style('basicTheme-style', get_stylesheet_uri(), array('basicTheme-second-style'), 'v.1.0', 'all');
+
+
+	//add js
+	wp_enqueue_script('basicTheme-script', get_template_directory_uri().'/js/javascript.js', null, 'v.1.0', true);
+
+	//add js libary
+	wp_enqueue_script('jquery');
+
+}
+add_action('wp_enqueue_scripts','basicTheme_scripts');
+
+
+
+NOTE:
+ to add css: wp_enqueue_style();
+ to add js: wp_enqueue_script();
+
+wp_enqueue_style(any-name,second-style.css location, depandancy:here none->none, version, media type:hear all);
+
+wp_enqueue_script(any-name,javascript.js location, depandancy:here none->none, version, script location: true->footer/ false->header);
+
+** To add direct link on wordpress we may add the link without 'https' in place of
+second parameter
+example:
+
+wp_enqueue_style('basicTheme-second-style', '//fonts.googleapis.com/css?family=Roboto:400,400i,500,500i', null, 'v.1.0', 'all');
+
+***dependancy:
+if we want to make any file more important than others, then we use this parameter. in case of
+css-sheet 'style.css' is major sheet, so to keep this file end of all style-sheet we may apply 
+depandancy.
+to apply it we will just add and arry with less important style-sheet name. here is:
+array('basicTheme-second-style');
+for more:
+array('sheet1','sheet2',....n);
+
+get_stylesheet_uri() used to add main style-sheet.
+
+***************** error in jquery libary
+
+
+---------------------
+Add additional scripts in footer after all scripts tags:
+
+function footer_extra_scripts(){ 
+?>
+
+ <script>
+  new WOW().init();
+</script>
+
+<?php
+}
+add_action('wp_footer','footer_extra_scripts',30);
+
+
+-------------------
+To get Project Title:
+ bloginfo('name'); 
+
+and to get it dynamically:
+<a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a>
+
+
+-------------------
+To get POST:
+
+***basic way:
+
+<?php
+  if (have_posts()) {
+    while ( have_posts() ) {
+    the_post();
+?>
+
+  <div class="single_post">
+    <h2>title</h2>
+    <p>content</p>
+  </div>
+  
+<?php        
+    }
+  }
+  else{
+  echo "no post";
+  }
+?>
+
+Note:
+1.have_posts() check is there any post or not
+2.have_posts() under while loop start print eatch post
+3.the_post() use to stop this loop after end of all posts because while loop starts
+here a infinite loop.
+
+post data:
+1.the_title() function use to print title of eatch posts.
+2.the_permalink() used in <a href="#"></a> tag to get the post another page
+3.the_content(); used to get post content
+4.the_excerpt() used to show some of from the contain
+
+
+--------------------
+To get post thumbnail image:
+
+step:1
+call this function under basicTheme_setup() function:
+
+add_theme_support('post-thumbnails');
+
+note:here we use 's' because we will use thumbnail image eatch of the post.
+
+step:2
+now we have to call thumbnail image in our post
+
+the_post_thumbnail();
+
+
+--------------------
+Thumbnail Image size:
+
+step:1
+call this function under basicTheme_setup() function:
+add_image_size('name',width,height, true -> crop the image / false -> don't crop, show original image );
+
+step:2
+naw call this function name inside the 
+the_post_thumbnail('name');
+
+
+---------------------
+
+***Note: after apply image size we get croped image in index.php page as our need,
+but when we click on title also we get same image size in 'single post page' because
+naw we don't have single.php page.
+
+---------------------
+Create single.php to show SINGLE POST  [IMAGE]
+single.php
+
+
+<?php get_header(); ?>
+
+  <div class="single-post">
+    <div class="post-area">
+
+    </div>
+  </div>
+
+<?php get_footer(); ?>
+
+
+---------------------
+Call single post in this page.  
+
+<?php get_header(); ?>
+
+<div class="single-post">
+  <div class="post-area">
+
+  <?php
+  if (have_posts()) {
+    while ( have_posts() ) {
+    the_post();
+  ?>
+
+    <h2><?php the_title(); ?></h2>
+    <?php the_post_thumbnail('thumbnail-image'); ?>
+    <?php the_content(); ?>
+  
+  <?php        
+        }
+      }
+    else{
+    echo "no post";
+    }
+  ?>
+
+  </div>
+</div>
+
+<?php get_footer(); ?>
+
+
+--------------------
+PAGE [image]
+page.php
+
+Bsic structure:
+-------
+<?php get_header(); ?>
+
+  <?php
+  if (have_posts()) {
+    while ( have_posts() ) {
+    the_post();
+  ?>
+
+  <h2><?php the_title(); ?></h2>
+  <?php the_content(); ?>
+  
+  <?php        
+        }
+      }
+    else{
+    echo "no post";
+    }
+  ?>
+ 
+<?php get_footer(); ?>
+
+Note: same a post structure
+
+
+-------------------------
+CREATE front-page.php page:  [IMAGE]
+
+front-page.php 
+
+
+<?php get_header(); ?>
+
+  <h2>Welcome Page</h2>
+ 
+<?php get_footer(); ?>
+
+
+-----------------------
+Create Menu:
+keep this code under basicTheme_setup() function
+
+step:1
+register_nav_menus(array(
+  'header_menu' => 'Main menu',
+  'footer_menu' => 'footer menu'
+));
+
+
+step2:
+After create this we will menu option on our dashboard. After this 
+we will create a menu as our need from dashboard. 
+
+
+step3:
+add header menu in header.php
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'header_menu',
+)); ?>
+
+
+add footer menu in footer.php
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'footer_menu',
+)); ?>
+
+
+---------------------
+404.php PAGE
+
+create 404.php page
+
+<?php get_header(); ?>
+ <h2>no page faund</h2>
+<?php get_footer(); ?>
+
+note:now search anything worng, you will get not found page.
+
+---------------------
+ADD html5 features
+
+add_theme_support('html5');
+
+---------------------
+ADD Search option:
+
+step1
+Create search.php file
+search.php
+
+
+step2
+now add this code in this search.php page, same as post code.
+<?php
+  if (have_posts()) {
+    while ( have_posts() ) {
+    the_post();
+  ?>
+
+    <h2><?php the_title(); ?></h2>
+
+  <?php        
+        }
+      }
+    else{
+    echo "No result found";
+    }
+  ?>
+
+
+step3
+Add this function on front-page.php page:
+get_search_form()
+
+
+step4
+to get typed content:
+<h2><?php printf('Search Result For : %s', get_search_query()); ?></h2>
+
+
+-----------------------
+Add Widgets
+
+step1
+To add widgets we need to create another function in function.php page
+
+function basicTheme_widgets(){
+
+}
+add_action('widgets_init','basicTheme_widgets');
+
+
+Step2
+function basicTheme_widgets(){
+
+    //register first widgets
+    register_sidebar(array(
+      'name' => 'Side Widgets',
+      'id' => 'side_widgets'
+    ));
+
+    //register second_widgets
+    register_sidebar(array(
+      'name' => 'Footer Widgets',
+      'id' => 'footer_widgets'
+    ));
+
+}
+add_action('widgets_init','basicTheme_widgets');
+
+//note: To get eatch widget we have to register a new widgets.
+1.here we differentiate eatch widgets by there 'name' and 'id'.
+
+
+step3
+now we have to call widgets in requer places with this function
+
+dynamic_sidebar('side_widgets');
+
+
+step4
+now go dashbort and add widgets
+
+
+-------------------
+Register Custom POST:
+
+step1:
+we need to create a new function called basicTheme_custom_post()
+
+
+function basicTheme_custom_post(){
+
+  }
+  add_action('init','basicTheme_custom_post');
+
+
+step2:
+need to register the custom theme
+
+
+function basicTheme_custom_post(){
+
+    register_post_type('basicTheme_product',array(
+
+        'labels' => array(
+
+            'name' => 'Basic Theme Products',
+            'menu_name' => 'PRODUCT',
+            'all_items' => 'See ALL',
+            'add_new' => 'Add New Product',
+            'add_new_item' => 'Add New Basic Theme Product',
+
+          ),
+
+        'public' => true,
+
+
+        'supports' => array(
+
+            'title','editor','thumbnail','excerpt','revisions','custom-fields','page-attributes'
+
+          )
+
+
+      ));
+
+  }
+  add_action('init','basicTheme_custom_post');
+
+
+Note:
+1. register_post_type() is the function, use to register the custom post
+2. first parameter 'basicTheme_product' is a post type, it may use to call
+    this function.
+    max. 20 characters, cannot contain capital letters or spaces
+3.
+
+4.name => used to give a Title of this page
+
+5.menu_name => used to give menu name in side bar of dashbord
+
+6.all_item => by default all item option created with menu_name, to edit it
+  we may use all_item
+
+7.add_new =>  by default we get 'Add New' option on our side bar, to edit it
+  we may use add_new 
+
+8.add_new_item => when we click on Add New option we get page, to edit this page
+  title we may use this
+
+9.public => this parameter use to display custom post.
+
+***1 TO 9 ARE THE PRYMARY FEATURES FOR A CUSTOM POST, FOR MORE SEE BELOW
+
+10.supports => here we add page support as our need.
+
+
+-------------------
+Display Custom posts:
+
+before display we need to clear how to get any function from a class.
+
+              class test{
+
+                function testfunction(){
+
+                }
+
+              }
+
+              $ver=new test;                 //(i)
+
+              $ver->testfunction();         //(ii)
+
+
+inside the 'test' class has a object 'testfunction()'. to excess this
+object we have to use those two steps (i) & (ii).
+
+we have to apply this process to get 'custom posts'.
+
+Step1:
+first we have to take a <section></section> in 'front-page.php' page.
+inside of this we have to code like display post.
+
+<?php
+      if (have_posts()) {
+        while(have_posts()){
+          the_post();
+          ?>
+
+          <h2><?php the_title(); ?></h2>
+
+          <?php
+        }
+      }
+
+  ?>
+
+
+here our normal post will be display. Now we will call our custom posts.
+
+
+
+ <section class="custom_post" style="border:1px solid #0f0">
+  <?php
+      $basicTheme = new WP_Query(array(
+
+        'post_type' => 'basicTheme_product', 
+        'category_name' => 'cat',
+        'posts_per_page' => 2
+        ));
+
+      if ($basicTheme->have_posts()) {
+        while($basicTheme->have_posts()){
+          $basicTheme->the_post();
+          $custom_fields_name1 = get_post_meta(get_the_ID(),'mobile_number',true);
+          ?>
+          <div class="single_post">
+          <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+          <p><?php echo $custom_fields_name1; ?></p>
+        </div>
+          <?php
+        }
+      }
+      wp_reset_postdata(); 
+
+  ?>
+  </section>
+
+
+Note:
+1.We take a variable '$basicTheme' where we access the object 'basicTheme_product' 
+form the class 'WP_Query' 
+
+2.Here we assume that 'have_posts()' & 'the_post()' are  object of the class 
+ 'WP_Query' 
+
+3.here class WP_Query has three parameters 
+  i. 'post_type' => name of the object
+        (1) 'post' ----> use to access default posts
+        (3) 'page' ----> to access any page
+        *(3) 'created name' ----> to access our created custom post
+
+  ii. 'category_name' => name of the category as we want to diplay
+        (1) 'category1' -------> to display only single category content
+        (2) 'category1, category2' ------> to display posts which have category1 and 2
+        (3) 'category1+category2' -----> to display post which has under both category
+
+  iii. 'posts_per_page' => number of page we want to see on a single page [10 default]  
+
+4.get_post_meta() used to get custom fields. It has three parametrs.
+  i. get_the_ID() ----> Use to get post id
+  ii. 'name' ------> Name of the custom fields
+  iii. true for single value / false for multiple value [array value].
+
+5.All values of custom post stored in a variable called ' $custom_fields_name1',
+  echo it to get value of it.
+
+6.We may use more custom_fields_name as we want.
+
+**8. wp_reset_postdata(); ---> used to reset data, It is most important function
+  when we use 'WP_Query'
+
+9.Now we display data from this object.
+
+** WP_Query() is the wordpress Class use to get value.
+
+
+-------------------
+ARCHIVE PAGE
+
+step1:create 'archive.php' page
+
+step2: add post code in it
+
+
+-------------------
+To get theme folder dynamically we have to use a 
+function:
+get_template_directory_uri();
+
+for example: to a image, if we use only src="img/image.jpg" then we
+can't get this, to get it we have to use:
+
+src="<?php echo get_template_directory_uri(); ?>/img/image.jpg"
+
+
+----------------------------
+Get thumnail image src link:
+code:
+
+<?php 
+    if(have_posts()){
+        the_post();
+        $banner_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID() ), 'full' );
+    echo $banner_image[0]; 
+
+    } ?>
+
+
+----------------------------
+
+ADD CSS AND JS
+
+Add css and us usign  "get_template_directory_uri();"
+
+example:
+
+<link rel="stylesheet" type="text/css" href="<?php get_template_directory_uri();?>/assets/css/default.css">
+<link rel="stylesheet" type="text/css" href="<?php get_template_directory_uri();?>/assets/css/default.js">
+
+----------------------------
+Add image:
+Add image using "get_template_directory_uri();"
+
+example:
+
+<img src="<?php get_template_directory_uri();?>/assets/img/image1.jpg">
+
+----------------------------
+
+
+
+
+
+INDEX:
+
+Dynamic title : 27
+
+Add css & js : 44
+
+bloginfo  : 93
+
+Post : 101
+
+Post thumbnail image : 138
+
+Thumbnail Image size : 154
+
+Single.php  : 172
+
+page.php  : 220
+
+front-page.php : 250
+
+menu : 263
+
+404.php : 294
+
+add html5 : 305
+
+Search option : 312
+
+widgets : 347
+
+Custom Post: 391
+
+
+

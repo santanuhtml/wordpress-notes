@@ -1,0 +1,1675 @@
+					    *** Premium Theme ***
+
+1. Inside the 'functions.php' file we don't placed all code. We will create
+another folder called 'inc' and create separated files in it and add codes
+as our need.
+
+-----------------------------------
+
+basic folder structure:
+
+Project Name
+	1.css
+		1.1.fonts
+	2.image
+	3.inc
+	4.js
+	5.less
+	6.template-details
+	8.index.php
+	9.style.css
+
+-----------------------------------
+
+wp-config.php
+
+	under this file we get 
+	define('wp_DEBUG','false');
+
+	we need to make it true 'during' development precess to get php errors.
+	End of the project we must make it 'false' again.
+
+
+----------------------------------
+
+Dashboard number list:
+
+2 - Dashboard
+4 - Separator
+5 - Posts
+10 - Media
+15 - Links
+20 - Pages
+25 - Comments
+59 - Separator
+60 - Appearance
+65 - Plugins
+70 - Users
+75 - Tools
+80 - Settings
+99 - Separator
+
+Notes: 
+
+----------------------------------
+
+CREATING THEME OPTION:
+
+Step1:
+create a new file inside 'inc' folder called 'function-admin.php' and 
+set this page like this:
+
+code:
+------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+			ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	echo "<h1>Testing</h1>";
+}
+
+?>
+
+
+
+------------
+
+notes:
+1.
+add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
+
+$capability => it set admin,editor,wirter etc parts
+$menu_slug => it set url link of this page, It will be signle word only.
+$function => it set the function name where we can add our requer code
+$position => it set the position of this option on the list of dashbord option
+
+2.
+sunset_theme_create_page()
+
+This fuction use to get this page relaed  content
+
+------------
+
+step2:
+now we will add some submenu pages.
+put this submenu code inside the main function called 'sunset_add_admin_page()'
+code:
+
+------------
+
+//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset settings' , 'settings' , 'manage_options' , 'edit_sunset_settings' , 'sunset_theme_settings_page');
+
+------------
+
+Note:
+add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
+
+$parent_slug => It is main slug which is used in add_menu_page();
+
+------------
+
+Also add this page content function
+code:
+
+------------
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>settings page</h1>";
+}
+
+------------
+
+So the updated code is
+
+------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset settings' , 'settings' , 'manage_options' , 'edit_sunset_settings' , 'sunset_theme_settings_page');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	echo "<h1>Testing</h1>";
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>settings page</h1>";
+}
+
+?>
+
+-------------
+Step3:
+
+*Note: here we see that Sunset theme option comes repetativly, to get
+it one time we have to modify our 'add_submenu_page()' option using 
+same parameter of 'add_menu_page()'.
+and we have to remove 'function premium_theme_admin_page()' right now 
+because we don't need any more.
+Code:
+
+-------------
+
+//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'Settings' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+
+-------------
+
+So the updated code is
+
+-------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'Settings' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	echo "<h1>Testing</h1>";
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>settings page</h1>";
+}
+
+?>
+
+-----------
+
+Step4:
+now we will create another sub-page for css
+code:
+
+----------- 
+
+//Custom CSS page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+-----------
+
+and add the function for this:
+code:
+
+-----------
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+-----------
+
+Updated code is:
+
+-----------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'Settings' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	echo "<h1>Testing</h1>";
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+-----------------
+Step5:
+Now we have to create some pages for page content like admin page,
+css page etc.
+To do this we have to crate a folder insite the 'inc' folder and
+create an file as we want, heare called 'sunset-theme-admin.php'
+
+after this we have to link this page inside the 'sunset_theme_create_page()'
+function.
+code:
+
+-----------------
+premium-theme-admin.php
+
+-------
+<h1>Premium Theme Option</h1>
+<h3 class="title">Manage option</h3>
+<p>Customize the default Wordpress Appearance option</p>
+<?php bloginfo('name'); ?>
+
+-------
+
+add the link:
+
+-------
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+-------
+Updated code for initial stage:
+-------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+===================================
+
+Up to this we create only admin page and its differents option and their different 
+pages. Now we will learn about how to make dynamic our Wordpress site using those.
+
+===================================
+
+SETTINGS API:
+It is a collection of functions, hooks and actions to create custom action and 
+it save automatically on database.
+
+step1:
+
+We need to create another function called 
+sunset_custom_settings() 
+BUT WE CALL the function hook inside the main admin function
+sunset_add_admin_page()
+note:
+BECAUSE if the system did not work properly OR our theme did
+not install properly then we may avoide this theme related
+custom settings.
+
+step2:
+Now we have to register our settings inside the newly created function called
+sunset_custom_settings()
+
+----------------------------------
+Updated code:
+----------------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	register_setting('sunset-settings-group','first_name');
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+----------------------
+Notes:
+register_settings:
+It gives the ability to create a specific section on database and we REPEAT it 
+to for eatch inputs [like input,dropdown,checkbox,dropdown etc.] of this specific 
+section.
+
+
+register_settings($option_group, $option_name, callback $sanitize_callback);
+
+$option_group: collection of all custom inputs which is placed in single place
+our database. We will use a unique name to set a name. Example:
+sunset-settings-group
+
+$option_name: It is name of single custom imput. Example:
+first_name
+
+** In case of Group option name we may separate two words by dash '-', example:
+sunset-settings-group
+But for the signle option name we will use underscore '_', for example:
+first_name
+
+----------------------
+
+Now call this 'sunset-settings-group' in sunset-theme-admin.php page inside the
+form.
+
+updated code of 'sunset-theme-admin.php'
+----------------------
+
+<h1>Sunset Theme Option</h1>
+<form method="post">
+	<?php settings_fields('sunset-settings-group'); ?>
+</form>
+
+---------------------
+
+SECTION ON DASH BOARD:
+step1
+Now create sub-section on dashbord. To do this call 'add_settings_section()'  after 'register_settings()'
+
+---------------------
+
+add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+
+---------------------
+
+Note:
+add_settings_section();
+1. It is the ID of this sub-section
+2. Title of this section
+3. It is the function which we have to call to generate HTML
+4. ID of this page where we want to print this sub-section
+
+---------------------
+
+step2:
+now create the function to call this HTML code (Point no. 3).
+
+--------------------
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+--------------------
+
+Updated code:
+
+--------------------
+
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	register_setting('sunset-settings-group','first_name');
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+---------------------
+
+Now finally we have to update this 'sunset-theme-admin.php'
+
+---------------------
+
+<h1>Sunset Theme Option</h1>
+<h3 class="title">Manage option</h3>
+<p>Customize Sidebar Option</p>
+
+<form method="post">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+</form>
+
+-------------------
+
+After this we can see a separated section on our dashbord.
+
+CUSTOM INPUT:
+Now we have to add custom input/ custom HTML field by using 'add_settings_field'
+by adding just after 'add_settings_section'
+
+-------------------
+
+add_settings_field('sidebar-name', 'First Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+
+-------------------
+
+Note:
+add_settings_field()
+
+1. Unique ID
+2. Title of the section
+3. function which is called to generate our content
+4. Name of the MAIN page ID From which this option belongs
+5. Sub-section ID
+
+------------------
+
+Now we create the callback function which contain our content like input fields
+
+------------------
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" />';
+}
+
+------------------
+Note:
+1. esc_attr(): use to save our database from users inputs.
+
+2. get_option('first_name'): 
+
+3. value="'.$firstName.'" : 
+
+------------------
+
+Updated Code:
+
+------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	register_setting('sunset-settings-group','first_name');
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+	add_settings_field('sidebar-name', 'First Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" />';
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+-----------------------
+Also update 'sunset-theme-admin.php' page
+
+-----------------------
+
+<h1>Sunset Theme Option</h1>
+<?php settings_errors(); ?>
+<form method="post" action="options.php">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+	<?php submit_button(); ?>
+</form>
+
+-----------------------
+Note:
+1. settings_errors() : to get any error
+
+2. action="options.php" : in wordpress by default all inputs are redirect
+to this options.php page.
+
+3. submit_button() : use to save our input.
+
+=======================
+
+Up to this we get Basic input fields
+
+=======================
+
+Now we will start to add our some of inputs fields.
+-----------------------
+
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	//each inputs like first name, last name, email 
+	register_setting('sunset-settings-group','first_name');
+	register_setting('sunset-settings-group','last_name');
+	register_setting('sunset-settings-group','twitter_handler');
+	register_setting('sunset-settings-group','facebook_handler');
+	register_setting('sunset-settings-group','gplus_handler');
+	
+	//section on dashbord
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+
+	//label like name, email
+	add_settings_field('sidebar-name', 'Full Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-twitter', 'twitter handler', 'sunset_sidebar_twitte', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-facebook', 'facebook handler', 'sunset_sidebar_facebook', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-gplus', 'Google+ handler', 'sunset_sidebar_gplus', 'edit_sunset', 'sunset-sidebar-options');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" /> <input type="text" name="last_name" value="'.$lastName.'" placeholder="Last Name" />';
+}
+
+function sunset_sidebar_twitte(){
+	$twitter = esc_attr(get_option('twitter_handler'));
+
+	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter Handler" />';
+}
+
+function sunset_sidebar_facebook(){
+	$facebook = esc_attr(get_option('facebook_handler'));
+
+	echo '<input type="text" name="facebook_handler" value="'.$facebook.'" placeholder="facebook Handler" />';
+}
+
+function sunset_sidebar_gplus(){
+	$gplus = esc_attr(get_option('gplus_handler'));
+
+	echo '<input type="text" name="gplus_handler" value="'.$gplus.'" placeholder="Google Plus Handler" />';
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+===============================
+
+Now we have to add sanitizetion on our inputs and to remove all invalid stuffs.
+
+Let's we add sanitizetion in twitter input, so we have to add a function 
+'sunset_sanitize_twitter_handler()' in register_setting(); 
+
+code:
+-------------------------------
+
+register_setting('sunset-settings-group','twitter_handler', 'sunset_sanitize_twitter_handler');
+
+-------------------------------
+
+and the function is:
+
+-------------------------------
+
+//sanitization settings
+function sunset_sanitize_twitter_handler($input){
+	$output = sanitize_text_field($input);
+	return $output;
+}
+
+------------------------------
+
+Note:
+
+sanitize_text_field():
+it is inbuild function in wordpress which checks invalid UTF-8, remove line break,
+speces, special characters etc.
+
+the variable '$input' contain input value of twitter and here we sanitize using this
+sanitize_text_field();
+
+for input description we may add:
+'<p class="description">Input your twitter user with out @ character.</p>'
+
+------------------------------
+
+Now also we reaplace special charecter
+
+------------------------------
+
+//sanitization settings
+function sunset_sanitize_twitter_handler($input){
+	$output = sanitize_text_field($input);
+	$output = str_replace('@', '', $output);
+	return $output;
+}
+
+------------------------------
+
+UPDATED CODE:
+
+------------------------------
+
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	//each inputs like first name, last name, email 
+	register_setting('sunset-settings-group','first_name');
+	register_setting('sunset-settings-group','last_name');
+	register_setting('sunset-settings-group','user_description');
+	register_setting('sunset-settings-group','twitter_handler', 'sunset_sanitize_twitter_handler');
+	register_setting('sunset-settings-group','facebook_handler');
+	register_setting('sunset-settings-group','gplus_handler');
+	
+	//section on dashbord
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+
+	//label like name, email
+	add_settings_field('sidebar-name', 'Full Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-description', 'Description', 'sunset_sidebar_description', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-twitter', 'twitter handler', 'sunset_sidebar_twitte', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-facebook', 'facebook handler', 'sunset_sidebar_facebook', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-gplus', 'Google+ handler', 'sunset_sidebar_gplus', 'edit_sunset', 'sunset-sidebar-options');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" /> <input type="text" name="last_name" value="'.$lastName.'" placeholder="Last Name" />';
+}
+
+function sunset_sidebar_description(){
+	$description = esc_attr(get_option('user_description'));
+
+	echo '<input type="text" name="user_description" value="'.$description.'" placeholder="Description" /><p class="description">Write something smart</p>';
+}
+
+function sunset_sidebar_twitte(){
+	$twitter = esc_attr(get_option('twitter_handler'));
+
+	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter Handler" /><p class="description">Input your twitter user with out @ character.</p>';
+}
+
+function sunset_sidebar_facebook(){
+	$facebook = esc_attr(get_option('facebook_handler'));
+
+	echo '<input type="text" name="facebook_handler" value="'.$facebook.'" placeholder="facebook Handler" />';
+}
+
+function sunset_sidebar_gplus(){
+	$gplus = esc_attr(get_option('gplus_handler'));
+
+	echo '<input type="text" name="gplus_handler" value="'.$gplus.'" placeholder="Google Plus Handler" />';
+}
+
+//sanitization settings
+function sunset_sanitize_twitter_handler($input){
+	$output = sanitize_text_field($input);
+	$output = str_replace('@', '', $output);
+	return $output;
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+-----------------------------
+
+ADD ADMIN PAGE CSS:
+
+step1:
+First we need to create new file called 'enqueue.php' under 'inc' folder.
+and link this file with 'functions.php' using this:
+
+-----------------------------
+
+require get_template_directory().'/inc/enqueue.php';
+
+-----------------------------
+
+and put this basic code inside the enqueue.php file:
+
+-----------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN ENQUEUE FUNCTIONS
+	===========================
+*/
+	
+?>
+
+-----------------------------
+
+step2:
+Now update our 'enqueue.php'
+
+-----------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN ENQUEUE FUNCTIONS
+	===========================
+*/
+
+	function sunset_load_admin_scripts(){
+		wp_register_style('sunset_admin', get_template_directory_uri(). '/css/sunset.admin.css', array(), '1.0.0', 'all');
+
+		wp_enqueue_style('sunset_admin');
+	}
+	add_action('admin_enqueue_scripts', 'sunset_load_admin_scripts');
+?>
+
+----------------------------
+
+create another file called 'sunset.admin.css' inside the 'css' folder and 
+update it.
+
+sunset.admin.css
+----------------------------
+
+/*
+	@package sunsettheme
+*/
+
+#wpbody{
+	border: 2px solid #f00;
+}
+
+-----------------------------
+
+Now here we can see this newly added css on our all pages of dashbord, but
+we need to add this css only our theme admin page. so we have to add a 
+variable called '$hook' inside the function sunset_load_admin_scripts($hook).
+
+updated code:
+
+-----------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN ENQUEUE FUNCTIONS
+	===========================
+*/
+
+	function sunset_load_admin_scripts($hook){
+		if ('toplevel_page_edit_sunset' != $hook) {
+			return;
+		}
+		
+		wp_register_style('sunset_admin', get_template_directory_uri(). '/css/sunset.admin.css', array(), '1.0.0', 'all');
+
+		wp_enqueue_style('sunset_admin');
+	}
+	add_action('admin_enqueue_scripts', 'sunset_load_admin_scripts');
+?>
+
+-----------------------------
+
+Note:
+every dashbord pages has their unique name, we can see this by using 
+'inspect'/ ctrl+u
+
+for the first page of our sunset theme we get 'toplevel_page_edit_sunset' where
+we want to add our css only so we add this:
+
+if ('toplevel_page_edit_sunset' != $hook) {
+	return;
+}
+
+here we checks if this we get don't get this page this newly created css will not
+execute.
+
+----------------------------
+
+DASHBORD PREVIEW:
+Here we are going to create a preview section on our dashbord which is 
+totally optional.
+
+first we create some html divs for our inputs inside the 'sunset-theme-admin.php'
+page.
+
+----------------------------
+
+<div class="sunset-sidebar-preview">
+	<div class="sunset-sidebar">
+		<h1 class="sunset-username"></h1>
+		<h2 class="sunset-description"></h2>
+		<div class="icon-wrapper"></div>
+	</div>
+</div>
+
+----------------------------
+
+so updated code is
+
+----------------------------
+
+<h1>Sunset Theme Option</h1>
+<?php settings_errors(); ?>
+
+<div class="sunset-sidebar-preview">
+	<div class="sunset-sidebar">
+		<h1 class="sunset-username"></h1>
+		<h2 class="sunset-description"></h2>
+		<div class="icon-wrapper"></div>
+	</div>
+</div>
+
+<form method="post" action="options.php">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+	<?php submit_button(); ?>
+</form>
+
+
+----------------------------
+
+now we will bring our inputs using our old code.
+
+----------------------------
+
+<h1>Sunset Theme Option</h1>
+<?php settings_errors(); ?>
+
+<?php
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+	$fullName = $firstName . ' '. $lastName;
+
+	$description = esc_attr(get_option('user_description'));
+?>
+
+<div class="sunset-sidebar-preview">
+	<div class="sunset-sidebar">
+		<h1 class="sunset-username"><?php echo $fullName; ?></h1>
+		<h2 class="sunset-description"><?php echo $description; ?></h2>
+		<div class="icon-wrapper"></div>
+	</div>
+</div>
+
+<form method="post" action="options.php" class="sunset-general-form">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+	<?php submit_button(); ?>
+</form>
+
+------------------------
+
+now we will add css code as our need on 'sunset.admin.css'
+
+------------------------
+
+/*
+	@package sunsettheme
+*/
+#setting-error-settings_updated{
+	margin-bottom: 15px;
+	margin-left: auto;
+}
+.sunset-general-form,
+.sunset-sidebar-preview{
+	display: inline-block;
+	float: left;
+}
+.sunset-sidebar-preview{
+	max-width: 300px;
+	padding: 20px;
+  margin-right: 30px;
+  background-color: #23282d;
+  margin-bottom: 15px;
+}
+.sunset-sidebar-preview h1,
+.sunset-sidebar-preview h2{
+	color: #fff;
+}
+.sunset-sidebar-preview h1{
+	font-weight: 400;
+}
+.sunset-sidebar-preview h2{
+	font-weight: 300;
+	font-size: 15px;
+}
+
+.sunset-general-form{
+	padding: 20px;
+  border: 1px solid #d1d1d1;
+}
+
+
+===============================
+Add Admin Js
+===============================
+now we need to add admin js file.
+to do it we need to create a file called 'sunset.admin.js' inside the 
+js folder. and we need to call it inside the 'enqueue.php' file under
+sunset_load_admin_scripts() function.
+
+-------------------------------
+
+//add admin js
+wp_register_script('sunset-admin-script', get_template_directory_uri(). '/js/sunset.admin.js', array('jquery'), '1.0.0', true);
+wp_enqueue_script('sunset-admin-script');
+
+-------------------------------
+Updated code is:
+-------------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN ENQUEUE FUNCTIONS
+	===========================
+*/
+
+	function sunset_load_admin_scripts($hook){
+		if ('toplevel_page_edit_sunset' != $hook) {
+			return;
+		}
+		
+		//add admin css
+		wp_register_style('sunset_admin', get_template_directory_uri(). '/css/sunset.admin.css', array(), '1.0.0', 'all');
+		wp_enqueue_style('sunset_admin');
+
+		//add admin js
+		wp_register_script('sunset-admin-script', get_template_directory_uri(). '/js/sunset.admin.js', array('jquery'), '1.0.0', true);
+		wp_enqueue_script('sunset-admin-script');
+
+
+	}
+	add_action('admin_enqueue_scripts', 'sunset_load_admin_scripts');
+?>
+
+--------------------------------
+Note: we can see this link under sunset admin page after inspect.
+--------------------------------
+
+===============================
+Add Admin Media
+===============================
+step1:
+To add a media file for our admin page we may simply add a wordpress 
+default function called 'wp_enqueue_media();' under sunset_load_admin_scripts().
+
+-------------------------------
+updated code:
+-------------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN ENQUEUE FUNCTIONS
+	===========================
+*/
+
+	function sunset_load_admin_scripts($hook){
+		if ('toplevel_page_edit_sunset' != $hook) {
+			return;
+		}
+		
+		//add admin css
+		wp_register_style('sunset_admin', get_template_directory_uri(). '/css/sunset.admin.css', array(), '1.0.0', 'all');
+		wp_enqueue_style('sunset_admin');
+
+		//add media file under admin page
+		wp_enqueue_media();
+
+		//add admin js
+		wp_register_script('sunset-admin-script', get_template_directory_uri(). '/js/sunset.admin.js', array('jquery'), '1.0.0', true);
+		wp_enqueue_script('sunset-admin-script');
+
+
+	}
+	add_action('admin_enqueue_scripts', 'sunset_load_admin_scripts');
+?>
+
+-------------------------------
+step2:
+Now we will create input fields for this button.
+-------------------------------
+
+1.
+register_setting('sunset-settings-group','profile_picture');
+
+2.
+add_settings_field('sidebar-profile-picture', 'Profile Picture', 'sunset_sidebar_profile', 'edit_sunset', 'sunset-sidebar-options');
+
+3.
+function sunset_sidebar_profile(){
+	$picture = esc_attr(get_option('profile_picture'));
+
+	echo '<input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button"><input type="hidden" id="profile-picture" name="profile_picture" value="'.$picture.'" />';
+}
+
+------------------------------
+updated code:
+------------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	//each inputs like first name, last name, email 
+	register_setting('sunset-settings-group','profile_picture');
+	register_setting('sunset-settings-group','first_name');
+	register_setting('sunset-settings-group','last_name');
+	register_setting('sunset-settings-group','user_description');
+	register_setting('sunset-settings-group','twitter_handler', 'sunset_sanitize_twitter_handler');
+	register_setting('sunset-settings-group','facebook_handler');
+	register_setting('sunset-settings-group','gplus_handler');
+	
+	//section on dashbord
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+
+	//label like name, email
+	add_settings_field('sidebar-profile-picture', 'Profile Picture', 'sunset_sidebar_profile', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-name', 'Full Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-description', 'Description', 'sunset_sidebar_description', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-twitter', 'twitter handler', 'sunset_sidebar_twitte', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-facebook', 'facebook handler', 'sunset_sidebar_facebook', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-gplus', 'Google+ handler', 'sunset_sidebar_gplus', 'edit_sunset', 'sunset-sidebar-options');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_sidebar_profile(){
+	$picture = esc_attr(get_option('profile_picture'));
+
+	echo '<input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button"><input type="hidden" id="profile-picture" name="profile_picture" value="'.$picture.'" />';
+}
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" /> <input type="text" name="last_name" value="'.$lastName.'" placeholder="Last Name" />';
+}
+
+function sunset_sidebar_description(){
+	$description = esc_attr(get_option('user_description'));
+
+	echo '<input type="text" name="user_description" value="'.$description.'" placeholder="Description" /><p class="description">Write something smart</p>';
+}
+
+function sunset_sidebar_twitte(){
+	$twitter = esc_attr(get_option('twitter_handler'));
+
+	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter Handler" /><p class="description">Input your twitter user with out @ character.</p>';
+}
+
+function sunset_sidebar_facebook(){
+	$facebook = esc_attr(get_option('facebook_handler'));
+
+	echo '<input type="text" name="facebook_handler" value="'.$facebook.'" placeholder="facebook Handler" />';
+}
+
+function sunset_sidebar_gplus(){
+	$gplus = esc_attr(get_option('gplus_handler'));
+
+	echo '<input type="text" name="gplus_handler" value="'.$gplus.'" placeholder="Google Plus Handler" />';
+}
+
+//sanitization settings
+function sunset_sanitize_twitter_handler($input){
+	$output = sanitize_text_field($input);
+	$output = str_replace('@', '', $output);
+	return $output;
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+-------------------------------
+
+step3:
+now we have to update our 'sunset.admin.js' file:
+
+-------------------------------
+
+jQuery(document).ready(function($){
+
+	var mediaUploder;
+
+	$('#upload-button').on('click', function(e){
+
+		e.preventDefault();
+		if(mediaUploder){
+			mediaUploder.open();
+			return;
+		}
+
+		mediaUploder = wp.media.frames.file_frame = wp.media({
+			title: 'Choose a Profile Picture',
+			button:{
+				text:'Choose Picture'
+			},
+			multiple:false,
+		});
+
+		mediaUploder.on('select', function(){
+			attachment = mediaUploder.state().get('selection').first().toJSON();
+			$('#profile-picture').val(attachment.url);
+			$('#profile-picture-preview').css('background-image','url('+ attachment.url +')');
+		});
+
+		mediaUploder.open();
+
+	});
+
+});
+
+----------------------------
+
+step4:
+now we will update our prewiew option on 'sunset-theme-admin.php'
+
+---------------------------
+
+1.
+$picture = esc_attr(get_option('profile_picture'));
+
+2.
+<div class="image-container">
+	<div id="profile-picture-preview" class="profile-picture" style="background-image:url(<?php echo $picture; ?>);">
+	</div>
+</div>
+
+---------------------------
+updated code is:
+---------------------------
+
+
+<h1>Sunset Theme Option</h1>
+<?php settings_errors(); ?>
+
+<?php
+  $picture = esc_attr(get_option('profile_picture'));
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+	$fullName = $firstName . ' '. $lastName;
+
+	$description = esc_attr(get_option('user_description'));
+?>
+
+<div class="sunset-sidebar-preview">
+	<div class="sunset-sidebar">
+		<div class="image-container">
+			<div id="profile-picture-preview" class="profile-picture" style="background-image:url(<?php echo $picture; ?>);">
+			</div>
+		</div>
+		<h1 class="sunset-username"><?php echo $fullName; ?></h1>
+		<h2 class="sunset-description"><?php echo $description; ?></h2>
+		<div class="icon-wrapper"></div>
+	</div>
+</div>
+
+<form method="post" action="options.php" class="sunset-general-form">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+	<?php submit_button(); ?>
+</form>
+
+
+---------------------------
+
+end of this we may update our 'sunset.admin.css' file as our need.
+
+---------------------------
+
+.profile-picture img{
+	width: 100%;
+	height: auto;
+}
+.profile-picture{
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+===========================
+---------------------------
+SOME OF CHANGES:
+1.
+Now we are going to change some of our option Names before
+create subpages.
+
+function-admin.php
+---------------------------
+
+//gennerate sunset admin sub-pages
+add_submenu_page( 'edit_sunset' , 'Sunset Theme Option' , 'General' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+
+               ||
+               \/
+
+add_submenu_page( 'edit_sunset' , 'Sunset Sidebar Option' , 'Sidebar' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+
+---------------------------
+
+UPDATED CODE:
+
+---------------------------
+
+<?php
+/*
+	@package sunsettheme
+	===========================
+	    ADMIN PAGE
+	===========================
+*/
+function sunset_add_admin_page(){
+
+	//gennerate sunset admin sub pages
+ 	add_menu_page( 'Sunset Theme Option', 'Sunset', 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page' , get_template_directory_uri().'/image/sunset-icon.png' , 110 );
+
+ 	//gennerate sunset admin sub-pages
+ 	add_submenu_page( 'edit_sunset' , 'Sunset Sidebar Option' , 'Sidebar' , 'manage_options' , 'edit_sunset' , 'sunset_theme_create_page');
+ 	//css page
+ 	add_submenu_page( 'edit_sunset' , 'Sunset CSS Options' , 'Custom CSS' , 'manage_options' , 'edit_sunset_css' , 'sunset_theme_settings_page');
+
+ 	//Active custom settings
+ 	add_action('admin_init','sunset_custom_settings');
+
+}
+add_action( 'admin_menu', 'sunset_add_admin_page' );
+
+function sunset_custom_settings(){
+	//each inputs like first name, last name, email 
+	register_setting('sunset-settings-group','profile_picture');
+	register_setting('sunset-settings-group','first_name');
+	register_setting('sunset-settings-group','last_name');
+	register_setting('sunset-settings-group','user_description');
+	register_setting('sunset-settings-group','twitter_handler', 'sunset_sanitize_twitter_handler');
+	register_setting('sunset-settings-group','facebook_handler');
+	register_setting('sunset-settings-group','gplus_handler');
+	
+	//section on dashbord
+	add_settings_section('sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'edit_sunset');
+
+	//label like name, email
+	add_settings_field('sidebar-profile-picture', 'Profile Picture', 'sunset_sidebar_profile', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-name', 'Full Name', 'sunset_sidebar_name', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-description', 'Description', 'sunset_sidebar_description', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-twitter', 'twitter handler', 'sunset_sidebar_twitte', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-facebook', 'facebook handler', 'sunset_sidebar_facebook', 'edit_sunset', 'sunset-sidebar-options');
+
+	add_settings_field('sidebar-gplus', 'Google+ handler', 'sunset_sidebar_gplus', 'edit_sunset', 'sunset-sidebar-options');
+}
+
+function sunset_sidebar_options(){
+	echo "Customize your sidebar option";
+}
+
+function sunset_sidebar_profile(){
+	$picture = esc_attr(get_option('profile_picture'));
+
+	echo '<input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button"><input type="hidden" id="profile-picture" name="profile_picture" value="'.$picture.'" />';
+}
+
+function sunset_sidebar_name(){
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+
+	echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" /> <input type="text" name="last_name" value="'.$lastName.'" placeholder="Last Name" />';
+}
+
+function sunset_sidebar_description(){
+	$description = esc_attr(get_option('user_description'));
+
+	echo '<input type="text" name="user_description" value="'.$description.'" placeholder="Description" /><p class="description">Write something smart</p>';
+}
+
+function sunset_sidebar_twitte(){
+	$twitter = esc_attr(get_option('twitter_handler'));
+
+	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter Handler" /><p class="description">Input your twitter user with out @ character.</p>';
+}
+
+function sunset_sidebar_facebook(){
+	$facebook = esc_attr(get_option('facebook_handler'));
+
+	echo '<input type="text" name="facebook_handler" value="'.$facebook.'" placeholder="facebook Handler" />';
+}
+
+function sunset_sidebar_gplus(){
+	$gplus = esc_attr(get_option('gplus_handler'));
+
+	echo '<input type="text" name="gplus_handler" value="'.$gplus.'" placeholder="Google Plus Handler" />';
+}
+
+//sanitization settings
+function sunset_sanitize_twitter_handler($input){
+	$output = sanitize_text_field($input);
+	$output = str_replace('@', '', $output);
+	return $output;
+}
+
+function sunset_theme_create_page(){
+	//generation of admin page
+	require_once(get_template_directory().'/inc/templates/sunset-theme-admin.php');
+}
+
+function sunset_theme_settings_page(){
+	//generation of our admin page
+	echo "<h1>CSS page</h1>";
+}
+
+?>
+
+
+---------------------------
+
+2.
+We also change the page title 'sunset-theme-admin.php'
+
+---------------------------
+
+<h1>Sunset Theme Option</h1>
+
+---------------------------
+
+UPDATED CODE:
+
+---------------------------
+
+<h1>Sunset Sidebar Option</h1>
+<?php settings_errors(); ?>
+
+<?php
+  $picture = esc_attr(get_option('profile_picture'));
+	$firstName = esc_attr(get_option('first_name'));
+	$lastName = esc_attr(get_option('last_name'));
+	$fullName = $firstName . ' '. $lastName;
+
+	$description = esc_attr(get_option('user_description'));
+?>
+
+<div class="sunset-sidebar-preview">
+	<div class="sunset-sidebar">
+		<div class="image-container">
+			<div id="profile-picture-preview" class="profile-picture" style="background-image:url(<?php echo $picture; ?>);">
+			</div>
+		</div>
+		<h1 class="sunset-username"><?php echo $fullName; ?></h1>
+		<h2 class="sunset-description"><?php echo $description; ?></h2>
+		<div class="icon-wrapper"></div>
+	</div>
+</div>
+
+<form method="post" action="options.php" class="sunset-general-form">
+	<?php settings_fields('sunset-settings-group'); ?>
+	<?php do_settings_sections('edit_sunset'); ?>
+	<?php submit_button(); ?>
+</form>
+
+
+
+
+===========================
+

@@ -1,0 +1,150 @@
+                 *** WORDPRESS NOTES III  ***
+                 			    NEW UPDATES
+
+
+********************************
+WP BOOTSTRAP NAVWALKER
+********************************
+1.linke this on functions.php page.
+---------------------------------
+
+require_once('wp-bootstrap-navwalker.php');
+
+---------------------------------
+2. add this in header.php page
+---------------------------------
+
+<?php wp_nav_menu(array(
+  'theme_location' => 'header_menu',
+  'fallback_cb' => 'growthmates_fallback_menu',
+  'container' => '',
+  'menu_class' => 'nav navbar-nav navbar-right',
+
+  /* -------------- add this ---------------- */
+  
+  'depth'             => 4,
+  'container_class'   => 'collapse navbar-collapse',
+  'container_id'      => 'bs-example-navbar-collapse-1',
+  'walker'            => new WP_Bootstrap_Navwalker(),
+
+  /* -------------- add this ---------------- */
+
+)); ?>
+
+
+************************************************
+CLICKABLE DROPDOWN 
+************************************************
+LINK:
+https://medium.com/@oscarmwana/make-parent-link-clickable-in-bootstrap-wordpress-navigation-walker-61213063a1a0
+
+--------------------------
+To make clickable dropdown we have to change 
+2 lines of code in the wp_bootstrap_navwalker.php file.
+
+befor
+---------------
+On line 85:
+$atts['href'] = '#';
+On line 87:
+$atts['data-toggle'] = 'dropdown';
+
+After
+--------------
+On line 85:
+$atts['href'] = ! empty( $item->url ) ? $item->url : '';
+On line 87:
+$atts['data-hover'] = 'dropdown';
+
+************************************************
+THEME CUSTOMIZE
+************************************************
+STEP1:
+Add this code
+-----------------------
+
+/* ------------ customize_register ------------ */
+function mytheme_customize_register( $wp_customize ) {
+   //All our sections, settings, and controls will be added here
+}
+add_action( 'customize_register', 'mytheme_customize_register' );
+
+-----------------------
+
+Notes:
+Theme customize has three part:
+I.control(UI):
+					adding this a we can get input form,color picker ect.
+II.settings(DATABASE):
+					using this we may save user choice in DATABASE.
+III.section(GROUP):
+					it may provide group of option
+
+------------------------
+STEP2:
+new keep this code insige the function:
+------------------------
+
+	//All our sections, settings, and controls will be added here
+  $wp_customize->add_section( 'mytheme_new_section_name' , array(
+    'title'      => __( 'Visible Section Name', 'mytheme' ),
+    'priority'   => 30,
+  ) );
+
+  $wp_customize->add_setting( 'header_textcolor' , array(
+    'default'   => '#f00',
+    'transport' => 'refresh',
+  ) );
+
+  $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+  'label'      => __( 'Header Color', 'mytheme' ),
+  'section'    => 'mytheme_new_section_name',
+  'settings'   => 'header_textcolor',
+  ) ) );
+
+--------------------------
+UPDATED CODE:
+--------------------------
+
+/* ------------ customize_register ------------ */
+function mytheme_customize_register( $wp_customize ) {
+
+	//All our sections, settings, and controls will be added here
+  $wp_customize->add_section( 'mytheme_new_section_name' , array(
+    'title'      => __( 'Visible Section Name', 'mytheme' ),
+    'priority'   => 30,
+  ) );
+   
+  $wp_customize->add_setting( 'header_textcolor' , array(
+    'default'   => '#f00',
+    'transport' => 'refresh',
+  ) );
+
+  $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+  'label'      => __( 'Header Color', 'mytheme' ),
+  'section'    => 'mytheme_new_section_name',
+  'settings'   => 'header_textcolor',
+  ) ) );
+
+}
+add_action( 'customize_register', 'mytheme_customize_register' );
+
+
+--------------------------
+Now we will create another function where we want to run this 
+custom function.
+--------------------------
+
+/* ------------ output customize css ------------ */
+function mytheme_customize_css()
+{
+  ?>
+   <style type="text/css">
+      h1{ color:#<?php echo get_theme_mod('header_textcolor');?>; }
+   </style>
+  <?php
+}
+add_action( 'wp_head', 'mytheme_customize_css');
+
+
+=================================================

@@ -1,0 +1,246 @@
+
+Redux Fremwork
+**********************
+Step1: Download redux freamword and keep it on ince folder
+
+step2:
+to add a link with redux fremword add the link in 'functions.php' page.
+
+//Redux connection 
+  require_once('inc/redux-framework-master/redux-framework.php');
+  require_once('inc/redux-framework-master/sample/sample-config.php');
+
+        OR 
+to get only require features we may add 
+
+
+//Redux connection
+  require_once('inc/redux-framework-master/redux-framework.php');
+  require_once('inc/redux-framework-master/sample/barebones-config.php');
+
+
+step3:
+Now we can see 'sample option' bar in our dashbord. we may also edit this
+'barebones-config.php' page as our need.
+
+
+i.$opt_name = "office_master";
+ii.'menu_title'           => __( 'Office Master Options', 'redux-framework-demo' ),
+   'page_title'           => __( 'Office Master Options', 'redux-framework-demo' ),
+
+
+
+step4:
+Example1: logo edit
+Now we will start to crate basic fields.
+We will put our all codes indise the 'START Basic Fields' section.
+code:
+
+  Redux::setSection( $opt_name, array(
+            'id' => 'header_option',
+            'title' => 'Header Master',
+            'desc' => 'This is header option',
+            'icon' => 'el el-home-alt',
+            ));
+
+        //logo option under header option
+        Redux::setSection( $opt_name, array(
+            'id' => 'header_sub_option',
+            'title' => 'Logo option',
+            'desc' => 'This is header option',
+            'subsection' => true,
+            'fields' => array(
+                    array(
+
+                        'id' => 'site_logo',
+                        'title' => 'Site Logo',
+                        'url' => true,
+                        'desc' => 'Upload your site logo',
+                        'type' => 'media',
+                      
+
+                    )
+                )
+            ));
+
+
+This are the basic details to create a field. To get more details we will search
+'redux type'.
+
+in case of logo we will search 'media fields' in search option and new features
+like:
+
+'url' => true,
+
+'default'  => array(
+              'url'=>get_template_directory_uri().'/assets/img/slider/Office.png'
+          ),
+
+
+code:
+
+ Redux::setSection( $opt_name, array(
+            'id' => 'header_option',
+            'title' => 'Header Master',
+            'desc' => 'This is header option',
+            'icon' => 'el el-home-alt',
+            ));
+        //logo option under header option
+        Redux::setSection( $opt_name, array(
+            'id' => 'header_sub_option',
+            'title' => 'Logo option',
+            'desc' => 'This is header option',
+            'subsection' => true,
+            'fields' => array(
+                    array(
+
+                        'id' => 'site_logo',
+                        'title' => 'Site Logo',
+                        'url' => true,
+                        'desc' => 'Upload your site logo',
+                        'type' => 'media',
+                        
+                        'default'  => array(
+                            'url'=>get_template_directory_uri().'/assets/img/slider/Office.png'
+                        ),
+
+                    )
+                )
+            ));
+
+
+step5:
+now we will add this in our html project:
+code:
+
+<img src="<?php
+    global $office_master;
+    echo $office_master['site_logo']['url'] ;
+?>" width="100">
+
+
+example2:footer edit
+
+
+ //footer option
+        Redux::setSection( $opt_name, array(
+            'id' => 'footer_option',
+            'title' => 'Footer Option',
+            'desc' => 'This is footer option',
+            'icon' => 'el el-folder-close',
+            ));
+
+        //Copy Right section
+        Redux::setSection( $opt_name, array(
+            'id' => 'footer_sub_option',
+            'title' => 'copy-right option',
+            'desc' => 'This is copy-right option',
+            'subsection' => true,
+            'fields' => array(
+                    array(
+
+                        'id' => 'copy_text',
+                        'title' => 'Copy right',
+                        'desc' => 'type copy right info',
+                        'type' => 'editor',
+                        
+                        'default'  => '© Copyright 2014, Your Website Link. Theme by ThemeWagon',
+                        'args'   => array(
+                            'wpautop' => false,
+                        )
+
+                    )
+                )
+            ));
+
+            //note: search redax editor to red about 'args'
+            // 'wpautop' => false, use to get default <p> tag
+
+        //footer cols
+        Redux::setSection( $opt_name, array(
+            'id' => 'footer_sub_options_col_1',
+            'title' => 'Column one',
+            'desc' => 'This is Column one option',
+            'subsection' => true,
+            'fields' => array(
+                    array(
+                        'id' => 'col_1_title',
+                        'title' => 'Column One Title',
+                        'desc' => 'type Column One Title',
+                        'type' => 'text',
+                        'default'  => 'Contact',
+                    ),
+                    array(
+                        'id' => 'col_1_icon',
+                        'title' => 'Column one icon',
+                        'desc' => 'type Column one icon',
+                        'type' => 'text',
+                        'default'  => 'fa-map-marker',
+                    ),
+                    array(
+                        'id' => 'col_1_content',
+                        'title' => 'Column one content',
+                        'desc' => 'type Column one content',
+                        'type' => 'editor',
+                        'default'  => 'Via Ludovisi 39-45, Rome, 54267, Italy
+Phone: 1.800.245.356 Fax: 1.800.245.357
+Email: hello@LawOffice.org',
+                    )
+                )
+            ));
+
+
+
+    print:
+
+    <?php
+    global $office_master;
+    echo $office_master['col_1_icon'];
+    ?>">
+
+
+  EXAMPLE 3:
+
+  //footer option
+    Redux::setSection( $opt_name, array(
+        'id' => 'footer_option',
+        'title' => 'Footer Option',
+        'desc' => 'This is footer option',
+        'icon' => 'el el-folder-close',
+        ));
+
+       //footer col2
+        Redux::setSection( $opt_name, array(
+            'id' => 'footer_sub_options_col_2',
+            'title' => 'Column two',
+            'desc' => 'This is Column two option',
+            'subsection' => true,
+            'fields' => array(
+                    array(
+                        'id' => 'col_2_links',
+                        'title' => 'Links',
+                        'type' => 'slides',
+                        'placeholder' => array(
+                            'title' => 'Write here you link title',
+                            'url' => 'Write url link',
+                        ),
+                    )
+
+                )
+            ));
+
+  //DISPLAY
+
+  <?php
+    if(is_array($office_master['col_2_links'])){
+
+       foreach ($office_master['col_2_links'] as $singleValue) { ?>
+       <p> <a href="<?php echo $singleValue['url'] ?>"> <?php echo $singleValue['title'] ?></a></p>
+
+        <?php   
+      } 
+    }
+  ?>
+
+
+--------------------------------

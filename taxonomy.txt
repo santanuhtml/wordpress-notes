@@ -1,0 +1,95 @@
+TAXONOMY
+
+1.Custom post category using TAXONOMY
+
+Register:
+//taxonomy
+    register_taxonomy(
+      'team_category',
+      'team',
+        array(
+          'labels' => array(
+          'name' => 'team categori',
+          'add_new_item' => 'Add New categori'
+        ),
+        'hierarchical' => true,
+        'show_admin_column' => true,
+      )
+    );
+
+
+Note: 
+1. 'team_category' => it is the id of this specific taxonomy.
+2. 'team' => it is the id of this custom post in which we need
+       to add taxonomy
+3.'hierarchical' => if we use true then we will get categori option.
+        tags are the defautl option.
+4.'show_admin_column' => to see this category in our custom post listing
+       we may us it.
+
+
+Display:
+
+<?php 
+      $team_data = null;
+
+      $team_data = new WP_Query(array(
+      'post_type' => 'team', 
+      'posts_per_page' => -1,
+      'order' => 'ASC',
+      'team_category' => 'developer,designer,seo'
+    ));
+   $prefix = '_office-master_';
+
+.............
+
+Note:
+1.add this id 'team_category' and add the slag names which we want to
+display.
+2.We can also add child category of them, and display them as our need.
+example: Design has two categori logo-designer and ui-designer
+3.if we want to display only logo-desiger then we will place it on
+'team_category'. If we want to display all designers then we will 
+add only 'designer' category.
+
+----------------------
+
+2.Custom post tags using TAXONOMY
+
+Register:
+ //custom post tags
+    register_taxonomy(
+    'team_tags',
+      'team',
+        array(
+          'labels' => array(
+          'name' => 'team tags',
+          'add_new_item' => 'Add New tags'
+        ),
+        'show_admin_column' => true,
+      )
+    );
+
+Display:
+
+<?php 
+   $team_data = null;
+
+   $team_data = new WP_Query(array(
+    'post_type' => 'team', 
+    'posts_per_page' => -1,
+    'order' => 'ASC',
+    'team_category' => 'designer',
+    'team_tags' => 'first',
+
+   ));
+$prefix = '_office-master_';
+
+.............
+
+Note:
+1.We can apply every this same as category
+2.if we want to display some one who has
+both categori first and second then we can us
+
+'team_tags' => 'first + second',

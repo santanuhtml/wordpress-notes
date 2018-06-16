@@ -1,0 +1,72 @@
+												*** comments ***
+step1:
+add this code under single.php page
+note:when comments open then this code redirect to 
+comment.php page
+------------------------
+
+<?php
+	if(comments_open()){
+		comments_template();
+	}
+?>
+
+------------------------
+
+Step:2
+create  'contact.php' page and placed this code given below:
+
+------------------------
+
+<?php
+if(post_password_required()){
+	return;
+}
+?>
+
+<div id="comments" class="comments-area">
+	<?php
+		if (have_comments()) {
+		
+	?>
+
+	<ol class="comment-list">
+		<?php 
+		$args = array(
+		'walker'            => null,
+		'max_depth'         => '',
+		'style'             => 'ol',
+		'callback'          => null,
+		'end-callback'      => null,
+		'type'              => 'all',
+		'reply_text'        => 'Reply',
+		'page'              => '', //1
+		'per_page'          => '', //3
+		'avatar_size'       => 30,
+		'reverse_top_level' => null,
+		'reverse_children'  => '',
+		'format'            => 'html5', // or 'xhtml' if no 'HTML5' theme support
+		'short_ping'        => false,   // @since 3.6
+	   'echo'              => true     // boolean, default is true
+	);
+
+		 	wp_list_comments($args); 
+	 	?> 
+	</ol>
+
+	<?php
+		if (!comments_open() && get_comments_number()) {
+			# code...
+		}
+	}
+	?>
+
+	<?php 
+		comment_form();
+	?>
+</div>
+
+---------------------
+note:
+we can see details of wp_list_comments(); in this link given below:
+https://codex.wordpress.org/Function_Reference/wp_list_comments

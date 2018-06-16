@@ -1,0 +1,452 @@
+CMB2 Plugin [watch tutorial 30]
+************************************
+Note:In wordpress when we need to repeat any task morethan one time,
+then we use custom post.
+
+step1:
+
+Atfirst we will create a folder called 'inc' and inside of it we will keep our
+'cmb2' plugin
+
+
+To reduct code length in 'functions.php', we will create another file in 'inc' 
+folder called 'cmb2-custom-field.php' where we add all 'cmb2' plugin related 
+codes and include it inside the 'functions.php' file using 'include_once()'
+function.
+code:
+
+include_once('inc/cmb2-custom-field.php');
+
+step2:
+now we will connect this file to 'cmb2' project, here we will see two types of 
+folder names cmb2 and CMB2. Our folder is 'cmb2', so first one accepted.
+code:
+
+if ( file_exists( __DIR__ . '/cmb2/init.php' ) ) {
+  require_once __DIR__ . '/cmb2/init.php';
+} elseif ( file_exists(  __DIR__ . '/CMB2/init.php' ) ) {
+  require_once __DIR__ . '/CMB2/init.php';
+}
+
+step3:
+Now we will create a function to Define the metabox and field 
+configurations. 
+Inside the function we will call all metabox
+code:
+
+add_action( 'cmb2_admin_init', 'office_master_cmb2' );
+
+function office_master_cmb2(){
+
+}
+
+
+step4:
+inside the function:
+code:
+
+/**
+   * Initiate the metabox
+   */
+  $service_item = new_cmb2_box( array(
+    'id'            => 'service_metabox',
+    'title'         => __( 'Service Metabox', 'office_master' ),
+    'object_types'  => array( 'services' ), // ****Post type****
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+    
+  ) );
+
+
+Note:
+i.$service_item is a variable
+ii.an unique id is need for individual metabox
+iii.title has two parameter 
+    1. title of this metabox
+    2. it is a text-domain. To get multiangle support we will keep 
+       same name in here.
+    3.***here we add our post type, we use here 'service' custom post,
+      so we use it.
+
+
+step5:
+inside the function:
+code:
+
+// Regular text field
+  $service_item->add_field( array(
+    'name'       => __( 'Service Icon', 'office_master' ),
+    'desc'       => __( 'Add font-awesome service icon', 'office_master' ),
+    'id'         => $prefix.'service_icon',
+    'type'       => 'text',
+    
+  ) );
+
+
+
+  Note:
+  iii. *$prefix used to hide fields from custom fields list.
+      'service_icon' It is custom post id name get from Dashbord.
+
+     ***if we use '$prefix' then we have to add some mejor changes:
+      1. we need to add a $prefix variable at the top of all codes
+         under the function.
+         code:
+
+         $prefix = '_office-master_';
+
+      2.Also we need to add same variable code on html page, inside the 
+        custome post code.
+        and also add this variable inside the get_post_meta().
+        example:
+
+         if ($services->have_posts()) {
+            while($services->have_posts()){
+              $services->the_post();
+              $service_icon = get_post_meta(get_the_ID(), $prefix.'service_icon',true);
+              ......
+
+  iv. type: here we keep 'text'. To see details of types visti:
+      https://github.com/CMB2/CMB2/wiki/Field-Types#types
+
+       
+----------------------
+DISPLAY CMB2 PLUGIN:
+
+<?php
+
+   $basicTheme = null;
+   $basicTheme = new WP_Query(array(
+
+    'post_type' => 'slider_post', 
+    'posts_per_page' => -1,
+    'order' => 'ASC'
+   ));
+  // Start with an underscore to hide fields from custom fields list
+   $prefix = '_office-master_';
+
+   if ($basicTheme->have_posts()) {
+   $x = 0;
+   while($basicTheme->have_posts()){
+    $basicTheme->the_post();
+    $slider_caption = get_post_meta(get_the_ID(), $prefix.'slider_caption',true);
+    $x++;
+   ?>
+                         <!-- slider -->
+                        <div class="item <?php if($x==1){echo 'active';} ?>">
+                          <?php the_post_thumbnail('slider-size'); ?>
+                          <div class="carousel-caption">
+                              <h3 class="carousel-title hidden-xs"><?php the_title(); ?></h3>
+                              <p class="carousel-body"><?php echo $slider_caption; ?></p>
+                          </div>
+                        </div>
+                        <!-- /slider -->
+                        <?php
+                      }
+                    }
+                    wp_reset_postdata(); 
+
+                    ?>
+
+                     	
+
+
+----------------------
+
+1. Add any specific custom post any specific page using cmb2:
+
+***NOTE: Here we don't need to display this option on left-side of
+our dashbord. so we use only this code on 'cmb2-custom-field.php' 
+page. we don't need to code anything on 'functions.php' page for this 
+section
+
+step1:
+
+
+/**
+   * test
+   */
+  $test = new_cmb2_box( array(
+    'id'            => 'test',
+    'title'         => __( 'test', 'office_master' ),
+    'object_types'  => array( 'page' ), // ***Post type
+
+
+    //SELECT SPECIFIC PAGE
+    'show_on' => array(
+      'key' => 'id',
+      'value' => '278'       //ID OF THIS PAGE GATTING FROM URL
+      ),
+
+
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+    
+  ) );
+
+  // Regular text field
+  $test->add_field( array(
+    'name'       => __( 'test', 'office_master' ),
+    'desc'       => __( 'Add Slider caption', 'office_master' ),
+    'id'         => $prefix.'test',
+    'type'       => 'text',
+    
+  ) );
+
+
+
+step2:
+      display it by using simple post display way...
+
+
+  Note:
+  example:
+  We need to add contact form only contact page, then we apply this 
+  process to add only contact page.
+
+-----------------------     
+2. Add repeatable features using cmb2:
+
+step1:
+Just add last key on regular text field.
+code:
+
+ // Regular text field
+  $cmb->add_field( array(
+   'name'       => __( 'test', 'office_master' ),
+    'desc'       => __( 'Add Slider caption', 'office_master' ),
+    'id'         => $prefix.'test',
+    'type'       => 'text',
+    'repeatable' => true
+  ) );
+
+
+step2:
+now display it using 'foreach' loop.
+code:
+
+ $service_icon = get_post_meta(get_the_ID(), $prefix.'service_icon',true);
+      .
+      .
+      ?>
+
+      html codes...
+
+      <?php
+          foreach($service_icon as $single_icon ){ 
+      ?>
+
+        <p class="services-icon"><span class="fa <?php echo $single_icon; ?> 
+        fa-5x"></span></p>
+
+      <?php    
+        }
+        ...
+      ?>
+
+----------------------
+3. Add group custom post:
+
+Example1:
+
+step1:
+
+/**
+   * group question
+   */
+  $group_repeat_test = new_cmb2_box( array(
+    'id'            => 'group_repeat_test_metabox',
+    'title'         => __( 'group repeat Test Metabox', 'office_master' ),
+    'object_types'  => array( 'page' ), // Post type
+    'show_on'      => array( 'key' => 'id', 'value' => array( 394 ) ),
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  // set
+  $main_of_group = $group_repeat_test->add_field( array(
+    'name'       => __( 'set', 'office_master' ),
+    'desc'       => __( 'add set', 'office_master' ),
+    'id'         => $prefix.'set',
+    'type'        => 'group',
+    //'repeatable' => true
+  ) );
+
+  // question
+  $group_repeat_test->add_group_field($main_of_group, array(
+    'name'       => __( 'Question', 'office_master' ),
+    'desc'       => __( 'add question', 'office_master' ),
+    'id'         => $prefix.'question',
+    'type'       => 'text',
+    //'repeatable' => true
+  ) );
+
+  // options
+  $group_repeat_test->add_group_field($main_of_group, array(
+    'name'       => __( 'Options', 'office_master' ),
+    'desc'       => __( 'add options', 'office_master' ),
+    'id'         => $prefix.'option',
+    'type'       => 'text',
+    'repeatable' => true
+  ) );
+
+  // answer
+  $group_repeat_test->add_group_field($main_of_group, array(
+    'name'       => __( 'Answer', 'office_master' ),
+    'desc'       => __( 'add answer', 'office_master' ),
+    'id'         => $prefix.'answer',
+    'type'       => 'text',
+    //'repeatable' => true
+  ) );
+
+  // answer link
+  $group_repeat_test->add_group_field($main_of_group, array(
+    'name'       => __( 'Answer link', 'office_master' ),
+    'desc'       => __( 'add answer link', 'office_master' ),
+    'id'         => $prefix.'link',
+    'type'       => 'text',
+    //'repeatable' => true
+  ) );
+
+step2:
+
+<?php
+/*
+Template Name: For Question Page
+*/
+get_header();
+?>
+
+<?php
+    $prefix = '_office-master_';
+  if(have_posts()){
+    while(have_posts()){
+      the_post();
+      $get_questions = get_post_meta( get_the_ID(), $prefix.'set', true );
+    }
+  }
+
+
+?>
+
+<?php 
+  foreach ($get_questions as $get_single) { ?>
+    <?php print_r($get_single) ?>
+    <h2><?php echo $get_single[$prefix.'question']; ?></h2>
+    
+    <?php
+      if(is_array($get_single[$prefix.'option'])){
+        foreach ($get_single[$prefix.'option'] as $options) { ?>
+          <p><?php echo $options ?></p>
+    <?php } }
+    ?>
+
+
+    <p><?php echo $get_single[$prefix.'answer']; ?>
+
+      <?php if ($get_single[$prefix.'link']!='') { ?>
+        Read More<a href="<?php echo $get_single[$prefix.'link']; ?>" target="_blank"> Here</a>
+      <?php } ?>
+
+      //if no link provide then Read More option not visible
+
+    </p>
+    <hr>
+<?php }
+?>
+
+<?php
+get_footer();
+?>
+
+--------------------
+
+Example:2
+
+STEP1:
+
+/**
+   *  ul and link
+   */
+  $ul_link_test = new_cmb2_box( array(
+    'id'            => 'group_ul_link_test',
+    'title'         => __( 'ul and link', 'office_master' ),
+    'object_types'  => array( 'page' ), // Post type
+    'show_on'      => array( 'key' => 'id', 'value' => array( 397 ) ),
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  // set
+  $ul_link_of_group = $ul_link_test->add_field( array(
+    'name'       => __( 'list and link', 'office_master' ),
+    'desc'       => __( 'add unorder list and link', 'office_master' ),
+    'id'         => $prefix.'ul_li',
+    'type'        => 'group',
+    //'repeatable' => true
+  ) );
+
+  // list
+  $ul_link_test->add_group_field($ul_link_of_group, array(
+    'name'       => __( 'list', 'office_master' ),
+    'desc'       => __( 'add list', 'office_master' ),
+    'id'         => $prefix.'list',
+    'type'       => 'text',
+    'repeatable' => true
+  ) );
+
+  // link
+  $ul_link_test->add_group_field($ul_link_of_group, array(
+    'name'       => __( 'Link', 'office_master' ),
+    'desc'       => __( 'add Link', 'office_master' ),
+    'id'         => $prefix.'link',
+    'type'       => 'text',
+    'repeatable' => true
+  ) );
+
+
+
+  STEP2:
+
+
+  <?php
+/*
+Template Name: For Link Page
+*/
+get_header();
+?>
+
+  <?php
+    $prefix = '_office-master_';
+    if(have_posts()){
+      while(have_posts()){
+        the_post();
+        $get_list_link = get_post_meta( get_the_ID(), $prefix.'ul_li', true ); 
+        foreach ($get_list_link as $list_link_single) { 
+
+          foreach ($list_link_single[$prefix.'list'] as $key => $list_link_single2) { ?>
+                  <p><a href="<?php echo $list_link_single[$prefix.'link'][$key];  ?>"><?php echo $list_link_single2; ?></a> </p>
+            <?php
+          }
+          
+        }
+      }
+    }
+  ?>
+
+
+<?php
+get_footer();
+?>
+
+NOTE: *** For more complex steps see tutorial 36
+
+----------------------------
+
+
+
+
