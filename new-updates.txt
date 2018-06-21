@@ -60,10 +60,8 @@ $atts['data-hover'] = 'dropdown';
 ************************************************
 Display custom post category
 ************************************************
-
 step1: call it inside the loop
 ------------------------------------------------
-
 <?php
 	if (have_posts()) {
 		while ( have_posts() ) {
@@ -74,14 +72,32 @@ step1: call it inside the loop
 
 Note: here 'recepe-category' is the ID of register_taxonomy();
 ------------------------------------------------
-
 step2:display
-
 ------------------------------------------------
 
 <li class="active"> <?php echo $firstCategory; ?>
 
 ------------------------------------------------
+
+************************************************
+Single Post Pagination
+************************************************
+
+<div class="next-prev-post">
+  <nav aria-label="...">
+    <ul class="pager">
+      <li class="previous">
+      <?php previous_post_link( '%link', 'Previous Recipes' ); ?>
+     <!-- <a href="#"><span aria-hidden="true">&larr;</span> Older</a> -->
+      </li>
+      <li class="next">
+      <?php next_post_link( '%link', 'Next Recipes' ); ?>
+      <!-- <a href="#">Newer <span aria-hidden="true">&rarr;</span></a> -->
+      </li>
+    </ul>
+  </nav>
+</div>  
+
 
 ************************************************
 THEME CUSTOMIZE
