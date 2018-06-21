@@ -56,6 +56,33 @@ $atts['href'] = ! empty( $item->url ) ? $item->url : '';
 On line 87:
 $atts['data-hover'] = 'dropdown';
 
+
+************************************************
+Display custom post category
+************************************************
+
+step1: call it inside the loop
+------------------------------------------------
+
+<?php
+	if (have_posts()) {
+		while ( have_posts() ) {
+		the_post();	
+		$rescat = get_the_terms(get_the_ID(), 'recepe-category');
+    $firstCategory = $rescat[0]->name;
+?>
+
+Note: here 'recepe-category' is the ID of register_taxonomy();
+------------------------------------------------
+
+step2:display
+
+------------------------------------------------
+
+<li class="active"> <?php echo $firstCategory; ?>
+
+------------------------------------------------
+
 ************************************************
 THEME CUSTOMIZE
 ************************************************
