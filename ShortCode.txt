@@ -426,3 +426,51 @@ example:
 [sliderShortcode id=1]
 
 [sliderShortcode id=2]
+
+-----------------------------------------
+
+ANOTHER EXAMPLE:
+/* =========== Image Gallery ========= */
+function image_gallery($para,$content){
+  $test = shortcode_atts(array(
+    'image-no' => 0,
+	'brand-name' =>'a',
+	'image-folder-name' => 'a',
+  ),$para); 
+  ob_start();
+?>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2 style="margin-bottom:20px;">
+				<?php echo $test['brand-name']  ?>
+			</h2>
+		</div>
+		<br />
+		<?php 
+		for ($i=1; $i <=$test['image-no']; $i++) { 
+				?>
+			<div class="col-md-3">
+				<div class="zoom-gallery">
+					<a href="<?php echo get_template_directory_uri(); ?>/img/<?php echo $test['image-folder-name'] ?>/<?php echo $i ?>.jpg" data-source="http://500px.com/photo/32736307" title="Into The Blue" class="img-responsive">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/<?php echo $test['image-folder-name'] ?>/<?php echo $i ?>.jpg" class="img-responsive">
+					</a>
+				</div>
+			</div>
+		
+		<?php
+			}
+		?>
+	</div>
+</div>
+
+<?php
+return ob_get_clean();
+}
+add_shortcode('callittwo','image_gallery');  
+
+/*
+ * [callittwo image-no=3 brand-name="Agarwal Vikas Trust" image-folder-name="agarwal-vikas-trust"]
+ * */
+
+
