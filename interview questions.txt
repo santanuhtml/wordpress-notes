@@ -1,9 +1,241 @@
+BASIC
+1.	What is WordPress?
+WordPress is free open source content management system (CMS) written PHP language.
+
+2.	What year was WordPress released?
+2003
+
+3.	What are minimum requirements to run WordPress?
+Xampp
+
+4.	What is the difference between wordpress.com and wordpress.org?
+Both the sites are part of WordPress. Only difference is about "who is hosting your website". With org, YOU host your website or blog. With com, THEY host for you.
+
+5.	Where is WordPress content stored?
+WordPress contents are stored in MySQL database on Server.
+
+6.	*Why is MySQL used in WordPress?
+i. Open source
+ii.Free of cost
+iii.Supported by many low-cost Linux hosts.
+iv.Extremely fast
+
+7.	How safe is your website on WordPress?
+Updated the latest version of WordPress to avoid hacking.
+
+8.	Is WordPress secure?
+Yes, the error can come from downloading plugins and tools from an unauthorized source.
+
+9.	What do you do when your WordPress website is hacked?
+We may:
+i.	Install security plugins like WP security
+ii.	Re-install the latest version of WordPress
+iii.	Change password and user-ids for all your users
+iv.	Uninstall all plugins that are downloaded from untrusted places
+
+10.	List the Positive aspects of WordPress?
+i. Easy installation and upgrade
+ii. Community
+iii. Easy theme system
+iv. SEO friendly
+
+11.	Can you list any other CMS better than WordPress?
+Joomla.
+
+12.	What plugins you can use to create a contact form in WordPress?
+contact form 7.
+
+13.	What are meta-tags?
+Meta-tags are keyword and description used to display website or page information.
+
+14.	Is wordpress.com more secure than wordpress.org?
+Yes, because wordpress.com limits the themes and does not allow the installation of plugins.
+
+15.	What are disadvantages of WordPress?
+i. Use of multiple plugins can make website heavy to load and slow.
+ii. Sometimes updates can lead to loss of data, so you always need a 
+backup copy.
+
+16.	Can you host WordPress using Amazon web services such as EC2, RDS, EBS etc?
+Yes, we can host using Amazon web services.
+
+17.	Why you use a static front page in wordpress?
+Some WordPress users wants their WordPress installation to be more than a blog site. To give their page a look more like a real website page some users use static front page.
+Standard
+18.	What is a plugin in WordPress?
+WordPress Plugins are increase the functionality or add some new features to a WordPress site.
+
+19.	In which cases you don’t see plugin menu?
+When the blog is hosted on free wordpress.com
+
+20.	How is creating a site on wordpress.org different from wordpress.com?
+Most of the things are similar in both except the choices of themes and the usage of plugins.
+
+21.	 List plugin that comes with WordPress?
+Akismet
+Hello Dolly
+
+22.	What is the difference between installing and activating a theme?
+When a theme is activated, then this theme is current theme on your siteand an installed theme is simply part of your theme library.
+
+23.	How many default tables are the WordPress?
+There are 11 tables in wordpress, they are:
+i.wp_posts
+ii.wp_comments
+iii.wp_users
+iv.wp_links
+
+24.	Does WordPress use cookies?
+Yes, WordPress has cookies, and WordPress uses cookies for verification of users while logged in.
+
+25.	*What is the loop in WordPress?
+The Loop is PHP code used to display posts.
+
+26.	**In WordPress, objects are passed by value or by reference?
+In WordPress, all objects are passed by value.
+
+
+27.	What is a WordPress taxonomy?
+“taxonomy” is a grouping mechanism for  posts & custom post.
+There are four default taxonomies:
+Category
+Tag
+Link Category
+Post Formats
+
+28.	*What are the Posts in Wordpress?
+Posts allow you to write a blog and post it on your site, where generally news or informational updates are published. They are listed in chronological order.
+
+29.	What are Pages in Wordpress?
+Pages are static content and naturally they do not change, like about us, contact us page etc.
+
+
+30.	What is the difference between post and page?
+•	WordPress posts are content published on a site with an exact date and time. They can be categorized on the basis of category and tags. 
+•	WordPress pages are static and does not change frequently such as contact us about us, privacy policy, etc. They don't have date and time published, however, database stores their published date and time.
+
+31.	*What do you mean by the custom field in WordPress?
+Custom field is a meta-data that allows you to store arbitrary information to the wordpress post. Through custom field extra information can be added to the post.
+
+32.	Function to get website url in wordpress?
+get_site_url(); / echo site_url();
+
+33.	Is it possible to SEO a WordPress site to show it on Google first page?
+WordPress has an in-built SEO search engine benefit. You can also have an additional plug-in in WordPress to help with SEO and rank on a popular search engine like Google.
+http://www.wpbeginner.com/wordpress-seo/
+
+34.	What is hook?
+Using hook user can create WordPress themes or plug-ins with shortcode without changing the original files.
+
+35.	What are the types of hooks in WP and what are their functions?
+There are two types hooks are available in WordPress, Action hooks and filter hooks.
+
+36.	What is Action Hook?
+Using Action hook user we can insert an additional code from an outside resource.
+http://www.wpbeginner.com/glossary/action/
+
+37.	What is Filter Hook?
+Using Filter hooks we can add a content or text at the end of the post.
+http://www.wpbeginner.com/glossary/filter/
+
+38.	List some action and filter hooks functions in WordPress?
+
+39.	Explain Categories in WordPress.
+Categories allow a user to divide its content into different sections, so user can easily find their content from a lot.
+
+
+40.	Explain Tags in WordPress.
+With the help of tags, similar posts can be grouped together. Hence, it makes easier for the users to search a particular post. It tells the user what a post is about. Tags are similar to categories but still different.
+
+41.	What is the use of Slug field in tags?
+It is used to specify the tags URL.
+
+42.	Template Files List for development WordPress Theme?
+Important files:-
+index.php
+single.php
+front-page.php
+page.php
+404.php
+search.php
+functions.php
+style.css
+Others files:-
+category.php
+tag.php
+
+43.	What are the template tags in WordPress? List some of them.
+Template tags are used within themes to retrieve content from your database. 
+It is a piece of code that tells WordPress to get something from the database. some of them:
+get_header()
+get_footer()
+get_sidebar()
+get_search_form()
+the_category()
+the_tags()
+
+44.	How many types of users WordPress have?
+Administrator: They have full rights over a site.
+Editor: They deal with content section of a site.
+Author: They only deal with their own posts. They can delete their post even after publishing.
+Contributor: A contributor doesn't have right to publish their post or page. 
+They need to send it to the administrator for review.
+Subscriber: Users which are subscribed to your site can log in and update their profile.
+Follower: They don't have any right. They can only read and comment on your post.
+Viewer: They can only read and comment on a post.
+
+45.	What is the difference between the two URLs WordPress Address AND Site Address?
+WordPress Address is file address inside the wordpress folder. We may do it using call the function get_template_directory_uri();                    
+Site Address used as the base for creating URLs for web pages.
+
+46.	How do you enable debug mode / display error messages during development in WP?
+Edit wp-config.php file and changing WP_DEBUG default value to true.
+
+47.	How can you disable the WordPress comment?
+settings -> Discussion -> "Allow people to post comments on new 
+articles" [unchecking  it]
+
+48.	What is default table prefix for wordpress?
+wp_ is default prefix for WordPress.
+In wordpress database table defined as Prefix.
+
+49.	What are Importers in WordPress?
+Importers are plugins use to import Posts, Page, Custom Posts and Users data in an XML file.
+
+50.	Define what is the difference between the wp_title and the_title tags?
+wp_title() function is for use outside “The Loop” to display the title of a Page.
+the_title() on the other hand is used within “The Loop“.
+
+51.	Define what do next_posts_link() and previous_posts_link() do?
+Post are usually sorted in reverse chronological order, next_posts_link() usually 
+points toward the end of the post and previous_posts_link() usually points to toward 
+the beginning of the Post.
+
+52.	How to run database Query on WordPress?
+<?php $wpdb->query('query'); ?>
+
+53.	How to store the post title in variable?
+get_the_title()
+
+54.	Define what is the special meaning of _sleep and _wakeup?
+I know only _sleeps return the array & _wakeup retrives them.
+
+55.	What is site_url()?
+ This is the URL to the WordPress core files.
+
+56.	Is it possible to rename the WordPress folder?
+Yes, it is possible to rename the WordPress folder.  If WordPress is already installed you have to login to the weblog as the administrator and then change the settings.
+
+WordPress address (URI)  :
+Blog address( URI) :
+
+After making the changes, you can rename the folder or directory with the WordPress file in it.
+
+57.	How Custom theme is different than Normal theme?
+Custom theme allows for SEO search, but with a SEO plugin available it would not make much difference to normal theme. One benefit using the Custom theme is that it allows to make the changes without going much into the coding part.
+
+58.	Define what’s the difference between site_url() and home_url()?
 33.What is a child theme?
 45. Essential plugins for WordPress?
-48. How Custom theme is different than Normal theme?
-Custom theme allows for SEO search, but with a SEO plugin available it would 
-not make much difference to normal theme. One benefit using the Custom theme 
-is that it allows to make the changes without going much into the coding part.
 
-https://www.javatpoint.com/wordpress-interview-questions
-http://interviewquestionstutorials.com/tag/100-top-wordpress-interview-questions-and-answers-in-pdf/
+
