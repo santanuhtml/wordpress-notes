@@ -1,0 +1,9 @@
+33.What is a child theme?
+45. Essential plugins for WordPress?
+48. How Custom theme is different than Normal theme?
+Custom theme allows for SEO search, but with a SEO plugin available it would 
+not make much difference to normal theme. One benefit using the Custom theme 
+is that it allows to make the changes without going much into the coding part.
+
+https://www.javatpoint.com/wordpress-interview-questions
+http://interviewquestionstutorials.com/tag/100-top-wordpress-interview-questions-and-answers-in-pdf/
