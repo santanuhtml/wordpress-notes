@@ -468,7 +468,7 @@ function basicTheme_custom_post(){
           ),
 
         'public' => true,
-
+	'menu_icon' => 'dashicons-format-image',
 
         'supports' => array(
 
