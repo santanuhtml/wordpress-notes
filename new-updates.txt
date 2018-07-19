@@ -31,6 +31,15 @@ require_once('wp-bootstrap-navwalker.php');
 
 )); ?>
 
+---------------------------------
+3. add this css also
+---------------------------------
+
+.dropdown .menu-item .dropdown-menu {
+    left: 240px !important;
+    top: 0px;
+    min-width: 200px;
+}
 
 ************************************************
 CLICKABLE DROPDOWN 
