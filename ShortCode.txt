@@ -473,4 +473,71 @@ add_shortcode('callittwo','image_gallery');
  * [callittwo image-no=3 brand-name="Agarwal Vikas Trust" image-folder-name="agarwal-vikas-trust"]
  * */
 
+--------------------------------
+EXAMPLE:
+        CUSTOM IMAGE GALLERY WITH SHORTCODE
+Note:
+We already created custom post for image gallery.
+Here custom post post_type = magnum_image
+--------------------------------
+
+
+function image_gallery($para,$content){
+  $test = shortcode_atts(array(
+    'brand-name' =>'a',
+    ),$para); 
+    ob_start();
+  ?>
+    <?php
+         $product_image = new WP_Query(array(
+        'post_type' => 'magnum_image', 
+        'product_category' => $test['brand-name'],
+        'posts_per_page' => -1
+        ));
+      if ($product_image->have_posts()) {
+        while($product_image->have_posts()){
+          $product_image->the_post();
+			$banner_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID() ), 'full' );
+      ?>
+			<div class="col-md-4">
+				<div class="zoom-gallery">
+					<a class="gallery-img" href="<?php echo $banner_image[0]; ?>" data-source="http://500px.com/photo/32736307" title="<?php the_title(); ?>">
+						<?php the_post_thumbnail('img-resize'); ?>
+						<div class="overlay">
+							<h4><?php the_title(); ?></h4>
+						</div>
+					</a>
+				</div>
+			</div>	
+        <?php
+        }
+      }
+    else{
+       for ($i=1; $i <=3 ; $i++) { 
+      ?>
+       <div class="col-md-4">
+        <div class="gallery-img" data-aos="fade-up" data-aos-once="true">
+        <img src="http://via.placeholder.com/350x250">
+        <div class="content transition">
+          <h3>Image title</h3>
+        </div>
+        </div>
+      </div>
+    <?php
+       }
+    }
+    wp_reset_postdata(); 
+  ?>
+  <?php
+  return ob_get_clean();
+  }
+  add_shortcode('callittwo','image_gallery');  
+
+  /*
+  call it using:
+  [callittwo brand-name="cafe-restaurants"]
+
+  Note:cafe-restaurants is the category name created
+  with taxonomy for this custompost
+ */
 
