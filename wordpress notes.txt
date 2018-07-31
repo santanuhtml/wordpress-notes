@@ -445,8 +445,8 @@ add those code as our need:
 code:
 
  the_posts_pagination(array(
-  'prev_text' => '«',
-  'next_text' =>'»',
+  'prev_text' => 'Â«',
+  'next_text' =>'Â»',
   'mid_size' =>'3'
   ));
 
@@ -508,9 +508,10 @@ if(have_posts()){
     $content = get_the_content();
 ?>
 
-Now echo this '$content' variable where we want to display our content.
+Now echo this image link and  '$content' variable where we want to display our content.
 CODE:
 
+<?php echo $banner_image[0]; ?>
 <?php echo $content; ?>
 
 NOTE:
