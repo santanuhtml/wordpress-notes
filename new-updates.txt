@@ -107,6 +107,39 @@ Single Post Pagination
   </nav>
 </div>  
 
+************************************************
+How to Increase the Maximum File Upload Size in WordPress
+************************************************
+step1:
+Once you located .htaccess file, select it and click on Edit button and add this code
+-----------------
+
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+-----------------
+after added .htaccess will be
+-----------------
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# END WordPress
+
 
 ************************************************
 THEME CUSTOMIZE
