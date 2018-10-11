@@ -1,5 +1,14 @@
                  *** WORDPRESS NOTES III  ***
                  			    NEW UPDATES
+					    
+********************************
+DATE TIME
+********************************
+<?php
+date_default_timezone_set("Asia/Kolkata");
+echo '<span class="glyphicon glyphicon-time" aria-hidden="true"></span> ' . date("h:i:sa") .'&nbsp;&nbsp;'; 
+echo '<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ' . date("d-m-Y");
+?>
 
 
 ********************************
