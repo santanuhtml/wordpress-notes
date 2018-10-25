@@ -198,18 +198,21 @@ now we have to call thumbnail image in our post
 
 the_post_thumbnail();
 
-
 --------------------
 Thumbnail Image size:
 
 step:1
 call this function under basicTheme_setup() function:
 add_image_size('name',width,height, true -> crop the image / false -> don't crop, show original image );
+example:
+add_image_size( 'custom-size', 220, 180, true );
 
 step:2
 naw call this function name inside the 
 the_post_thumbnail('name');
 
+** Add a class in the_post_thumbnail:
+<?php the_post_thumbnail('post-img-sm',array('class' => 'media-object')); ?>
 
 ---------------------
 
