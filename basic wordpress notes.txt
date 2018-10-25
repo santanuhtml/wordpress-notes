@@ -181,7 +181,7 @@ post data:
 2.the_permalink() used in <a href="#"></a> tag to get the post another page
 3.the_content(); used to get post content
 4.the_excerpt() used to show some of from the contain
-
+5.the_time('j F  Y')
 
 --------------------
 To get post thumbnail image:
