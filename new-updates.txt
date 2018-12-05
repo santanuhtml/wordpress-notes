@@ -1,5 +1,17 @@
                  *** WORDPRESS NOTES III  ***
                  			    NEW UPDATES
+
+DATE TIME
+WP BOOTSTRAP NAVWALKER
+CLICKABLE DROPDOWN 
+DISPLAY CUSTOM POST CATEGORY
+SIGNLE POST PAGINATION
+INCREASE MAXIMUM FILE UPLOAD SIZE IN WORDPRESS
+ADD SVG IMAGES
+WORDPRESS DEMO PROJECT TO LIVE
+THEME CUSTOMIZE
+SEARCH OPTION WITH ICON
+SEARCH OPTION WITH ANIMATION
 					    
 ********************************
 DATE TIME
@@ -98,7 +110,7 @@ step2:display
 ------------------------------------------------
 
 ************************************************
-Single Post Pagination
+SIGNLE POST PAGINATION
 ************************************************
 
 <div class="next-prev-post">
@@ -117,7 +129,7 @@ Single Post Pagination
 </div>  
 
 ************************************************
-How to Increase the Maximum File Upload Size in WordPress
+INCREASE MAXIMUM FILE UPLOAD SIZE IN WORDPRESS
 ************************************************
 step1:
 Once you located .htaccess file, select it and click on Edit button and add this code
@@ -166,7 +178,7 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 
 
 ************************************************
-WordPress Demo Porject to Live
+WORDPRESS DEMO PROJECT TO LIVE
 ************************************************
 STEP:1
 Page:wp-config.php
