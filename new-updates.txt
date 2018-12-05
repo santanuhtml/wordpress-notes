@@ -166,6 +166,35 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 
 
 ************************************************
+WordPress Demo Porject to Live
+************************************************
+STEP:1
+Page:wp-config.php
+Add this code after all define:
+-----------------------------------------------
+
+define('WP_SITEURL', 'https://yourdomain.com/');
+
+define('WP_HOME', 'https://yourdomain.com/');
+
+
+-----------------------------------------------
+STEP:2
+phpMyAdmin -> Data Base Name -> In 'option_value' change 
+in to the current domain 'https://yourdomain.com/'
+-----------------------------------------------
+STEP:3
+Visit Dashbord -> settings -> Permalinks -> SAVE IT
+-----------------------------------------------
+STEP:4
+Visit Dashbord -> General Settings -> 
+WordPress Address (URL) & Site Address (URL) -> 
+Fill with current web address. 
+Example:https://www.webmaddy.com/
+
+
+
+************************************************
 THEME CUSTOMIZE
 ************************************************
 STEP1:
