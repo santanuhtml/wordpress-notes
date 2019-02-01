@@ -187,5 +187,15 @@ DISPLAY THIS CATEGORY IN PAGE
       }
     }
     wp_reset_postdata(); 
-
   ?>
+  
+  /*
+--------------------
+STEP:3
+DISPLAY THIS CUSTOMPOST IN SINGLE PAGE
+--------------------
+*/
+CREATE A SINGLE PAGE FOR A CUSTOM POST
+--> single-custompostName.php
+EXAMPLE:
+single-recipes.php
