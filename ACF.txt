@@ -1,0 +1,83 @@
+
+ACF
+------------------------------
+
+Display value:
+<?php the_field('text'); ?>
+
+------------------------------
+
+Store value in a veriable:
+<?php get_field('dates'); ?>
+Example:
+$date = get_field('dates');
+
+------------------------------
+
+ACF Repeater:
+
+<?php
+if( have_rows('repeater_field_name') ):
+    while ( have_rows('repeater_field_name') ) : the_row();
+
+    the_sub_field('sub_field_name');
+
+    endwhile;
+else :
+endif;
+?>
+
+-------------------------------
+
+ACF Repeater For Images:
+
+step1:
+Return Value : Image Array [DONE]
+
+step2:
+
+ <?php
+    if( have_rows('product_image') ):
+      while ( have_rows('product_image') ) : the_row();
+      $image = get_sub_field('add_product');
+      ?>      
+                
+        <img src="<?php echo $image['sizes']['thumbnail'] ?>" />
+        <img src="<?php echo $image['sizes']['custom-size-lg'] ?>" />
+                
+      <?php 
+    endwhile;
+  else :
+  endif;
+?>
+
+-------------------------------
+ACF Repeater with first option active
+
+<?php
+  if( have_rows('phase') ):
+    $x = 0;
+    while ( have_rows('phase') ) : the_row();
+      $x++;
+      ?>
+
+        <div class="panel">
+          <div class="panel-title" id="headingOne">
+            <div class="ac-head">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $x; ?>" aria-expanded="true" aria-controls="collapse<?php echo $x; ?>">
+                <span>0<?php echo $x; ?></span> <?php echo the_sub_field('phase_title'); ?>
+              </button>
+            </div>
+          </div>
+          <div id="collapse<?php echo $x; ?>" class="collapse <?php if($x==1){echo 'show';} ?>" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="panel-body">
+              <?php echo the_sub_field('phase_content'); ?>
+            </div>
+          </div>
+        </div>
+
+      <?php
+    endwhile;
+  else :
+  endif;
+?>
