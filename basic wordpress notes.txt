@@ -624,6 +624,19 @@ form the class 'WP_Query'
 ** WP_Query() is the wordpress Class use to get value.
 
 
+
+/*
+--------------------
+DISPLAY THIS CUSTOMPOST IN SINGLE PAGE
+--------------------
+*/
+CREATE A PAGE FOR A CUSTOM POST
+--> single-post_type.php
+EXAMPLE:
+single-basicTheme_product.php
+single-recipes.php
+
+
 -------------------
 ARCHIVE PAGE
 
