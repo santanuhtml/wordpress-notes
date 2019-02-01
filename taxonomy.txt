@@ -93,3 +93,99 @@ Note:
 both categori first and second then we can us
 
 'team_tags' => 'first + second',
+
+
+/*
+-------------------------------------
+HOW TO USE
+-------------------------------------
+*/
+
+
+/*
+--------------------
+STEP:1
+CALL THIS IN function.php page
+--------------------
+*/
+
+/*
+----------------------------
+CUSTOM POST
+----------------------------
+*/
+function jalan_custom_post(){
+    /* Recipes */
+    register_post_type('recipes',array(
+    'labels' => array(
+        'name' => 'Recipes',
+        'menu_name' => 'Recipes',
+        'all_items' => 'See All Recipes',
+        'add_new' => 'Add New Recipes',
+        'add_new_item' => 'Add New Basic ThemeRecipes',
+      ),
+    
+    'public' => true,
+    'menu_icon'   => 'dashicons-welcome-write-blog',
+    'supports' => array(
+        'title','editor','thumbnail','excerpt','revisions','custom-fields','page-attributes'
+      )
+  ));
+}
+add_action('init','jalan_custom_post');
+
+/*
+----------------------------
+CUSTOM POST CATEGORY
+----------------------------
+*/
+function create_recepes_taxonomy() { 
+
+    register_taxonomy(
+        'recepe-category',       //**** This will use to call the category 
+        'recipes',
+        array(
+            'label' => __( 'Category' ),
+            'rewrite' => array( 'slug' => 'recepe-category' ),
+            'hierarchical' => true,
+        )
+    );
+}
+add_action( 'init', 'create_recepes_taxonomy' );
+
+
+/*
+--------------------
+STEP:2
+DISPLAY THIS CATEGORY IN PAGE
+--------------------
+*/
+
+<?php
+    $allrecipes = new WP_Query(array(
+       'post_type' => 'recipes', 
+       'order' => 'ASC',
+       'recepe-category' => 'jalan-chana-sattu',  //**** calling created category
+       'posts_per_page' => -1
+      ));
+
+    if ($allrecipes->have_posts()) {
+      while($allrecipes->have_posts()){
+        $allrecipes->the_post();
+        ?>
+        <div class="col-md-4">
+          <div class="product-box">
+            <div class="details">
+              <a href="<?php the_permalink(); ?>">
+                <?php the_post_thumbnail(); ?>
+              </a>
+              <h3><?php the_title(); ?></h3>
+            </div>
+          </div>
+        </div>
+        <?php
+      }
+    }
+    wp_reset_postdata(); 
+
+  ?>
