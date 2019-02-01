@@ -623,8 +623,6 @@ form the class 'WP_Query'
 
 ** WP_Query() is the wordpress Class use to get value.
 
-
-
 /*
 --------------------
 DISPLAY THIS CUSTOMPOST IN SINGLE PAGE
@@ -635,6 +633,42 @@ CREATE A PAGE FOR A CUSTOM POST
 EXAMPLE:
 single-basicTheme_product.php
 single-recipes.php
+
+/*
+-------------------
+HIDE Add New Option from custom post
+-------------------
+*/
+add this in during custompost register:
+CODE:
+
+================
+
+ 'capability_type' => 'post',
+    'capabilities' => array(
+      'create_posts' => 'do_not_allow',
+    ),
+ 'map_meta_cap' => true,
+ 
+ ================
+EXAMPLE:
+
+register_post_type('contact',array(
+    'labels' => array(
+      'name' => 'Contact',
+      'menu_name' => 'Contact',
+    ),
+    'public' => true,
+		'menu_icon' => 'dashicons-location',
+    'supports' => array(
+      'title','editor','thumbnail'
+    ),
+    'capability_type' => 'post',
+    'capabilities' => array(
+      'create_posts' => 'do_not_allow',
+    ),
+    'map_meta_cap' => true,
+  ));
 
 
 -------------------
