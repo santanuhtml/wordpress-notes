@@ -9,7 +9,8 @@ WordPress is free open source content management system (CMS) written PHP langua
 Xampp
 
 4.	What is the difference between wordpress.com and wordpress.org?
-Both the sites are part of WordPress. Only difference is about "who is hosting your website". With org, YOU host your website or blog. With com, THEY host for you.
+Both the sites are part of WordPress. Only difference is about "who is hosting your website". 
+With org, YOU host your website or blog. With com, THEY host for you.
 
 5.	Where is WordPress content stored?
 WordPress contents are stored in MySQL database on Server.
@@ -21,7 +22,8 @@ iii.Supported by many low-cost Linux hosts.
 iv.Extremely fast
 
 7.	How safe is your website on WordPress?
-Updated the latest version of WordPress to avoid hacking.
+> Updated the latest version of WordPress to avoid hacking.
+> Install security plugins like WP security
 
 8.	Is WordPress secure?
 Yes, the error can come from downloading plugins and tools from an unauthorized source.
@@ -60,7 +62,8 @@ backup copy.
 Yes, we can host using Amazon web services.
 
 17.	Why you use a static front page in wordpress?
-Some WordPress users wants their WordPress installation to be more than a blog site. To give their page a look more like a real website page some users use static front page.
+Some WordPress users wants their WordPress installation to be more than a blog site. 
+To give their page a look more like a real website page some users use static front page.
 Standard
 18.	What is a plugin in WordPress?
 WordPress Plugins are increase the functionality or add some new features to a WordPress site.
@@ -76,7 +79,8 @@ Akismet
 Hello Dolly
 
 22.	What is the difference between installing and activating a theme?
-When a theme is activated, then this theme is current theme on your siteand an installed theme is simply part of your theme library.
+When a theme is activated, then this theme is current theme on your siteand an installed theme is simply 
+part of your theme library.
 
 23.	How many default tables are the WordPress?
 There are 11 tables in wordpress, they are:
@@ -94,7 +98,6 @@ The Loop is PHP code used to display posts.
 26.	**In WordPress, objects are passed by value or by reference?
 In WordPress, all objects are passed by value.
 
-
 27.	What is a WordPress taxonomy?
 “taxonomy” is a grouping mechanism for  posts & custom post.
 There are four default taxonomies:
@@ -104,24 +107,28 @@ Link Category
 Post Formats
 
 28.	*What are the Posts in Wordpress?
-Posts allow you to write a blog and post it on your site, where generally news or informational updates are published. They are listed in chronological order.
+Posts allow you to write a blog and post it on your site, where generally news or informational updates are published. 
+They are listed in chronological order.
 
 29.	What are Pages in Wordpress?
 Pages are static content and naturally they do not change, like about us, contact us page etc.
 
-
 30.	What is the difference between post and page?
-•	WordPress posts are content published on a site with an exact date and time. They can be categorized on the basis of category and tags. 
-•	WordPress pages are static and does not change frequently such as contact us about us, privacy policy, etc. They don't have date and time published, however, database stores their published date and time.
+•	WordPress posts are content published on a site with an exact date and time. 
+They can be categorized on the basis of category and tags. 
+•	WordPress pages are static and does not change frequently such as contact us about us, privacy policy, etc. 
+They don't have date and time published, however, database stores their published date and time.
 
 31.	*What do you mean by the custom field in WordPress?
-Custom field is a meta-data that allows you to store arbitrary information to the wordpress post. Through custom field extra information can be added to the post.
+Custom field is a meta-data that allows you to store arbitrary information to the wordpress post. 
+Through custom field extra information can be added to the post.
 
 32.	Function to get website url in wordpress?
 get_site_url(); / echo site_url();
 
 33.	Is it possible to SEO a WordPress site to show it on Google first page?
-WordPress has an in-built SEO search engine benefit. You can also have an additional plug-in in WordPress to help with SEO and rank on a popular search engine like Google.
+WordPress has an in-built SEO search engine benefit. You can also have an additional plug-in in WordPress to help 
+with SEO and rank on a popular search engine like Google.
 http://www.wpbeginner.com/wordpress-seo/
 
 34.	What is hook?
@@ -143,9 +150,10 @@ http://www.wpbeginner.com/glossary/filter/
 39.	Explain Categories in WordPress.
 Categories allow a user to divide its content into different sections, so user can easily find their content from a lot.
 
-
 40.	Explain Tags in WordPress.
-With the help of tags, similar posts can be grouped together. Hence, it makes easier for the users to search a particular post. It tells the user what a post is about. Tags are similar to categories but still different.
+With the help of tags, similar posts can be grouped together. Hence, it makes easier for the 
+users to search a particular post. It tells the user what a post is about. Tags are similar 
+to categories but still different.
 
 41.	What is the use of Slug field in tags?
 It is used to specify the tags URL.
@@ -185,8 +193,9 @@ Follower: They don't have any right. They can only read and comment on your post
 Viewer: They can only read and comment on a post.
 
 45.	What is the difference between the two URLs WordPress Address AND Site Address?
-WordPress Address is file address inside the wordpress folder. We may do it using call the function get_template_directory_uri();                    
-Site Address used as the base for creating URLs for web pages.
+> WordPress Address is file address inside the wordpress folder. We may do it using call the function: 
+get_template_directory_uri();                    
+> Site Address used as the base for creating URLs for web pages.
 
 46.	How do you enable debug mode / display error messages during development in WP?
 Edit wp-config.php file and changing WP_DEBUG default value to true.
