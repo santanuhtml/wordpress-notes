@@ -12,6 +12,7 @@ WORDPRESS DEMO PROJECT TO LIVE
 THEME CUSTOMIZE
 SEARCH OPTION WITH ICON
 SEARCH OPTION WITH ANIMATION
+NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
 					    
 ********************************
 DATE TIME
@@ -442,6 +443,15 @@ $(function () {
     });
  });
 
-
-
+************************************************
+NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
+************************************************
+ <ul>
+   <li class="next">
+      <?php next_post_link( '%link', 'Next Product', true, '', 'recepe-category' ); ?>
+   </li>
+   <li class="previous">
+      <?php previous_post_link( '%link', 'Previous Product', true, '', 'recepe-category' ); ?>
+   </li>
+</ul>
 
