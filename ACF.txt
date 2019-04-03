@@ -29,7 +29,20 @@ endif;
 
 -------------------------------
 
-ACF Repeater For Images:
+ACF FOR SINGLE IMAGE
+
+<div class="item">
+  <?php 
+    $image2 = get_field('sample_document');
+  ?>
+  <a href="<?php echo $image2['sizes']['large'] ?>" data-lity>
+    <img src="<?php echo $image2['sizes']['medium'] ?>" class="img-responsive">
+  </a>
+</div>
+
+-------------------------------
+
+ACF Repeater For multiple Images:
 
 step1:
 Return Value : Image Array [DONE]
