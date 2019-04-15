@@ -13,7 +13,8 @@ THEME CUSTOMIZE
 SEARCH OPTION WITH ICON
 SEARCH OPTION WITH ANIMATION
 NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
-Breadcrumb
+Breadcrumb section
+Single Page Comment section
 					    
 ********************************
 DATE TIME
@@ -457,7 +458,7 @@ NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
 </ul>
 
 ************************************************
-Breadcrumb
+Breadcrumb section
 ************************************************
 source: https://www.codexworld.com/wordpress-how-to-display-breadcrumb-without-plugin/
 
@@ -484,3 +485,93 @@ function get_breadcrumb() {
 
 //HTML
 <div class="breadcrumb"><?php get_breadcrumb(); ?></div>
+
+************************************************
+Single Page Comment section
+************************************************
+<?php
+$postid = get_the_ID();
+$comments_count = wp_count_comments($postid);
+if($comments_count->total_comments>1){
+?>
+<a href="#reply-title" class="btn btn-secondary pull-right leave-reply">Leave a Reply</a>
+<?php
+}
+?>
+<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>
+
+-----------------------------------
+CSS [Edit as our need]
+-----------------------------------
+.btn{
+background-color: #194d70;
+color: #fff;
+}
+.btn:hover{
+color: #fff;
+}
+#comments{
+border-top: 1px solid #d8d8d8;
+padding-top: 28px;
+margin-top: 40px;
+}
+.comments .comments-title{
+font-size: 20px;
+margin-bottom: 30px;
+}
+.comments .comment-body{
+margin-top: 12px;
+padding: 16px;
+background: #f3f3f3;
+border: 1px solid #eaeaea;
+}
+#comments-list{
+margin-bottom: 30px;
+}
+.comments ul{
+padding-left: 0px;
+list-style: none;
+}
+.comments .avatar{
+margin-right: 6px;
+margin-bottom: 6px;
+}
+.comments .children{
+padding-left: 20px !important;
+}
+.comments .comment-body p{
+font-size: 17px;
+margin-top: 10px;
+}
+#comments label {
+display: block !important;
+}
+#comments textarea{
+width: 100%;
+height: 110px;
+border-radius: 5px;
+border: 1px solid #dadada;
+outline: none;
+}
+#reply-title{
+font-size: 20px;
+margin-bottom: 6px;
+}
+.comment-form-url, .comment-form-cookies-consent{
+display: none !important;
+}
+#comments input{
+height: 35px;
+border-radius: 5px;
+outline: none;
+border: 1px solid #dadada;
+}
+#comments #submit{
+background: #042c4a !important;
+color: #fff !important;
+padding: 7px 20px !important;
+border: none !important;
+font-size: 14px !important;
+text-transform: uppercase !important;
+margin-top: 8px;
+}
