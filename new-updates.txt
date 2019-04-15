@@ -13,6 +13,7 @@ THEME CUSTOMIZE
 SEARCH OPTION WITH ICON
 SEARCH OPTION WITH ANIMATION
 NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
+Breadcrumb
 					    
 ********************************
 DATE TIME
@@ -455,3 +456,31 @@ NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
    </li>
 </ul>
 
+************************************************
+Breadcrumb
+************************************************
+source: https://www.codexworld.com/wordpress-how-to-display-breadcrumb-without-plugin/
+
+//breadcrumb
+function get_breadcrumb() {
+  echo '<a href="'.home_url().'" rel="nofollow">Home</a>';
+  if (is_category() || is_single()) {
+      echo "&nbsp;&nbsp;<span>&#8260;</span>&nbsp;&nbsp;";
+      the_category(' &bull; ');
+        if (is_single()) {
+          echo " &nbsp;&nbsp;<span>&#8260;</span>&nbsp;&nbsp; ";
+          the_title();
+        }
+  } elseif (is_page()) {
+      echo "&nbsp;&nbsp;<span>&#8260;</span>&nbsp;&nbsp;";
+      echo the_title();
+  } elseif (is_search()) {
+    echo "&nbsp;&nbsp;<span>&#8260;</span>&nbsp;&nbsp;Search Results for... ";
+    echo '"<em>';
+    echo the_search_query();
+    echo '</em>"';
+  }
+}
+
+//HTML
+<div class="breadcrumb"><?php get_breadcrumb(); ?></div>
