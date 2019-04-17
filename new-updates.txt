@@ -489,9 +489,12 @@ function get_breadcrumb() {
 ************************************************
 Single Page Comment section
 ************************************************
+Source:https://developer.wordpress.org/reference/functions/wp_count_comments/
+
 <?php
 $postid = get_the_ID();
 $comments_count = wp_count_comments($postid);
+echo "Total Comments: " . $comments_count->total_comments . "<br />";       //TESTING LINE, DONOT NEED IT
 if($comments_count->total_comments>1){
 ?>
 <a href="#reply-title" class="btn btn-secondary pull-right leave-reply">Leave a Reply</a>
