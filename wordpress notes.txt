@@ -618,6 +618,28 @@ vii. We may also edit MESSAGE BODY:
 This e-mail was sent from a contact form on E Buy (http://BRANDNAME.COM/contact-us) </p>
 
 -------------------------------
+Selectable Recipient with Pipes
+link:
+https://contactform7.com/selectable-recipient-with-pipes/
+
+step1:
+From
+Add on Form
+[select your-recipient "CEO|ceo@example.com"
+                    "Sales|sales@example.com"
+                    "Support|support@example.com"]
+		    
+step2:	
+Mail
+Add thi on 'TO'
+[your-recipient]
+
+AND 
+
+Add this on 'Message Body'
+[your-recipient]
+
+-------------------------------
 
 NOTE: TUTORIL 41 OF EBIT
 -------------------------------
