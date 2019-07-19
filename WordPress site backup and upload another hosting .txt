@@ -1,0 +1,61 @@
+STEP1:
+cpanel - Backup Wizard
+Back Up -> MySQL Databases -> select a database -> hubgravita-db (Click over it to download).
+
+STEP2:
+Download Full Project from 
+'File Manager' -> Public_html -> zip full project.
+
+
+STEP3:
+New Cpanle
+cpanel - Backup Wizard
+Restore -> MySQL Databases -> choose file -> hubgravita-db.sql.gz -> Upload
+
+STEP4:
+Upload Backup zip file on your new server.
+
+STEP5:
+Go to the uploaded project -> wp-config.php -> edit ->
+db name:
+db User name:
+db password:
+
+NOTE: need to add those fields from newly added database 'hubgravita-db.sql.gz'
+
+STEP6:
+New cpanel -> MySQL Databases -> Check Database list and find the database -> where has no user
+Now create a user -> cpanel -> MySQL Databases -> Add New User -> 'smart' ->
+take password from networkd_test-hubgravita file -> here the password is 'hubgravita-user' -> done
+Now Go Back to the page.
+
+lolo
+lolo124@2015
+
+STEP7:
+Add User to Database
+User : smart (new created user)
+Database : hubgravita-db (Uploaded database)
+->
+ADD
+->ALL PRIVILEGES
+
+<-GO BACK
+
+STEP8:
+select DB name 'networkd_hubgravita-db' from the list and past it on 
+'wp-config.php' file - > DB_NAME: networkd_hubgravita-db
+                         UB_USER: networkd_smart
+			 DB_PASSWORD:
+
+
+IF PROJECT DOMAIN ALSO CHANGE THEN
+STEP9:
+Cpanel -> phpMyAdmin -> click on your database -> click on 'wp_options' ->
+change domain name from
+Siteurl:
+home:
+
+********
+Dashbord -> settings -> permalinks -> save changes
+********
