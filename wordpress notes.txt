@@ -640,6 +640,19 @@ Add this on 'Message Body'
 [your-recipient]
 
 -------------------------------
+SEND PAGE DETAILS DYNAMICALLY
+-------------------------------
+STEP1: Download 'Contact Form 7 Dynamic Text Extension' plugin
+
+STEP2: ADD THIS "CF7_URL" ON CODE
+EXAMPLE:
+<div class="form-group">
+[submit class:btn class:btn-primary "Submit"]
+</div>
+[dynamichidden dynamichidden-426 "CF7_URL"]
+
+
+
 
 NOTE: TUTORIL 41 OF EBIT
 -------------------------------
