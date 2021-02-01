@@ -11,7 +11,7 @@ CODE:
 
 <?php
   function first_shortcode(){
-    echo "first short code";
+    return "first short code";
   }
   add_shortcode('callit','first_shortcode');
 ?>
@@ -59,7 +59,7 @@ Array ( [text] => testing content [name] => name attribute )
 EXAMPLE2: 
 <?php
   function first_shortcode($para){
-    echo $para['text'];
+    return $para['text'];
   }
   add_shortcode('callit','first_shortcode');
 ?>
@@ -70,7 +70,7 @@ testing content
 EXAMPLE3:
 <?php
   function first_shortcode($para){
-    echo '<h2>'.$para['value'].'</h2>';
+   return '<h2>'.$para['value'].'</h2>';
   }
   add_shortcode('callit','first_shortcode');
 ?>
