@@ -1,17 +1,20 @@
 <?php get_header(); 
 
-	$fields = CFS()->get( 'gift' );
-	foreach ( $fields as $field ) {
+$fields = CFS()->get( 'gift' );
+foreach ( $fields as $field ) {
     echo $field['name'];
     echo $field['image'];
     echo $field['discription'];
     echo $field['link'];
     // nest loop
-		foreach ($field['lists'] as $aaa)  {
-	    echo $aaa['list'];
-	  }
-	  // end nest loop
-	}
+	foreach ($field['lists'] as $aaa)  {
+	   echo $aaa['list'];
+        }
+    // end nest loop
+     ?>
+     <br><br>
+    <?php
+}
  
  get_footer(); ?>
 
