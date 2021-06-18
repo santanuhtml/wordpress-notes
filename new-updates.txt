@@ -94,6 +94,17 @@ $atts['data-hover'] = 'dropdown';
 ************************************************
 Display custom post category
 ************************************************
+
+$categories = get_the_category();
+if ( ! empty( $categories ) ) {
+    echo esc_html( $categories[0]->name );   
+}
+// $categories[0]->name => Web Designer
+// $categories[0]->slug => web-designer
+
+
+---------------
+For Custom Post
 step1: call it inside the loop
 ------------------------------------------------
 <?php
