@@ -16,6 +16,7 @@ NEXT AND PRIVIOUS OPTION ON SINGLE PAGE BASE ON CATEGORY
 Breadcrumb section
 Single Page Comment section
 Stop Hackers fron Script Injection
+Remove "Updates" link from Wordpress Admin Dashboard
 					    
 ********************************
 DATE TIME
@@ -610,3 +611,14 @@ RewriteRule ^(.*)$ index.php [F,L]
 # END Protect Against Script Injections
 
 ----------------------------------------------
+
+************************************************
+Remove "Updates" link from Wordpress Admin Dashboard
+************************************************
+
+function edit_admin_menus() {  
+global $submenu;  
+unset($submenu['index.php'][10]);
+return $submenu;
+}  
+add_action( 'admin_menu', 'edit_admin_menus' ); 
