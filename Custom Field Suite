@@ -17,4 +17,19 @@ foreach ( $fields as $field ) {
 }
  
  get_footer(); ?>
+ 
+ 
+------------------
+True/False example:
+If Check then it returns 1
+------------------
+$activeOverviewResult	= CFS()->get( 'active_overview' );
+  if ($activeOverviewResult ==1) {
+        echo CFS()->get( 'location');
+  	echo CFS()->get( 'about_the_project');
+  }
+  else{
+  echo "Section Hide";
+  }
+  ?>
 
