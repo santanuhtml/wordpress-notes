@@ -33,3 +33,41 @@ $activeOverviewResult	= CFS()->get( 'active_overview' );
   }
   ?>
 
+
+-------------------
+True/False 
+Loop
+Select Option
+-------------------
+<!--  Amenities -->
+<?php 
+$activeAmenitiesResult  = CFS()->get( 'active_amenities' );
+if ($activeAmenitiesResult ==1) {
+  // Amenities Loop
+  $fields = CFS()->get( 'add_amenities' );
+    foreach ( $fields as $field ) {
+    
+    //$values = CFS()->get( 'select_amenities' );
+    foreach ( $field['select_amenities'] as $key => $label ) {
+      // Lobby
+      if ('Exclusive lobby' == $label) {
+        echo "Exclusive lobby"; ?> <br> <?php
+      }
+      //School
+      if ('100% power backup' == $label) {
+        echo "100% power backup"; ?> <br> <?php
+      }
+      //School
+      if ('Lifts' == $label) {
+        echo "Lifts"; ?> <br> <?php
+      }
+      //School
+      if ('Security Cabin' == $label) {
+        echo "Security Cabin"; ?> <br> <?php
+      }
+    }
+  }
+  // Amenities Loop End
+}
+?>
+<!-- /  Amenities -->
