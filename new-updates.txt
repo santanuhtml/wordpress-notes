@@ -17,6 +17,7 @@ Breadcrumb section
 Single Page Comment section
 Stop Hackers fron Script Injection
 Remove "Updates" link from Wordpress Admin Dashboard
+disable form first dropdown option
 					    
 ********************************
 DATE TIME
@@ -622,3 +623,13 @@ unset($submenu['index.php'][10]);
 return $submenu;
 }  
 add_action( 'admin_menu', 'edit_admin_menus' ); 
+
+**************************************************
+disable form first dropdown option
+**************************************************
+[select* bhk class:form-control "Flat*" "2BHK" "3BHK" "4BHK"]
+<script>
+  $( "form option:first-child" ).attr("disabled","disabled");
+</script>
+
+
