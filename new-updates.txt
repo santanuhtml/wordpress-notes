@@ -19,6 +19,7 @@ Stop Hackers fron Script Injection
 Remove "Updates" link from Wordpress Admin Dashboard
 disable form first dropdown option
 Post-Processing of the Image Failed Likely Because the Server is Busy…
+Allow Editor Role To See Contact Form 7 Database
 					    
 ********************************
 DATE TIME
@@ -642,5 +643,9 @@ add_filter('wp_image_editors', function($editors) {
 return ['WP_Image_Editor_GD', 'WP_Image_Editor_Imagick'];
 })
 
---------------------------------------------------
-
+					    
+********************************
+Allow Editor Role To See Contact Form 7 Database
+********************************
+Install this plugin:
+https://wordpress.org/plugins/members/
