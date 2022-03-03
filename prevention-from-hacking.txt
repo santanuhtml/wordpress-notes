@@ -1,0 +1,279 @@
+1. Basic Setup for Wordpress Security
+2. Security Headers – X-Frame-Options and
+   Security Headers – X-XSS-Protection
+3. SQL Injection
+4. Cross Site Scripting (XSS)
+5. Insecure de-serializing (remote code execution)
+6. Cross Site Request Forgery (CSRF)
+7. Improper security configuration
+
+-------------------------------------
+1. Basic Setup for Wordpress Security
+-------------------------------------
+  I.   **Scan for SQL Injection Vulnerabilities**
+       https://sitecheck.sucuri.net/
+
+  II.   Hide WordPress Version:
+       Add this line in functions.php
+       ----------------------------------
+       remove_action( 'wp_head', 'wp_generator' );
+       ----------------------------------
+
+  III. Change Default WordPress Prefix For Database
+       names that start with the prefix “wp_”. so change Default WordPress 
+       Prefix For Database
+
+  IV.  Delete Unused Plugins or Themes
+
+  V.   Update:
+       Update WordPress core, theme, and plugins.
+
+  VI.  PHP Versions:
+       Use The latest version of PHP is 7.4
+       Check which hosting provider give PHP 7.4 
+
+  VII. Use Trusted Form Plugins
+       Note: We can use Contact Form 7 but don't use
+       Advanced Contact form 7 DB is prone to an SQL injection vulnerability
+       If we need to use then update to the latest 1.6.1 release.
+
+-------------------------------------
+2. Security Headers – X-Frame-Options and
+   Security Headers – X-XSS-Protection
+-------------------------------------
+.htaccess
+Add this on .htaccess file
+------------------
+# Security Headers
+Header always append X-Frame-Options SAMEORIGIN
+Header set X-XSS-Protection "1; mode=block"
+------------------
+
+
+-------------------------------------
+3. SQL Injection
+Source:
+https://www.cloudways.com/blog/wordpress-security-issues-and-fixes/
+https://www.cloudways.com/blog/wordpress-sql-injection-protection/
+-------------------------------------
+SQL Injections:
+  SQL injections are type of SQL commands which embed various areas of the websites
+  like comment box and text areas...
+  These commands can compromise the SQL database 
+
+URL Hacking:
+  Modifying theURL by adding PHP statements is another potential 
+  threat to WordPress security in which the attackers can trigger 
+  attacks on the database and other website components.
+
+Entry Points for SQL Injection Attacks
+  Sign up forms
+  Login forms
+  Contact forms
+  Site searches
+  Feedback fields
+  Shopping carts
+
+Ways to Prevent SQL Injection in WordPress
+  there is no way to completely get rid of hacking attempts. 
+  However, one can minimize the risk of getting hacked. 
+
+  I. To reduce the incidences of SQL injections and URL hacking, 
+     add the following code to the .htaccess
+
+.htaccess
+---------------------------------------
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} \.\.\/ [NC,OR]
+RewriteCond %{QUERY_STRING} boot\.ini [NC,OR]
+RewriteCond %{QUERY_STRING} tag\= [NC,OR]
+RewriteCond %{QUERY_STRING} ftp\:  [NC,OR]
+RewriteCond %{QUERY_STRING} http\:  [NC,OR]
+RewriteCond %{QUERY_STRING} https\:  [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|ê|"|;|\?|\*|=$).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(&#x22;|&#x27;|&#x3C;|&#x3E;|&#x5C;|&#x7B;|&#x7C;).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(%24&x).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F|127\.0).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(request|select|insert|union|declare).* [NC]
+RewriteCond %{HTTP_COOKIE} !^.*WordPress_logged_in_.*$
+RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+---------------------------------------
+
+  II. Deny Access To Sensitive Files in WordPress:
+      A WordPress installation contains several sensitive files, 
+      such as the wp-config.php, install.php, and readme.html files. 
+      These files must be kept hidden from all outside access.
+
+------------------------
+<files .htaccess>
+Order allow,deny
+Deny from all
+</files>
+<files readme.html>
+Order allow,deny
+Deny from all
+</files>
+<files license.txt>
+Order allow,deny
+Deny from all
+</files>
+<files install.php>
+Order allow,deny
+Deny from all
+</files>
+<files wp-config.php>
+Order allow,deny
+Deny from all
+</files>
+<files error_log>
+Order allow,deny
+Deny from all
+</files>
+<files fantastico_fileslist.txt>
+Order allow,deny
+Deny from all
+</files>
+<files fantversion.php>
+Order allow,deny
+Deny from all
+</files>
+------------------------
+
+-------------------------------------
+4. Cross Site Scripting (XSS)
+   4.1 Types of XSS attacks:
+   4.2 How to prevent Cross Site Scripting (XSS)
+------------------------------------- 
+4.1 Types of XSS attacks:
+  I.   Reflected XSS (Non-Persistent)
+  II.  Stored XSS (Presistent)
+  III. DOM (Document Object Model) XSS
+  
+  
+I. Reflected XSS (Non-Persistent):
+     In this case script excuted on the website and 
+     it is not stored on the server.
+
+
+   Checking Vulnerable input of a site
+   --------------
+   i.   <script>alert("Hello")</script>
+   --------------
+   ii.  <scr<script>ipt>alert("Hello")</script>
+   --------------
+        We can prevent i. & ii. script tag by using:
+        $name = preg_replace('', '', $_GET[$...])
+
+   --------------
+   iii. <img src=x onMouseOver=alert("Hello")>
+   --------------
+   iv.  <script>alert(document.cookie)</script>
+
+      Using this Reflected XSS Hacker can get Session ID and using
+      this Session ID hacker can login to a differnt account even if
+      the hacker don't know the username and password for that account.
+   --------------
+      
+  
+II. Stored XSS (Presistent)
+    Script is stored and executed on the server so when
+    any user visite to the site, that data will executing
+    the malicious code.
+  
+    Checking Vulnerable input of our comment | contact etc
+    --------------
+    i. <script>alert("Hello")</script>
+    --------------
+    ii.  <scr<script>ipt>alert("Hello")</script>
+    --------------
+	We can prevent i. & ii. script tag by using:
+        $name = preg_replace('', '', $_GET[$...])
+
+    --------------
+    iii. <img src=x onMouseOver=alert("Hellow")>
+    --------------
+
+
+III.  DOM (Document Object Model) XSS
+      It is a client-side attack, in this case script is not
+      sent to the server or it is not stored on the server. It
+      is stays on the client-side. 
+      In this case when user select any option [like dropdown] then the 
+      script executed
+
+      Checking Vulnerable URL
+      Example:
+      <select>
+       <option value="volvo">Volvo</option>
+       <option value="saab">Saab</option>
+       <option value="mercedes">Mercedes</option>
+       <option value="audi">Audi</option>
+      </select>
+      -----------------------
+      On select any option from dropdown url may be
+      ......../?default=Volvo
+
+      --------------
+      i.  we may add our script in place of Volvo 
+          ......../?default=<script>alert("Hello")</script>
+      --------------
+      ii. ......../?default=Volvo</option></select><body onload=alert("Hello")>
+      --------------
+      iii. ......../?default=Volvo#<script>alert("Hello")</script>
+      --------------
+      if this script executed the popup display. using this we can 
+      manupulat for low lavel sequrity website.
+
+
+4.2 How to prevent Cross Site Scripting (XSS)
+    
+    I. Escaping User input
+       Remove the symbol used in tags or in malicious script like
+       <, >, % etc
+
+    II. Consider all input as a threat:
+        Assub that every input is a thread and sanitize and handel
+        every input with care 
+
+    III. Data Validation
+         For example Login page have a user email, so validate input 
+         should be a email address with @ symbol
+
+    IV. Encode output
+ 
+     V. Content Security Policy to avoide cross site scripting
+
+
+
+
+
+
+
+
+
+
+---------------
+$username = stripcslashes($username)
+$password = stripcslashes($username)
+$username = mysqli_real_escape_string();
+$password = 
+
+
+Work on wordpress
+sanitize_email('admin@example.com!');
+--------------------
+
+
+<?php
+$sanitized_email = sanitize_email('admin@example.com!');
+echo $sanitized_email; // will output: 'admin@example.com' on wordpress file
+?>
