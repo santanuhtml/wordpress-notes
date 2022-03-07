@@ -1,6 +1,9 @@
 1. Basic Setup for Wordpress Security
 2. Security Headers – X-Frame-Options and
    Security Headers – X-XSS-Protection
+   Security Headers – X-Content-Type: nosniff
+   Disable Directory Listing
+   HTTP Trace Method
 3. SQL Injection
 4. Cross Site Scripting (XSS)
 5. Insecure de-serializing (remote code execution)
@@ -40,15 +43,36 @@
 -------------------------------------
 2. Security Headers – X-Frame-Options and
    Security Headers – X-XSS-Protection
+   Security Headers – X-Content-Type: nosniff
+   Disable Directory Listing
+   HTTP Trace Method
+
+
+Source: https://docs.sucuri.net/warnings/hardening/disable-server-banners/
 -------------------------------------
 .htaccess
 Add this on .htaccess file
-------------------
-# Security Headers
-Header always append X-Frame-Options SAMEORIGIN
-Header set X-XSS-Protection "1; mode=block"
-------------------
+---------------------------------------
 
+#Security Headers – X-XSS-Protection
+Header set X-XSS-Protection "1; mode=block"
+
+#Security Headers – X-Frame-Options
+Header always append X-Frame-Options SAMEORIGIN
+
+#Security Headers – X-Content-Type: nosniff
+Header set X-Content-Type-Options nosniff
+
+#Disable Directory Listing
+Options -Indexes
+
+# Disable HTTP Trace Method
+RewriteEngine On 
+RewriteCond %{REQUEST_METHOD} ^TRACE 
+RewriteRule .* - [F]
+
+
+---------------------------------------
 
 -------------------------------------
 3. SQL Injection
@@ -255,25 +279,3 @@ III.  DOM (Document Object Model) XSS
 
 
 
-
-
-
-
-
-
----------------
-$username = stripcslashes($username)
-$password = stripcslashes($username)
-$username = mysqli_real_escape_string();
-$password = 
-
-
-Work on wordpress
-sanitize_email('admin@example.com!');
---------------------
-
-
-<?php
-$sanitized_email = sanitize_email('admin@example.com!');
-echo $sanitized_email; // will output: 'admin@example.com' on wordpress file
-?>
