@@ -1,19 +1,16 @@
 1. Basic Setup for Wordpress Security
-2. Security Headers – X-Frame-Options and
-   Security Headers – X-XSS-Protection
-   Security Headers – X-Content-Type: nosniff
-   Disable Directory Listing
-   HTTP Trace Method
+2. .htaccess file
 3. SQL Injection
 4. Cross Site Scripting (XSS)
 5. Insecure de-serializing (remote code execution)
 6. Cross Site Request Forgery (CSRF)
 7. Improper security configuration
 
--------------------------------------
+------------------------------
 1. Basic Setup for Wordpress Security
--------------------------------------
-  I.   **Scan for SQL Injection Vulnerabilities**
+------------------------------
+
+I.   **Scan for SQL Injection Vulnerabilities**
        https://sitecheck.sucuri.net/
 
   II.   Hide WordPress Version:
@@ -40,46 +37,20 @@
        Advanced Contact form 7 DB is prone to an SQL injection vulnerability
        If we need to use then update to the latest 1.6.1 release.
 
--------------------------------------
-2. Security Headers – X-Frame-Options and
-   Security Headers – X-XSS-Protection
-   Security Headers – X-Content-Type: nosniff
-   Disable Directory Listing
-   HTTP Trace Method
+
+------------------------------
+2. .htaccess file
+------------------------------
+view the page 'all about htaccess file.txt'
 
 
-Source: https://docs.sucuri.net/warnings/hardening/disable-server-banners/
--------------------------------------
-.htaccess
-Add this on .htaccess file
----------------------------------------
-
-#Security Headers – X-XSS-Protection
-Header set X-XSS-Protection "1; mode=block"
-
-#Security Headers – X-Frame-Options
-Header always append X-Frame-Options SAMEORIGIN
-
-#Security Headers – X-Content-Type: nosniff
-Header set X-Content-Type-Options nosniff
-
-#Disable Directory Listing
-Options -Indexes
-
-# Disable HTTP Trace Method
-RewriteEngine On 
-RewriteCond %{REQUEST_METHOD} ^TRACE 
-RewriteRule .* - [F]
-
-
----------------------------------------
-
--------------------------------------
+------------------------------
 3. SQL Injection
 Source:
 https://www.cloudways.com/blog/wordpress-security-issues-and-fixes/
 https://www.cloudways.com/blog/wordpress-sql-injection-protection/
--------------------------------------
+------------------------------
+
 SQL Injections:
   SQL injections are type of SQL commands which embed various areas of the websites
   like comment box and text areas...
@@ -102,81 +73,24 @@ Ways to Prevent SQL Injection in WordPress
   there is no way to completely get rid of hacking attempts. 
   However, one can minimize the risk of getting hacked. 
 
-  I. To reduce the incidences of SQL injections and URL hacking, 
-     add the following code to the .htaccess
-
-.htaccess
----------------------------------------
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC]
-RewriteRule ^(.*)$ - [F,L]
-RewriteCond %{QUERY_STRING} \.\.\/ [NC,OR]
-RewriteCond %{QUERY_STRING} boot\.ini [NC,OR]
-RewriteCond %{QUERY_STRING} tag\= [NC,OR]
-RewriteCond %{QUERY_STRING} ftp\:  [NC,OR]
-RewriteCond %{QUERY_STRING} http\:  [NC,OR]
-RewriteCond %{QUERY_STRING} https\:  [NC,OR]
-RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
-RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [NC,OR]
-RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|ê|"|;|\?|\*|=$).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(&#x22;|&#x27;|&#x3C;|&#x3E;|&#x5C;|&#x7B;|&#x7C;).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(%24&x).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F|127\.0).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]
-RewriteCond %{QUERY_STRING} ^.*(request|select|insert|union|declare).* [NC]
-RewriteCond %{HTTP_COOKIE} !^.*WordPress_logged_in_.*$
-RewriteRule ^(.*)$ - [F,L]
-</IfModule>
----------------------------------------
+  I.  To reduce the incidences of SQL injections and URL hacking, 
+      add the following code to the .htaccess
+      [view the page 'all about htaccess file.txt'] 
 
   II. Deny Access To Sensitive Files in WordPress:
       A WordPress installation contains several sensitive files, 
       such as the wp-config.php, install.php, and readme.html files. 
       These files must be kept hidden from all outside access.
+      [view the page 'all about htaccess file.txt'] 
 
-------------------------
-<files .htaccess>
-Order allow,deny
-Deny from all
-</files>
-<files readme.html>
-Order allow,deny
-Deny from all
-</files>
-<files license.txt>
-Order allow,deny
-Deny from all
-</files>
-<files install.php>
-Order allow,deny
-Deny from all
-</files>
-<files wp-config.php>
-Order allow,deny
-Deny from all
-</files>
-<files error_log>
-Order allow,deny
-Deny from all
-</files>
-<files fantastico_fileslist.txt>
-Order allow,deny
-Deny from all
-</files>
-<files fantversion.php>
-Order allow,deny
-Deny from all
-</files>
-------------------------
 
--------------------------------------
+
+------------------------------
 4. Cross Site Scripting (XSS)
    4.1 Types of XSS attacks:
    4.2 How to prevent Cross Site Scripting (XSS)
-------------------------------------- 
+------------------------------
+
 4.1 Types of XSS attacks:
   I.   Reflected XSS (Non-Persistent)
   II.  Stored XSS (Presistent)
@@ -275,7 +189,3 @@ III.  DOM (Document Object Model) XSS
     IV. Encode output
  
      V. Content Security Policy to avoide cross site scripting
-
-
-
-
