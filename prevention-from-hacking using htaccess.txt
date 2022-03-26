@@ -114,6 +114,19 @@ RewriteRule .* index.php [F,L]
 </IfModule>
 
 
+---------
+Source: https://wp-mix.com/block-xss-htaccess/
+
+<IfModule mod_rewrite.c>
+	RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+	RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+	RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+	RewriteRule .* index.php [F,L]
+</IfModule>
+
+-------
+
+
 ------------------------------
 7. Restrict Direct Access To Plugin & Theme PHP files
 ------------------------------
