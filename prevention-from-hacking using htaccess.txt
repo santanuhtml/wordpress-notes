@@ -1,0 +1,183 @@
+1. Redirect All Http to Https
+2. Block Bad Bots
+3. Disable Directory Browsing 
+   & Disable Directory Listing
+4. Deny Access To Files
+5. Block Access To wp-includes Folder And Files
+6. Block cross-site scripting (XSS)
+7. Restrict Direct Access To Plugin & Theme PHP files
+8. Protect Against SQL Injection
+9. Security Headers – X-Frame-Options and
+   Security Headers – X-XSS-Protection
+   Security Headers – X-Content-Type: nosniff
+   HTTP Trace Method
+10. Deny Access install.php
+
+
+------------------------------
+1. Redirect All Http to Https
+------------------------------
+#Redirect http to https
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+------------------------------
+2. Block Bad Bots
+------------------------------
+#Block bad hackers
+SetEnvIfNoCase User-Agent "^libwww-perl*" block_bad_bots
+Deny from env=block_bad_bots
+
+------------------------------
+3. Disable Directory Browsing 
+   & Disable Directory Listing
+------------------------------
+# Disable directory browsing
+Options All -Indexes
+
+#Disable Directory Listing
+Options -Indexes
+
+------------------------------
+4. Deny Access To Files
+------------------------------
+# Deny access to all .htaccess files
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+ 
+# Deny access to readme.html
+<files readme.html>
+Order allow,deny
+Deny from all
+</files>
+ 
+# Deny access to license.txt
+<files license.txt>
+Order allow,deny
+Deny from all
+</files>
+ 
+# Deny access to wp-config.php file
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+ 
+# Deny access to error_log
+<files error_log>
+Order allow,deny
+Deny from all
+</files>
+
+# Others New added Code
+<files .htaccess>
+Order allow,deny
+Deny from all
+</files>
+<files fantastico_fileslist.txt>
+Order allow,deny
+Deny from all
+</files>
+<files fantversion.php>
+Order allow,deny
+Deny from all
+</files>
+
+
+------------------------------
+5. Block Access To wp-includes Folder And Files
+------------------------------
+# Deny access to wp-includes folder and files
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+------------------------------
+6. Block cross-site scripting (XSS)
+------------------------------
+# Blocks some XSS attacks
+<IfModule mod_rewrite.c>
+RewriteCond %{QUERY_STRING} (\|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule .* index.php [F,L]
+</IfModule>
+
+
+------------------------------
+7. Restrict Direct Access To Plugin & Theme PHP files
+------------------------------
+# Restricts access to PHP files from plugin and theme directories
+RewriteCond %{REQUEST_URI} !^/wp-content/plugins/file/to/exclude\.php
+RewriteCond %{REQUEST_URI} !^/wp-content/plugins/directory/to/exclude/
+RewriteRule wp-content/plugins/(.*\.php)$ - [R=404,L]
+RewriteCond %{REQUEST_URI} !^/wp-content/themes/file/to/exclude\.php
+RewriteCond %{REQUEST_URI} !^/wp-content/themes/directory/to/exclude/
+RewriteRule wp-content/themes/(.*\.php)$ - [R=404,L]
+
+
+------------------------------
+8. Protect Against SQL Injection
+------------------------------
+# Protect Against SQL Injection
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} \.\.\/ [NC,OR]
+RewriteCond %{QUERY_STRING} boot\.ini [NC,OR]
+RewriteCond %{QUERY_STRING} tag\= [NC,OR]
+RewriteCond %{QUERY_STRING} ftp\:  [NC,OR]
+RewriteCond %{QUERY_STRING} http\:  [NC,OR]
+RewriteCond %{QUERY_STRING} https\:  [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|ê|"|;|\?|\*|=$).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(%24&x).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F|127\.0).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(request|select|insert|union|declare).* [NC]
+RewriteCond %{HTTP_COOKIE} !^.*WordPress_logged_in_.*$
+RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+
+------------------------------
+9. Security Headers – X-Frame-Options and
+   Security Headers – X-XSS-Protection
+   Security Headers – X-Content-Type: nosniff
+   HTTP Trace Method
+------------------------------
+#Security Headers – X-XSS-Protection
+Header set X-XSS-Protection "1; mode=block"
+
+#Security Headers – X-Frame-Options
+Header always append X-Frame-Options SAMEORIGIN
+
+#Security Headers – X-Content-Type: nosniff
+Header set X-Content-Type-Options nosniff
+
+# Disable HTTP Trace Method
+RewriteEngine On 
+RewriteCond %{REQUEST_METHOD} ^TRACE 
+RewriteRule .* - [F]
+
+------------------------------
+10. Deny Access install.php
+------------------------------
+<files install.php>
+Order allow,deny
+Deny from all
+</files>
