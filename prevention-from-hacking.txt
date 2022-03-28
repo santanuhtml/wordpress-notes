@@ -22,6 +22,41 @@ I.   **Scan for SQL Injection Vulnerabilities**
   III. Change Default WordPress Prefix For Database
        names that start with the prefix “wp_”. so change Default WordPress 
        Prefix For Database
+       
+       source:
+       https://help.one.com/hc/en-us/articles/360002107438-Change-the-table-prefix-for-WordPress-#step-2
+       --------------
+       Step 1 - Change the table prefix in wp-config.php
+       --------------
+	$table_prefix = 'wp_';
+	to
+	$table_prefix = 'ind_';
+	
+	--------------
+	Step 2 - Change the table prefix in the database
+	--------------
+
+	I.  Select all tables that start with wp_ 
+	II. i.  Click With selected to open the drop-down menu 
+       	        and select "Replace table prefix"
+    	    ii. Type in wp_ in the From-field, and the new name in the To-field, 
+                in this example, ind_.
+
+	--------------
+	Step 3 - Replace all references to the old prefix
+	--------------
+	I.  Click on the SQL tab in the menu at the top of the screen.
+	II. Copy and paste in the following commands:
+
+	--------------
+
+	update ind_usermeta set meta_key = 'david_capabilities' where meta_key = 'wp_capabilities';
+	update ind_usermeta set meta_key = 'david_user_level' where meta_key = 'wp_user_level';
+	update ind_usermeta set meta_key = 'david_autosave_draft_ids' where meta_key = 'wp_autosave_draft_ids';
+	update ind_options set option_name = 'david_user_roles' where option_name = 'wp_user_roles';
+
+	--------------
+       
 
   IV.  Delete Unused Plugins or Themes
 
