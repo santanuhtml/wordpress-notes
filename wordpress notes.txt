@@ -617,6 +617,12 @@ vii. We may also edit MESSAGE BODY:
 <p> -- <br />
 This e-mail was sent from a contact form on E Buy (http://BRANDNAME.COM/contact-us) </p>
 
+
+-------------------------------
+Telephone number 10 digit:
+
+[tel* your-number minlength:10 maxlength:10 class:form-control placeholder "Mobile Number"]
+
 -------------------------------
 Selectable Recipient with Pipes
 link:
