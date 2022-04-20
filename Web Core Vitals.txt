@@ -1,0 +1,54 @@
+Web Core Vitals:
+1. Optimise design for Mobile view
+   i.   Need to optimize big element of Above the Fold Content
+        to load fast
+   ii.  Don't use Slider, Animation, Video on Above the Fold Content area.
+   iii. May use CSS gradient with text
+   iv.  Keep optimized text.
+   v.   Maximum use sing optimized Image [webp format]
+   vi.  If animation need the keep them below the Above the Fold Content area.
+
+2. keep separate css and js files for Mobile
+   Example:
+   <link rel="stylesheet" href="style.css" media="only screen and (max-width: 960px)">
+
+3. Check for W3C Markup & CSS vlidaton
+
+4. Try to use Mobile pre install fonts. Example: Roboto
+
+5. Use font-display:swap
+   For WordPress use 'Swap google Font Display' By FlyingPress
+
+6. Use 'defer' attribute in <script>
+   Example: <script defer src="...min.js" />
+   For wordpress may use 'Async Javascript' By Frank Goossens (futtta)
+
+7. Image Optimization
+   i.   Take minimum image size as pre mobile and Desktop width
+   ii.  Compress image in compressjpeg.com
+   iii. Convert jpg/jpeg/png into webp.
+
+8. Add lazy loading for Html website
+   source: https://web.dev/browser-level-image-lazy-loading/
+   For wordpress use 'Autoptimize' By WP Rocket
+   Note: i.  Using 'Autoptimize' we can disable lazy load image 
+             for the first image above the fold.
+         ii. add the skip-lazy class to any image we wish 
+             to exclude from being lazyloaded
+
+9. W3 Total Cache
+
+10. Compress HTML,CSS,JS files
+
+
+
+-------------------------------------------------------------------------------
+
+R&D:
+https://snigel.com/blog/11-critical-ways-to-improve-first-contentful-paint-fcp
+https://blog.hubspot.com/marketing/remove-javascript-rendering-block
+
+
+
+
+
