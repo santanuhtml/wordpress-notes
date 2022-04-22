@@ -65,12 +65,13 @@ i.  Click on the SQL tab in the menu at the top of the screen.
 ii. Copy and paste in the following commands:     
 --------------
 	
-update ind_usermeta set meta_key = 'ind_capabilities' where meta_key = 'wp_capabilities';
-update ind_usermeta set meta_key = 'ind_user_level' where meta_key = 'wp_user_level';
-update ind_usermeta set meta_key = 'ind_autosave_draft_ids' where meta_key = 'wp_autosave_draft_ids';
-update ind_options set option_name = 'ind_user_roles' where option_name = 'wp_user_roles';
+update NEWPREFIX_usermeta set meta_key = 'NEWPREFIX_capabilities' where meta_key = 'OLDPREFIX_capabilities';
+update NEWPREFIX_usermeta set meta_key = 'NEWPREFIX_user_level' where meta_key = 'OLDPREFIX_user_level';
+update NEWPREFIX_usermeta set meta_key = 'NEWPREFIX_autosave_draft_ids' where meta_key = 'OLDPREFIX_autosave_draft_ids';
+update NEWPREFIX_options set option_name = 'NEWPREFIX_user_roles' where option_name = 'OLDPREFIX_user_roles';
 	     
 --------------
+Replace OLDPREFIX and NEWPREFIX, with your own old and new prefix. Like in the example below, where we replace wp_ with david_:
 
 ------------------------------
 5. Move your wp-config.php file to another location
