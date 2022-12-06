@@ -71,3 +71,18 @@ if ($activeAmenitiesResult ==1) {
 }
 ?>
 <!-- /  Amenities -->
+
+
+-------------------
+Image size
+source: 
+https://michaelsoriano.com/how-to-display-worpdress-automatically-resized-images-using-only-one-custom-field-value/
+-------------------
+<?php
+$varimgs = CFS()->get( 'image');
+echo $mediumimg = str_replace('.jpg', '-300x200.jpg' , $varimgs);
+$thumbimg = str_replace('.jpg', '-150x150.jpg' , $varimgs);
+?>
+<img src="<?php echo $varimgs; ?> " />
+<img src="<?php echo $mediumimg; ?> " />
+<img src="<?php echo $thumbimg; ?> " />
