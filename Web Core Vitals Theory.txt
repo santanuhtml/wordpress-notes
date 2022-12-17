@@ -1,0 +1,134 @@
+Web Core Vitals:
+It has three parts
+1. Largest Contentful Paint (LCP) <= 2.5 sec
+2. First Input Delay (FID)
+3. Cumulative Layout Shift (CLS)
+
+1. Largest Contentful Paint (LCP):
+   LCP is the loding time of the Largest element of the Above the Fold Content.
+
+   . Since Website view different on Mobile and Desktop, so LCP will be
+     different for Mobiel and Desktop for the same website.
+   . Google using Mobile LCP score to create Web Core Vitals score, so 
+     first try to improve Mobile LCP score.
+
+   I. Optimise Above The Fold Content for Mobile view.
+     i.   Need to optimize big element of Above the Fold Content
+          to load fast
+     ii.  Don't use Slider, Animation, Video on Above the Fold Content area.
+     iii. May use CSS gradient with text
+     iv.  Keep optimized text.
+     v.   Maximum use sing optimized Image [webp format]
+     vi.  If animation need the keep them below the Above the Fold Content area.
+     vii. Use minimum elements.
+
+   II. Optimise Fonts
+       During Website loding, Fonts also load with HTML and CSS.
+       If fonts take time then also website LCP score increse, because text will not
+       display untill the font load.
+       Solution is before loding our font, we can take user's preinstall font.
+       For this we use:
+       font-display:swap;
+       ----------------------
+	@font-face{
+	  font-family: "open sans";
+	  font-display:swap;
+	}
+       ----------------------
+       Note: For WordPress use 'Swap google Font Display' By FlyingPress
+
+
+    III. Render-Blocking Resources:
+
+         Use 'defer' attribute in <script>
+         Example: <script defer src="...min.js" />
+         For wordpress may use 'Async Javascript' By Frank Goossens (futtta)
+
+	 Why Defer?
+         Defer allows parallel download and files get executed after HTML is done parsing. 
+	
+         Why Not Async?
+         Async allows parallel download but files get executed immediately after download.
+ 
+  	**Note: So, If we use defer attribute in script, then we can keep JS file on header 
+	
+	[When website load then HTML execute line by line, if get CSS file then it paralley
+ 	 download this file and execute this. But in case of JS file, it download first, after
+         execute, it execute next line. to solve this problame we use defer attribute.]
+
+
+    IV. Minification of HTML, CSS and JavaScript
+        Use Autoptimize for WordPress Project.
+
+    V. Image Optimization
+       i. Take minimum image size as pre mobile and Desktop width.
+       ii. Compress image in compressjpeg.com
+       iii. Convert jpg/jpeg/png into webp.
+
+    VI. Use CDN
+
+    VII. Enable Caching
+
+   Others:
+    *** Upgrade Hosting
+        
+
+
+2. First Input Delay (FID)
+   FID is the time that our website takes to start working on first touch/click.
+   FID is closely related to Total Block Time (TBT)
+   If TBT score increase then our FID score also increase.
+   TBT score <= 300ms
+   To increase TBT score, we can work over
+   
+   I. Reduce JS Execution Time
+      i. Remove unused Js.
+      ii. Use requre Js.
+      iii. Optimize Js
+      iv. Compress Js.
+
+   II. Optimize CSS
+       i. Remove unused CSS.
+      iii. Compress CSS.
+
+   III. Minimize Main Thread Work
+   IV. Reduct Third Party Code
+       Example: Chat Plugin. If need then use.
+
+   
+3. Cumulative Layout Shift (CLS)
+   During Web page loding, light element (ex: button, text..) load first and large element
+   (ex: Image) load after some delay. After loding Larght element, first loaded elemt shift
+   if the large element placed above the lignt element. Its called Cumulative Layout Shift.
+   ---------------------------
+   <img src="" />
+   <button onclick="" >
+   ---------------------------
+   ** CLS Consider specilly for the links and Button.
+      CLS Score <= 0.1
+      Use Crome Developer tool use find which element shift its position.
+
+   Solution:
+    i. Try to use Preinstall Fonts. like Roboto, so that we don't need to 
+       worry about Optimise Fonts using font-display:swap;
+    ii. Self-host your font, so that 'requst' will be reduce [Hosting must be good]
+    iii. Image with width and height to store image area.
+    iv. Give proper size to our embedded elements to avoid layout shift.
+    v. ADS
+       - Allot space for ads and set fallback images in case ads spots spots don't get filled
+
+  
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+
