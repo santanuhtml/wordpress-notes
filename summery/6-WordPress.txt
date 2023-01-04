@@ -1,0 +1,323 @@
+1.What is WordPress?
+WordPress is free open source content management system (CMS) written PHP language.
+
+2.What year was WordPress released?
+2003
+
+3.What are minimum requirements to run WordPress?
+Xampp
+
+4.What is the difference between wordpress.com and wordpress.org?
+Both the sites are part of WordPress. 
+Only difference is about "who is hosting your website". 
+With org, YOU host your website or blog. With com, THEY host for you.
+
+5.Where is WordPress content stored?
+WordPress contents are stored in MySQL database on Server.
+
+6.*Why is MySQL used in WordPress?
+i. Open source and Free of cost
+ii.Supported by many low-cost Linux hosts.
+iv.Extremely fast
+
+7.How safe is your website on WordPress?
+i. Updated the latest version of WordPress to avoid hacking.
+ii. Disable File Editing from wp-config.php file.
+    define( 'DISALLOW_FILE_EDIT', true );
+iii. Change Default WordPress Prefix “wp_” For Database.
+iv. Move your wp-config.php file out side the root folder.
+v. htaccess file
+   Block cross-site scripting (XSS)
+   Protect Against SQL Injection
+   Security Headers – X-Frame-Options and
+   Security Headers – X-XSS-Protection
+
+vi. Change your WP-login URL
+vii. Delete Unused Plugins or Themes
+viii. Hide WordPress Version
+
+
+8.Is WordPress secure?
+Yes, the error can come from downloading plugins and tools from an unauthorized source.
+
+9.What do you do when your WordPress website is hacked?
+If we have new backup then we may use it.
+Otherwise we may:
+i. Download the Project and Database.
+ii. Clear all unknown script & links form our databse
+iii. Clear all unknown files and folder form our Project
+
+
+10.List the Positive aspects of WordPress?
+i. Easy installation and upgrade
+ii. Community
+iii. Easy theme system
+iv. SEO friendly
+
+11.Can you list any other CMS better than WordPress?
+Joomla.
+
+12.What plugins you can use to create a contact form in WordPress?
+contact form 7.
+
+13.What are meta-tags?
+Meta-tags are keyword and description used to display website or page information.
+
+14.Is wordpress.com more secure than wordpress.org?
+Yes, because 
+i. wordpress.com limits the themes 
+ii. wordpress.com  does not allow the installation of plugins.
+
+15.What are disadvantages of WordPress?
+i. Use of multiple plugins can make website heavy to load and slow.
+ii. Sometimes updates can lead to loss of data, so you always need a 
+backup copy.
+
+16.Can you host WordPress using Amazon web services such as EC2, RDS, EBS etc?
+Yes, But I have experience over linux hosting.
+
+17.Why you use a static front page in wordpress?
+Some clients wants their WordPress website to be more than a blog site. 
+To give their page a look more like a real website page some users use static front page. [front-page.php]
+
+18.What is a plugin in WordPress?
+WordPress Plugins are increase the functionality and add some new features to a WordPress site.
+
+19.In which cases you don’t see plugin menu?
+When the blog is hosted on free wordpress.com
+
+20.How is creating a site on wordpress.org different from wordpress.com?
+Most of the things are similar in both except the choices of themes and the usage of plugins.
+
+21.List plugin that comes with WordPress?
+Akismet
+Hello Dolly
+
+22.What is the difference between installing and activating a theme?
+When a theme is activated, then this theme is current theme 
+Installing theme is just part of our theme library.
+
+23. How many default tables are the WordPress?
+There are 11 tables in wordpress, they are:
+wp_posts
+wp_postmeta
+wp_comments
+wp_commentmeta
+wp_users
+wp_usermeta
+wp_terms
+wp_term_taxonomy
+wp_term_relationships
+wp_options
+wp_links
+
+24.Does WordPress use cookies?
+Yes, WordPress has cookies.
+When users while logged in, WordPress uses cookies for verification.
+
+
+25.*What is the loop in WordPress?
+The Loop is PHP code used to display posts.
+
+26.**In WordPress, objects are passed by ____?
+In WordPress, all objects are passed by VALUE.
+
+27.What is a WordPress taxonomy?
+“taxonomy” is a grouping mechanism for posts & custom post.
+There are four default taxonomies:
+Category
+Tag
+
+
+28.*What are the Posts in Wordpress?
+Posts allow us to write a blog and post it on your website.
+
+29.What are Pages in Wordpress?
+Pages are static content and naturally they do not change, like about us, contact us page etc.
+
+30.What is the difference between post and page?
+Post:
+  WordPress Posts allow us to write a blog and post it on your website, with an exact date and time. 
+  They can be categorized on the basis of category and tags. 
+
+Page:
+  WordPress pages are static content and naturally they do not change, like about us, contact us page etc.
+  They don't have date and time published, however, database stores their published date and time.
+
+
+31.*What do you mean by the custom field in WordPress?
+Using custom field we can store more information.
+
+32.Function to get website url in wordpress?
+<?php site_url(); ?>
+<?php get_site_url();  ?>
+
+33. Is it possible to SEO a WordPress site to show it on Google first page?
+WordPress has  in-built SEO search engine benefit. 
+WordPress has also have an additional plug-in 
+
+34.What is hook?
+Using hook user can create 
+WordPress themes and plug-ins 
+with shortcode without changing the original files.
+
+35.What are the types of hooks in WP and what are their functions?
+Action hooks 
+filter hooks
+
+36.What is Action Hook?
+Using Action hook we can insert an additional code from an outside resource.
+Example:
+add_action()
+remove_action()
+do_action()
+has_action()
+http://www.wpbeginner.com/glossary/action/
+
+37.What is Filter Hook?
+Using Filter hooks we can add a content or text at the end of the post.
+add_filter()
+remove_filter()
+doing_filter()
+has_filter()
+http://www.wpbeginner.com/glossary/filter/
+
+
+42. Template Files List for development WordPress Theme?
+Important files:-
+index.php
+single.php
+front-page.php
+page.php
+404.php
+search.php
+functions.php
+style.css
+Others files:-
+category.php
+tag.php
+
+43.What are the template tags in WordPress? List some of them.
+Template tags are used in themes and fetch data from your database. 
+some of them:
+get_header()
+get_footer()
+get_sidebar()
+get_search_form()
+the_category()
+the_tags()
+
+44.How many types of users WordPress have?
+Administrator: They have full rights over a site.
+Editor: They deal with content section of a site.
+Author: They only deal with their own posts. They can delete their post even after publishing.
+Contributor: A contributor doesn't have right to publish their post or page. 
+They need to send it to the administrator for review.
+Subscriber: Users which are subscribed to your site can log in and update their profile.
+Follower: They don't have any right. They can only read and comment on your post.
+Viewer: They can only read and comment on a post.
+
+45.What is the difference between the two URLs WordPress Address AND Site Address?
+> WordPress Address is file address inside the wordpress folder.
+get_template_directory_uri();       
+> Site Address is URL of our webpages.
+
+46.How do you enable debug mode / display error messages during development in WP?
+Edit wp-config.php file and changing 
+WP_DEBUG default value to true.
+
+47.How can you disable the WordPress comment?
+settings -> Discussion -> "Allow people to post comments on new 
+articles" [unchecking  it]
+
+48.What is default table prefix for wordpress?
+wp_ is default prefix for WordPress.
+
+50. Define what is the difference between the wp_title and the_title tags?
+wp_title() is used outside “The Loop” to display the title of a Page.
+the_title() on the other hand is used within "The Loop".
+
+51.Define what do next_posts_link() and previous_posts_link() do?
+
+53.How to store the post title in variable?
+get_the_title()
+
+55.What is site_url()?
+Its returns our site URL
+
+58.Define what’s the difference between site_url() and home_url()?
+33.What is a child theme?
+45. Essential plugins for WordPress?
+
+-------------------------------------------------------------------------------------
+Plugins
+-------------------------------------------------------------------------------------
+Contact Form 7
+WP Gmail SMTP
+Custom Field Suite
+
+-------------------------------------------------------------------------------------
+coding part
+-------------------------------------------------------------------------------------
+
+1.Basic pages:
+index.php
+page.php
+front-page.php
+single.php
+search.php
+archive.php
+404.php
+header.php
+footer.php
+functions.php
+style.css
+screenShot.png
+
+2.To add header:
+get_header();
+
+3.To add footer:
+get_footer();
+
+4.To use WordPress head, add befor </head> tag:
+<?php wp_head(); ?>
+
+5. To use footer, add before </body> tag:
+<?php wp_footer(); ?>
+
+7. To use/call any function we have to use a Action hook:
+add_action();
+
+
+8. To create dynamic <title></title> tag:
+---------------
+functions.php
+---------------
+add_action('after_setup_theme','basicTheme_setup');
+
+function basicTheme_setup(){
+  add_theme_support('title-tag');
+}
+---------------
+
+8. post data:
+1.the_title(); 
+2.the_permalink();
+3.the_content(); 
+4.the_excerpt();
+5.the_time('j F  Y');
+
+
+9. To get post thumbnail image:
+call this function under basicTheme_setup() function:
+---------------
+add_action('after_setup_theme','basicTheme_setup');
+function basicTheme_setup(){
+  add_theme_support('title-tag');
+  add_theme_support('post-thumbnails');
+}
+---------------
+now we have to call thumbnail image in our post
+<?php the_post_thumbnail(); ?>
+

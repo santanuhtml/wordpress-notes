@@ -1,0 +1,634 @@
+1. CSS stands for Cascading Style Sheets
+   CSS is not case sensitive
+
+   New in CSS3:
+   @media(){}
+   @font-face{}
+   @keyframes
+   transform:
+
+2. Difference between ID and Class Selectors?
+   Id is used to identify one element
+   Class is used to identify any number of elementss
+   Note: Do not start an ID or Class name with a NUMBER.
+
+Gropping Selectors:
+h1,h2{ font-size:20px; }
+
+CSS Selectors
+Note: A class name and id name cannot start with a number!
+The CSS Universal Selector
+The universal selector (*) selects all HTML elements
+STAR => * is the universal selector
+
+3. How To Add CSS
+Three Ways to Insert CSS
+ i.  External CSS
+ ii.  Internal CSS
+ iii. Inline CSS
+
+i. External CSS
+<link href="css/custom.css?v=1.5" rel="stylesheet">
+
+ii. Internal CSS
+<head>
+  <title></title>
+  <style type="text/css">
+    p{
+     color:blue;
+    }
+  </style>
+</head>
+
+iii. Inline CSS
+<p style="color: pink;">Hello World!</p>
+
+
+CSS Specificity:
+style="color: pink;" > #demo {color: blue;} > .test {color: green;} > p {color: red;}
+--------------
+  <style>
+    #demo {color: blue;}
+    .test {color: green;}
+    p {color: red;}
+  </style>
+</head>
+<body>
+
+<p id="demo" class="test" style="color: pink;">Hello World!</p>
+
+----------
+What is !important?
+in CSS is used to add more importance to a property/value than normal.
+
+
+4. CSS Colors
+RGB Value
+rgb(red, green, blue)
+
+RGBA Value
+rgba(red, green, blue, alpha)
+The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (not transparent at all)
+
+HEX Value
+#rrggbb
+
+5. CSS background
+-----------------
+body {
+  background-color: #ffffff;
+  background-image: url("img_tree.png");
+  background-size: 400px 400px; //image size
+  background-repeat: no-repeat | repeat-x | repeat-y;
+  background-position: right top;
+}
+-----------------
+
+CSS Background Attachment
+-----------------
+  background-attachment: fixed | scroll;
+-----------------
+
+CSS background - Shorthand property
+-----------------
+body {
+  background: #ffffff url("img_tree.png") no-repeat right top;
+}
+-----------------
+
+6. CSS Borders
+-----------------
+border-style: dotted | dashed | solid | double | groove | ridge | inset | outset | none | hidden;
+-----------------
+
+Specific Side Widths
+-----------------
+div{
+  border-style: solid;
+  border-width: 5px 20px; /* 5px top and bottom, 20px on the sides */
+}
+-----------------
+
+Specific Side Colors
+-----------------
+div{
+  border-style: solid;
+  border-color: red green blue yellow;
+}
+-----------------
+
+7. CSS Margins
+Margins are used to create space around elements, outside of any defined borders.
+
+8. CSS Padding
+Padding is used to create space around an element's content, inside of any defined borders.
+
+9. CSS height and width Values
+auto    - The browser calculates the height and width
+inherit - The height/width depends of its parent value
+initial - default value
+
+10. CSS Text
+text-align: center | left | right;
+
+text-align: justify;
+each line is stretched so that every line has equal width
+
+Vertical Alignment
+vertical-align: baseline;
+
+Text Decoration
+text-decoration: overline | line-through | underline | overline underline;
+
+CSS Text Shadow
+h1 {
+  text-shadow: left down opacity color;
+}
+h1 {
+  text-shadow: 2px 2px 5px red;
+}
+
+CSS Font Fallbacks
+When the current font isn't available the fallback fonts are used.
+{
+font-display: swap;
+}
+
+11. CSS Layout - The display
+The display property set how an element is displayed.
+Every HTML element has a default display value.
+
+Block-level Elements
+A block-level element 
+i.  Always starts on a new line and 
+ii. takes full width.
+Examples of block-level elements:
+<div>
+<h1> - <h6>
+<p>
+
+Inline Elements
+An inline element does not start on a new line and only takes necessary width.
+Examples of inline elements:
+<span>
+<a>
+<img>
+
+A common example is making inline <li> elements for horizontal menus:
+li {
+  display: inline;
+}
+
+display:  inline | inline-block | block
+
+inline => element height not applicabel
+inline-block => element height applicable
+block => height applicable
+
+display: none; =>  hides an element and no space take as before.	
+visibility:hidden; =>  hides an element but the element will still take up the same space as before.
+
+width and max-width:
+Case:1
+div.ex1 {
+  width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21;
+}
+
+Case:2
+div.ex2 {
+  max-width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21;
+}
+
+Case:1 => browser window is smaller than the width of the element. 
+The browser then adds a horizontal scrollbar to the page.
+
+Case:2 => Using max-width browser window is smaller than the width of the element. 
+box size adjust.
+
+
+12. The z-index Property
+    he z-index property set which element should be placed in front or behind, the others.
+
+click link below a higher z-index div
+{
+pointer-events: none;
+}
+
+13. CSS Overflow
+when the content of an element is too big to fit in the specified area the overflow property used.
+
+overflow: visible; => Default.
+text is not clipped and it renders outside the element's box
+
+overflow-wrap: break-word;
+this be allowed to break long words
+
+
+14. The float:
+    It is used to set position the content.
+    **the float property can be used to wrap text around images.
+
+The clearfix Hack:
+If a floated element is taller than the containing element, 
+it will "overflow" outside of its container. 
+We can then add a clearfix hack to solve this problem:
+
+------------------
+<div class="clearfix">
+  <img class="img2" src="pineapple.jpg" alt="Pineapple" width="170" height="170">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...
+</div>
+
+<style>
+div {
+  border: 3px solid #4CAF50;
+  padding: 5px;
+}
+.img2 {
+  float: right;
+}
+
+.clearfix {
+  overflow: auto;
+}
+</style>
+------------------
+
+15. box-sizing Hack:
+The box-sizing property allows us to include the padding and border in the box's and 
+we can easily create three floating boxes side by side. 
+------------------
+<style>
+* {
+  box-sizing: border-box;
+}
+.box {
+  float: left;
+  width: 33.33%;
+  padding: 50px;
+}
+.clearfix{
+   overflow: auto;
+}
+</style>
+
+<div class="clearfix">
+  <div class="box" style="background-color:#bbb">
+  <p>Some text inside the box.</p>
+  </div>
+  <div class="box" style="background-color:#ccc">
+  <p>Some text inside the box.</p>
+  </div>
+  <div class="box" style="background-color:#ddd">
+  <p>Some text inside the box. Here, we use the clearfix hack to take care of the layout flow.</p>
+  </div>
+</div>
+
+------------------
+NOTE: Equal Height Boxes Use flex
+
+16. CSS ALIGN
+i.Center an Image
+<style>
+img {
+  display:block;
+  margin:0 auto;
+}
+</style>
+
+ii. Left and Right Align - Using position
+<style>
+.right {
+  position: absolute;
+  right: 0px;
+  width: 300px;
+}
+</style>
+
+iii. Left and Right Align - Using float
+<style>
+.right {
+  float: right;
+  width: 300px;
+}
+</style>
+iii. The clearfix Hack 
+<style>
+.clearfix{
+  overflow:auto;
+}
+</style>
+
+iv. Center Vertically - Using position & transform
+<style>
+.center {
+  position: relative;
+}
+.center p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+v. Center Vertically - Using Flexbox
+<style>
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  border: 3px solid green; 
+}
+</style>
+<div class="center">
+  <p>I am vertically and horizontally centered.</p>
+</div>
+
+
+18. CSS Combinators
+A combinator is something that explains the relationship between the selectors.
+
+I. 
+selects all <p> elements inside <div> elements:
+div p {
+  background-color: yellow;
+}
+
+II.
+selects all <p> elements that are children of a <div> element:
+div > p {
+  background-color: yellow;
+}
+
+III.
+selects the first <p> element that are placed after <div> elements
+div + p {
+  background-color: yellow;
+}
+<div>
+  <p>Paragraph 5 in the div.</p> // Background Yellow
+  <p>Paragraph 6 in the div.</p>
+</div>
+
+IV. 
+selects all <p> elements that are next siblings of <div> elements: 
+<style>
+div ~ p {
+  background-color: yellow;
+}
+</style>
+
+<div>
+  <p>Paragraph 2.</p>
+</div>
+
+<p>Paragraph 3.</p> // Background Yellow
+<code>Some code.</code>
+<p>Paragraph 4.</p> // Background Yellow
+
+
+19. CSS Pseudo-classes
+define a special state of an element.
+it can be used to:
+Style an element when a user mouses over it, visited, focus
+
+Anchor Pseudo-classes
+/* mouse over link */
+a:hover {
+  color: #FF00FF;
+}
+
+CSS Pseudo-elements
+used to style specified parts of an element.
+
+it can be used to:
+Style the first letter, or line, of an element
+Insert content before, or after, the content of an element
+
+---------------- Check all about Pseudo-elements
+
+20. Navbar:
+li {
+  display: inline;
+}
+li a:hover:not(.active) {
+  background-color: #111;
+}
+.active {
+  background-color: #04AA6D;
+}
+
+
+21. CSS Image Sprites
+It is a collection of images 
+if a web page with many images can take a long time to load because it generates multiple server requests.
+Using image sprites will reduce the number of server requests and save bandwidth.
+
+<ul id="navlist">
+  <li id="home"><a href="default.asp"></a></li>
+  <li id="prev"><a href="css_intro.asp"></a></li>
+  <li id="next"><a href="css_syntax.asp"></a></li>
+</ul>
+<style>
+#home {
+  left: 0px;
+  width: 46px;
+  background: url('img_navsprites.gif') 0 0;
+}
+
+#prev {
+  left: 63px;
+  width: 43px;
+  background: url('img_navsprites.gif') -47px 0;
+}
+
+#next {
+  left: 129px;
+  width: 43px;
+  background: url('img_navsprites.gif') -91px 0;
+}
+</style>
+
+22. CSS Units
+Introduction of em:
+body{
+font-size:15px;
+  @media only screen and (max-width : 480px) {
+     font-size: 14px;
+  }
+}
+h1{
+font-size:4em; 
+}
+/* 15x4 = 60px;  
+   on mobile view it will be
+   14x4 = 56px;
+*/
+
+
+23. flex:
+In flex items are flexible with the same length and 
+not depend on content.
+
+display: flex;
+flex-wrap: wrap | nowrap |wrap-reverse;
+flex-direction: row | column | row-reverse|column-reverse;
+flex: 1|2|25%|50%;
+
+Ex:
+HTML
+----------------
+<div class="flex-container">
+  <div class="flex-item">1</div>
+  <div class="flex-item" style="background:#ddd">2</div>
+</div>
+----------------
+
+CSS
+----------------
+*{
+  box-sizing: border-box;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex-item{
+  background-color: #f1f1f1;
+  padding: 0px 30px;
+  flex: 50%;
+}
+@media (max-width: 767px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+----------------
+
+24. Grid
+
+display: grid; 
+grid-template-columns: auto auto auto; 
+grid-template-columns: repeat(3, 1fr); 
+.item1 {
+  grid-row: span 2;
+}
+
+Difference between flex and grid:
+Css grid use for two-dimensional layout system, which makes website easier.
+
+Css flex use one-dimensional layout system, which help to align items.
+[] [] [] [] [] []
+
+
+25. Add Font
+----------------
+@font-face{
+    font-family: 'Harmony';
+    src: url();
+    font-display: swap;
+}
+body{
+font-family: 'Harmony';
+}
+----------------
+
+26. transform: translate();
+               rotate();
+               scale();
+
+27. Responsive:
+    @media(max-width:767px){
+    }
+
+28. @keyframes
+
+<img src="https://i.ibb.co/B4GKy7J/snowflake.png" width="128" />
+<style>
+img{
+    animation: spin linear 10s infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+29.mix-blend-mode:
+   It is a css blending property with valus multiply | difference | overlay | darken etc.
+   mix-blend-mode: normal | multiply | difference | overlay | darken;
+
+               
+
+/*
+-----------------------------------------------
+CSS CODING
+-----------------------------------------------
+*/
+
+1. For Smooth scroll use "scroll-behavior: smooth;" on html{}
+Ex:
+html {
+   scroll-behavior: smooth;
+}
+
+2. For Smooth effect use  "transition"
+Ex:
+a,a:hover,a:focus{
+  transition: all .3s;
+}
+
+3. Image property:
+
+img {
+    max-width: 400px;
+    height: 300px;
+    object-fit: contain | cover  | fill;
+}
+
+4. Browser Support:
+
+-webkit- for safari
+-ms-     for Internet Explorer
+-moz-    for olf mozila firefox
+-o-      for Opera 11
+
+
+5. coloum count:
+p{
+  column-count:3;
+  column-gap:40px;
+}
+
+6. Sticky Sidebar:
+.make_me_sticky{
+  
+   display: block;
+  
+   position: sticky;
+  
+   top: 20px;
+
+ }
+
+7. monsary gallery:
+.gallery-grid{
+  
+  columns: 3;
+  
+  column-gap: 30px;
+
+}
+

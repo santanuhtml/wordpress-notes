@@ -1,0 +1,136 @@
+Less:
+LESS stands for Leaner Style Sheets.
+
+Features:
+1. Variables:
+@primary-color:#f00;
+@background-dark: #000;
+@padding-lg: 60px 0px;
+
+2. Nesting ability in our code.
+
+.carousel {
+    .carousel-item {
+        img {
+        }
+    }
+}
+
+3. Mathematical Operations like: +, -, *, /
+
+.carousel-item {
+    height: @carousel-item-height;
+}
+.carousel-item .item-large {
+    height: @carousel-item-height *2;
+}
+
+---------------------
+
+SASS & SCSS
+---------------------
+. SASS stands for Syntactically Awesome Stylesheet.
+. SASS & SCSS is a CSS Pre-processor.
+
+Features
+---------------------
+1. Nesting
+2. Variables($)
+3. Operators
+4. @mixin and @include
+---------------------
+
+1. Nesting
+---------------------
+With SASS
+. do not use {}
+. do not use ; end of line
+
+Example:
+custom.sass
+---------------------
+header
+  width:100px
+  height:500px
+  h1
+    color:blue
+
+---------------------
+
+With SCSS
+. Use {}
+. Use ; end of line like less
+
+Example:
+custom.scss
+---------------------
+header{
+  width:100px;
+  height:500px;
+  h1{
+   color:blue;
+  }
+  :hover{
+  }
+  &::after{
+  }
+}
+---------------------
+
+2. Variables($)
+In SASS and SCSS we take $ to create variables
+
+Example:
+custom.scss
+---------------------
+$primary-color:blue;
+
+h1{
+ color:$primary-color;
+}
+
+---------------------
+
+3. Operators
+we can use / * + - 
+
+Example:
+---------------------
+header{
+  width: 100px + 100px;
+}
+.carousel-item {
+    height: @carousel-item-height;
+}
+.carousel-item .item-large {
+    height: @carousel-item-height *2;
+}
+---------------------
+
+4. @mixin and @include
+Example1:
+custom.scss
+---------------------
+
+@mixin mainColor{
+  color:white;
+  background-color:black;
+}
+.section{
+  @include mainColor;
+}
+---------------------
+
+Example2:
+custom.scss
+---------------------
+@mixin mainColor($fontSize){
+  color:white;
+  background-color:black;
+  font-size:$fontSize;
+}
+.section{
+  @include mainColor(30px);
+}
+
+---------------------

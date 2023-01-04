@@ -1,0 +1,830 @@
+1. What is HTML?
+HTML stands for Hyper Text Markup Language
+HTML is used to desing Document to display in Web Browser.
+Web Browser is a application software to access websites.
+
+2. What is the Difference between HTML and HTML5?
+HTML5 is the latest version of HTML which include new features like:
+Doctype decleration
+New HTML5 elements
+New form control attributes
+New graphic element
+New multimedia element
+New HTML5 API
+
+3. What is the difference between the Application Model of HTML and HTML5?
+There is no difference between the Application model of html and html5.
+
+4. New in HTML5:
+i. The DOCTYPE deceleration for HTML5
+   <!DOCTYPE html>
+
+ii. New HTML5 elements like
+    <header>
+    <footer>
+    <nav>
+    <section>
+    <article>
+    <aside>
+
+iii. New from control attribute
+     number 
+     date
+     time
+     calender
+     email
+
+iv. New graphic element like <svg>, <canvas> 
+
+v. New Multimedia element like <audio>, <video>
+
+vi. New HTML5 API like 
+    HTML geolocation
+
+
+5. A Simple HTML Document
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1>My First Heading</h1>
+    <p>My first paragraph.</p>
+  </body>
+</html>
+
+** Total 8, 4 pairs of tags used for most simple webpage
+   <!DOCTYPE html> is not a HTML5 tag, It is a instruction to the web browser
+
+Explained:
+The <!DOCTYPE html> defines that this is an HTML5 document
+The <html> element is the root element 
+The <head> element contains meta-information about the HTML page
+The <title> element contain a title for the HTML page.
+The <body> element contain document's body, and it is visible in website.
+The <h1> element defines a large heading
+The <p> element defines a paragraph
+
+6. HTML is Not Case Sensitive
+HTML tags are not case sensitive: <P> means the same as <p>.
+The HTML standard does not require lowercase tags, but W3C recommends lowercase in HTML
+
+7. What is Tag?
+Tags are surrounded by angular brackets <>
+
+8. What is an HTML Element?
+An HTML element is defined by a start tag, some content, and an end tag:
+<tagname> Content goes here... </tagname>
+Example: <h1>title</h1>
+
+Note: Some HTML elements have no content like <br> and <hr>  element. 
+These elements are called Empty Elements. Empty elements do not have an end tag!
+
+9. Web Browsers
+Web Browser is a application software to access websites.
+example:Chrome, Edge, Firefox, Safari
+Application Software - Microsoft Word and Excel
+Web Application - Gmail, Yahoo
+
+10. HTML History
+Tim Berners-Lee invented www in 1989	
+Tim Berners-Lee invented HTML in 1991	
+HTML5 introduced in 2014
+
+11. <!DOCTYPE html>
+The <!DOCTYPE html> declaration defines that this is an HTML5 document
+The <!DOCTYPE> declaration is not case sensitive.
+
+If we do not put <!DOCTYPE html>, will HTML5 works?
+If we do not put <!DOCTYPE html>, web browser will not able to 
+identify that it is a HTML5 document, so HTML5 tags will not supporte.
+
+Note:
+i. <!DOCTYPE html> is not a HTML5 tag, It is a instruction to the web browser
+that it is a HTML5 document.
+ii. <!DOCTYPE> is case-insensitive, so we cann wirte in lower case if we want.
+
+12. What are Semantic Elements?
+A semantic element clearly describes its meaning to both the browser and the developer.
+Examples of semantic elements: <form>, <table>, and <article> - Clearly defines its content.
+Examples of non-semantic elements: <div> and <span> - Tells nothing about its content.
+
+13. Canvas and SVG:
+Canvas and SVG use to define graphic for webpages.
+
+Canvas:
+i.  It is use to draw 2D graphic
+ii. Canvas is pixel based, so it is Resolution dependent
+
+SVG:
+i. SVG stands for Scalable Vector Graphic
+ii. It is use to draw 2D and 3D vectors
+iii. SVG is vector based, so it is Resolution independent.
+
+
+14. HTML5 API
+HTML5 Geolocation:
+It is a HTML5 geolocation API, after the user permission, we get user's grapical position.
+
+HTML5 Local Storage:
+Web application can store data locally within the users browser.
+
+HTML5 Cache?
+It is HTML5 API.
+Web application can cashe and accessiblel without an internet connection.
+
+15. <noscript>
+If <script> tage not supported or disabled, then  the content inside the 
+<noscript> element will be display.
+
+16. HTML Headings
+<h1> to <h6> tags are HTML heading.
+<h1> defines the most important heading. 
+<h6> defines the least important heading
+Note:
+Search engines use the headings to index the structure and content of your web pages.
+Use HTML headings for headings only. Don't use headings to make text BIG or bold.
+
+17. HTML Attributes
+Attributes provide additional information about elements
+All HTML elements can have attributes
+
+18. The href Attribute
+The <a> tag defines a hyperlink. 
+The href attribute specifies the URL of the page the link goes to:
+<a href="https://www.w3schools.com">Visit W3Schools</a>
+
+19. The src Attribute
+The src attribute specifies the path of the image.
+<img src="img_girl.jpg">
+
+The alt Attribute
+The alt attribute specifies an alternate text for an image, if the image for some reason cannot be displayed. 
+<img src="img_girl.jpg" alt="Girl with a jacket">
+src - Specifies the path to the image
+alt - Specifies an alternate text for the image
+
+The width and height Attributes
+The <img> tag should also contain the width and height attributes, which specify the width and height of the image (in pixels):
+<img src="img_girl.jpg" width="500" height="600">
+OR
+<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">
+
+**Note: If width and height are not specified, the web page might flicker while the image loads.
+
+20. HTML Image Maps
+<map> is used to create clickable areas on an image.
+
+21. The style Attribute
+The style attribute is used to add styles to an element.
+<p style="color:red;">This is a red paragraph.</p>
+
+22. The lang Attribute
+Always include the lang attribute inside the <html> tag, to declare the language of the Web page. 
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+...
+</body>
+</html>
+
+Country codes can also be added to the language code in the lang attribute. So, the first two characters define the language of the HTML page, and the last two characters define the country.
+<html lang="en-US">
+
+22. The title Attribute
+The title attribute defines some extra information about an element.
+<p title="I'm a tooltip">This is a paragraph.</p>
+
+Single or Double Quotes?
+<p title='John "ShotGun" Nelson'>
+<p title="John 'ShotGun' Nelson">
+
+title attribute = tooltip
+
+23. HTML Paragraphs
+The HTML <p> element defines a paragraph.
+
+24. <pre> Element
+pre tag preserves both spaces and line breaks:
+
+<pre>
+ 		My Bonnie lies over the ocean.
+  My Bonnie lies over the sea.
+    	Oh, bring back my Bonnie to me.
+</pre>
+
+25. HTML Text Formatting
+To make any text bold without any extra importance we use <b> tag
+<b>This text is bold</b>
+
+To make any text bold with  strong  importance we use <strong> tag
+<strong>This text is important!</strong>
+
+<b> - Bold text
+<strong> - Important text
+<i> - Italic text
+<em> - Emphasized text
+<mark> - Marked yellow  text
+<small> - Smaller text
+<del> - Deleted text
+<ins> - Underline text
+<sub> - Subscript text ex: This is subscripted text.
+<sup> - Superscript text ex: This is superscripted text.
+
+26. HTML Quotation 
+<blockquote> 
+A section that is get from another source. Example:
+
+<blockquote cite="http://www.worldwildlife.org/who/index.html">
+For 50 years, WWF has been protecting the future of nature.
+The world's leading conservation organization
+</blockquote>
+
+27. <cite>
+<cite> tag defines the title of a creative work.  Example:
+<p><cite>The Scream</cite> by Edvard Munch. Painted in 1893.</p>
+Note: A person's name is not the title of a work.
+
+28. <q>
+<q> for Short Quotations
+
+29. <address>
+<address> tag defines the contact information for the author/owner of a document or an article.Example:
+<address>
+Written by John Doe.<br>
+Visit us at:<br>
+Example.com<br>
+Box 564, Disneyland<br>
+USA
+</address>
+
+30. HTML Colors
+HTML RGB Colors
+rgb(red, green, blue)
+
+HTML RGBA Colors
+rgba(red, green, blue, alpha)
+The alpha parameter is a number between 0.0 (fully transparent) and 1.0 (not transparent at all):
+
+HEX Color Values
+#rrggbb
+
+31. HTML Links
+HTML links are hyperlinks.
+You can click on a link and jump to another document.
+Syntax:
+<a href="url">link text</a>
+Example:
+<a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
+
+A link will appear like this
+An unvisited link color -> blue
+A visited link color -> purple
+An active link color -> red
+
+The target Attribute
+Use target="_blank" to open the linked document in a new browser window or tab:
+
+Link to an Email Address
+<a href="mailto:someone@example.com">Send email</a>
+
+Button as a Link
+To use an HTML button as a link, you have to add some JavaScript code. Example:
+<button onclick="document.location='default.asp'">HTML Tutorial</button>
+
+32. HTML Links - Create Bookmarks
+<p><a href="#C4">Jump to Chapter 4</a></p>
+……..
+<h2 id="C4">Chapter 4</h2>
+<p>This chapter explains ba bla bla</p>
+
+Use the id attribute to define bookmarks in a page
+Use the href attribute to link to the bookmark
+
+33. HTML Favicon
+A favicon is a small image displayed in browser tab.
+To add a favicon to your website, either save your favicon image to the root directory 
+A common name for a favicon image is "favicon.ico".
+Add favicon after after the <title> element, using link
+<head>
+  <title>My Page Title</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+</head>
+***Favicon Image add using Link in plaece of img tag
+
+34. HTML Tables
+HTML tables allow web developers to arrange data into rows and columns.
+A simple HTML table:
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+
+tr stands for table row.
+td stands for table data.
+th stands for table header.
+<th> elements are bold
+
+Add a Border:
+table, th, td {
+  border: 1px solid black;
+}
+
+Collapsed Table Borders:
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+Align Table Headers
+th {
+  text-align: left;
+}
+
+HTML Table Sizes
+<table style="width:100%">
+  <tr>
+    <th style="width:70%">Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+</table>
+
+Header for Multiple Columns
+<table>
+  <tr>
+    <th colspan="2">Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+</table>
+
+Table Caption
+heading for the entire table.
+<table style="width:100%">
+  <caption>Monthly savings</caption>
+   <tr>
+    <th>Month</th>
+   </tr >
+ </table>
+HTML Table Styling
+Zebra Stripes (Horizontal)
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+Vertical Zebra Stripes
+td:nth-child(even), th:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+Combine Vertical and Horizontal Zebra Stripes
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+th:nth-child(even),td:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+35. HTML Lists
+An unordered list starts with the <ul> tag.
+<ul>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+
+An ordered list starts with the <ol> tag.
+<ol>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+
+The <dl> tag defines the description list
+<dl>
+  <dt>Coffee</dt>
+  <dd>- black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>- white cold drink</dd>
+</dl>
+
+
+Use the CSS list-style-type property to define the list item marker. Example:
+list-style-type:none | square | circle | disc;
+Use the CSS property float:left to display a list horizontally
+
+Type Attribute
+The type attribute of the <ol> tag defines the type of the list item
+type="1"	| "A"  | "a" | "I" | "i"
+Example:
+<ol type="1">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+
+Control List Counting
+Using the start attribute we can start counting as we want. Example:
+<ol start="50" type="I">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+
+36. Block-level Elements
+A block-level element always starts on a new line, and add some space before and after the element.
+Two commonly used block elements are: <p> and <div>.
+
+37. Inline Elements
+An inline element does not start on a new line.
+<span>Hello World</span>
+
+38. HTML File Paths
+<img src="picture.jpg">	
+The "picture.jpg" file is located in the same folder as the current page
+
+<img src="images/picture.jpg">	
+The "picture.jpg" file is located in the images folder in the current folder
+
+<img src="/images/picture.jpg">	
+The "picture.jpg" file is located in the images folder at the root of the current web
+
+<img src="../picture.jpg">	
+The "picture.jpg" file is located in the folder one level up from the current folder
+
+39. HTML - The Head Element
+he HTML <head> element is a container for the following elements: 
+<title>, 
+<meta>, 
+<link>, 
+<style>, 
+<script>, and 
+<base>.
+
+The HTML <meta> Element
+HTML metadata is data about the HTML document. 
+Metadata is not displayed.
+Metadata typically define the 
+character set, 
+keywords, 
+page description,  
+viewport settings.
+
+Example:
+<meta charset="UTF-8">
+<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="description" content="Free Web tutorials">
+<meta name="author" content="John Doe">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="30">
+
+Setting The Viewport
+Viewport helps for mobile responsive
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+The width=device-width part sets the width of the web page to follow the screen-width of the device 
+The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+
+HTML Responsive Web Design
+To create a responsive website, add the following <meta> tag to all your web pages:
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+the viewport will give instructions to the browser on how to control the page's dimensions and scaling.
+
+Responsive Images
+<img src="img_girl.jpg" style="max-width:100%; height: auto; ">
+
+Responsive Text Size
+The text size can be set with a "vw" unit, which means the "viewport width".
+That way the text size will follow the size of the browser window:
+<h1 style="font-size:10vw">Hello World</h1>
+
+Viewport is the browser window size. 1vw = 1%
+If the viewport is 100cm wide, 1vw is 1cm.
+If the viewport is 50cm wide, 1vw is 0.5cm.
+
+40. Media Queries
+@media screen and (max-width: 800px) {
+}
+
+41. HTML Computer Code Elements
+<code>
+x = 5;
+y = 6;
+z = x + y;
+</code>
+
+Output:
+x = 5; y = 6; z = x + y;
+
+<pre>
+<code>
+x = 5;
+y = 6;
+z = x + y;
+</code>
+</pre>
+
+Output:
+x = 5;
+y = 6;
+z = x + y;
+
+41. HTML <kbd> For Keyboard Input
+<p>Save the document by pressing <kbd>Ctrl + S</kbd></p>
+
+42. HTML <var> For Variables
+The HTML <var> element  is used to define a variable in programming or in a mathematical expression.
+
+
+43. HTML Style Guide
+Always Specify alt, width, and height for Images
+<img src="html5.gif" alt="HTML5" style="width:128px;height:128px">
+
+44. Blank Lines and Indentation
+Good:
+-------------
+<body>
+
+<h1>Famous Cities</h1>
+
+<h2>Tokyo</h2>
+<p>Tokyo is the capital of Japan, the center of the Greater Tokyo Area, and the most populous metropolitan area in the world.</p>
+
+<h2>London</h2>
+<p>London is the capital city of England. It is the most populous city in the United Kingdom.</p>
+
+<h2>Paris</h2>
+<p>Paris is the capital of France. The Paris area is one of the largest population centers in Europe.</p>
+
+</body>
+-------------
+
+Never Skip the <title> Element
+The <title> element is required in HTML.
+The contents of a page title is very important for search engine optimization (SEO)! The page title is used by search engine algorithms to decide the order when listing pages in search results.
+So, try to make the title as accurate and meaningful as possible: 
+<title>HTML Style Guide and Coding Conventions</title>
+
+
+45. Meta Data
+To ensure proper interpretation and correct search engine indexing, both the language and the character encoding <meta charset="charset"> should be defined as early as possible in an HTML document:
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+
+46. Differences Between .htm and .html?
+There is no difference between the .htm and .html file extensions!
+Both will be treated as HTML by any web browser and web server.
+
+47. HTML Entities
+<	less than	&lt;	
+>	greater than	&gt;	
+&	ampersand	&amp;
+©	copyright	&copy;	
+®	R trademark	&reg;
+
+48. The HTML charset Attribute
+In HTML5 The default character encoding  is UTF-8.
+Unicode enables processing, storage, and transport of text independent of platform and language. 
+Emojis are characters from the UTF-8 character set
+
+
+49. HTML Forms
+The HTML <input> element is the most used form element.
+An <input> element can be displayed in many ways, depending on the type attribute.
+<input type="text">	
+<input type="radio">	
+<input type="checkbox">
+<input type="submit">	
+<input type="button">
+
+The Name Attribute for <input>
+each input field must have a name attribute to be submitted.
+If the name attribute is omitted, the value of the input field will not be sent at all.
+-----------------------------
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+-----------------------------
+
+
+HTML Form Attributes
+The Action Attribute
+The action attribute performed when the form is submitted.
+On submit, form data send to "action_page.php":
+-----------------------------
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+-----------------------------
+Note: If the action attribute is omitted, the action is set to the current page.
+
+The Method Attribute
+The method attribute specifies the HTTP method, used when submitting the form data.
+If method="get"
+form-data can be sent as URL variables
+if method="post"
+form-data can be sent as HTTP post transaction
+
+NEVER use GET to send sensitive data! 
+GET is good for non-secure data, 
+I. like query strings in Google and
+II.  bookmark the result
+
+
+The Target Attribute
+The target attribute specifies where to display the response after submitting the form.
+_blank	The response is displayed in a new window or tab
+_self	The response is displayed in the current window
+
+The Autocomplete Attribute
+The Autocomplete attribute specifies whether a form should have to autocomplete on or off.
+When autocomplete is on, the browser automatically suggests values that the user has entered before.
+<form action="/action_page.php" autocomplete="on">
+
+HTML Form Elements
+<input>
+<label>
+<select>
+<option>
+<textarea>
+ <fieldset> and <legend>
+
+The <input> Element
+One of the most used form element is the <input> element.
+The <input> element can be displayed in different ways, depending on the type attribute.
+
+The <label> Element
+The <label> element is useful for screen-reader users
+The for attribute of the <label> tag should be equal to the id attribute of the <input> element to bind them together.
+-------------
+ <label for="fname">First name:</label><br>
+ <input type="text" id="fname" name="fname" value="John"><br>
+-------------
+
+The <select> Element
+The <select> element defines a drop-down list:
+<label for="cars">Choose a car:</label>
+<select id="cars" name="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab" selected>Saab</option>
+  <option value="fiat">Fiat</option>
+  <option value="audi">Audi</option>
+</select>
+
+The <option> elements defines an option that can be selected.
+To define a pre-selected option, add the selected attribute to the option:
+Allow Multiple Selections:
+Use the multiple attribute to allow the user to select more than one value:
+<select id="cars" name="cars" size="4" multiple>
+
+The <textarea> Element
+The <textarea> element defines a multi-line input field (a text area):
+-----------------
+<textarea name="message" rows="10" cols="30">
+The cat was playing in the garden.
+</textarea>
+-----------------
+The rows attribute specifies the visible number of lines in a text area.
+The cols attribute specifies the visible width of a text area.
+
+You can also define the size of the text area by using CSS:
+-----------------
+<textarea name="message" style="width:200px; height:600px;">
+The cat was playing in the garden.
+</textarea>
+-----------------
+
+The <fieldset> and <legend> Elements
+The <fieldset> element is used to group related data in a form.
+The <legend> element defines a caption for the <fieldset> element.
+
+<form action="/action_page.php">
+  <fieldset>
+    <legend>Personalia:</legend>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+HTML Input Types
+Here describes the different types for the HTML <input> element.
+
+<input type="button">
+<input type="checkbox">
+<input type="email">
+<input type="file">
+<input type="password">
+<input type="radio">
+<input type="range">
+input type="submit">
+<input type="tel">
+
+Note: The default value of the type attribute is "text".
+
+<input type="text"> defines a single-line text input field.
+<input type="submit"> a button for submitting form data.
+<input type="reset"> a reset button that will reset all form values
+--------------------
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+  <input type="reset">
+</form>
+--------------------
+Note:
+If you omit the submit button's value attribute, the button will get a default text:
+--------------------
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit">
+</form>
+--------------------
+
+<input type="checkbox"> defines a checkbox.
+Checkboxes let a user select ZERO or MORE options of a limited number of choices.
+
+--------------------
+<form action="/action_page.php">
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1"> I have a bike</label><br>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label for="vehicle2"> I have a car</label><br>
+  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+  <label for="vehicle3"> I have a boat</label><br><br>
+  <input type="submit" value="Submit">
+</form>
+--------------------
+
+<input type="radio"> defines a radio button.
+Radio buttons let a user select ONLY ONE of a limited number of choices
+
+--------------------
+<form>
+  <input type="radio" id="html" name="fav_language" value="HTML">
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="fav_language" value="CSS">
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+  <label for="javascript">JavaScript</label>
+</form>
+--------------------
+Note: ** All names are same under same radio option
+
+

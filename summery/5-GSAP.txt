@@ -1,0 +1,30 @@
+https://cdnjs.com/libraries/gsap/3.8.0
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
+
+
+var bigDream_tl = gsap.timeline({paused: true});
+    bigDream_tl.to(".section-bigIdeas-h .content", { duration: 3, scale: 3.5, transformOrigin: "left"})
+               .to(".section-bigIdeas-h .img-star-circle", {duration:2, opacity:0}, "-=3")
+               .to(".section-bigIdeas-h .content", { duration:15, x: -1100});
+
+//bigDream_tl.play();
+
+ScrollTrigger.create({
+  trigger: ".section-bigIdeas-h",
+  scrub: true, //1 for smooth animation
+  pin: true, //stuck the section ".section-bigIdeas-h" and animation happening
+  start: "50% 50%",
+  end:"350% top", //default value "bottom top"
+  //markers: true,
+  //scroller: ".scroll-container",
+  animation:  bigDream_tl
+});
+
+
+
+----------- remove error -----------------
+gsap.config({
+  nullTargetWarn: false,
+});
+----------- /remove error -----------------
