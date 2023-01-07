@@ -1,0 +1,1655 @@
+JavaScript
+1. About JavaScript
+2. Where to JavaScript
+3. Use of document.getElement 
+4. JavaScript Output
+5. JavaScript Syntax
+6. JavaScript Variable
+7. JavaScript Operators
+8. JavaScript Data Types
+9. JavaScript Function
+10. JavaScript Object
+11. JavaScript Events
+12. String Function/Method
+13. Templates literals
+14. JavaScript Number
+15. JavaScript Array
+16. JavaScript Array Function/Method
+17. JavaScript Array Iteration
+18. JavaScript Math Object
+19. JavaScript Comparison Operators
+20. JavaScript Logical Operator
+21. JavaScript Loop
+22. ES6 Arrow Function
+23. JavaScript Class
+24. JavScript Import and Export
+-----------------------------------
+1. About JavaScript
+. JavaScript Official name ECMA Script
+. All kinds of language like PHP, JAVA etc are coverted in to JavaScript
+  to perform in web
+. After update of JavaScript into ES6 in 2015, it get big change.
+. JavaScript case sensitive.
+. JavaScript accept single or double quote
+  'Hello World!' and "Hello World!"
+
+
+-----------------------------------
+2. Where to JavaScript
+. Use under <script></script>
+. we can keep JS code just before </body> tag
+. Best place to keep JS code in to a external file, because
+  browser can cache external JS code. 
+  <script src="custom.js"></script>
+
+-----------------------------------
+3. Use of document.getElement 
+. The web page we look called document(global object).
+. This document may have some of elements like button, section, banner etc
+. Each of the element may have their own identity with class or id
+. Using JavaScript we can target any element by 
+  there class or ID 
+  Example:
+--------------------
+<p id="demo">Replace This</p>
+<script>
+  document.getElementById('demo').innerHTML = "Hello World!";
+</script>
+--------------------
+  JavaScript can change -
+  i.   HTML content using      .innerHTML
+  ii.  HTML css using          .style
+  iii. HTML attribute using    .src 
+  
+
+Example:
+i. Change HTML content using .innerHTML
+--------------------
+<p id="demo">Replace This</p>
+<script>
+  document.getElementById('demo').innerHTML = "Hello World!";
+</script>
+--------------------
+
+Example:
+ii. Change HTML css using .style
+--------------------
+<p id="demo" style="color: red;">Replace This</p>
+<script>
+  document.getElementById('demo').style.color = "blue";
+</script>
+--------------------
+Note:
+I .style.fontSize = "36px";
+  In JavaScript we can't use "-" for "font-size" after using "."
+  so, font-size is fontSize
+
+II. JavaScript can display or hide any section usign
+    .style.display = "none | block"
+--------------------
+
+Example:
+iii. Change HTML attribute using .src 
+--------------------
+<img id="demo" src="https://dummyimage.com/640x300/aaa/fff">
+<br>
+<button onclick='document.getElementById("demo").src = "https://dummyimage.com/640x300/aaa/fff";'>
+  ON
+</button>
+<button onclick='document.getElementById("demo").src = "https://dummyimage.com/640x300/aaa/000";'>
+  OFF
+</button>
+-----------------------------------
+
+4. JavaScript Output
+i.    innerHTML
+ii.   console.log();
+iii.  alert();
+iv.   window.print();
+v.    document.write();
+
+--------------------
+
+Example:
+iv. window.print();
+--------------------
+<img id="demo" src="https://dummyimage.com/640x300/aaa/fff">
+<br>
+<button onclick="window.print();">Print This</button>
+
+-----------------------------------
+
+5. JavaScript Syntax
+. JavaScript Syntax is set of rules to use JS.
+. In JS we can write code without ;
+  but the best practice to use ; end of the statement.
+. JavaScript has two type of values
+  i.  Fixed value called Literal
+  ii. Variable value called Variable
+
+  i. Fixed value called Literal:
+     Two most important Fixed valu or Literal
+     > Numbers
+       10
+       10.5
+
+     > Strings:
+       "Hello World!"
+
+  ii. Variable value called Variable:
+      Variable are used to store data
+      let x; [here creating a varibale]
+      x = 6; [here store or assign a value]
+
+      let y,z;
+      y = 8;
+      z = 10;
+
+. Expression:
+  total = price1 + price2;
+          ----------------   
+  	     Expression
+
+. Statement:
+  total = price1 + price2;
+  ------------------------   
+  	Statement
+
+. JavaScript Comments:
+  // Your Comment
+  /* Your Comment */
+
+. JavaScript case sensitive.
+  'lastname' and 'lastName' both are differnt varibale.
+
+. Hypens are not allowed
+  first-name -> X
+  firstNmae  -> Correct to use Cammel Case
+
+
+-----------------------------------
+6. JavaScript Variable
+   3 types of JavaScript Variables
+   I.   var
+   II.  let  [Real life coding we only use let]
+   III. const
+
+------------
+I. var
+------------
+var x; [variable Declearing]
+x = 5; [variable assin]
+
+We can also write in single line:
+var x = 5;
+
+Example:
+var x = 5;
+var x = 10;
+console.log(x);
+//output: 10
+
+Example:
+var x = 5;
+var y = 10;
+var z = x+y;
+console.log(z);
+//output: 15
+
+------------
+II. let
+------------
+i. Variable define with 'let' can not redefine but we can assign it.
+
+Example:
+let x = 5;   
+let x = 10;  // X Again redeclear not applicable
+console.log(x);
+[Syntex Error: x has already decleared]
+
+let x = 5;
+var x = 10;
+console.log(x);
+[Syntex Error: x has already decleared]
+
+Correct Way:
+Example:
+let x = 5;
+    x = 10;
+console.log(x);
+
+
+ii. Block Scope:
+    if 'let' variable declear inside a {} block, 
+    then we CAN NOT access outside the block.
+
+Example 1:
+if(true){
+ let x = 10;
+}
+console.log(x);
+//output: x is not defined
+
+Example 2:
+if(true){
+ let x = 10;
+ console.log(x);
+}
+//output: 10
+
+Example 3:
+let x = 10;
+if(true){
+  console.log(x);
+}  
+//output: 10
+
+Example 4:
+let x = 5;
+if(true){
+  let x = 10;
+  console.log(x);
+}
+console.log(x);
+
+//output: 10
+          5
+
+Example 5:
+let x = 2;  // Allowed
+{
+ let x = 3; // Allowed
+}
+
+NOTE:
+---------------------
+function myClass(){
+}
+Function is not Block Scope, 
+otherwise all are Block 
+
+if(true){
+}
+Block Scope
+---------------------
+
+Variable Hoting:
+When we use 'var' then we can assing a variable before it is decleared.
+Example:
+carName = 'TATA';
+var carName;
+console.log(carName)
+//output: TATA
+
+This is happining because JavaScript Host variable itself and assign 
+it undefined.
+Example:
+
+var carName;           <-------- JavaScript did it itself
+carName = undefine;    <-------- JavaScript did it itself
+
+carName = 'TATA';      <-------- our code
+console.log(carName)   <-------- our code
+
+
+* When we use 'let' JavaScript Host this variable but
+DO NOT assign undefine.
+
+
+Difference of 'var' and 'let'
+var:
+. Redeclear Allow
+. var global Scope
+
+let:
+. Redclear not allowed
+. let Block Scope
+
+------------
+III. const
+------------
+. 'const' variable declear and assign in single line
+. 'const' variable can not reassigned.
+. 'const' is block scope
+. 'const' Hosting same as 'let' hosting
+
+Example 1:
+const pi = 3.14;
+console.log(pi);
+
+
+
+-----------------------------------
+7. JavaScript Operators
+   i.   JavaScript Arithmetic Operator
+   ii.  JavaScript Assignment Operator
+   iii. JavaScript String Operator
+   iv.  JavaScript Comparison Operator
+
+------------
+i. JavaScript Arithmetic Operator
+------------
+Basic:
++ - * /  
+
+**  Exponentiation use for  Power
+%   Modulus use for Division Remainder
+++  Increment (x+1 = x++)
+--  Decrement (x-1 = x--)
+
+------------
+ii. JavaScript Assignment Operator
+------------
+Operator	Example		Same as
+=		x=y		x=y
++=		x+=y		x=x+y
+-=		x-=y		x=x-y
+*=		x*=y		x=x*y
+
++= called Addition Assignment Operator
+
+Example:
+let x = 5;
+x+=10;
+console.log(x);
+// output: 15
+
+------------
+iii. JavaScript String Operator
+------------
+Example1:
+let firstName = "Santanu";
+let lastName  = "Chowdhury";
+let fullName  = firstName + " " + lastName;
+console.log(fullName);
+//output: Santanu Chowdhury
+
+Example2:
+let x = 5+5;
+let y = "5"+5;
+let z = "Hello"+5;
+console.log(x,y,z);
+//output: 10 '55' 'Hello5'
+
+
+-----------------------------------
+8. JavaScript Data Types
+------------
+i. JavaScript Number:
+------------
+let x = 10;
+let y = 10.00;
+
+------------
+ii. JavaScript String
+------------
+let x = 'My name is "Santanu Chowdhury"';
+let y = "My name is 'Santanu Chowdhury'";
+console.log(x,y);
+
+------------
+iii. JavaScript Array
+------------
+let x = ['Santanu', 'Chowdhury', 'Indian'];
+console.log(x);
+
+------------
+iv. JavaScript Object
+------------
+let x = {firstName:'Santanu', lastName:'Chowdhury', cityzenship:'Indian'};
+console.log(x);
+
+*** Using 'typeof' property we can find out the data type
+Example:
+let x = 10;
+console.log(typeof x);
+//output: number
+
+------------
+v. JavaScript Undefine
+------------
+In JavaScript a variable without a value, has the value undefine.
+Example:
+let car;
+console.log(typeof car);
+//output: undefined
+
+------------
+vi. JavaScript Empty 
+------------
+let car = "";
+console.log(typeof car);
+//output: string
+
+
+-----------------------------------
+9. JavaScript Function:
+   JavaScript Function is a block of code desing to perform a 
+   preticular task.
+
+------------
+i. Basic Function
+------------
+function name(){
+  console.log('My name is Santanu Chowdhury.');
+}
+name();
+//output: My name is Santanu Chowdhury.
+
+------------
+ii. Function with Parameter
+------------
+Example1:
+function name(x){
+  console.log('My name is'+ ' ' +x);
+}
+name('Santanu Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+Example2:
+function name(firstName,lastName){
+  console.log('My name is'+ ' ' + firstName + ' ' + lastName);
+}
+name('Santanu', 'Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+Example3:
+function name(firstName,...params){
+  console.log(firstName);
+  console.log(params);
+}
+name('Santanu', 1,2,3,4,5);
+//output: 
+Santanu
+
+[1, 2, 3, 4, 5]
+
+
+------------
+iii. Default Parameter
+------------
+function power(x=6){
+return x**2;
+}
+let y = 'Default value is' + ' ' + power();
+let z = 'Power of 5 is' + ' ' + power(5)
+console.log(y, z);
+
+//output: Default value is 36 
+          Power of 5 is 25
+
+------------
+iv. When Function Call/Invocation
+------------
+. When an event occurs (When a user clicks a button)
+. When it is call form JavaScript code
+. Self Invocation
+
+------------
+v. Function Return
+------------
+. When JavaScript function reaches a  'return' statement, then the 
+  function stops executing. If this function call from a statement, then
+  return that value.
+. If we use 'return'  then we can store the return value under a variable.
+
+Example1:
+function name(firstName,lastName){
+  return firstName + ' ' + lastName;
+  console.log('This will not print');
+}
+let x = name('Santanu', 'Chowdhury');
+console.log(x);
+//output: Santanu Chowdhury
+
+------------
+Note: 
+Under any function if we do not use 'return', then the function itself return
+a 'undefined' value.
+------------
+function name(firstName,lastName){
+console.log(firstName + ' ' + lastName);
+}
+let x = name('Santanu', 'Chowdhury');
+console.log(x);
+
+//output: Santanu Chowdhury
+  	  undefined
+
+
+------------
+vi. Use Function Directly
+------------
+function power(x){
+return x**2;
+}
+let y = power(5);
+		
+let text1 = 'Power of 5 is' + ' ' + y;
+let text2 = 'Power of 5 is' + ' ' + power(5);
+console.log(text1, text2);
+
+//output: Power of 5 is 25 
+	  Power of 5 is 25
+
+
+-----------------------------------
+10. JavaScript Object
+. In JavaScript every thing is Object.
+. Object create with 'const' variable and we can able to change object values.
+. functon within a object called 'Method'
+
+------------
+i. Basic Object
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+skills : {
+    webDesing:"HTML, CSS, JavaScript"
+  },
+office:function(){
+   return 'I am working in Webmaddy.com';
+  },
+};
+console.log(me.firstName);
+console.log(me.office());
+
+//output: Santanu
+          I am working in Webmaddy.com
+
+Note:
+. here firstName called key
+       'Santanu' called value
+. When all values are define directly called 'Object Literal'.
+
+------------
+ii. Store Variables under Object
+------------
+let x = 10;
+let y = 20;
+let z = x+y;
+const store = {
+  x,
+  y,
+  z
+}
+console.log(store.x);
+console.log(store.z);
+
+//output: 10
+	  30
+
+------------
+iii. this
+------------
+If we use 'this' under any object then, 'this' denote the parent Object.
+
+Example1:
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+summery: function(){
+   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
+  }
+};
+console.log(me.summery());
+//output: My name is Santanu Chowdhury
+
+Note:
+. Here 'me' is the parent object.
+
+
+Example 2:
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+designation: 'Web Designer',
+summery: function(){
+  console.log('My name is' + ' ' + this.firstName + ' ' + this.lastName); 
+  },
+workSummery: function(){
+  this.summery();
+  console.log('I am a' + ' ' + this.designation);
+  }
+};
+console.log(me.workSummery());
+
+//output: My name is Santanu Chowdhury
+	  I am a Web Designer
+
+
+------------
+iv. new
+------------
+. When a JavaScript variable is assign with a key work 'name', 
+  the variable is created an object.
+. We never use it because it my complicated out code and make slow our code
+
+Example:
+let x = 10;
+let y = new Number(10);
+console.log(typeof x);
+console.log(typeof y);
+
+//output: number
+	  object
+
+------------
+v. Get Object key,values,entries
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+summery: function(){
+   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
+  }
+};
+let keys = Object.keys(me);
+let values = Object.values(me);
+let entries = Object.entries(me);
+console.log(keys);
+console.log(values);
+console.log(entries);
+
+
+------------
+vi. Add Two Object
+------------
+const me = {
+  firstName:   'Santanu',
+  lastName:    'Chowdhury',
+  citizenShip: 'Indian',
+};
+const work = {
+  designation: 'Web Designer',
+  skills:      'HTML, CSS, JavaScript',
+};
+const all = {
+  ...me,
+  ...work
+}
+console.log(all);
+
+------------
+vii. Object Destructuring to get value
+------------
+const me = {
+  firstName:   'Santanu',
+  lastName:    'Chowdhury',
+  citizenShip: 'Indian',
+  designation: 'Web Designer',
+  skills : {
+    webDesing:"HTML, CSS, JavaScript"
+  }
+};
+
+const {firstName} = me;
+const {firstName:title} = me;
+const {skills:{webDesing}} = me;
+const {skills:{webDesing:all}} = me;
+
+console.log(firstName);
+console.log(title);
+console.log(webDesing);
+console.log(all);
+
+//Output:
+Santanu
+
+Santanu
+HTML, CSS, JavaScript
+HTML, CSS, JavaScript
+
+-----------------------------------
+11. JavaScript Events
+syntax:
+<element event="js code">
+
+Common HTML events:
+  onclick
+  onchange
+  onmousehover
+  onmouseout
+  onkeydown
+  onload
+
+Example1:
+<div id="demo"></div>
+<button onclick="document.getElementById('demo').innerHTML= Date()">
+  Check The Date
+</button>
+
+Example2:
+<button onclick="this.innerHTML= Date()">
+  Check The Date
+</button>
+
+Example3:
+//Add function with event
+<button onclick="notice()">Alert</button>
+<script>
+function notice(){
+  alert('Hello World');
+}
+</script>
+
+
+
+-----------------------------------
+12. String Function/Method
+------------
+i. length()
+------------
+let x = "Lorem ipsum dolor sit amet, consectetur adipisicing elit";
+console.log(x)
+console.log(x.length);
+
+------------
+ii. Escape Character \
+------------
+Error:
+let x = "I am "Santanu Chowdhury", Web desinger";
+console.log(x)
+
+Correct:
+let x = "I am \"Santanu Chowdhury\", Web desinger";
+console.log(x)
+
+------------
+iii. slice()
+------------
+let x = "Apple, Banana, Kiwi";
+    x = x.slice(0,5);
+console.log(x);
+//Output: Apple
+
+------------
+iv. replace()
+------------
+let x = "I love Java";
+    x = x.replace("Java", "JavaScript");
+console.log(x)
+//Output: I love JavaScript
+
+------------
+v. toUpperCase()
+------------
+let x = "I love JavaScript";
+    x = x.toUpperCase();
+console.log(x)
+//Output: I LOVE JAVASCRIPT
+
+------------
+vi. trim()
+------------
+Use to remove space around the text.
+
+let x = "      I love JavaScript    ";
+    console.log(x);
+    x = x.trim();
+    console.log(x);
+
+-----------
+vii. split()
+-----------
+Insert text into Array
+
+Example1:
+let x = "I love JavaScript";
+    x = x.split();
+    console.log(x);
+
+//Output: ['I love JavaScript']
+
+
+Example2:
+let x = "I love JavaScript";
+    x = x.split('');
+    console.log(x);
+
+//Output: ['I', ' ', 'l', 'o', 'v', 'e', ' ', 'J', 'a', 'v', 'a', 'S', 'c', 'r', 'i', 'p', 't']
+
+
+-----------
+viii. indexOf()
+-----------
+. Use to find an element
+
+Example1:
+let x = "I love JavaScript";
+    x = x.indexOf('love');
+    console.log(x);
+
+//Output: 2
+
+Example2:
+let x = "I love JavaScript";
+    x = x.indexOf('Love');
+    console.log(x);
+
+//Output: -1 [for not found]
+
+-----------
+viii. search()
+-----------
+let x = "I love JavaScript";
+    x = x.search('love');
+    console.log(x);
+//Output: 2
+
+Note: indexOf() & search() same
+
+-----------
+ix. includes()
+-----------
+. Use to find an element
+
+let x = "I love JavaScript";
+    x = x.includes('love');
+    console.log(x);
+
+//Output: true
+
+
+-----------------------------------
+13. Templates literals
+
+Example1:
+let x = `My name is Santanu Chowdhury.
+I am a Web Desinger and WordPress Developer`;
+console.log(x);
+
+Example2:
+let name = 'Santanu Chowdhury';
+let work = 'Web Desinger and WordPress Developer';
+let x = `My name is ${name}.
+I am a ${work}`;
+console.log(x);
+
+
+
+-----------------------------------
+14. JavaScript Number
+
+-----------
+i. Number()
+-----------
+Number() method/function use to convert JS variable into Number
+Example1:
+let x = "100";
+    console.log(typeof x);
+    x = Number(x);
+    console.log(typeof x);
+
+//Output: string
+          Number
+
+Example2:
+let x = "Santanu Chowdhury";
+    console.log(typeof x);
+    x = Number(x);
+    console.log(typeof x);
+    console.log(x);
+
+//Output: string
+	  number
+	  NaN
+
+ii. 
+let x = 999999999999999;  //15 digit
+let y = 9999999999999999;
+console.log(x);
+console.log(y);
+
+//Output: 999999999999999
+          10000000000000000
+Note: JavaScript red 15 digit correctly
+
+iii.
+let x = 0.2+0.2;
+    console.log(x);
+//Output:0.4
+
+But
+
+let x = 0.2+0.1;
+    console.log(x);
+//Output: 0.30000000000000004
+
+To solve this:
+let x = (0.2*10+0.1*10)/10;
+    console.log(x);
+//Output: 0.3
+
+------------
+Basic
+------------
+Decimal
+0123456789   | Base 10
+
+Binary
+01	     | Base 2
+
+Octal
+01234567     | Base 8
+
+HexaDecimal
+0123456789   | Base 16 (10+6)
+ABCDEF
+
+
+-----------------------------------
+15. JavaScript Array
+. We can write code using 'let', but when we need to use
+  loop then we need to ues Array.
+. Array create with 'const' variable and we can able to change Array values.
+. Array is a Object
+. Syntax: 
+  const name = [element1, element2, element3];
+  element can be Object, String, Number, Function.
+
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+OR
+let firstName = 'Santanu';
+let lastName  = 'Chowdhury';
+let citizen   = 'Indian';
+
+------------
+i. Access Array Element:
+------------
+Example1:
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let x = me[0];
+console.log(x);
+
+------------
+ii. Change Array Element:
+------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let   x = me[2];
+      console.log(x);
+      me[2] = 'Pro Indian';
+      x = me[2];
+      console.log(x);
+
+------------
+iii. Access Full Array:
+------------
+<p id="demo"></p>
+<script>
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+document.getElementById('demo').innerHTML=me;
+</script>
+
+//Output: Santanu,Chowdhury,Indian
+
+------------
+iv. Array is a Object
+------------
+Array is a special type of Object with Number index.
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+console.log(typeof me);
+//Output: object
+
+------------
+v. How to check Object or Array
+------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+console.log(Array.isArray(me));
+//Output:true
+
+------------
+vi. Difference of Array and Object
+------------
+Array use number index
+Object use named index
+
+------------
+vii. When to use Array & Object
+------------
+We will use Array, when we want number index.
+We will use Object, when we want name index.
+
+
+
+-----------------------------------
+16. JavaScript Array Function/Method
+
+------------
+i. length
+------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let x = me.length;
+console.log(x);
+
+//Output: 3
+
+------------
+ii. Last Array [length-1]
+------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let x = me[me.length-1];
+console.log(x);
+
+//Output: Indian
+
+------------
+iii. push()
+------------
+. Add new element at the end 
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.push('Coding');
+console.log(me);
+//Output: ['Santanu', 'Chowdhury', 'Indian', 'Coding']
+
+------------
+iv. unshift()
+------------
+. Add new element at front
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.unshift('Mr');
+console.log(me);
+//Output: ['Mr', 'Santanu', 'Chowdhury', 'Indian']
+
+------------
+v. pop()
+------------
+. Remove last element
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.pop();
+console.log(me);
+//output: ['Santanu', 'Chowdhury']
+
+------------
+vi. shift()
+------------
+. Remove first element
+. All element number index shift
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.shift();
+console.log(me);
+//output: ['Chowdhury', 'Indian']
+
+------------
+vii. delet
+------------
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+delete me[1];
+console.log(me);
+//Output: ['Santanu', empty, 'Indian']
+** Do not use delete because it keep blank space.
+
+------------
+viii. splice()
+------------
+. use to add element
+. use to delete element
+. splice change the main Array
+. syntax:
+  const me = ['Santanu', 'Chowdhury', 'Indian'];
+  me.splice(2,0,'Coding','Yahama');	  
+  i.   '2' => after 2 element, new element will add
+  ii.  '0' => no element will delete
+  iii.  those elemnet will be added
+
+Example1:
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.splice(2,0,'Coding','Yahama');
+console.log(me);
+
+//output: ['Santanu', 'Chowdhury', 'Coding', 'Yahama', 'Indian']
+
+Example2:
+const me = ['Santanu', 'Chowdhury', 'Coding', 'Yahama', 'Indian'];
+me.splice(2,2);
+console.log(me);
+
+//output:['Santanu', 'Chowdhury', 'Indian']
+
+------------
+ix. slice()
+------------
+. slice not change the main Array.
+
+const me = ['Santanu', 'Chowdhury', 'Coding', 'Yahama', 'Indian'];
+const firstTwo = me.slice(0,2);
+console.log(firstTwo);
+
+const middlethree = me.slice(1,4);
+console.log(middlethree);
+
+//output: ['Santanu', 'Chowdhury']
+	  ['Chowdhury', 'Coding', 'Yahama']
+
+
+------------
+ix. concat()
+------------
+. Adding two or more array
+. Not change the main Array
+. syntax:
+  const newArray  = array1.concat(array2,array3,...);  
+  const newArray2 = array1.concat('Santanu', 'Chowdhury');
+
+Example1:
+const me   = ['Santanu', 'Chowdhury', 'Indian'];
+const more = ['Coding', 'Yahama',]
+const all  = me.concat(more);
+console.log(all);
+//output: ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama']
+
+Example2:
+const me   = ['Santanu', 'Chowdhury', 'Indian'];
+const all  = me.concat('Happy', 'Smily');
+console.log(all);
+//output: ['Santanu', 'Chowdhury', 'Indian', 'Happy', 'Smily']
+
+
+------------
+x. ...
+------------
+Example1:
+const me   = ['Santanu', 'Chowdhury', 'Indian'];
+const more = ['Coding', 'Yahama',];
+const all  = [...me, ...more];
+console.log(all);
+//output:  ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama']
+
+
+Example2:
+const me   = ['Santanu', 'Chowdhury', 'Indian'];
+const more = [...me,'Coding', 'Yahama',];
+console.log(me);
+console.log(more);
+
+//Output: 
+['Santanu', 'Chowdhury', 'Indian']
+['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama']
+
+------------
+xi. Array copy
+------------
+const me   = ['Santanu', 'Chowdhury', 'Indian'];
+const copyMe = [...me];
+console.log(me);
+console.log(copyMe);
+
+//Output: 
+['Santanu', 'Chowdhury', 'Indian']
+['Santanu', 'Chowdhury', 'Indian']
+
+------------
+xii. Array Destructuring
+------------
+Example1:
+const me = ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama'];
+let [firstName, lastNmae] = me;
+
+console.log(me[0]);
+console.log(me[1]);
+console.log(firstName);
+console.log(lastNmae);
+
+//Output:
+Santanu
+
+Chowdhury
+Santanu
+
+Chowdhury
+
+Example2:
+const me = ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama'];
+let [, , citizenShip, , skill] = me;
+console.log(citizenShip);
+console.log(skill);
+//Output:
+Indian
+Yahama
+
+Example3:
+const me = ['Santanu', 'Chowdhury', 'Indian', ['HTML', 'CSS', 'JavaScript'], 'Yahama'];
+let [, , , [a,b,c]] = me;
+console.log(a,b,c);
+//output:
+HTML CSS JavaScript
+
+
+------------
+x. sort()
+------------
+. Sort Array alphabetically
+
+------------
+xi. toString()
+------------
+Make Array to String
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let    x = me.toString();
+       console.log(x);
+
+//Output:Santanu,Chowdhury,Indian
+
+------------
+xii. join()
+------------
+. Same as toString()
+. Also can add separator
+
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+  let  x = me.join(" ");
+       console.log(x);
+  let  y = me.join("+"); 
+       console.log(y);    
+
+//Output: Santanu Chowdhury Indian
+
+          Santanu+Chowdhury+Indian
+
+
+-----------------------------------
+17. JavaScript Array Iteration (map, reduce)
+
+------------
+i. forEach
+------------
+. forEach change the original Array
+
+Example1:
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.forEach(loop);
+function loop(x,y){
+  console.log(x,y);
+}
+//output: Santanu     0
+
+	  Chowdhury   1
+
+	  Indian      2
+
+
+Example2:
+const me = [1, 2, 3, 4, 5];
+me.forEach(loop);
+function loop(x){
+  console.log(x*2);
+}
+console.log(me);
+//output:2
+	 4
+	 6	
+	 8	
+	 10
+//output:2
+	 4
+	 6	
+	 8	
+	 10
+
+Note: here 'me' Array itself change
+
+
+------------
+ii. map()
+------------
+map Array not change the original Array
+
+Example1:
+const me = [1, 2, 3, 4, 5];
+me.forEach(loop);
+function loop(x){
+  console.log(x*2);
+}
+console.log(me);
+//output:2
+	 4
+	 6	
+	 8	
+	 10
+//output:1
+	 2
+	 3	
+	 4	
+	 5
+
+
+Example2:
+const me = [1, 2, 3, 4, 5];
+const newMe = me.map(loop);
+function loop(x){
+   return x*2;
+}
+console.log(newMe);
+console.log(me);
+
+//output:
+(5) [2, 4, 6, 8, 10]
+(5) [1, 2, 3, 4, 5]
+
+
+------------
+iii. filter
+------------
+const me = [1, 2, 3, 4, 5];
+const newMe = me.filter(loop);
+function loop(x){
+  return x>3;
+}
+console.log(newMe);
+//output: [4, 5]
+
+
+------------
+iv. find
+------------
+. After get first value it comes out form Array
+
+const me = [1, 2, 3, 4, 5];
+const newMe = me.find(loop);
+function loop(x){
+  return x>3;
+}
+console.log(newMe);
+//Output: 4
+
+
+
+-----------------------------------
+18. JavaScript Math Object
+. Math object do not have any constructor like Date()
+. console.log(Math.PI);
+  //output: 3.141592653589793
+
+------------
+i. Math.round()
+------------
+console.log(Math.round(4.8));  //5
+console.log(Math.round(4.6));  //5
+console.log(Math.round(4.4));  //4
+console.log(Math.round(4.1));  //4
+console.log(Math.round(-4.1)); //-4
+
+------------
+ii. Math.ceil()
+------------
+console.log(Math.ceil(4.9));  //5
+console.log(Math.ceil(4.4));  //5
+
+Note: ceil = ceilling/upper value
+
+------------
+iii. Math.trunc()
+------------
+console.log(Math.trunc(4.9));  //4
+console.log(Math.trunc(4.4));  //4
+
+------------
+iv. Math.sign()
+------------
+console.log(Math.sign(-4));  //-1
+console.log(Math.sign(0));   //0
+console.log(Math.sign(4));   //1
+
+------------
+v. Math.pow()
+------------
+console.log(Math.pow(5,2));  //25
+
+------------
+vi. Math.sqrt()
+------------
+console.log(Math.sqrt(25));  //5
+
+------------
+vii. Math.abs()
+------------
+. Return absolute positive value.
+
+console.log(Math.abs(-4.5));  // 4.5
+
+------------
+viii. Math.min() and Math.max()
+------------
+console.log(Math.min(-4.5,0,5,1,10,50,3,-30,2.5,25));   //-30
+console.log(Math.max(-4.5,0,5,1,10,50,3,-30,2.5,25));   //50
+
+------------
+ix. Math.random()
+------------
+. Random value between 0 to 1
+console.log(Math.random());
+
+
+-----------------------------------
+19. JavaScript Comparison Operators
+    Comparison Operators are use to test TRUE or FALSE
+
+let x = 5;
+
+Operator	Description		Comparing	Result
+
+>		greater than		x>8		false
+
+<		less than		x<8		true
+
+>=		greater than		x>=8		false
+		or Equat to
+
+<=		less than		x<=8		true
+		or Equat to
+
+==		equal to		x==5		true
+					x=="5"		true
+				
+
+
+===		Equal value		x===5		true
+		and Equal type		x==="5"		false
+
+!=		not equal value		x!=8		true
+
+
+!==		not equal value		x!==5		false
+		and not equal type	x!=="5"		true
+
+
+
+
+-----------------------------------
+20. JavaScript Logical Operator
+Logical operator use to determine the logic between variable and values
+
+let x = 6;
+let y = 3;
+
+Operator	Description		Comparing		Result	
+
+&&		and (both)		x<10 && y>1		true
+
+||		OR (Any fo them)	x==5 || y==5		false
+
+!		not			!(x==y)			true
+
+
+------------
+Ternary Operator
+------------
+Syntax:
+let x = (condition)?trueValue:falseValue;
+
+Example:
+let age = 17;
+let result = (age>=18)?"You are adult":"You are not Adult";
+console.log(result);
+//output: You are not Adult
+
+------------
+isNaN operator
+------------
+NaN => Not a Number
+
+Example:
+let age = 10;
+let result = isNaN(age)?"Given valu is not a number.":"Given valu is a number.";
+console.log(result);
+
+
+-----------------------------------
+21. JavaScript Loop
+
+------------
+i. For loop in Array
+------------
+Example:
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+for (let i = 0; i < me.length; i++) {
+console.log(me[i]);
+}
+
+Note: In loop we use 'let' because -
+      'let' is block scope and
+      'ver' is global scope
+
+
+------------
+ii. For in loop in Object
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+office:function(){
+   return 'I am working in Webmaddy.com';
+  },
+};
+
+for(let x in me){
+  console.log(x);
+}
+//output:
+	firstName
+
+	lastName
+
+	citizenShip
+
+	designation
+	office
+
+
+for(let x in me){
+  console.log(me[x]);
+}
+//output:
+	Santanu
+	Chowdhury
+	Indian
+
+	Web Designer
+
+
+------------
+Note
+------------
+. Iterble:
+  In an array we can read data one by one called Iteration
+  And the Array called Iterable Object
+
+. Object is not Iterable because order is not important in object
+
+
+
+
+-----------------------------------
+22. ES6 Arrow Function
+
+------------
+Basic Function
+------------
+function name(){
+  console.log('My name is Santanu Chowdhury.');
+}
+name();
+//output: My name is Santanu Chowdhury.
+
+------------
+i. Basic Arrow Function
+------------
+let name = () =>{
+  console.log('My name is Santanu Chowdhury');
+}
+name();
+
+------------
+ii. Arrow Function with Parameter
+------------
+Example1:
+let name = (x) =>{
+  console.log(`My name is ${x}`);
+}
+name('Santanu Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+Example2:
+let name = (firstName,lastName) =>{
+  console.log(`My name is ${firstName} ${lastName}`);
+}
+name('Santanu', 'Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+
+------------
+iii. Arrow Function with Single Statement
+------------
+let name = (firstName,lastName) => console.log(`My name is  ${firstName} ${lastName}`);
+name('Santanu', 'Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+------------
+iv. Arrow Function with Single Parameter
+------------
+let name = firstName => console.log(`My name is  ${firstName}`);
+name('Santanu');
+//output: My name is Santanu
+
+
+------------
+iv. Arrow Function make 'this' eassy
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: ['HTML','CSS','JS'],
+office:function(){
+   this.designation.forEach((x)=>{
+     console.log(`${this.firstName} loves ${x}`)
+   })
+  },
+};
+console.log(me.office());
+
+//output:
+Santanu loves HTML
+
+Santanu loves CSS
+
+Santanu loves JS
+
+
