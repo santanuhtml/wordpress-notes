@@ -182,6 +182,8 @@ post data:
 3.the_content(); used to get post content
 4.the_excerpt() used to show some of from the contain
 5.the_time('j F  Y')
+6.the_author_posts_link(); 
+7.the_category( ', ' );
 
 --------------------
 To get post thumbnail image:
