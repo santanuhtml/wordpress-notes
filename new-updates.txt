@@ -99,7 +99,32 @@ $atts['data-hover'] = 'dropdown';
 ************************************************
 Display custom post category
 ************************************************
+-------------------
+TYPE:1
+-------------------
+<ul class="location-list">
+<?php
+$args = array(
+'taxonomy' => 'map_location',
+'orderby' => 'name',
+'order'   => 'ASC'
+);
+$cats = get_categories($args);
+foreach($cats as $cat){
+?>
+<li>
+  <a href="<?php echo get_category_link( $cat->term_id ) ?>">
+     <?php echo $cat->name; ?>
+  </a>
+</li>
+<?php
+}
+?>
+</ul>
 
+-------------------
+TYPE:2
+-------------------
 $categories = get_the_category();
 if ( ! empty( $categories ) ) {
     echo esc_html( $categories[0]->name );   
