@@ -1,0 +1,47 @@
+Autoptimize Settings
+--------------------------------
+JavaScript Option
+--------------------------------
+Optimize JavaScript Code [check]
+Aggregate JS-file? [check]
+Also Aggregrate inline JS [check]
+
+--------------------------------
+CSS Option
+--------------------------------
+Optimize CSS code [check]
+Aggregate CSS-files? [check]
+Also aggregate inline CSS? [check]
+Generate data: URIs for images? [check]
+
+--------------------------------
+HTML
+--------------------------------
+Optimize HTML Code? [check]
+
+--------------------------------
+Misc Options
+--------------------------------
+Save aggregated script/css as static files? [check]	
+Minify excluded CSS and JS files? [check]
+Enable 404 fallbacks? [check]	
+Also optimize for logged in editors/ administrators? [check]	
+Enable configuration per post/ page? [check]	
+
+--------------------------------
+Image Optimization
+--------------------------------
+Image optimization & CDN [check]
+Image Optimization quality [Lossy]	
+Load AVIF in supported browsers? [check]	
+Lazy-load images? [check]	
+**Lazy-load exclusions	[file name]	
+**Lazy-load from nth image [1 or 2]	
+
+--------------------------------
+Extra
+--------------------------------
+Combine and link deferred in head (fonts load late, but are not render-blocking), includes display:swap. [check]
+Remove emojis [check]	
+Remove query strings from static resources [check]	
+

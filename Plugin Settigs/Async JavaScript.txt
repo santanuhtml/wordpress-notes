@@ -1,0 +1,31 @@
+Async JavaScript settings
+-----------------------------
+Quick Settings
+-----------------------------
+Apply Defer (jQuery excluded)
+
+-----------------------------
+Enable Async JavaScript
+-----------------------------
+Enable Async JavaScript? [checked]
+Also enable Async JavaScript for logged in users? [checked]
+
+-----------------------------
+Async JavaScript Method
+-----------------------------
+Defer [check]
+
+-----------------------------
+jQuery 
+-----------------------------
+Defer [check]
+*** If website have any issue then check ***
+Exclude [check]
+
+-----------------------------
+Async JavaScript For Plugins
+-----------------------------
+Enable Autoptimize Support to allow you to override 
+AO's default "defer" flag (see below):      [Check]
+
+Autoptimize Javascript Method:  Async  [check]

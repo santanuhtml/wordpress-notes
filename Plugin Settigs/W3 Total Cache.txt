@@ -1,0 +1,50 @@
+W3 Total Cache Settings
+
+1. General Settings
+---------------------------
+Page Cache
+---------------------------
+Page Cache: [check]
+
+
+---------------------------
+Browser Cache
+---------------------------
+Browser Cache: [check]
+
+---------------------------
+Miscellaneous
+---------------------------
+Enable Google PageSpeed dashboard widget [*** Uncheck]
+Verify rewrite rules [Check]
+
+
+
+2. Page Cache
+---------------------------
+Page Cache
+---------------------------
+Cache URIs with query string variables [*** Uncheck]
+Cache 404 (not found) pages [*** Uncheck]
+
+
+---------------------------
+Advance
+---------------------------
+*** Compatibility mode: [Check]
+
+Save all settings
+
+
+3. Browser Cache
+---------------------------
+Set Last-Modified header
+Set expires header
+Set cache control header
+Set entity tag (ETag)
+Set W3 Total Cache header
+Enable HTTP (gzip) compression
+Remove query strings from static resources
+Don't set cookies for static files
+
+Save all settings
