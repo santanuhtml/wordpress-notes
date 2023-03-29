@@ -1,4 +1,4 @@
-JavaScript
+ JavaScript
 1. About JavaScript
 2. Where to JavaScript
 3. Use of document.getElement 
@@ -8,7 +8,7 @@ JavaScript
 7. JavaScript Operators
 8. JavaScript Data Types
 9. JavaScript Function
-10. JavaScript Object
+10. JavaScript Object and this
 11. JavaScript Events
 12. String Function/Method
 13. Templates literals
@@ -20,9 +20,30 @@ JavaScript
 19. JavaScript Comparison Operators
 20. JavaScript Logical Operator
 21. JavaScript Loop
-22. ES6 Arrow Function
-23. JavaScript Class
-24. JavScript Import and Export
+22. JavaScript Iterables
+23. ES6 Arrow Function
+24. JavaScript Sets
+25. JavaScript Maps
+26. JavaScript typeof
+27. JavaScript Conversion
+28. Regular Expressions
+29. JavaScript Errors
+30. JavaScript Scope
+31. setInterval()
+    setTimeout()
+32. this Keyword
+33. JavaScript Class
+34. JavaScript JSON
+35. JavaScript Debugging
+36. JavaScript Style Guide
+37. JavaScript Best Practices
+38. JavaScript Performance
+39. DOM
+
+
+JavScript Import and Export
+
+
 -----------------------------------
 1. About JavaScript
 . JavaScript Official name ECMA Script
@@ -32,6 +53,8 @@ JavaScript
 . JavaScript case sensitive.
 . JavaScript accept single or double quote
   'Hello World!' and "Hello World!"
+. Button as a link
+  <button onclick="document.location='default.asp'">HTML Tutorial</button>
 
 
 -----------------------------------
@@ -121,8 +144,8 @@ iv. window.print();
 
 5. JavaScript Syntax
 . JavaScript Syntax is set of rules to use JS.
-. In JS we can write code without ;
-  but the best practice to use ; end of the statement.
+. In JS we can write code without ';'
+  but the best practice to use ';' end of the statement.
 . JavaScript has two type of values
   i.  Fixed value called Literal
   ii. Variable value called Variable
@@ -173,15 +196,19 @@ iv. window.print();
    I.   var
    II.  let  [Real life coding we only use let]
    III. const
+  
+   * Hosting and Strict Mode *
 
 ------------
 I. var
 ------------
 var x; [variable Declearing]
 x = 5; [variable assin]
+var x = 5; [Initialize]
 
-We can also write in single line:
-var x = 5;
+
+We can also write in single line called variable Initialize
+var x = 5; [variable Initialize]
 
 Example:
 var x = 5;
@@ -265,8 +292,9 @@ NOTE:
 ---------------------
 function myClass(){
 }
-Function is not Block Scope, 
-otherwise all are Block 
+. Function is not Block Scope, 
+  otherwise all are Block 
+. Function itself provide Function scope.
 
 if(true){
 }
@@ -274,7 +302,8 @@ Block Scope
 ---------------------
 
 Variable Hoting:
-When we use 'var' then we can assing a variable before it is decleared.
+. Hosting is a default behavior of JavaScript which move declerations to the top.
+
 Example:
 carName = 'TATA';
 var carName;
@@ -311,13 +340,36 @@ III. const
 . 'const' variable declear and assign in single line
 . 'const' variable can not reassigned.
 . 'const' is block scope
-. 'const' Hosting same as 'let' hosting
+. 'const' Hosting is Not possible because it should 
+   declear and assign in same line.
 
 Example 1:
 const pi = 3.14;
 console.log(pi);
 
+------------
+Strict Mode
+------------
+. When we use Strice mode then we need to code with correct format. 
+  for example with out strice mode if assign a variable without declear, the
+  JavaScript Host it.
+  But if we use Strice Mode then it will give an error. So, we have to declear
+  the variable first and then we can assign.
+. "use strict";
 
+Example: Without Strict Mode correct
+------------
+var carName1 = "TATA";
+console.dir(carName1);
+
+------------
+Example: With Strict Mode this is incorrect and gives error
+------------
+ "use strict"
+  var carName1 = "TATA";
+  console.dir(carName1);
+
+------------
 
 -----------------------------------
 7. JavaScript Operators
@@ -406,9 +458,9 @@ console.log(typeof x);
 //output: number
 
 ------------
-v. JavaScript Undefine
+v. JavaScript Undefined
 ------------
-In JavaScript a variable without a value, has the value undefine.
+In JavaScript a variable without a value, has the value undefined.
 Example:
 let car;
 console.log(typeof car);
@@ -533,11 +585,24 @@ console.log(text1, text2);
 	  Power of 5 is 25
 
 
+------------
+Note:
+**Anonymous Function:
+------------
+Function without a name called anonymous function.
+Example:
+<script>
+  const x = function (a, b) {return a * b};
+  let z = x(4, 3);
+  console.log(z);
+</script>
+
+
 -----------------------------------
-10. JavaScript Object
+10. JavaScript Object and this
 . In JavaScript every thing is Object.
 . Object create with 'const' variable and we can able to change object values.
-. functon within a object called 'Method'
+. ***functon within a object called 'Method'
 
 ------------
 i. Basic Object
@@ -555,9 +620,11 @@ office:function(){
   },
 };
 console.log(me.firstName);
+console.log(me.skills.webDesing);
 console.log(me.office());
 
 //output: Santanu
+   	  HTML, CSS, JavaScript
           I am working in Webmaddy.com
 
 Note:
@@ -620,7 +687,7 @@ workSummery: function(){
 console.log(me.workSummery());
 
 //output: My name is Santanu Chowdhury
-	  I am a Web Designer
+	  I am a Web Designer                                                                                            
 
 
 ------------
@@ -797,9 +864,9 @@ let x = "      I love JavaScript    ";
     console.log(x);
 
 -----------
-vii. split()
+vii. split() and Array.from()
 -----------
-Insert text into Array
+Create an array from a string
 
 Example1:
 let x = "I love JavaScript";
@@ -1016,7 +1083,7 @@ Object use named index
 ------------
 vii. When to use Array & Object
 ------------
-We will use Array, when we want number index.
+We will use Array, when we want number index and Iterate one by one.
 We will use Object, when we want name index.
 
 
@@ -1167,7 +1234,7 @@ const me   = ['Santanu', 'Chowdhury', 'Indian'];
 const more = ['Coding', 'Yahama',];
 const all  = [...me, ...more];
 console.log(all);
-//output:  ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama']
+//output: Â ['Santanu', 'Chowdhury', 'Indian', 'Coding', 'Yahama']
 
 
 Example2:
@@ -1228,7 +1295,6 @@ console.log(a,b,c);
 //output:
 HTML CSS JavaScript
 
-
 ------------
 x. sort()
 ------------
@@ -1261,9 +1327,23 @@ const me = ['Santanu', 'Chowdhury', 'Indian'];
 
           Santanu+Chowdhury+Indian
 
+------------
+Others Methods:
+Array.from()
+Create an array from a string
+
+let x = "Lorem ipsum";
+    console.log(x);
+    x = Array.from(x);
+    console.log(x);
+
+//Output: Lorem ipsum
+
+          ['L', 'o', 'r', 'e', 'm', ' ', 'i', 'p', 's', 'u', 'm']
+
 
 -----------------------------------
-17. JavaScript Array Iteration (map, reduce)
+17. JavaScript Array Iteration
 
 ------------
 i. forEach
@@ -1295,40 +1375,16 @@ console.log(me);
 	 6	
 	 8	
 	 10
-//output:2
-	 4
-	 6	
-	 8	
-	 10
-
-Note: here 'me' Array itself change
-
+//output:[1, 2, 3, 4, 5]
 
 ------------
 ii. map()
 ------------
-map Array not change the original Array
+. map not change the original Array
+. map create new array.
+
 
 Example1:
-const me = [1, 2, 3, 4, 5];
-me.forEach(loop);
-function loop(x){
-  console.log(x*2);
-}
-console.log(me);
-//output:2
-	 4
-	 6	
-	 8	
-	 10
-//output:1
-	 2
-	 3	
-	 4	
-	 5
-
-
-Example2:
 const me = [1, 2, 3, 4, 5];
 const newMe = me.map(loop);
 function loop(x){
@@ -1338,9 +1394,27 @@ console.log(newMe);
 console.log(me);
 
 //output:
-(5) [2, 4, 6, 8, 10]
-(5) [1, 2, 3, 4, 5]
+(5)Â [2, 4, 6, 8, 10]
+(5)Â [1, 2, 3, 4, 5]
 
+
+------------
+Difference forEach and map
+------------
+const me = [1,2,3,4,5];
+let newArray = me.forEach(x=>{
+  return x*2;
+});
+console.log(me);
+console.log(newArray); //undefined, not create new array
+
+------------
+const me = [1,2,3,4,5];
+let newArray = me.map(x=>{
+  return x*2;
+});
+console.log(me);    
+console.log(newArray); //Create new array.
 
 ------------
 iii. filter
@@ -1573,11 +1647,50 @@ Note
 
 . Object is not Iterable because order is not important in object
 
+-----------------------------------
+22. JavaScript Iterables
+-----------------------------------
+JavaScript Iterables:
+The Data type which has an order(Index Number) can be Iterate one by one like Array, String, set, Map.
+Note: 
+. Every thing in JavaScript is an Object
+. Object is not Iterable because we it don't has order(Index Number).
+  We can just access Objec values.
+. Array Iterable because it has index number to iterate.
+. Syntex
+let letters = ["A","B"];
+for (const x of letters) {
+ // code block to be executed
+}
+------------
+Iterating Over a String
+------------
+<p id="demo"></p>
+<script>
+const name = "I love JavaScript";
+let text = "";
+for(const x of name){
+text += x + '<br />'
+}
+document.getElementById('demo').innerHTML = text;
+</script>
 
+------------
+Iterating Over an Array
+------------
+<p id="demo"></p>
+<script>
+const name = ["A","B","C",100, 100.5, 500];
+let text = "";
+for(const x of name){
+  text += x + '<br />'
+}
+document.getElementById('demo').innerHTML = text;
+</script>
 
 
 -----------------------------------
-22. ES6 Arrow Function
+23. ES6 Arrow Function
 
 ------------
 Basic Function
@@ -1652,4 +1765,1529 @@ Santanu loves CSS
 
 Santanu loves JS
 
+
+-----------------------------------
+24. JavaScript Sets
+-----------------------------------
+. Set is a collection of unique values.
+
+. new Set(); use to creates a new Set.
+  example:
+  const x = new Set(["a","b","c"]);
+
+. Set Also has various methods like:
+  add()
+  delete()
+
+-----------------------------------
+25. JavaScript Maps
+-----------------------------------
+. An Object was created with Keys & Valus.
+  A Map holds key-value pairs where the keys can be any datatype.
+
+. new Map(); use to create a MAP
+  example:
+  const x = new Map();
+
+. Example:
+  const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+
+. Map Also has various methods.
+
+Note: Map mainly use in High level projects.
+
+
+-----------------------------------
+26. JavaScript typeof
+-----------------------------------
+In JavaScript there are 5 different data types that can contain values:
+. string
+. number
+. boolean
+. object
+. function
+
+And 2 data types that cannot contain values:
+. null
+. undefined
+
+Note: null and undefined are both value & data type.
+
+------------
+The typeof Operator
+------------
+typeof NaN                    // Returns "number"
+
+typeof null                   // Returns "object"
+
+typeof false                  // Returns "boolean"
+
+typeof [1,2,3,4]              // Returns "object"
+
+typeof {name:'John', age:34}  // Returns "object"
+
+typeof new Date()             // Returns "object"
+
+typeof function () {}         // Returns "function"
+
+typeof myCar                  // Returns "undefined" [with assign any values]
+
+
+------------
+Primitive Data Value
+------------
+. Primitive data value is a simple data value 
+. Contain no additional properties and methods.
+. Example:
+  string
+  number
+  boolean
+
+------------
+Undefined
+------------
+. A variable without a value, has the value undefined.
+. typeof undefined  is undefined
+. Example:  
+let car;
+console.log(car);         // value  => undefined
+console.log(typeof car);  // typeof => undefined 
+
+Note:
+* Variable can be emptied by assing 'undefined'
+Example: 
+let x = [1,2,3,4];
+console.log(x)
+x = undefined;
+console.log(x)    
+
+------------  
+Empty Values
+------------
+let car ="";
+console.log(car);         // blank space
+console.log(typeof car);  // string
+
+------------
+Null
+------------
+. In JavaScript null is "nothing" or doesn't exist.
+. null is an object.
+. We can empty an object by assing null.
+. Aso We can empty an object by assing undefined.
+
+------------
+Difference Between Undefined and Null
+------------
+. Undefined and null are equal in value but different in data type:
+  
+Equal in value:
+null == undefined          // true
+
+Different in type:
+null === undefined         // false
+
+because:
+typeof undefined           // undefined
+typeof null                // object
+
+
+
+
+-----------------------------------
+27. JavaScript Conversion
+-----------------------------------
+i. Converting Strings to Numbers
+------------
+Methods are:
+Number()
+parseFloat()
+parseInt()
+--------------------
+Example:
+--------------------
+console.log(Number("3.5"));           // 3.5
+console.log(typeof (Number("3.5")));  // Number
+
+console.log(Number(""));	      // 0
+console.log(typeof (Number("")));     // Number
+   
+console.log(Number("a"));	      // NaN
+console.log(typeof (Number("a")));    // Number
+
+------------
+Unary + Operator
+------------
+Shortcut way to convert string into a number.
+
+Example:
+let y = "5";
+let x = + y;
+console.log(x);
+console.log(typeof x);
+
+Output:
+5
+number
+
+------------
+ii. Converting Numbers to Strings
+------------
+let x = String(100);     
+console.log(typeof x); // String
+
+------------
+iii. Decimal to Binary
+------------
+let x = (50).toString(2);
+    console.log(x);
+
+------------
+iv. Binary to Decimal
+    *Note:add '0b' before binary number.
+------------
+let y = (0b110010).toString(10);
+    console.log(y);
+
+
+NOTE:
+Visit for more conversion:
+https://www.w3schools.com/js/js_type_conversion.asp
+
+
+-----------------------------------
+28. Regular Expressions
+-----------------------------------
+. To find text and replace text we use Regular Expessions.
+
+. Syntax
+  /pattern/modifiers;
+
+. Example:
+  /javascript/i  
+  
+  javascript => we are finding this pattern
+  i => It is case-insensitive modifier
+  g => It is global match modifier.
+  m => It is multiline matching modifier.
+--------------------
+i.
+Search() With a Regular Expression
+Example:
+--------------------
+let x = "I love JavaScript";
+    x = x.search(/javascript/i);
+    console.log(x);
+
+--------------------
+*Note:
+search() gives Index number
+match()  gives Array
+Example:
+--------------------
+let x = "I love JavaScript";
+let y = "I love WordPress";
+    x = x.search(/javascript/i);
+    console.log(x);
+    y = y.match(/wordPress/i);
+    console.log(y);
+
+--------------------
+ii.
+replace() With a Regular Expression
+Example:
+--------------------
+let x = "I love JavaScript";
+    x = x.replace(/javascript/i, "JavaScript and React JS");
+    console.log(x);
+
+--------------------
+iii. g flag use for global match
+replace() With 
+Example:
+--------------------
+let x = "I love HTML.  html is scripting language";
+    x = x.replace(/html/ig, "JavaScript");
+    console.log(x);
+
+--------------------
+Regular Expression Patterns
+--------------------
+[abc] => Find any of the characters between the brackets
+[0-9] => Find any of the digits between the brackets
+(x|y) => Find any of the alternatives separated with 
+
+--------------------
+Regular Expression Methods
+--------------------
+. test() method
+  It returens true & false
+
+. exec() method
+  It returns Object
+
+--------------------
+Example 1:
+--------------------
+let x = 'The best things in life are free!';
+   console.log(/BEst/i.test(x));
+   //Output : true
+
+--------------------
+Example: 2
+--------------------
+let x = 'The best things in life are free!';
+  console.log(/Best/i.exec(x));
+  let obj = /Best/i.exec(x);
+  console.log(obj[0]);
+
+
+-----------------------------------
+29. JavaScript Errors
+-----------------------------------
+i. JavaScript try and catch
+--------------------
+   syntax:
+   try {
+    //test code
+   }
+   catch(err) {
+     //error message
+   }
+--------------------
+Example: 
+--------------------
+try{
+   sdf
+}
+catch(err){
+  console.log(err.message);
+}
+
+--------------------
+ii. JavaScript throw Errors
+--------------------
+. Using throw we can create a custom error.
+. Using throw together with try and catch, we can control program flow 
+  and generate custom error messages.
+
+--------------------
+Example: 
+--------------------
+//add 4,10,100
+  let x = 10;
+  try{
+    if(x == "") throw "empty";
+    if(isNaN(x)) throw "not a number";
+    x = Number(x);
+    if(x < 5) throw "too low";
+    if(x > 10) throw{
+                message: 'Too hig',
+                name   : 'toHigh'
+              }
+  }
+  catch(err){
+    console.log(err)
+  }
+
+--------------------
+iii. Error Object
+--------------------
+JavaScript has a built in error object -
+name
+message
+
+--------------------
+iv. Six different 
+--------------------
+Reference Error => variable not assign related error.
+Syntax Error    => quote ' related error
+TypeError
+
+
+-----------------------------------
+30. JavaScript Scope
+-----------------------------------
+. After declear any variable, the accessablity of this varibale 
+  define by the JavaScript Scope.
+
+. JavaScript has 3 types of scope:
+  Block scope
+  Function scope
+  Global scope
+   - Automatically Global
+  Local scope
+
+--------------------
+Block Scope
+--------------------
+. let and const are Block Scope.
+
+. Variables with 'let' and 'const' declared inside a { } block 
+  cannot be accessed outside the block:
+. Example:
+  {
+    let x = 2;
+  }
+   // x can NOT be used here
+
+. var not a block scope.
+
+. Varibale declear with var  inside a { } block 
+  can be accessed from outside the block.
+. Example:
+  {
+    var x = 2;
+  }
+  // x CAN be used here
+
+
+--------------------
+Local scope
+--------------------
+. Variables declared within a JavaScript function, 
+  become LOCAL to the function.
+
+--------------------
+Function Scope
+--------------------
+. Variables defined inside a function with 'var', 'let' and 'const'
+  are not accessible (visible) from outside the function.
+
+  They all have Function Scope.
+
+. Example:
+  ------------
+  function myFunction() {
+     var carName = "Volvo";   // Function Scope
+  }
+  ------------
+  function myFunction() {
+    let carName = "Volvo";   // Function Scope
+  }
+  ------------
+  function myFunction() {
+   const carName = "Volvo";   // Function Scope
+  }
+  ------------
+
+Note:
+. ** Var is global and function scope.
+. let and const is block scope.
+
+--------------------
+Global Scope
+--------------------
+. Variables declared outside any function and block Scope have Global Scope.
+. Global variables can be accessed from anywhere in a JavaScript program.
+. Variables declared with var, let and const are quite similar when declared outside a block.
+
+--------------------
+Automatically Global
+--------------------
+. Inside a function if we assign a variable without declared it,
+  then it will be automatically GLOBAL variable.
+
+Example:
+--------------------
+function myFunction() {
+  carName = "Volvo";
+}
+
+// code here can use carName
+
+myFunction();
+
+
+--------------------
+Global Variables
+--------------------
+. In HTML, the Global Scope is the Window object.
+  Global Scope = Window Object
+
+. var is Global varibale because it belong to the Window Object.
+  simply var variable store in Window object.
+
+. let is not Global varibale because it not belong to the Window Object.
+
+------------
+var carName1 = "TATA";
+let carName2 = "VOLVO";
+    console.log(carName1);        //TATA
+    console.log(window.carName1); //TATA
+    console.log(window.carName2); //undefined because not belong form Window Object.
+    console.log(carName2);        //VOLVO
+------------
+
+Proof that Var store in Window Object.
+------------
+var carName1 = "TATA";
+  console.dir(window);
+
+--------------------
+Lifetime of JavaScript Variables
+--------------------
+. The lifetime of a JavaScript variable starts when it is declared.
+. Function variables are deleted when the function is completed.
+. global variables are deleted, when we close the browser window or Tab.
+
+
+-----------------------------------
+32. this Keyword
+-----------------------------------
+. In JavaScript, the 'this' refers to an object.
+
+use of it:
+. In an object method, this refers to the object.
+. Alone, this refers to the global object.
+. In a function, this refers to the global object.
+. In a function, in strict mode, this is undefined.
+. In an event, this refers to the element.
+
+--------------------
+i. Object Method Binding
+--------------------
+------------
+Example1:
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+summery: function(){
+   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
+  }
+};
+console.log(me.summery());
+//output: My name is Santanu Chowdhury
+
+Note:
+. Here 'me' is the parent object.
+
+------------
+Example 2:
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+designation: 'Web Designer',
+summery: function(){
+  console.log('My name is' + ' ' + this.firstName + ' ' + this.lastName); 
+  },
+workSummery: function(){
+  this.summery();
+  console.log('I am a' + ' ' + this.designation);
+  }
+};
+console.log(me.workSummery());
+
+//output: My name is Santanu Chowdhury
+	  I am a Web Designer     
+
+------------
+Example 3:
+------------
+<script>
+    const person = {
+      firstName  : "John",
+      lastName   : "Doe",
+      id     : 5566,
+      myFunction : function() {
+        return this;
+      }
+    };
+    console.log(person.myFunction());
+</script>
+
+--------------------
+ii. call()
+    using call() method we can get value from another Object.
+--------------------
+Example 1:
+------------
+<script>
+const person1 = {
+     fullName: function() {
+     return this.firstName + " " + this.lastName;
+   }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2));
+</script>
+
+--------------------
+iii. this in Event Handlers
+--------------------
+Example 1:
+------------
+<h1 onclick="this.style.color='red'">Hello World!</h1>
+------------
+Example 2:
+------------
+<h1 onclick="textChange(this)">Hello World!</h1>
+<script>
+function textChange(test){
+  //console.log(test);
+  test.innerHTML = 'I Love JavaScript';
+}
+</script>
+
+
+
+-----------------------------------
+33. JavaScript Class
+  Class Method
+  Class Method with Parameter
+-----------------------------------
+. Actual Vanila JavaScript is not Object-oriented programming (OOP) language, so 
+  Vanila JavaScript don't have Class concept.
+. ECMAScript 2015, introduct Class to introduct OOP.
+. Syntax:
+  class ClassName {
+    constructor() {
+        ... 
+     }
+  }
+
+--------------------
+Example:1
+--------------------
+class Car {
+  constructor(name, year) {
+     this.name = name;
+     this.year = year;
+  }
+}
+
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+console.log(car1.name);
+console.log(car2.name);
+
+--------------------
+Output:
+TATA
+Audi
+
+--------------------
+Class Methods
+Example:2
+--------------------
+//Class declear
+class Car {
+  constructor(name, year){
+    this.name = name;
+    this.year = year;
+  }
+  intro(){
+    console.log(`${this.name} is bought in the year ${this.year}`)
+  }
+}
+
+//Class assign
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+//call
+car1.intro();
+car2.intro();
+
+--------------------
+output:
+TATA is bought in the year 2023
+Audi is bought in the year 2022
+
+
+--------------------
+Use Parameter
+Example:3
+--------------------
+//Class declear
+class Car {
+  constructor(name, year){
+    this.name = name;
+    this.year = year;
+  }
+  intro(status='Good'){
+    console.log(`${this.name} is bought in the year ${this.year} with ${status} condition.`)
+  }
+}
+
+//Class assign
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+//call
+car1.intro('Best');
+car2.intro('well');
+
+
+-----------------------------------
+34. JavaScript JSON
+-----------------------------------
+. JSON stands for JavaScript Object Notation
+. Using JSON we can get data and display on our web page.
+. JSON is language independent.
+. JSON is written as name/value pairs, just like JavaScript object.
+. A name/value pair consists in double quotes.
+  ------------
+  "firstName":"John"
+  ------------
+
+. JSON Objects:
+  JSON objects are written inside curly braces.
+  ------------
+  {"firstName":"John", "lastName":"Doe"}
+  ------------
+
+. JSON Arrays
+  ------------
+  "employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+   ]
+
+  ------------
+--------------------
+i. JSON Text to a JavaScript Object Using
+   JSON.parse();
+--------------------
+Example
+--------------------
+  //step:1
+  let text = '{ "employees" : [' +
+      '{ "firstName":"John" , "lastName":"Doe" },' +
+      '{ "firstName":"Anna" , "lastName":"Smith" },' +
+      '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+
+  //step:2
+  const obj = JSON.parse(text);
+
+  console.log(obj.employees[0].firstName);
+  
+--------------------
+ii. JavaScript Object ot JSON Text Using
+    JSON.stringify()
+--------------------
+Example
+--------------------
+let me = {
+    firstName : 'Santanu',
+    lastName  : 'Chowdhury'
+}
+console.log(JSON.stringify(me));
+
+
+
+
+-----------------------------------
+35. JavaScript Debugging
+-----------------------------------
+
+-----------------------------------
+36. JavaScript Style Guide
+-----------------------------------
+. In JavaScript we use camelCase
+
+. All names start with a letter.
+
+. Most web servers (Apache, Unix) are case sensitive about file names:
+  london.jpg cannot be accessed as London.jpg.
+
+. Microsoft are not case sensitive:
+  london.jpg can be accessed as London.jpg or london.jpg.
+
+. Loading JavaScript in HTML simply without any extra attribute:
+  <script src="myscript.js"></script>
+
+. Function Rules:
+  > Use one space before the opening bracket.
+  > Do not end a complex statement with a semicolon.
+
+  ------------
+  function toCelsius(fahrenheit) {
+  return (5 / 9) * (fahrenheit - 32);
+  }
+  ------------
+  
+. Object Rules
+  > Do not add a comma after the last property-value pair.
+  > Place the closing bracket on a new line, without leading spaces.
+  > Always end an object definition with a semicolon.
+
+  ------------
+  const me = {
+    firstName: "Santanu",
+    lastName: "Chowdhury",
+    age: 32
+  };	
+  ------------
+
+-----------------------------------
+37. JavaScript Best Practices
+-----------------------------------  
+. Avoid Global Variables, Always Declare Local Variables.
+  Local variables must be declared with the var, the let, or the const.
+
+. Declare all variable at the beginning.
+  ------------
+  let firstName, lastName, price, discount, fullPrice;
+  ------------
+
+. Initialize variables when you declare them
+  ------------
+  let firstName = "";
+  const myArray = [];
+  const myObject = {};
+  ------------
+
+. Declare Objects and Arrays with const.
+  ------------
+  const myArray = [];
+  const myObject = {};
+  ------------
+
+. Use === operator for comparison which check values and type.
+
+. Use Parameter Defaults:
+  ------------
+  function myFunction(x = 1, y = 1) {
+  }
+  ------------
+
+. Avoid Using eval() function.
+
+. JavaScript are stored as 64-bits Floating point numbers 
+  to solve this problame use:
+  ------------
+  let z = (x * 10 + y * 10) / 10;  
+  ------------
+
+. You must use a "backslash" \ if we break a statement:
+  ------------
+  let x = "Hello \
+  World!";
+  ------------
+
+-----------------------------------
+38. JavaScript Performance
+-----------------------------------
+
+. Reduce Activity in Loops
+
+  BAD CODE: because everytime within loop check array length.
+  --------------------
+  for (let i = 0; i < arr.length; i++) { 
+  }
+  --------------------
+  
+  GOOD CODE:
+  --------------------
+  let length = arr.length;
+  for (let i = 0; i < length; i++) {
+  }
+  --------------------
+
+. Reduce DOM Access
+  > Accessing the HTML DOM is very slow, compared to other JavaScript statements.
+  > If you expect to access a DOM element several times, access it once, and use it as a local variable
+  --------------------
+  <p id="demo"></p>
+  <script>
+   const obj = document.getElementById("demo");
+   obj.innerHTML = " Hello";
+   obj.style.color = 'blue';
+   obj.style.fontSize = '50px';
+  </script>
+  --------------------  
+
+. Reduce DOM Size
+  > Keep the number of elements in the HTML DOM small.
+  > This will always improve page loading, and speed up rendering (page display), 
+    especially on smaller devices.
+
+. Delay JavaScript Loading
+  > use defer="true" in the script tag
+
+. Avoid Using 'with' keyword.
+
+
+
+-----------------------------------
+39. DOM
+    i. DOM Methods and Properties:
+    ii. DOM From
+    iii. DOM Animation
+    iv. DOM Event **
+    v. DOM EventListener
+    vi. Event Bubbling or Event Capturing.
+    vii. DOM Navigation
+    viii. HTMLCollection and NodeList
+-----------------------------------
+
+. DOM stands for Document Object Model.
+. Using DOM JavaScript can access HTML elements and can change, add, delete all the elements   .
+. Also we can say DOM works as a interface/Connector between HTML and JavaScript.
+
+------------
+i. DOM Methods and Properties:
+HTML DOM methods are actions (like add or deleting an HTML element).
+HTML DOM properties are values (like the content of an HTML element).
+Example:
+--------
+document.getElementById("demo").innerHTML = "Hello World!";
+--------
+getElementById is a method, and
+innerHTML is a property.
+
+List of DOM methods:
+------------
+document.getElementById(id)	
+document.getElementsByClassName(name)
+document.getElementsByTagName(name)
+document.querySelector('.class | #id | elementName')
+document.querySelectorAll('.class | #id | elementName') 
+
+** document.getElementsByTagName() => This method returns an HTMLCollection Object
+** document.querySelectorAll()     => This method returns an NodeList object.
+
+------------
+List of DOM Properties:
+------------
+.innerHTML 
+.attribute
+ > .src
+ > .style
+.write() 
+.value
+.URL
+
+Note: document.write() used to write directly to the HTML
+
+---------
+Example 1:
+---------
+<h1 id="test">Test</h1>
+<p id="test1"></p>
+<p id="test2"></p>
+<p id="test3"></p>
+<a href="#">Link</a>
+<h2 class="new">New</h2>
+<script>
+let x = document.getElementById('test').innerHTML;
+console.log(x);
+console.log(document.getElementById('test'));
+console.log(document.getElementsByClassName('new'))
+console.log(document.getElementsByTagName('p'))
+console.log(document.getElementsByTagName('a'))
+</script>
+
+---------
+Example 2:
+---------
+<p>Text</p>
+<script>
+let p = document.querySelector('p');
+p.style.color="#f00";
+p.style.fontSize="30px";
+</script>
+
+---------
+Example 3:
+setTimeout(function, milliseconds);
+---------
+<p>Text</p>
+<script>
+setTimeout(function(){
+let p = document.querySelector('p');
+    p.style.color="#f00";
+    p.style.fontSize="30px";
+},5000);
+
+</script>
+
+---------
+Example 4:
+. Before document load, we can use document.write() into the HTML.
+. ** Never use document.write() after the document is loaded. 
+     It will overwrite the document.
+. ** When Browser parsing/reading our HTML code one by one 
+     then we can use it to print content under the HTML.
+     If afte loding the html file we use document.write();
+     then all document will be reaplace by it.
+---------
+<p>test</p>
+<script>
+  document.write(Date());
+</script>
+<p>test</p>
+
+------------
+ii. DOM From
+------------
+Example
+---------
+<input type="text" id="demo" name="number" placeholder="Type Number" />
+<input type="submit" onclick="myFunction()">
+<div id="result"></div>
+<script>
+	function myFunction(){
+	let x = document.getElementById('demo').value;
+	let test;
+	if(isNaN(x)){
+		test = 'Number not valid';
+	}
+	else if (!x.match('[0-9]{10}')) {
+		test = 'Number not 10 dight';
+	}
+	else{
+		test = 'Number has Submited';
+		setTimeout(function(){ 
+	      document.getElementById("demo").value = "";
+	    }, 3000);
+	}
+	document.getElementById('result').innerHTML = test;
+	setTimeout(function(){ 
+      document.getElementById("result").innerHTML = "";
+    }, 3000);
+  }
+</script>
+
+
+------------
+iii. DOM Animation
+------------
+Example
+------------
+<div id="container">
+  <div id="animate"></div>
+</div>
+<style>
+#container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: #ddd;
+}
+#animate {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background-color: #505050;
+}
+</style>
+<script>
+/* //Code step 1
+function myMove(){
+  let animate = document.getElementById('animate');
+  let pos = 0;
+  setInterval(move,1000);
+  function move(){
+  	pos++;
+  	animate.style.top = pos + 'px';
+  	animate.style.left = pos + 'px';
+  }
+}
+myMove();
+  */
+  //Code step 2
+function myMove(){
+  let animate = document.getElementById('animate');
+  let pos = 0;
+  const interval = setInterval(move,10);
+  function move(){
+    if(pos<350){
+       //console.log(pos);
+  	pos++;
+  	animate.style.top = pos + 'px';
+  	animate.style.left = pos + 'px';
+     }
+     else{
+  	//***Must clear this setInterval***
+  	clearInterval(interval);
+  	//console.log('clearInterval');
+     }
+  }
+}
+myMove();
+</script>
+
+
+------------
+iv. DOM Event
+------------
+some of DOM Event are:
+onclick
+onmouseover
+onmouseout
+
+---------
+Example 1:
+---------
+<h1 id="demo" onclick="textChange()">Hello World!</h1>
+<script>
+function textChange(){
+  //let text = document.querySelector('h1');
+  let text = document.getElementById('demo');
+  text.innerHTML = 'I Love JavaScript';
+}
+</script>
+
+---------
+Example 2:
+---------
+<h1 onclick="this.innerHTML='I love JavaScript'">Hello World!</h1>
+
+---------
+Example 3:
+---------
+<h1 onclick="textChange(this)">Hello World!</h1>
+<script>
+function textChange(test){
+  //console.log(test);
+  test.innerHTML = 'I Love JavaScript';
+}
+</script>
+
+---------
+Example 4:
+---------
+<Button id="buy1">Buy Now</Button>
+<Button id="buy2">Buy Now</Button>
+<script>
+let buy1 = document.querySelector('#buy1');
+buy1.onclick = function(){
+buy1.innerHTML = 'Thank You';
+window.open("https://www.w3schools.com", '_blank');
+}
+
+let buy2 = document.querySelector('#buy2');
+buy2.onclick = function(){
+buy2.innerHTML = 'Thank You';
+window.open("http://www.google.com", '_blank');
+}
+</script>
+<style>
+button{
+cursor: pointer;
+}
+</style>
+
+------------
+v. DOM EventListener
+------------
+. Here we don't need to add JS code under inline HTML. so without using
+  onclick, onmouseover we can add JS code on HTML element.
+  Example:
+  <h1 id="demo" onclick="myfunction()"></h1>
+   Useing addEventListener()
+  <h1 id="demo"></h1>
+
+. syntax:
+  element.addEventListener('event', function, useCapture);
+
+. *** 'event' => 'click' in place of 'onclick'
+
+---------
+Example 1:
+---------
+<button id="button">Click</button>
+<script>
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    console.log('Hello World!');
+  });
+</script>
+
+---------
+Example 2:
+---------
+<a href="#" id="button">Click</a>
+<script>
+  function myNew() {
+     window.open('http://www.w3schools.com', '_blank');
+     button.innerHTML ="Thank You";
+  }
+  let button = document.getElementById('button');
+  button.addEventListener('click', myNew);
+</script>
+
+---------
+Example 3:
+Add many events to the same element
+---------
+<button id="button">Click</button>
+<script>
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    console.log('Hello World!');
+  });
+  button.addEventListener('click', function(){
+    console.log('Another Event');
+  });
+</script>
+
+---------
+Example 4:
+Add events of different types to the same element
+---------
+<button id="button">Click</button>
+<script>
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    console.log('Hello World!');
+  });
+  button.addEventListener('mouseover', function(){
+    console.log('Mouse Over');
+  });
+  button.addEventListener('mouseout', function(){
+    console.log('Mouse Out');
+  });
+</script>
+
+---------
+Example 5:
+** Useing "anonymous function" pass parameter using the addEventListener() method.
+---------
+<a href="#" id="button">Click</a>
+<script>
+  let p1 = 5;
+  let p2 = 8;
+
+  function myNew(a,b) {
+    console.log(a*b);
+  }
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    myNew(p1, p2);
+  });
+</script>
+
+Note:
+**Anonymous Function:
+Function without a name called anonymous function. 
+Example:
+<script>
+  const x = function (a, b) {return a * b};
+  let z = x(4, 3);
+  console.log(z);
+</script>
+
+------------
+vi. Event Bubbling or Event Capturing.
+------------
+Let we have
+<div>
+  <p></p>
+</div>
+
+. In bubbling the inner most element's event is handled first and then the outer. 
+  Example:	
+  the <p> element's click event is handled first, then the <div> element's click event.
+
+. In capturing the outer most element's event is handled first and then the inner.
+  Example:
+  the <div> element's click event will be handled first, then the <p> element's click event.
+
+
+---------
+Example: 1 with Bubbling
+---------
+<div id="parent">
+   <p id="child">Test</p>
+</div>
+<script>
+  let x = document.getElementById('parent');
+  x.onclick = function(){
+    console.log('parent');
+  }
+   let y = document.getElementById('child');
+  y.onclick = function(){
+    console.log('child');
+  }
+</script>
+
+----
+output on console:
+Child
+Parent
+----
+---------
+Example: 2 with Bubbling
+---------
+<div id="parent">
+   <p id="child">Test</p>
+</div>
+<script>
+let child = document.getElementById('child');
+child.addEventListener('click', function(){
+  console.log('Child')
+});
+let parent = document.getElementById('parent');
+parent.addEventListener('click', function(){
+  console.log('Parent')
+});
+</script>
+
+----
+output on console:
+Child
+Parent
+----
+---------
+Example with Capturing (true)
+---------
+<div id="parent">
+  <p id="child">Test</p>
+</div>
+<script>
+let child = document.getElementById('child');
+child.addEventListener('click', function(){
+  console.log('Child')
+},true);
+let parent = document.getElementById('parent');
+parent.addEventListener('click', function(){
+  console.log('Parent')
+},true);
+</script>
+
+----
+output on console:
+Parent
+Child
+----
+
+------------
+vii. DOM Navigation
+------------
+We can navigate the node tree using node relationships.
+
+nodeValue gives the value
+ex:
+<p>text</text>
+nodeValue => text
+
+Example:
+  firstChild.nodeValue;
+  lastChild.nodeValue;
+  childNodes[0].nodeValue;
+  nodeName;
+
+---------
+Example:1
+---------
+<p id="demo">
+  hello
+</p>
+<script>
+  let p = document.getElementById('demo');
+  let way1 = p.innerHTML;
+  let way2 = p.firstChild.nodeValue;
+  let way3 = p.childNodes[0].nodeValue;
+  console.log(way1,way2,way3);
+</script>
+
+---------
+Note:
+It is mainly use for complex HTML code or any place where
+to adding id is not possible.
+example:
+<ul>
+ <li></li>
+ <li>
+   <ul>
+     <li></li>
+    <li></li>
+    <li></li>
+   </ul>	
+ </li>
+ <li></li>
+ <li></li>
+</ul>
+
+---------
+Example:2
+---------
+<div id="outer">
+  <h2>Outer</h2>
+  <div id="inner">
+  	<h2>Inner</h2>
+  	<div>A</div>
+  	<div>B</div>
+  	<div id="child-c">C</div>
+  	<div>D</div>
+  	<div>E</div>
+  </div>
+</div>
+<script>
+let inner = document.getElementById('inner');
+    inner.parentElement.style.background="#ddd";
+inner.parentElement.style.padding="20px";
+
+inner.style.background="#ccc";
+inner.style.padding="20px";
+
+inner.firstElementChild.style.color="#f00";
+inner.lastElementChild.style.color="#f00";
+</script>
+
+---------
+I. Creating new HTML element using Node
+---------
+Example: 
+---------
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+<script>
+let addPara = document.createElement('p');
+let addText = document.createTextNode('Hello World');
+    addPara.appendChild(addText);
+let parent = document.getElementById('div1');
+    parent.appendChild(addPara);
+</script>
+
+---------
+II. Creating new HTML element anywere - insertBefore()
+---------
+Example: 
+---------
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+<p id="p3">This is another paragraph.</p>
+</div>
+<script>
+let addPara = document.createElement('p');
+let addText = document.createTextNode('Hello World');
+    addPara.appendChild(addText);
+		    
+let parent = document.getElementById('div1');
+let p2 = document.getElementById('p2');
+    parent.insertBefore(addPara, p2);
+</script>
+
+---------
+III. Removing Existing HTML Elements - remove()
+---------
+Example: 
+---------
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+<script>
+let p2 = document.getElementById('p2');
+    p2.remove();
+</script>
+
+---------
+NOTE:The remove() method does not work in older browsers
+     So, we use removeChild();
+---------
+<div id="div1">
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+</div>
+<script>
+let parent = document.getElementById('div1');
+let p2 = document.getElementById('p2');
+    parent.removeChild(p2);
+</script>
+
+---------
+IV. Replacing HTML Elements 
+---------
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+<script>
+let addPara = document.createElement('p');
+let addText = document.createTextNode('Hello World');
+    addPara.appendChild(addText);
+
+let parent = document.getElementById('div1');
+let p2     = document.getElementById('p2');
+    parent.replaceChild(addPara,p2);
+</script>
+
+---------
+
+------------
+viii. HTMLCollection and NodeList
+------------
+HTMLCollection:
+The 'getElementsByTagName()' method returns an HTMLCollection Object.
+It is a Object, Not a Array.
+---------
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+<script>
+ let p = document.getElementsByTagName('p');
+     console.log(p);
+     console.log(p[1]);     //index Number
+     console.log(p['p1']);  //Id
+     console.log(typeof p);
+     console.log(Array.isArray(p));
+</script>
+
+OUTPUT:
+HTMLCollection(2)Â [p#p1, p#p2, p1: p#p1, p2: p#p2]
+<p id="p2">This is another paragraph.</p>
+object
+false
+
+---------
+NodeList:
+querySelectorAll() method returns an NodeList object.
+---------
+<p id="p1">This is a paragraph.</p>
+<p id="p2">This is another paragraph.</p>
+<script>
+ let p = document.querySelectorAll('p');
+     console.log(p);
+     console.log(p[1]);
+     console.log(typeof p);
+     console.log(Array.isArray(p));
+</script>
+
+OUTPUT:
+NodeList(2)Â [p#p1, p#p2]
+<p id="p2">This is another paragraph.</p>
+object
+false
+
+---------
+Difference Between an HTMLCollection and a NodeList:
+---------
+. Both have a length property
+
+. HTMLCollection items can be accessed by their name, id, or index number.
+  but NodeList items can only be accessed by their index number.
+
+
+
+-----------------------------------
+Application
+-----------------------------------
+1. How to remove duplicates from an array?
+--------------
+1. How to remove duplicates from an array?
+
+const x = ['HTML','CSS','JavaScript', 'HTML', 'Bootstrap']	    
+const y =  Array.from(new Set (x));
+console.log(y);
+//output: ['HTML', 'CSS', 'JavaScript', 'Bootstrap']
 
