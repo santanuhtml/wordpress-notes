@@ -38,11 +38,10 @@
 36. JavaScript Style Guide
 37. JavaScript Best Practices
 38. JavaScript Performance
-39. DOM
-
+39. JavaScript Object Details
+40. DOM
 
 JavScript Import and Export
-
 
 -----------------------------------
 1. About JavaScript
@@ -442,13 +441,13 @@ console.log(x,y);
 ------------
 iii. JavaScript Array
 ------------
-let x = ['Santanu', 'Chowdhury', 'Indian'];
+const x = ['Santanu', 'Chowdhury', 'Indian'];
 console.log(x);
 
 ------------
 iv. JavaScript Object
 ------------
-let x = {firstName:'Santanu', lastName:'Chowdhury', cityzenship:'Indian'};
+const x = {firstName:'Santanu', lastName:'Chowdhury', cityzenship:'Indian'};
 console.log(x);
 
 *** Using 'typeof' property we can find out the data type
@@ -845,6 +844,13 @@ let x = "I love Java";
 console.log(x)
 //Output: I love JavaScript
 
+
+*** replace with Regular Expressions
+------------
+let x = "lorem love java, java \n  ME JAVA";
+    x = x.replace(/Java/igm, 'JavaScript');
+  console.log(x);
+
 ------------
 v. toUpperCase()
 ------------
@@ -1086,7 +1092,7 @@ vii. When to use Array & Object
 We will use Array, when we want number index and Iterate one by one.
 We will use Object, when we want name index.
 
-
+* In an array we can read data one by one called Iteration
 
 -----------------------------------
 16. JavaScript Array Function/Method
@@ -1645,7 +1651,7 @@ Note
   In an array we can read data one by one called Iteration
   And the Array called Iterable Object
 
-. Object is not Iterable because order is not important in object
+. Object is not Iterable because order is not it don't has Index Number.
 
 -----------------------------------
 22. JavaScript Iterables
@@ -1695,7 +1701,7 @@ document.getElementById('demo').innerHTML = text;
 ------------
 Basic Function
 ------------
-function name(){
+function name() {
   console.log('My name is Santanu Chowdhury.');
 }
 name();
@@ -1784,6 +1790,10 @@ Santanu loves JS
 -----------------------------------
 . An Object was created with Keys & Valus.
   A Map holds key-value pairs where the keys can be any datatype.
+
+. * In Object key must be a string but in Map keys can be any datatype.
+
+. Map remember the Order of key.
 
 . new Map(); use to create a MAP
   example:
@@ -1877,8 +1887,8 @@ Null
 ------------
 . In JavaScript null is "nothing" or doesn't exist.
 . null is an object.
-. We can empty an object by assing null.
-. Aso We can empty an object by assing undefined.
+. * We can empty an object by assing null.
+. * Aso We can empty an object by assing undefined.
 
 ------------
 Difference Between Undefined and Null
@@ -1990,11 +2000,15 @@ match()  gives Array
 Example:
 --------------------
 let x = "I love JavaScript";
-let y = "I love WordPress";
-    x = x.search(/javascript/i);
+let y = "I love WordPress and Wordpress";
+    x = x.search(/javascript/ig);
     console.log(x);
-    y = y.match(/wordPress/i);
+    y = y.match(/wordPress/ig);
     console.log(y);
+
+output:
+7
+['WordPress', 'Wordpress']
 
 --------------------
 ii.
@@ -2347,7 +2361,7 @@ function textChange(test){
   Class Method
   Class Method with Parameter
 -----------------------------------
-. Actual Vanila JavaScript is not Object-oriented programming (OOP) language, so 
+. Vanila JavaScript is not Object-oriented programming (OOP) language, so 
   Vanila JavaScript don't have Class concept.
 . ECMAScript 2015, introduct Class to introduct OOP.
 . Syntax:
@@ -2430,6 +2444,33 @@ const car2 = new Car("Audi", 2022);
 car1.intro('Best');
 car2.intro('well');
 
+
+--------------------
+Example:4
+--------------------
+
+  
+   class Person {
+      constructor(name,id,age,blood){
+        this.name = name;
+        this.id   = id;
+        this.age  = age;
+        this.blood = blood;
+      }
+   }
+   const santanu = new Person('Santanu Chowdhury', 101, 32, 'B+');
+   const puja    = new Person('Puja Chowdhury', 102, 30, 'O+');
+   const mayank    = new Person('Mayank Chowdhury', 103, 1, ' ');
+
+   const all = [santanu, puja, mayank];
+   all.map((name)=>{ for(let x in name){
+      console.log(`${x} :${name[x]}`);
+   } })
+
+   // for(let x in santanu){
+   //    console.log(`${x} :${santanu[x]}`);
+   // }
+ 
 
 -----------------------------------
 34. JavaScript JSON
@@ -2622,6 +2663,765 @@ console.log(JSON.stringify(me));
 . Avoid Using 'with' keyword.
 
 
+-----------------------------------
+39. JavaScript Object Details
+ i.   Basic
+ ii.  Object Properties
+ iii. Object Method
+ iv.  Display Objects
+ v.   Object Accessors
+ vi.  Object Constructors
+ vii. Object Prototypes
+ viii. Object Iterables with [Symbol.iterator]()
+ ix.  JavaScript Sets
+ x.   JavaScript Maps
+
+-----------------------------------
+i. Basic	
+--------------------
+		    
+1. Primitive value:
+   A primitive value is a value that has no properties or methods.
+   Example: let x = 3.14; It is a primitive value.
+
+   In JavaScript 7 types of primitive data types:
+   string
+   number
+   boolean
+   null
+   undefined
+ 
+2. Immutable
+   Primitive values are immutable
+   Example:
+   ------------
+   let number = 3;
+       number = 4;
+   ------------
+   In this case we chage this variable value
+   3 to 4, not immute this variable.
+   so this variable is 'immutable' 
+
+3.  mutable:
+    * JavaScript Objects are mutable.
+
+    Example: 1 
+    ------------
+    const person = {
+      name : 'Santanu Chowdhury', // this statement called Property
+      age  : 32
+    }
+    person.name = 'India';
+    ------------
+    In this case we not change the Object value,
+    we just mute this object.
+
+   Example2:
+   ------------
+   const person = {
+     name  : 'Santanu Chowdhury',
+     age   : 32,
+     skill : 'HTML5, CSS3, Bootstrap'
+   }
+   console.log
+   const x = person;
+   console.log(person.age);
+   console.log(x.age);
+   x.age = 10;          // *** This Will change both x.age and person.age
+   console.log(person.age);
+  console.log(x.age);
+   ------------
+
+--------------------
+ii.  Object Properties
+--------------------
+1. Object Property: 
+   ------------
+   const person = {
+     name : 'Santanu Chowdhury', 
+     age  : 32
+   }
+   ------------
+   name : 'Santanu Chowdhury', 
+   Here above statement called Property 
+   Property has two attributes called 'key and 'value'
+
+2. Properties can usually be changed, added, and deleted, 
+   but some are read only.
+   Example: 
+   ------------
+   const me = {
+     name : 'Santanu Chowdhury',
+     age  : 32,
+     eye  : 'Black'
+   }
+   console.log(me);
+   me.skill = 'HTML5'; // Add key and value
+   me.age = 33 ;       // Edit value
+   delete me.eye;      // Delete eye
+
+   console.log(me);
+   ------------
+ 
+3. Accessing JavaScript Properties
+   Example:
+   ------------
+   const me = {
+     name : 'Santanu Chowdhury',
+     age  : 32
+   }
+   console.log(me.age);
+   console.log(me['age']);
+   ------------
+
+4. JavaScript for...in Loop
+   Example:
+  ------------
+  const me = {
+    firstName:   'Santanu',
+    lastName:    'Chowdhury',
+    citizenShip: 'Indian',
+    designation: 'Web Designer',
+    office:function(){
+       return 'I am working in Webmaddy.com';
+      }
+    };
+    for(let x in me){
+      console.log(x + ' : ' + me[x]);
+    }
+  ------------
+
+5. Nested Objects
+   Example:
+   ------------
+   const me = {
+    firstName:   'Santanu',
+    lastName:    'Chowdhury',
+    citizenShip: 'Indian',
+    designation: 'Web Designer',
+    skills : {
+      webDesing : "HTML, CSS, JavaScript",
+      wordPress : "PHP"
+    }
+  }; 
+  console.log(me);
+  ------------
+
+6. Nested Arrays and Objects
+   Example:
+   ------------
+   const me = {
+      firstName:   'Santanu',
+      lastName:    'Chowdhury',
+      citizenShip: 'Indian',
+      designation: [
+        {name:"Web Desing", skills:["HTML", "CSS", "JavaScript"]},
+        {name:"WordPress", skills:["Php", "WordPress"]}
+      ]
+    }; 
+    for(let x in me.designation){
+      console.log(me.designation[x].name);
+      for(let y in me.designation[x].skills){
+         console.log( " > " + me.designation[x].skills[y]);
+      }
+    }
+   ------------
+
+
+
+
+--------------------
+ iii. Object Method
+--------------------
+
+1. function within an Object called Method.
+   Example:
+  ------------
+   const me = {
+    firstName :   'Santanu',
+    lastName :    'Chowdhury',
+    citizenShip : 'Indian',
+    designation : 'Web Designer',
+    office : function() {
+       return 'I am working in Webmaddy.com';
+      }
+    };
+    console.log(me.office());
+    console.log(me.office); 
+  ------------
+  Note:
+  . without '()' it returen the function.
+
+
+2. Adding a Method to an Object
+   Example:
+   ------------
+    const me = {
+    firstName:   'Santanu',
+    lastName:    'Chowdhury',
+    citizenShip: 'Indian',
+    designation: 'Web Designer'
+    };
+
+    me.office = function(){
+      return 'I am working in Webmaddy.com';
+    }
+    console.log(me);
+   ------------
+
+3. Useing Built-In Methods on Object Method
+   Example:
+   ------------
+    const me = {
+    firstName :   'Santanu',
+    lastName :    'Chowdhury',
+    citizenShip : 'Indian',
+    designation : 'Web Designer',
+    office : function() {
+       return ('I am working in Webmaddy.com').toUpperCase();
+      }
+    };
+    console.log(me.office());
+   
+   ------------
+
+--------------------
+iv.  Display Objects
+--------------------
+.  If we insert object within innerHTML, it will return [object Object].
+   Example:
+   ------------
+   const me = {
+     firstName :   'Santanu',
+     lastName :    'Chowdhury',
+     citizenShip : 'Indian',
+     designation : 'Web Designer'
+   };
+   document.getElementById('demo').innerHTML = me; 	
+  ------------
+
+. Some common solutions to display JavaScript objects are:
+   > Displaying the Object Properties by name
+   > Displaying the Object Properties in a Loop
+   > Displaying the Object using Object.values()
+   > Displaying the Object using JSON.stringify()
+
+
+1. Displaying the Object Properties by name
+   Example:
+   ------------
+    const me = {
+      firstName :   'Santanu',
+      lastName :    'Chowdhury',
+      citizenShip : 'Indian',
+      designation : 'Web Designer'
+    };
+    document.getElementById('demo').innerHTML = 'My name is ' + me.firstName + ' ' + me.lastName + '.';
+   ------------
+
+2. Displaying the Object Properties in a Loop
+   Example:
+   ------------
+   const me = {
+      firstName :   'Santanu',
+      lastName :    'Chowdhury',
+      citizenShip : 'Indian',
+      designation : 'Web Designer'
+    };
+    let text = '';
+    for(let x in me){
+      text += me[x] + ' ';
+    }
+    document.getElementById("demo").innerHTML = text;
+   ------------
+
+3. Displaying the Object using Object.values()
+   Example:
+   ------------
+   const me = {
+      firstName :   'Santanu',
+      lastName :    'Chowdhury',
+      citizenShip : 'Indian',
+      designation : 'Web Designer'
+    };
+
+    //Making array
+    const myArray = Object.values(me);
+    //Print Array in html
+    document.getElementById("demo").innerHTML = myArray;
+    //Print Array in console
+    myArray.forEach(x=>{console.log(x)});
+
+   ------------
+
+4. Using JSON.stringify()
+   Example 1:
+   ------------
+   const me = {
+      firstName :   'Santanu',
+      lastName :    'Chowdhury',
+      citizenShip : 'Indian',
+      designation : 'Web Designer',
+      office : function() {
+       return ('I am working in Webmaddy.com').toUpperCase();
+      }
+    };
+
+    let myString = JSON.stringify(me);
+    console.log(myString);
+   ------------
+
+  Note: ** But it not convert function in to string.
+        so, If we need the function value too then stringify 
+        the function first.
+
+  ------------
+  Example 2:
+  ------------
+  const me = {
+     firstName :   'Santanu',
+     lastName :    'Chowdhury',
+     citizenShip : 'Indian',
+     designation : 'Web Designer',
+     office : function() {
+       return ('I am working in Webmaddy.com').toUpperCase();
+     }
+   };
+   me.office = me.office.toString();
+   let myString = JSON.stringify(me);
+   console.log(myString);
+  ------------
+
+--------------------
+v.   Object Accessors
+--------------------
+. Getters and setters are the Accessors on JavaScript Object.
+  Using Getters and setters we get Computed Properties.
+  Example 1: Getter
+  ------------
+  const me = {
+      firstName:   'Santanu',
+      lastName:    'Chowdhury',
+      get fullName() {
+        return this.firstName + ' ' + this.lastName;
+      }
+    }; 
+  ------------
+  Note:
+  . Here we have 'firstName' and 'lastName' two properties. 
+    Now we can create 'fullName' computed properties to get 
+    'firstName' and 'lastName' together using 'Getter'.
+  
+  . We can did same task usign 'function' but for better data quality
+    we can use 'Getter' and 'Setter'.
+  
+  . Explain Better Quality:
+    > When we use 'Getter' then the function will be active when we
+      access the computed propertie.
+
+    > When we use 'function' then the function active always.
+    
+  ------------
+  Example 2: setter
+  ------------
+   const me = {
+      firstName:   'Santanu',
+      lastName:    'Chowdhury',
+      citizenShip: '',
+      set citizen(citizen) {
+        this.citizenShip = citizen;
+      }
+    }; 
+    me.citizen = "Indian"
+    console.log(me);
+  ------------
+  
+--------------------
+ vi.  Object Constructors
+--------------------
+1. * Basic Structure with Method:
+   Example:
+   ------------
+   function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+      this.fullName = function() {
+        return this.firstName + ' ' + this.lastName;
+      }
+    }
+    const santanu = new Person('Santanu', 'Chowdhury', 32, );
+    const puja    = new Person('Puja', 'Chowdhury', 30, );
+    const mayank    = new Person('Mayank', 'Chowdhury', 1);
+
+    console.log(santanu);
+    console.log(santanu.firstName);
+    console.log(santanu.fullName());
+
+   ------------
+   Note:
+   . ** Name of a constructor function start with an upper-case first letter.
+    
+
+2. Adding a Property to an Object
+   Example:
+   ------------
+   function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+    }
+     const santanu = new Person('Santanu', 'Chowdhury', 32, );
+     const puja    = new Person('Puja', 'Chowdhury', 30, );
+     const mayank    = new Person('Mayank', 'Chowdhury', 1);
+
+     santanu.country = "India";
+     console.log(santanu);
+     console.log(Person);
+   ------------
+   Note: 
+   . The property 'country' will be added to santanu. Not to puja. 
+
+
+3. Adding a Method to an Object
+   ------------
+    function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+    }
+
+    const santanu = new Person('Santanu', 'Chowdhury', 32, );
+    const puja    = new Person('Puja', 'Chowdhury', 30, );
+    const mayank    = new Person('Mayank', 'Chowdhury', 1);
+
+    santanu.name = function () {
+     return this.firstName + " " + this.lastName;
+    };
+    
+    console.log(santanu.name());
+   ------------
+   Note:
+   . The method 'name' will be added to santanu. Not to puja. 
+
+
+4. Adding a Property to a Constructor:
+   ** We cannot add a new property to an object constructor.
+   ** To add a new property to a constructor, We must add it 
+      to the constructor function.
+   Example:
+   ------------
+   function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+    }
+    const santanu = new Person('Santanu', 'Chowdhury', 32, );
+    const puja    = new Person('Puja', 'Chowdhury', 30, );
+    const mayank    = new Person('Mayank', 'Chowdhury', 1);
+
+    Person.citizenShip = "Indian";
+
+    console.log(santanu.citizenShip);
+    //output: undefined
+
+   ------------
+   Note:
+   ** We cannot add a new property to an object constructor.
+   ** To add a new property to a constructor, We must add it to 
+      the constructor function.
+
+
+--------------------
+ vii. Object Prototypes	
+      *** Using JavaScript 'Prototype' Properties we can add
+          new new properties and methods to object constructors.
+--------------------
+** We cannot add a new property to an object constructor.
+** To add a new property to a constructor, We must add it to 
+   the constructor function.
+
+** JavaScript 'Prototype' allows you to add new properties 
+    to object constructors
+   
+1. Adding Properties usgin Prototype:
+   Example:
+   ------------
+    function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+    }
+    const santanu = new Person('Santanu', 'Chowdhury', 32, );
+    const puja    = new Person('Puja', 'Chowdhury', 30, );
+    const mayank    = new Person('Mayank', 'Chowdhury', 1);
+
+    Person.prototype.citizenShip = "Indian";
+
+    console.log(santanu.citizenShip);
+    console.log(puja.citizenShip);
+    console.log(mayank.citizenShip);
+   ------------
+
+2. Adding Method usgin Prototype:
+   Example:
+   ------------
+   function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+    }
+    const santanu = new Person('Santanu', 'Chowdhury' );
+    const puja    = new Person('Puja', 'Chowdhury' );
+    const mayank    = new Person('Mayank', 'Chowdhury');
+
+    Person.prototype.fullName = function() {
+      return this.firstName +  ' ' + this.lastName;
+    }
+
+    console.log(santanu.fullName());
+    console.log(puja.fullName());
+    console.log(mayank.fullName());
+
+   ------------
+
+3. *** Using Prototype we can add new Methods
+       to an Objects constructors. ***
+   *** But never do it!
+   ------------
+    String.prototype.myname = function() {
+      return 'Santanu Chowdhury';
+    }
+    Number.prototype.myadd = function() {
+      return 'It is my add Function'
+    }
+    let x = 'India';
+    let y = 10;
+    console.dir(x.myname());
+    console.dir(y.myadd());
+   ------------
+
+
+--------------------
+viii. Object Iterables with [Symbol.iterator]()
+      * [Symbol.iterator]() is a Iterator function.
+--------------------
+. An object is not Iterable because we can't Iterate on by one
+  because it has name index.
+. But using [Symbol.iterator] function we can Iterate an Object.
+
+> [Symbol.iterator] is a functon which return an 'Iterator'.
+> 'Iterator' nothin but have a next() method which funally return an 'object' contain
+  two property 'value' and 'done'.
+  
+  Syntax:
+  ------------
+    const myObject = {};
+    myObject[Symbol.iterator] = function() {
+      return {
+        next() {
+          return {
+            value: ,
+            done :true/false 
+          }
+        }
+      }
+    }
+  ------------
+  Note: 
+  . next()
+  . done:true then iterator has completed.
+  . done:false then iterate next value.
+
+  ------------
+  Example:
+  ------------
+  const myObject = {};
+  myObject[Symbol.iterator] = function() {
+    let n = 0;
+    let done = false;
+    return{
+      next() {
+        n += 10;
+        if(n == 100) {done = true}
+        return {
+          value: n,
+          done : done
+        }
+      }
+    }
+  }
+  
+  for(let num of myObject){
+    console.log(num);
+  }
+ ------------
+
+1. *** Control Loop using [Symbol.iterator]() iterator ***
+   Example:
+   ------------
+   const number = [1,2,3];
+    const numberIterator = number[Symbol.iterator]();
+    //console.log(numberIterator);
+    console.log(numberIterator.next());
+    console.log(numberIterator.next());
+    console.log(numberIterator.next());
+    console.log(numberIterator.next());
+  ------------
+  Note: using [Symbol.iterator]() function we can get valu next by next.
+
+
+--------------------
+ ix.  JavaScript Sets	
+--------------------
+. A JavaScript Set is a collection of unique values.
+. A Set can hold any value of any data type.
+. Sets are Objects.
+. To check object or set then use 'instanceof'
+  link to check array or object use 'Array.isArray(x)'
+
+1. Basic Structure:
+   ------------
+   const letters = new Set(['a','b','c']);
+   console.log(letters);
+  ------------
+
+2. Set collection of unique values
+   ------------
+   const letters = new Set(['a','b','c', 'c', 'cc', 'a']);
+   console.log(letters);
+
+  //output: Set(4) {'a', 'b', 'c', 'cc'}
+  ------------
+    
+3. forEach() Method
+   * forEach() for Set return only value not key.
+   ------------
+   const letters = new Set(['a','b','c', 'c', 'cc', 'a']);
+   letters.forEach(x => {console.log(x)});
+   ------------
+
+4. values() Method:
+   . Since Set returns only 'value' so using values() method
+     we get Iterator like [Symbol.iterator]();
+   ------------
+    const letters = new Set(['a','b','c']);
+    const myIterator = letters.values();   
+    for (const x of myIterator) {
+      console.log(x);
+    }
+   ------------
+  
+5. Sets are Objects
+   ------------
+   const letters = new Set(['a','b','c']);
+   console.log(typeof letters);
+   console.log(letters instanceof Set)  
+
+   //output: object
+   //output: true
+   ------------
+
+--------------------
+x.   JavaScript Maps	
+--------------------
+. An Object was created with Keys & Valus.
+  A Map holds key-value pairs where the keys can be any datatype.
+
+. * In Object key must be a string but in Map keys can be any datatype.
+
+. Map remember the Order of key so Map Directly iterable.
+
+. new Map(); use to create a MAP
+  example:
+  const x = new Map();
+
+. Example:
+  const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+
+. Map Also has various methods.
+
+Note: Map mainly use in High level projects.
+
+
+1. set() & get()
+   . We can add elements to a Map with the set() method.
+   . We can get key valu using get() method.
+  ------------
+    const me = new Map();
+    
+    me.set("name", "Santanu Chowdhury");
+    me.set("age", 32);
+    me.set(173, "Address")
+
+    console.log(me.get('name'));
+    console.log(me.get(173));
+
+    //Output: Santanu Chowdhury
+    //Output: Address
+  ------------
+
+2. Maps are Objects
+   ------------
+   const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+   ]);
+   console.log(typeof fruits);
+   console.log(fruits instanceof Set);
+
+   //output: object
+   //output: true
+
+3. Map keys can be any datatype:
+   Here we use a Object as a key
+  ------------
+    //create a MAP
+    const fruits = new Map();
+
+    //create Objects
+    const apple  = { name : "Apple" };
+    const banana = { name : "Banana"};
+    const orange = { name : "Orange"};
+
+    //add object to the MAP
+    fruits.set(apple, 120);
+    fruits.set(banana, 60);
+    fruits.set(orange, 20);
+
+    console.log(fruits.get(apple));
+
+  ------------
+
+2. forEach() 
+   * forEach() for Map return both 'value' and 'key'
+   ------------
+   const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+   ]);
+   fruits.forEach((x,y)=>{console.log(x + ' ' + y)})
+   ------------
+
+3. values()Method:
+   . Since Math returns Both 'value' and 'keys' so we access them.
+     Here using values() method.
+   ------------
+    const fruits = new Map([
+      ["apples", 500],
+      ["bananas", 300],
+      ["oranges", 200]
+    ]);
+    let x = fruits.values();
+    for(let y of x){
+      console.log(y);
+    }
+   ------------
 
 -----------------------------------
 39. DOM
@@ -3290,4 +4090,7 @@ const x = ['HTML','CSS','JavaScript', 'HTML', 'Bootstrap']
 const y =  Array.from(new Set (x));
 console.log(y);
 //output: ['HTML', 'CSS', 'JavaScript', 'Bootstrap']
+
+
+
 
