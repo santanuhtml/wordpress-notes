@@ -32,14 +32,15 @@
 31. setInterval()
     setTimeout()
 32. this Keyword
-33. JavaScript Class
 34. JavaScript JSON
 35. JavaScript Debugging
 36. JavaScript Style Guide
 37. JavaScript Best Practices
 38. JavaScript Performance
 39. JavaScript Object Details
-40. DOM
+40. JavaScript Function
+41. JavaScript Class
+42. DOM
 
 JavScript Import and Export
 
@@ -321,7 +322,7 @@ console.log(carName)   <-------- our code
 
 
 * When we use 'let' JavaScript Host this variable but
-DO NOT assign undefine.
+DO NOT assign undefined.
 
 
 Difference of 'var' and 'let'
@@ -422,7 +423,6 @@ let z = "Hello"+5;
 console.log(x,y,z);
 //output: 10 '55' 'Hello5'
 
-
 -----------------------------------
 8. JavaScript Data Types
 ------------
@@ -517,6 +517,19 @@ Santanu
 
 
 ------------
+Function Arguments:
+. usgin 'arguments' we can see the parameter passing throught the function.
+. 'arguments' also a array.
+------------
+  function name(firstName,lastName){
+    console.log(arguments);
+    console.log(arguments[0]);
+    console.log(arguments.length);
+    console.log('My name is'+ ' ' + firstName + ' ' + lastName);
+  }
+  name('Santanu', 'Chowdhury');
+
+------------
 iii. Default Parameter
 ------------
 function power(x=6){
@@ -569,7 +582,7 @@ console.log(x);
 
 
 ------------
-vi. Use Function Directly
+vi. Use Function Directly / Functions Can Be Used as Values
 ------------
 function power(x){
 return x**2;
@@ -595,6 +608,19 @@ Example:
   let z = x(4, 3);
   console.log(z);
 </script>
+
+--------------------
+vii. Self-Invoking Functions / IIFE
+--------------------
+. This function called Automatically.
+------------
+(function() {
+  console.log('Hello World');
+})();
+
+------------
+Note:
+. It is also a Anonymous function 
 
 
 -----------------------------------
@@ -649,48 +675,7 @@ console.log(store.z);
 	  30
 
 ------------
-iii. this
-------------
-If we use 'this' under any object then, 'this' denote the parent Object.
-
-Example1:
-const me = {
-firstName:   'Santanu',
-lastName:    'Chowdhury',
-citizenShip: 'Indian',
-designation: 'Web Designer',
-summery: function(){
-   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
-  }
-};
-console.log(me.summery());
-//output: My name is Santanu Chowdhury
-
-Note:
-. Here 'me' is the parent object.
-
-
-Example 2:
-const me = {
-firstName:   'Santanu',
-lastName:    'Chowdhury',
-designation: 'Web Designer',
-summery: function(){
-  console.log('My name is' + ' ' + this.firstName + ' ' + this.lastName); 
-  },
-workSummery: function(){
-  this.summery();
-  console.log('I am a' + ' ' + this.designation);
-  }
-};
-console.log(me.workSummery());
-
-//output: My name is Santanu Chowdhury
-	  I am a Web Designer                                                                                            
-
-
-------------
-iv. new
+iii. new
 ------------
 . When a JavaScript variable is assign with a key work 'name', 
   the variable is created an object.
@@ -706,16 +691,13 @@ console.log(typeof y);
 	  object
 
 ------------
-v. Get Object key,values,entries
+iv. Get Object key,values,entries
 ------------
 const me = {
 firstName:   'Santanu',
 lastName:    'Chowdhury',
 citizenShip: 'Indian',
-designation: 'Web Designer',
-summery: function(){
-   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
-  }
+designation: 'Web Designer'
 };
 let keys = Object.keys(me);
 let values = Object.values(me);
@@ -726,7 +708,7 @@ console.log(entries);
 
 
 ------------
-vi. Add Two Object
+v. Add Two Object
 ------------
 const me = {
   firstName:   'Santanu',
@@ -744,7 +726,7 @@ const all = {
 console.log(all);
 
 ------------
-vii. Object Destructuring to get value
+vi. Object Destructuring to get value
 ------------
 const me = {
   firstName:   'Santanu',
@@ -773,6 +755,111 @@ Santanu
 HTML, CSS, JavaScript
 HTML, CSS, JavaScript
 
+
+------------
+vii. this
+     In JavaScript, the thing called 'this', is the Object that owns the
+     current code.
+------------
+I. Object Method Binding
+Example1:
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+citizenShip: 'Indian',
+designation: 'Web Designer',
+summery: function(){
+   return 'My name is' + ' ' + this.firstName + ' ' + this.lastName
+  }
+};
+console.log(me.summery());
+//output: My name is Santanu Chowdhury
+
+Note:
+. Here 'me' is the parent object.
+
+------------
+Example 2:
+------------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+designation: 'Web Designer',
+summery: function(){
+  console.log('My name is' + ' ' + this.firstName + ' ' + this.lastName); 
+  },
+workSummery: function(){
+  this.summery();
+  console.log('I am a' + ' ' + this.designation);
+  }
+};
+console.log(me.workSummery());
+
+//output: My name is Santanu Chowdhury
+	  I am a Web Designer  
+
+------------
+Example 3:
+------------
+ const person = {
+   firstName  : "John",
+   lastName   : "Doe",
+   id     : 5566,
+   myFunction : function() {
+    return this;
+   }
+ };
+console.log(person.myFunction());
+                                                                                         
+--------------------
+viii. call()
+    . call is Object method. 
+    . Using call() method we call a object method and pass the value
+      form the another Object.
+--------------------
+Example 1:
+------------
+<script>
+const person1 = {
+     fullName: function() {
+     return this.firstName + " " + this.lastName;
+   }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+const person3 = {
+  firstName:"Puja",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2));
+</script>
+
+------------
+Example 2:
+Passing Extra parameters
+------------
+const person1 = {
+ fullName: function(skill, citizen) {
+ return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+   }
+}
+const person2 = {
+ firstName:"Santanu",
+ lastName: "Chowdhury",
+}
+const person3 = {
+  firstName:"Puja",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
+
+------------
+Note:
+. We can pass many parameters as we want but first Parameter must be an Object.
+
 -----------------------------------
 11. JavaScript Events
 syntax:
@@ -781,7 +868,7 @@ syntax:
 Common HTML events:
   onclick
   onchange
-  onmousehover
+  onmouseover
   onmouseout
   onkeydown
   onload
@@ -806,7 +893,20 @@ function notice(){
 }
 </script>
 
-
+------------
+Example 4:
+------------
+<h1 onclick="this.style.color='red'">Hello World!</h1>
+------------
+*** Example 5:
+------------
+<h1 onclick="textChange(this)">Hello World!</h1>
+<script>
+function textChange(test){
+  //console.log(test);
+  test.innerHTML = 'I Love JavaScript';
+}
+</script>
 
 -----------------------------------
 12. String Function/Method
@@ -1771,6 +1871,13 @@ Santanu loves CSS
 
 Santanu loves JS
 
+------------
+Note:
+. Do not use Arrow function to define Object Methods because 
+. Arrow function do not have their own this.
+. this under Arrow function denote global Window Object.
+ 
+------------
 
 -----------------------------------
 24. JavaScript Sets
@@ -1814,7 +1921,7 @@ Note: Map mainly use in High level projects.
 -----------------------------------
 26. JavaScript typeof
 -----------------------------------
-In JavaScript there are 5 different data types that can contain values:
+In JavaScript there are 5 different data types:
 . string
 . number
 . boolean
@@ -1972,7 +2079,7 @@ https://www.w3schools.com/js/js_type_conversion.asp
 -----------------------------------
 28. Regular Expressions
 -----------------------------------
-. To find text and replace text we use Regular Expessions.
+. To Search text and replace text we use Regular Expessions.
 
 . Syntax
   /pattern/modifiers;
@@ -1992,7 +2099,7 @@ Example:
 let x = "I love JavaScript";
     x = x.search(/javascript/i);
     console.log(x);
-
+    //output : 7
 --------------------
 *Note:
 search() gives Index number
@@ -2111,7 +2218,7 @@ Example:
 --------------------
 iii. Error Object
 --------------------
-JavaScript has a built in error object -
+Error Object has two properties -
 name
 message
 
@@ -2190,8 +2297,8 @@ Function Scope
   ------------
 
 Note:
-. ** Var is global and function scope.
-. let and const is block scope.
+. ** Var function scope.
+. ** let and const is block scope and function scope.
 
 --------------------
 Global Scope
@@ -2245,27 +2352,43 @@ var carName1 = "TATA";
 --------------------
 Lifetime of JavaScript Variables
 --------------------
-. The lifetime of a JavaScript variable starts when it is declared.
-. Function variables are deleted when the function is completed.
-. global variables are deleted, when we close the browser window or Tab.
+. When variable are declared then the lifetime of the variable starts.
+. When the function is completed the Function variables are deleted .
+. When we close the browser or Tab then global variables are deleted.
 
 
------------------------------------
-32. this Keyword
------------------------------------
-. In JavaScript, the 'this' refers to an object.
 
-use of it:
-. In an object method, this refers to the object.
-. Alone, this refers to the global object.
-. In a function, this refers to the global object.
-. In a function, in strict mode, this is undefined.
-. In an event, this refers to the element.
-
---------------------
-i. Object Method Binding
---------------------
 ------------
+32. this Keyword
+    In JavaScript, the thing called 'this', is the Object that owns the
+    current code.
+------------
+I.   If we use 'this' under a functon then 'this' denote the Global Window Object
+       > In strict mode, this under a function returns Undefined.
+II.  If we use 'this' under any object then, 'this' denote the parent Object.
+III. In an event, this refers to the element.
+
+------------
+I. Under Function return Window Object
+Example1:
+------------
+function name(){
+    console.log(this);
+  }
+name();
+
+------------
+I. Under Function with strict mode return undefined
+Example 2:
+------------
+ 'use strict';
+  function name(){
+    console.log(this);
+  }
+  name();
+
+------------
+II. Under Object
 Example1:
 ------------
 const me = {
@@ -2301,44 +2424,23 @@ workSummery: function(){
 console.log(me.workSummery());
 
 //output: My name is Santanu Chowdhury
-	  I am a Web Designer     
+	  I am a Web Designer  
 
 ------------
 Example 3:
 ------------
-<script>
-    const person = {
-      firstName  : "John",
-      lastName   : "Doe",
-      id     : 5566,
-      myFunction : function() {
-        return this;
-      }
-    };
-    console.log(person.myFunction());
-</script>
-
---------------------
-ii. call()
-    using call() method we can get value from another Object.
---------------------
-Example 1:
-------------
-<script>
-const person1 = {
-     fullName: function() {
-     return this.firstName + " " + this.lastName;
+ const person = {
+   firstName  : "John",
+   lastName   : "Doe",
+   id     : 5566,
+   myFunction : function() {
+    return this;
    }
-}
-const person2 = {
-  firstName:"Santanu",
-  lastName: "Chowdhury",
-}
-console.log(person1.fullName.call(person2));
-</script>
-
+ };
+console.log(person.myFunction());
+                                                                                         
 --------------------
-iii. this in Event Handlers
+III. this in Event Handlers
 --------------------
 Example 1:
 ------------
@@ -2353,8 +2455,6 @@ function textChange(test){
   test.innerHTML = 'I Love JavaScript';
 }
 </script>
-
-
 
 -----------------------------------
 33. JavaScript Class
@@ -2531,7 +2631,7 @@ console.log(JSON.stringify(me));
 
 
 
------------------------------------
+----------------------------------- 
 35. JavaScript Debugging
 -----------------------------------
 
@@ -2653,7 +2753,7 @@ console.log(JSON.stringify(me));
   --------------------  
 
 . Reduce DOM Size
-  > Keep the number of elements in the HTML DOM small.
+  > Keep the number of elements in the HTML DOM small amount.
   > This will always improve page loading, and speed up rendering (page display), 
     especially on smaller devices.
 
@@ -2996,7 +3096,7 @@ iv.  Display Objects
 v.   Object Accessors
 --------------------
 . Getters and setters are the Accessors on JavaScript Object.
-  Using Getters and setters we get Computed Properties.
+  Using Getters and setters we get **Computed Properties**.
   Example 1: Getter
   ------------
   const me = {
@@ -3013,13 +3113,15 @@ v.   Object Accessors
     'firstName' and 'lastName' together using 'Getter'.
   
   . We can did same task usign 'function' but for better data quality
-    we can use 'Getter' and 'Setter'.
+    we can use 'Getter' and 'Setter'. because getter and setter gives
+   **Computed Properties**. [Not give full function body]
   
   . Explain Better Quality:
     > When we use 'Getter' then the function will be active when we
       access the computed propertie.
 
     > When we use 'function' then the function active always.
+      [Give full function body]
     
   ------------
   Example 2: setter
@@ -3038,6 +3140,7 @@ v.   Object Accessors
   
 --------------------
  vi.  Object Constructors
+      ** A function designed to create new objects, is called an object constructor.
 --------------------
 1. * Basic Structure with Method:
    Example:
@@ -3106,9 +3209,10 @@ v.   Object Accessors
 
 
 4. Adding a Property to a Constructor:
-   ** We cannot add a new property to an object constructor.
-   ** To add a new property to a constructor, We must add it 
-      to the constructor function.
+  ** We cannot add a new property to an object constructor from outside.
+      like: Person.citizenShip = "Indian";
+   ** To add a new property to a constructor, We must add it to 
+      the constructor function.
    Example:
    ------------
    function Person(first,last,age) {
@@ -3127,7 +3231,8 @@ v.   Object Accessors
 
    ------------
    Note:
-   ** We cannot add a new property to an object constructor.
+   ** We cannot add a new property to an object constructor from outside.
+      like: Person.citizenShip = "Indian";
    ** To add a new property to a constructor, We must add it to 
       the constructor function.
 
@@ -3137,12 +3242,13 @@ v.   Object Accessors
       *** Using JavaScript 'Prototype' Properties we can add
           new new properties and methods to object constructors.
 --------------------
-** We cannot add a new property to an object constructor.
+** We cannot add a new property to an object constructor from outside.
+   like: Person.citizenShip = "Indian";
 ** To add a new property to a constructor, We must add it to 
    the constructor function.
 
 ** JavaScript 'Prototype' allows you to add new properties 
-    to object constructors
+   to object constructors
    
 1. Adding Properties usgin Prototype:
    Example:
@@ -3423,8 +3529,500 @@ Note: Map mainly use in High level projects.
     }
    ------------
 
+
 -----------------------------------
-39. DOM
+40. JavaScript Function
+ i.   Definitions
+ ii.  Function Invocation
+ iii. call()
+ iv.  apply()
+ v.   JavaScript Closures
+-----------------------------------
+i.   Definitions	
+--------------------
+I. Function Declarations
+--------------------
+This Syntax is called Function Declarations:
+------------
+function functionName(parameters) {
+  // code to be executed
+}		    
+------------
+Example:
+------------
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+------------
+. Declared functions are not executed immediately. 
+. Since a function declaration is not an executable, 
+  so Semicolons are not used.
+
+------------
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+myFunction();
+------------
+. We use Semicolons after Semicolons myFunction() because
+  it executable.
+
+--------------------
+II. Function Expressions
+--------------------
+. When a function stored in a variable then it it called Function Expression.
+. Functions stored in variables are always invoked (called) using the variable name.
+. This type of function ends with a semicolon because it is a part of an executable statement.
+------------
+Example:
+------------
+const x = function() {
+      console.log('This is Function Declarations');
+    };
+x();
+
+------------
+Note:
+. Function Expression is actually an Anonymous function 
+  (a function without a name)
+
+. Use const for Function Expression.
+
+--------------------
+III. Function Hoisting
+--------------------
+. JavaScript Host Function Declarations.
+. JavaScript not Host Function Expressions.
+. JavaScript not Host Arrow Function.
+
+Example 1: 
+JavaScript Host Function Declarations
+------------
+myFunction();
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+------------
+
+Example 2: 
+JavaScript not Host Function Expressions.
+GIVE ERROR
+------------
+x();
+let x = function() {
+      console.log('This is Function Declarations');
+    };
+------------
+
+--------------------
+IV. Self-Invoking Functions / IIFE
+--------------------
+. This function called Automatically.
+------------
+(function() {
+  console.log('Hello World');
+})();
+
+------------
+Note:
+. It is also a Anonymous function 
+
+--------------------
+V. Functions Can Be Used as Values
+--------------------
+Example 1: 
+------------
+function myFunction() {
+   return 'This is Function Declarations';
+}
+let x = myFunction();
+console.log(x)
+
+------------
+Note:
+. we must have to use return statement in our function.
+. If we use console.log() then it just print the function,
+  and we get undefined value in our variable.
+
+
+------------
+VI. Function Arguments:
+. usgin 'arguments' we can see the parameter passing throught the function.
+. 'arguments' also a array.
+------------
+  function name(firstName,lastName){
+    console.log(arguments);
+    console.log(arguments[0]);
+    console.log(arguments.length);
+    console.log('My name is'+ ' ' + firstName + ' ' + lastName);
+  }
+  name('Santanu', 'Chowdhury');
+
+
+--------------------
+ ii.  Function Invocation:
+
+   . The code inside a function is not executed when the function is defined.
+   . The code inside a function is executed when the function is invoked.
+     and it is known as "call a function" OR "invoke a function".
+   . But actually to execute a function is defined as "Invocation"
+--------------------
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+myFunction() // this is called Invocation
+
+const me = {
+ firstName:   'Santanu',
+ lastName:    'Chowdhury',
+ office:function(){
+   console.log( 'I am working in Webmaddy.com');
+ }
+};
+me.office(); // this is called Invocation
+
+
+--------------------
+ iii. call()	
+--------------------
+Then what is call?
+call is Object method 
+Using call() method we call a object method and pass the value
+form the another Object.
+--------------------
+Example 1:
+------------
+<script>
+const person1 = {
+     fullName: function() {
+     return this.firstName + " " + this.lastName;
+   }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+const person3 = {
+  firstName:"Puja",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2));
+</script>
+
+------------
+Example 2:
+Passing Extra parameters
+------------
+const person1 = {
+ fullName: function(skill, citizen) {
+ return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+   }
+}
+const person2 = {
+ firstName:"Santanu",
+ lastName: "Chowdhury",
+}
+const person3 = {
+  firstName:"Puja",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
+
+------------
+Note:
+. We can pass many parameters as we want but first Parameter must be an Object.
+
+--------------------
+iv.  apply()
+--------------------
+. apply() is the Updated version of call()
+. In apply() we pass additional parameters using an Array
+--------------------
+
+const person1 = {
+  fullName: function(skill, citizen) {
+    return this.firstName + " " + this.lastName + "," +skill + "," +citizen;
+  }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.apply(person2, ['Web Designer', 'Indian']));
+
+--------------------
+Find the lagest value form an Array
+------------
+console.log(Math.max.apply(null,[1,2,3]));
+------------
+Note: 
+  Math.max() do not applicabel for Array but using apply() method
+  we can use Array for Math.max to find large number.
+
+ 
+--------------------
+v.   JavaScript Closures	
+--------------------
+. let we have a self-invoking Nested Function
+. Using Closures we can invoke a child function from outside the Parent function and since
+  the function is self-invoked so parent functon code also execute only once.
+
+------------
+Example 1:
+------------
+let add = (function(){
+      let counter = 0;
+      return function(){
+        counter += 1;
+        console.log(counter);
+        return counter;
+      }
+   })();
+   
+add();
+add();
+add();
+add();
+
+------------
+Example 2:
+------------
+<button onclick="mycount()">Click</button>
+<p id="demo">0</p>
+  <script>
+   let add = (function(){
+      let counter = 0;
+      return function(){
+        counter += 1;
+        console.log(counter);
+        return counter;
+      }
+   })();
+   function mycount(){
+      document.getElementById('demo').innerHTML = add();
+   }
+  </script>
+
+-----------------------------------
+41. JavaScript Class
+  Introduction
+  i.   Class Method
+  ii.  Class Method with Parameter
+  iii. Class Inheritance
+  iv.  Getters and Setters
+  v.   Static Methods
+  vi   Class Hoisting
+  vii. Example
+
+Class Hoisting
+-----------------------------------
+Introduction
+--------------------
+. Vanila JavaScript is not Object-oriented programming (OOP) language, so 
+  Vanila JavaScript don't have Class concept.
+. ECMAScript 2015, introduct Class to introduct OOP.
+. Syntax:
+  class ClassName {
+    constructor() {
+        ... 
+     }
+  }
+
+--------------------
+Basic Example
+--------------------
+class Car {
+  constructor(name, year) {
+     this.name = name;
+     this.year = year;
+  }
+}
+
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+console.log(car1.name);
+console.log(car2.name);
+
+--------------------
+Output:
+TATA
+Audi
+
+--------------------
+i.   Class Method
+--------------------
+Example:
+------------
+
+//Class declear
+class Car {
+  constructor(name, year){
+    this.name = name;
+    this.year = year;
+  }
+  intro(){
+    console.log(`${this.name} is bought in the year ${this.year}`)
+  }
+}
+
+//Class assign
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+//call
+car1.intro();
+car2.intro();
+
+--------------------
+output:
+TATA is bought in the year 2023
+Audi is bought in the year 2022
+
+
+--------------------
+ii.  Class Method with Parameter
+------------
+Example:
+------------
+
+//Class declear
+class Car {
+  constructor(name, year){
+    this.name = name;
+    this.year = year;
+  }
+  intro(status='Good'){
+    console.log(`${this.name} is bought in the year ${this.year} with ${status} condition.`)
+  }
+}
+
+//Class assign
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+//call
+car1.intro('Best');
+car2.intro('well');
+
+--------------------
+iii. Class Inheritance
+--------------------
+Using Inheritance we can call one class method and properties to 
+another class, so our code become reusable.
+------------
+Example:
+------------
+//class Car
+class Car {
+  constructor(name, brand){
+    this.name = name;
+    this.brand = brand;
+  }
+  intro(){
+    return `${this.name} car with brand ${this.brand}`;
+  }
+}
+
+// class Insurance
+class Insurance extends Car{
+  constructor(name, brand, year){
+     super(name, brand);
+     this.year = year;
+  }
+  details(){
+    return  this.intro() + '\n' + `This car is ${this.year} year old need a Insurance`;
+  }
+}
+
+const ins1  = new Insurance("TATA", "Nisan", 5);  
+console.log(ins1.details());
+
+
+--------------------
+iv.  Getters and Setters
+--------------------
+. Classes also allow us you to use getters and setters.
+. they return computed properties.
+  ** Same theory like Object Setter and getters
+------------
+Example:
+------------
+class Car {
+  constructor(name, brand){
+    this.name = name;
+    this.brand = brand;
+  }
+  get intro(){
+    return this.name + ' ' + this.brand
+  }
+  // intro(){
+  //   return this.name + ' ' + this.brand
+  // }
+}
+
+const car1 = new Car('Volvo', 'Bus');
+console.dir(car1)
+
+--------------------
+v.   Static Methods
+--------------------
+. Using static mode we can add static valu which can be assesable
+  with out generating object.
+. After generating new object we can also access it.
+------------
+Example:
+------------
+class Car {
+  constructor(name, brand){
+    this.name = name;
+    this.brand = brand;
+  }
+  static origin() {
+    return "It is a Indian Car.";
+  }
+}
+
+const car1 = new Car('Volvo', 'Bus');
+    
+console.log(Car.origin())      // call with Car function
+console.log(Car.origin(car1))  // call with car1 Object
+ 
+--------------------
+vi   Class Hoisting
+--------------------
+. class declarations are not hoisted.
+. We must declare a class before you can use it:
+-----------------------------------
+
+
+--------------------
+vii. Example
+--------------------
+class Person {
+  constructor(name,id,age,blood){
+    this.name = name;
+    this.id   = id;
+    this.age  = age;
+    this.blood = blood;
+  }
+}
+const santanu = new Person('Santanu Chowdhury', 101, 32, 'B+');
+const puja    = new Person('Puja Chowdhury', 102, 30, 'O+');
+const mayank    = new Person('Mayank Chowdhury', 103, 1, ' ');
+
+const all = [santanu, puja, mayank];
+ all.map((name)=>{ for(let x in name){
+   console.log(`${x} :${name[x]}`);
+} })
+
+// for(let x in santanu){
+//    console.log(`${x} :${santanu[x]}`);
+// }
+ 
+
+-----------------------------------
+42. DOM
     i. DOM Methods and Properties:
     ii. DOM From
     iii. DOM Animation
@@ -4083,14 +4681,31 @@ Difference Between an HTMLCollection and a NodeList:
 Application
 -----------------------------------
 1. How to remove duplicates from an array?
+2. In JavaScript all functions are Method?
+3. Find the largest value from an Array?
 --------------
 1. How to remove duplicates from an array?
 
-const x = ['HTML','CSS','JavaScript', 'HTML', 'Bootstrap']	    
-const y =  Array.from(new Set (x));
-console.log(y);
+const x = ['HTML','CSS','JavaScript', 'HTML', 'Bootstrap']  
+console.log(new Set([...x]));
 //output: ['HTML', 'CSS', 'JavaScript', 'Bootstrap']
 
+--------------
+2. In JavaScript all functions are Method?
+--------------
+A function belogn to any object called Method. 
+since a simple function also belog to the Window Object, 
+then the simple function also a Method.
+So, Yes all function in JavaScript are Methods.
 
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+myFunction();
+window.myFunction();
 
+--------------
+3. Find the largest value from an Array?
+--------------
+console.log(Math.max.apply(null,[1,2,3]));
 
