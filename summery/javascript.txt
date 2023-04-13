@@ -3813,8 +3813,8 @@ Example 2:
   v.   Static Methods
   vi   Class Hoisting
   vii. Example
+  
 
-Class Hoisting
 -----------------------------------
 Introduction
 --------------------
