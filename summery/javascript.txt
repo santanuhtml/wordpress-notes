@@ -40,7 +40,8 @@
 39. JavaScript Object Details
 40. JavaScript Function
 41. JavaScript Class
-42. DOM
+42. JS Async
+43. DOM
 
 JavScript Import and Export
 
@@ -4020,6 +4021,8 @@ const all = [santanu, puja, mayank];
 //    console.log(`${x} :${santanu[x]}`);
 // }
  
+
+
 -----------------------------------
 42. JS Async
     i. Asynchronous JavaScript
@@ -4339,8 +4342,10 @@ async function course(){
   //      console.log(err);
   //   })
 
+
+
 -----------------------------------
-42. DOM
+43. DOM
     i. DOM Methods and Properties:
     ii. DOM From
     iii. DOM Animation
