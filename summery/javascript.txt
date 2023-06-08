@@ -4020,6 +4020,324 @@ const all = [santanu, puja, mayank];
 //    console.log(`${x} :${santanu[x]}`);
 // }
  
+-----------------------------------
+42. JS Async
+    i. Asynchronous JavaScript
+    ii.  Callbacks
+    iii. Promises
+    iv.  Async/Await 
+--------------------
+i. Asynchronous JavaScript
+--------------------
+. JavaScript is Synchronous, means it read code step by setp.
+. If any { part of code } we need to execute leter then we have to 
+  use JavaScript Asynchronous behaviour using setTimeout() function and
+  use this { part of code } as a callback function.
+
+------------
+Example 1:
+Synchronous
+------------
+console.log('Print line 1.');
+console.log('Print line 2.');
+console.log('Print line 3.');
+
+------------
+Example 2:
+JavaScript Asynchronous behaviour using setTimeout()
+------------
+console.log('Print line 1.');
+setTimeout(function(){
+  console.log('Print line 2.');
+},0)
+console.log('Print line 3.');
+
+------------
+Example 3:
+JavaScript Asynchronous behaviour using setInterval()
+------------
+console.log('Print line 1.');
+setInterval(function(){
+    console.log('Print line 2.');
+},1000)
+console.log('Print line 3.');
+
+--------------------
+ii.  Callbacks
+--------------------
+. When we use a function as a parameter to another function called
+  Callback function.
+. below example display() is a callback function because it use as
+  a parameter in calculator() function.
+------------
+Example 1:
+------------
+function display(some) {
+  console.log(some);
+}
+function calculator(num1, num2, callback) {
+  let sum = num1 + num2;
+  if(callback){
+    callback(sum);
+  }
+}
+calculator(5, 5, display);
+
+------------
+Why Callback?
+. In JavaScript we will crate each functon for each task, 
+  we don't crate a function with multiple task, so every function 
+  should be independent. It is the standard way to work.
+. Using callback features we connect, two independent function for a multi task. 
+  Example: display() and calculator() two different independent functon, 
+  but we invockd claculator() functon with 'display' function as a
+  parameter and did multiple task.
+
+------------
+Example 1:
+note: Here each functions are Independent. 
+      Also we can call every function together.
+------------
+const payment = true;
+    const pass = 80;
+
+    function enroll(callback){
+      console.log('Payment Process for Enroll');
+      if(callback){
+          setTimeout(function(){
+          if(payment){
+            console.log('Your Payment Done')
+            callback();
+          }
+          else{
+            console.log('Payment Failed!')
+          }
+        },2000)
+      }
+    }
+
+    function course(callback){
+      if(callback){
+        setTimeout(function(){
+          if(pass>= 80){
+            console.log('Congratulations! You Passed.')
+            callback();
+          }
+          else{
+            console.log('You Failed.')
+          }
+        },2000)
+      }
+    }
+
+    function cirtificate(){
+      setTimeout(function(){
+        console.log('Your Certificate is generated, Kindly download it.')
+      },2000)
+    }
+  
+    //Multiple task 
+    enroll(function(){
+      course(cirtificate);
+    });
+    
+    //Independent functon 
+    //enroll();
+    // course();
+    // cirtificate();
+
+------------
+Example 2:
+------------
+
+const login = true;
+const productSelected = true;
+const paymentGateya = true;
+
+  function loginProcess(callback){
+    console.log('Login Process...');
+    setTimeout(function() {
+     if(login){
+      callback();
+     }
+     else{
+      console.log('Login Process Failed, try again.');
+     }
+    },2000)
+  }
+
+  function selectProduct(callback) {
+    console.log('Select your Products.');
+      setTimeout(function(){
+        if(productSelected){
+          callback();
+        }
+      },2000)
+  }
+  
+  function payment(callback){
+    console.log('Your Payment on Process...');
+    setTimeout(function(){
+      if(paymentGateya){
+        callback();
+      }
+      else{
+        console.log('Your Payment Failed');
+      }
+    },2000)
+  }
+  
+  function orderMessage(){
+    console.log('Your Payment done, Product will delever as soon as possibal.');
+  }
+
+  loginProcess(function(){
+    selectProduct(function(){
+      payment(orderMessage);
+    });
+  });
+
+    
+
+--------------------
+iii. Promises
+--------------------
+In above Callback function we see that we call all function together
+with nested way. It may be complicated for large task.
+To avoide this we use Promises.
+
+-------------
+SYNTAX:
+-------------
+
+const status = true;
+
+console.log('Print line 1')
+
+//Promise Defination
+const promise = new Promise(function(resolve, reject){
+  setTimeout(function(){
+    if(status){
+      resolve('Print line 2');
+    }
+    else{
+      reject();
+    }
+ },2000)
+})
+
+//Promise Call
+promise
+  .then(function(value){
+    console.log(value);
+  })
+  .catch(function(err){
+    console.log(err);
+  })
+
+console.log('Print line 3')
+
+-------------
+Note:
+. * then() and catch() expect a function body. so we provide a function
+  within then() and catch() and use value and err as a parameter.
+
+. Here value holds 'resolve' data and err holds 'reject' data.
+
+------------
+Example:
+------------
+
+  const payment = true;
+  const pass = 80;
+
+  function enroll(){
+    console.log('Course Enrollment in Process.');
+    const promise = new Promise(function(resolve, reject){
+       setTimeout(function(){
+         if(payment){
+           resolve()
+         }
+         else{
+          reject('Payment Failed! Try again.');
+         }
+       },2000);
+    });
+    return promise;
+  }
+
+  function learning(){
+    console.log('Course in Process.');
+    const promise = new Promise(function(resolve, reject){
+       setTimeout(function(){
+         if(pass>=80){
+           resolve()
+         }
+         else{
+          reject('You Failed the exam');
+         }
+       },2000);
+    });
+    return promise;
+  }
+
+  function cirtificate(){
+    console.log('You Passed the exam');
+    const promise = new Promise(function(resolve){
+       setTimeout(function(){
+        resolve('Download Your Cirtificate.'); // value
+       },2000);
+    });
+    return promise;
+  }
+
+  enroll()
+    .then(learning)
+    .then(cirtificate)
+    .then(function(value){ //since we need value
+      console.log(value);
+    })
+    .catch(function(err){
+       console.log(err);
+    })
+
+
+--------------------
+iv.  Async/Await 
+--------------------
+. If we add 'async' before a function, then the function 
+  becomes Asynchronous and the function return a promise.
+. since the function becomes Asynchronous, so to maintain 
+  the order we use 'Await' within the function.
+
+------------
+Example:
+** Privious code with async functon.
+------------
+
+async function course(){
+    try{
+      await enroll();
+      await learning();
+      //way to get value
+      const message = await cirtificate();
+      console.log(message);
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  course();
+
+  // enroll()
+  //   .then(learning)
+  //   .then(cirtificate)
+  //   .then(function(value){ //since we need value
+  //     console.log(value);
+  //   })
+  //   .catch(function(err){
+  //      console.log(err);
+  //   })
 
 -----------------------------------
 42. DOM
