@@ -5035,7 +5035,7 @@ console.log(Math.max.apply(null,[1,2,3]));
 
 
 -----------------------------------
-44. Web APIWeb API
+44. Web API
 1. Introduction
 2. Forms API
 3. Web History API
