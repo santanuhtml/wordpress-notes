@@ -5134,8 +5134,8 @@ function myFunction() {
 -----------------------------------
 5. Web Worker
 -----------------------------------
-   A web worker is a JavaScript that runs in the background 
-   without affecting the performance of the page.
+   A web worker is a JavaScript code that runs in background, so that
+   it not affecting the performance of the page.
 
 Example:
 index.html
