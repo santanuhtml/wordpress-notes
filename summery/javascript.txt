@@ -5243,7 +5243,7 @@ index.html
 
 ------------
 
-promise.js
+script.js
 ------------
 const display = document.getElementById('demo');
 
@@ -5267,7 +5267,7 @@ index.html
 <script src="./async.js"></script>
 ------------
 
-async.js
+script.js
 ------------
 const display = document.getElementById('demo');
 
@@ -5279,6 +5279,17 @@ async function getData(){
     display.innerText= data;
 }
 ------------
+NOTE: We can also get Object value directly
+------------
+script.js
+------------
+// Fetch Data Using ASYNC
+async function getData(){
+    const res = await fetch("https://dummyjson.com/users");
+    const data = await res.json();
+    console.log(data)
+}
+
 
 
 -----------------------------------
