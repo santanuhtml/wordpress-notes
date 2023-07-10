@@ -43,6 +43,7 @@
 42. JS Async
 43. DOM
 44. Web API
+45. AJAX
 
 JavScript Import and Export
 
@@ -5278,3 +5279,335 @@ async function getData(){
     display.innerText= data;
 }
 ------------
+
+
+-----------------------------------
+45. AJAX
+1. Introduction
+2. XMLHttpRequest Object Properties and Methods
+
+-----------------------------------
+1. Introduction
+-----------------------------------
+. AJAX = Asynchronous JavaScript And XML.
+
+. AJAX is not a programming language, it is
+  use to request data from a web server.
+  
+. The keystone of AJAX is the XMLHttpRequest object.
+  > Create an XMLHttpRequest object
+  > Define a callback function
+  > Open the XMLHttpRequest object
+  > Send a Request to a server  
+  
+  Example 1: GET Data
+  ----------------------
+  index.html
+  ----------------------
+  <div id="demo">
+    <h1>AJAX is a developer's dream</h1>
+    <button onclick="loadData()">Load Data</button>
+  </div>
+  <script src="script.js"></script>
+  ----------------------
+  
+  script.js
+  ----------------------
+  function loadData(){
+  
+    //create a new request
+    const xhr = new XMLHttpRequest();
+    
+    //What to do when responsive arrive
+    xhr.onload = function(){
+        const container = document.getElementById('demo');
+        container.innerHTML = xhr.responseText;
+      //container.innerHTML = this.responseText;
+    }
+    
+    //Prepare request - methods: GET, POST, PUT, PATCH, DELETE
+    xhr.open("GET", "https://dummyjson.com/products/1", true);	//true for Asynchronous
+    
+    //Send Request
+    xhr.send();
+    
+  }
+  ----------------------
+  
+  Note:
+  1. To avoid cached result
+     xhttp.open("GET", "demo_get.asp?t=" + Math.random());
+     Example:
+     'https:dummyjson.com/products?t='+ Math.random()
+     
+  2.  xhr.open("GET", url, true);   
+      true for Asynchronous
+      false for Synchronous
+  
+      
+  ----------------------
+  Example 2: GET Data
+  ----------------------      
+  index.html
+  ----------------------
+  <button onclick="getData()">Get Data</button>
+  <script src="script.js"></script>   
+  
+  ----------------------      
+  script.js
+  ----------------------
+  function getData(){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        console.log(typeof xhr.responseText);      //Data comes in text format
+        console.log(JSON.parse(xhr.responseText)); //Making text into Object
+        console.log(JSON.parse(xhr.responseText).title); //Now get data form Object
+        console.log(typeof JSON.parse(xhr.responseText)); //Object
+    }
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
+    xhr.send();
+  }
+  
+  ----------------------
+  Note:
+  ***
+  Here we get data in Text format, we can get data directly JSON
+  Format using - 
+  xhr.responseType = 'json';
+  And we get value usgin -
+  xhr.response
+  ----------------------
+  script.js
+  ----------------------
+  function getData(){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        console.log(xhr.response);      //Get Data  in JSON format
+    }
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
+    xhr.responseType = 'json';  // Applying to get data in JSON format
+    xhr.send();
+  }
+      
+  ----------------------
+  Example 3: POST Data
+  ----------------------    
+  index.html
+  ----------------------
+  <button onclick="sendData()">Send Data/Post Data</button>
+  <script src="script.js"></script>
+  
+  ----------------------
+  script.js
+  ----------------------
+  function sendData(){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        console.log(xhr.response);      
+    }
+    xhr.open('POST', 'https://jsonplaceholder.typicode.com/posts', JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }));
+    xhr.responseType = 'json';  
+    xhr.send();
+  }
+  
+  ----------------------
+  Example 4: Get data and Post Data
+  ----------------------
+  index.html
+  ----------------------
+  <button onclick="getData()">Get Data</button>
+  <button onclick="sendData()">Send Data/Post Data</button>
+  <script src="script.js"></script>
+  
+  ----------------------
+  script.js
+  ----------------------
+  function getData(){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        console.log(xhr.response);     
+    }
+    xhr.onerror = function(){
+        console.log("There was an error.");     
+    }
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
+    xhr.responseType = 'json';  
+    xhr.send();
+  }
+
+  function sendData(){
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        console.log(xhr.response);      
+    }
+    xhr.onerror = function(){
+        console.log("There was an error.");     
+    }
+    xhr.open('POST', 'https://jsonplaceholder.typicode.com/posts', JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }));
+    xhr.responseType = 'json';  
+    xhr.send();
+  }
+  
+  ----------------------
+  Example 4: Same example with reusable function using Promise
+  ----------------------
+  index.html
+  ----------------------
+  <button onclick="getData()">Get Data</button>
+  <button onclick="sendData()">Send Data/Post Data</button>
+  <script src="script.js"></script>
+  
+  ----------------------
+  script.js
+  ----------------------
+  function sendRequest(method, url, data){
+    const promise = new Promise(function(resolve, reject){
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            resolve(xhr.response);
+        }
+        xhr.onerror = function(){
+            console.log("There was an error.");     
+        }
+        xhr.open(method, url);
+        xhr.responseType = 'json';  
+        xhr.send(data);
+    })
+    return promise;
+  }
+  function getData(){
+    sendRequest("GET", "https://jsonplaceholder.typicode.com/todos/1")
+    .then((responseData)=>{
+        console.log(responseData);
+    })
+  }
+ function sendData(){
+    sendRequest("POST", "https://jsonplaceholder.typicode.com/posts", JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }))
+    .then((responseData)=>{
+        console.log(responseData);
+    })
+  }
+  
+  
+  ----------------------
+  script.js - After Error Handel
+  ----------------------
+  function sendRequest(method, url, data){
+    const promise = new Promise(function(resolve, reject){
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            //handel Application Error
+            if(xhr.status >= 400){
+                reject(`There was an application error, and the application status is ${xhr.status}`);
+            }
+            resolve(xhr.response);
+        }
+        xhr.onerror = function(){
+            reject("There was an error.")
+        }
+        xhr.open(method, url);
+        xhr.responseType = 'json';  
+        xhr.send(data);
+    })
+    return promise;
+  }
+  
+  function getData(){
+    sendRequest("GET", "https://jsonplaceholder.typicode.com/todos/1")
+    .then((responseData)=>{
+        console.log(responseData);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  }
+  
+  function sendData(){
+    sendRequest(
+        "POST", 
+        "https://jsonplaceholder.typicode.com/posts", 
+        JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }))
+    .then((responseData)=>{
+        console.log(responseData);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  }
+  
+  
+  ----------------------
+  Example 5: Two XML request dynamically
+  ----------------------
+  index.html
+  ----------------------
+  <div id="demo">
+    <h1>Load Data 01</h1>
+  </div>
+  <div id="demo2">
+    <h1>Load Data 02</h1>
+  </div>
+  <button onclick="loadData('https:dummyjson.com/products/1', myFunction1)">Load Data 01</button>
+  <button onclick="loadData('https:dummyjson.com/products', myFunction2)">Load Data 02</button>
+  <script src="script.js"></script>
+  
+  ----------------------
+  
+  script.js
+  ----------------------
+  function loadData(url,cFunction){
+    
+    const xhr = new XMLHttpRequest();
+   
+    xhr.onload = function(){
+        cFunction(this)
+    }
+    //Prepare request - methods: GET, POST, PUT, PATCH, DELETE
+    xhr.open("GET", url);
+    //Send Request
+    xhr.send();
+  }
+
+  function myFunction1(xhr){
+        const container = document.getElementById('demo');
+        container.innerHTML = xhr.responseText;
+        //container.innerHTML = this.responseText;
+  }
+
+  function myFunction2(xhr){
+    const container = document.getElementById('demo2');
+    container.innerHTML = xhr.responseText;
+    //container.innerHTML = this.responseText;
+  }
+  
+
+-----------------------------------
+2. Properties and Methods
+-----------------------------------
+new XMLHttpRequest()	: Creates a new XMLHttpRequest object
+abort() 		: Cancels the current request
+status
+statusText	
+
+** For more follow W3 School
+
+
+
+
+
