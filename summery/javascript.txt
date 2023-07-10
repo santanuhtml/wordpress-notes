@@ -5274,9 +5274,9 @@ const display = document.getElementById('demo');
 // Fetch Data Using ASYNC
 async function getData(){
     const res = await fetch("https://dummyjson.com/users");
-    const data = await res.text();
-
-    display.innerText= data;
+    const data = await res.text();  //.text() to get text format
+    display.innerText= data;        //Text format
+    console.log(JSON.parse(data))   //Object Format
 }
 ------------
 NOTE: We can also get Object value directly
@@ -5286,7 +5286,7 @@ script.js
 // Fetch Data Using ASYNC
 async function getData(){
     const res = await fetch("https://dummyjson.com/users");
-    const data = await res.json();
+    const data = await res.json(); //.josn() to get Object format
     console.log(data)
 }
 
