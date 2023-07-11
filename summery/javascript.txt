@@ -5633,7 +5633,7 @@ i. Introduction
 -----------------------------------
 . JSON stands for JavaScript Object Notation.
 
-. JSON is written in format so it is a lightweight
+. JSON is written in text format so it is a lightweight
 
 . It is use for storing and transporting data.
 
@@ -5810,13 +5810,14 @@ v.   JSON Object Literals
 > Inside the JSON string there is a JSON object literal:
   {"name":"Santanu", "age":32, "skill":"Web Desing"}
   
+> JSON object literal is a Text format, not a JavaScript Object.
 
 Note: **
 . It is a common mistake to call a "JSON object literal" "a JSON object".
   JSON is a String format, so JSON cannot be an object!
   When JSON string is converted to a JavaScript object using JSON.parse()
 
-. same thing for "JSON Array Literals"
+. The same thing for "JSON Array Literals"
 
 
 
