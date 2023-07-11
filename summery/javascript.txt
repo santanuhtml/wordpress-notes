@@ -44,6 +44,7 @@
 43. DOM
 44. Web API
 45. AJAX
+46. JSON
 
 JavScript Import and Export
 
@@ -5617,6 +5618,209 @@ status
 statusText	
 
 ** For more follow W3 School
+
+
+-----------------------------------
+46. JSON
+    i.   Introduction
+    ii.  JSON vs XML
+    iii. JSON.parse()
+    iv.  JSON.stringify()
+    v.   JSON Object Literals
+  
+-----------------------------------
+i. Introduction
+-----------------------------------
+. JSON stands for JavaScript Object Notation.
+
+. JSON is written in format so it is a lightweight
+
+. It is use for storing and transporting data.
+
+. JSON always comes in text format on browser.
+
+. JSON is language independent because it is a text format
+
+. Example of valid JSON string:
+  const jsonString = '{"name":"John", "age":30, "city":"New York"}';
+
+. JSON strings into JavaScript objects:
+  JSON.parse()
+  
+. JavaScript objects to JSON strings:
+  JSON.stringify()
+  
+. JSON can contain -
+  string, number, object, array, boolean, null
+  Example: Json syntax:
+  --------------------
+  {
+    "name": "Santanu Chowdhury",
+    "age":  32,
+    "job": {
+      "desingnation": "Web Desinger"
+    },
+    "skills": ["HTML5", "CSS3", "Bootstrap"],
+    "alive":true,
+    "illness":null
+  }
+  --------------------
+  
+ . JSON do not contain
+   function, date, undefined
+
+  
+  
+-----------------------------------
+ii.  JSON vs XML
+-----------------------------------
+. Both used to receive data from a web server.
+
+. JSON example:
+{"employees":[
+  { "firstName":"John", "lastName":"Doe" },
+  { "firstName":"Anna", "lastName":"Smith" },
+  { "firstName":"Peter", "lastName":"Jones" }
+]}
+
+. XML example:
+<employees>
+  <employee>
+    <firstName>John</firstName> <lastName>Doe</lastName>
+  </employee>
+  <employee>
+    <firstName>Anna</firstName> <lastName>Smith</lastName>
+  </employee>
+  <employee>
+    <firstName>Peter</firstName> <lastName>Jones</lastName>
+  </employee>
+</employees>
+
+. so, JSON is faster and easier than XML
+
+
+-----------------------------------
+iii. JSON.parse()
+-----------------------------------
+. Using JSON.parse() JSON text data becomes a JavaScript object.
+
+Example 1:
+--------------------
+// Valis JSON String
+const jsonString = '{"name":"Santanu", "age":30, "city":"Kolkata"}';
+console.log(jsonString);
+console.log(jsonString.name);
+
+// Convert JSON String into JSON Object
+const myObject = JSON.parse(jsonString);
+console.log(myObject);
+console.log(myObject.name)
+
+--------------------
+ Exceptions
+--------------------
+I. Parsing Dates
+Example 1:
+--------------------
+// Valis JSON String
+const jsonString = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+// Convert JSON String into JSON Object
+const myObject = JSON.parse(jsonString);
+console.log(myObject.birth);
+console.log(new Date(myObject.birth));
+
+--------------------
+II. Reviver parameter **
+Example 1:
+--------------------
+// Valis JSON String
+const jsonString = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+// Convert JSON String into JSON Object
+const myObject = JSON.parse(jsonString, function(key, value){
+    console.log(`${key} - ${value}`);
+    console.log('------------------')
+});
+
+--------------------
+Example 2:
+--------------------
+// Valis JSON String
+const jsonString = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+// Convert JSON String into JSON Object
+const myObject = JSON.parse(jsonString, function(key, value){
+    if(key === "birth"){
+        console.log(value);
+        console.log(new Date(value));
+    }
+});
+
+--------------------
+Example 3:
+Here using Reviver we can transform Data within JASON.parse()
+--------------------
+// Valis JSON String
+const jsonString = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+// Convert JSON String into JSON Object
+const myObject = JSON.parse(jsonString, function(key, value){
+    if(key === "birth"){
+        return new Date(value);
+    }
+    return value;
+});
+
+console.log(myObject);
+
+
+-----------------------------------
+iv.  JSON.stringify()
+-----------------------------------
+. Convert a JavaScript object into a string 
+
+Example 1:
+--------------------
+const me = {
+    firstName: "Santanu",
+    lastName: "Chowdhury",
+    age: 32
+}
+console.log(me);
+
+// Convert Object into JSON String
+const jsonString = JSON.stringify(me);
+console.log(jsonString);
+
+--------------------
+Example 2:
+--------------------
+// Valid JavaScript Array
+const me = ["Santanu", "Chowdhury", 32]
+console.log(me);
+
+// Convert Array into JSON String
+const jsonString = JSON.stringify(me);
+console.log(jsonString);
+
+
+-----------------------------------
+v.   JSON Object Literals
+-----------------------------------
+> This is a JSON string:
+  '{"name":"Santanu", "age":32, "skill":"Web Desing"}'
+
+> Inside the JSON string there is a JSON object literal:
+  {"name":"Santanu", "age":32, "skill":"Web Desing"}
+  
+
+Note: **
+. It is a common mistake to call a "JSON object literal" "a JSON object".
+  JSON is a String format, so JSON cannot be an object!
+  When JSON string is converted to a JavaScript object using JSON.parse()
+
+. same thing for "JSON Array Literals"
+
+
+
+
 
 
 
