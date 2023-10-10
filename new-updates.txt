@@ -21,6 +21,7 @@ disable form first dropdown option
 Post-Processing of the Image Failed Likely Because the Server is Busy…
 Allow Editor Role To See Contact Form 7 Database
 Increase XAMPP Database upload size
+Advance Search Option
 					    
 ********************************
 DATE TIME
@@ -686,4 +687,54 @@ Apache - - - - - [Config] (On click) -> php.ini -> post_max_size=40M
 					   upload_max_filesize=40M
 
 Save and restart Xampp
+
+
+					    
+********************************
+Advance Search Option
+********************************
+//Add below code on the function.php page
+//source: https://curious-human-b.medium.com/how-to-include-advanced-custom-fields-data-into-wordpress-search-77247f0aa23e
+// Only Post search
+function searchfilter($query) {
+  if ($query->is_search && !is_admin() ) {
+    $query->set('post_type',array('post'));
+  }
+  return $query;
+}
+add_filter('pre_get_posts','searchfilter');
+
+// Join posts and postmeta tables 
+function customfields_search_join( $join ) {     
+  global $wpdb;      
+  if ( is_search() ) {             
+    $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';     
+  }      
+  return $join; 
+} 
+add_filter('posts_join', 'customfields_search_join' );
+
+// Modify the query
+function customfields_search_where( $where) {
+  global $pagenow, $wpdb;
+  if( is_search() ) {
+  $where = preg_replace(
+"/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/","(".$wpdb->posts.".post_title LIKE $1) OR 
+(".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+  }
+  return $where;
+}
+add_filter('posts_where', 'customfields_search_where' );
+
+//Prevent duplicates
+function customfields_search_distinct( $where ) {     
+  global $wpdb;
+  if ( is_search() ) {
+    return "DISTINCT";
+  }
+  return $where;
+} 
+add_filter( 'posts_distinct', 'customfields_search_distinct' );
+
+
 
