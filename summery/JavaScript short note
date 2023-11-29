@@ -1,0 +1,1322 @@
+JavaScript short note
+1. Introduction
+2. DOM
+3. JavaScript Output  
+4. JavaScript Variable
+5. Strict Mode
+6. JavaScript Operators
+7. JavaScript Data Types
+8. JavaScript Function
+9. JavaScript Object
+10. JavaScript Events
+11. String Function/Method
+12. Templates literals
+13. JavaScript Array
+14. Array Function/Method
+15. Array Destructuring
+16. JavaScript Array Iteration
+17. Math Object
+18. JavaScript Comparison Operators
+19. JavaScript Loop
+20. ES6 Arrow Function
+21. JavaScript Sets
+22. JavaScript Maps
+23. JavaScript Conversion
+24. Regular Expressions
+25. JavaScript Errors
+26. JavaScript Scope
+27. Global Variables
+28. this Keyword
+29. JavaScript Class
+30. JavaScript JSON
+31. JavaScript Object Details
+32. JavaScript Closures
+33. JavaScript Class
+34. DOM Details
+35. Web API	
+--------------
+1. Introduction
+--------------
+. JavaScript Official name ECMA Script.
+. JavaScript case sensitive.
+. Javascript is the synchronous.
+. Button as a link
+  <button onclick="document.location='default.asp'">HTML Tutorial</button>
+
+--------------
+2. DOM
+--------------
+. DOM stands for Document Object Model.
+
+<p id="demo">Replace This</p>
+<script>
+  document.getElementById('demo').innerHTML = "Hello World!";
+</script>
+
+--------------
+i. JavaScript can change -
+--------------
+  i.   HTML content using      .innerHTML
+  ii.  HTML css using          .style
+  iii. HTML attribute using    .src 
+  iv.  HTML form attribut      .type
+  v.   HTML form input		.value
+  vi.  HTML page URL		.URL
+  
+--------------
+ii. List of DOM methods:
+--------------  
+document.getElementById(id)	
+document.getElementsByClassName(name)
+document.getElementsByTagName(name)
+document.querySelector('.class | #id | elementName')
+document.querySelectorAll('.class | #id | elementName') 
+
+** document.getElementsByTagName() => This method returns an HTMLCollection Object
+** document.querySelectorAll()     => This method returns an NodeList object.
+  
+--------------
+Example 1
+--------------   
+<p>Text</p>
+<script>
+let p = document.querySelector('p');
+p.style.color="#f00";
+p.style.fontSize="30px";
+</script>
+  
+--------------
+Example 2
+--------------   
+<input type="text" id="demo" name="number" placeholder="Type Number" />
+<input type="submit" onclick="myFunction()">
+<div id="result"></div>
+<script>
+ function myFunction(){
+    let x = document.getElementById('demo').value;
+    x = x.toUpperCase();
+    document.getElementById('result').innerHTML = x;
+ }
+</script>  
+  
+--------------
+3. JavaScript Output  
+--------------
+i.    innerHTML
+ii.   console.log();
+iii.  alert();
+iv.   window.print();
+v.    document.write();
+
+--------------
+4. JavaScript Variable
+--------------
+I.   var
+II.  let  [Real life coding we only use let]
+III. const
+
+----
+* Assign a Variable
+----
+var x; [variable Declearing]
+x = 5; [variable assin]
+var x = 5; [variable Initialize]
+let x = 5; [variable Initialize]
+
+----
+Variable Hoting:
+----
+Hosting is a default behavior of JavaScript which move declerations to the top.
+
+--------------
+5. Strict Mode
+--------------
+. "use strict";
+. When we use Strice mode then we need to code with correct format. 
+. Variable Hoting not working on Strict Mode
+
+
+--------------
+6. JavaScript Operators
+--------------
+let fullName  = firstName + " " + lastName;
+
+
+--------------
+7. JavaScript Data Types
+--------------
+i. Undefined
+---------
+A variable without a value, has the value undefined.
+Example:
+let car;
+console.log(typeof car);
+output: undefined
+
+Note:
+** Variable can be emptied by assing 'undefined'
+Example:
+let x = [1,2,3,4];
+    x = undefined;
+    console.log(x)    
+    // undefined
+    
+---------
+ii. Empty 
+---------
+let car = "";
+console.log(typeof car);
+output: string
+
+---------
+iii. Primitive Data Value
+---------
+. It is simple Data type which do not contain properties and methods.
+. Example:
+  string
+  number
+  boolean
+  
+---------
+iv. Null
+---------
+. In JavaScript null is "nothing" or doesn't exist.
+. null is an object.  
+. * We can empty an object by assing null.
+. * Aso We can empty an object by assing undefined.
+
+------------
+*** Difference Between Undefined and Null
+------------
+. Undefined and null are equal in value but different in data type:
+  
+Equal in value:
+null == undefined          // true
+
+Different in type:
+null === undefined         // false
+
+because:
+typeof undefined           // undefined
+typeof null                // object
+
+--------------
+8. JavaScript Function:
+--------------
+Basic Example1:
+function name(firstName='Santanu',lastName){
+  console.log('My name is'+ ' ' + firstName + ' ' + lastName);
+}
+name('Santanu', 'Chowdhury');
+//output: My name is Santanu Chowdhury.
+
+Basic Example2:
+function name(firstName,...params){
+  console.log(firstName);
+  console.log(params);
+  console.log(arguments.length);
+}
+name('Santanu', 1,2,3,4,5);
+//output: 
+Santanu
+[1, 2, 3, 4, 5]
+6
+
+---------
+i. Function Arguments:
+---------
+. Using Funcion Arguments we can access function parameter within
+  the Function.
+
+Example:
+function name(firstName,lastName){
+    console.log(arguments);
+    console.log(arguments[0]);
+    console.log(arguments.length);
+    console.log('My name is'+ ' ' + firstName + ' ' + lastName);
+  }
+name('Santanu', 'Chowdhury');  
+  
+---------
+ii. Anonymous Function:
+---------
+Function without a name called anonymous function.
+
+Example:
+<script>
+  const x = function (a, b) {return a * b};
+  let z = x(4, 3);
+  console.log(z);
+</script>
+
+
+---------
+iii. Self-Invoking Functions / IIFE
+---------
+(function() {
+  console.log('Hello World');
+})();
+
+Note:
+. It is also a Anonymous function 
+
+
+--------------
+9. JavaScript Object
+--------------
+. In JavaScript every thing is Object.
+. Object create with 'const' variable
+. ***functon within a object called 'Method'
+
+---------
+i. Basic Object
+---------
+const me = {
+  firstName:   'Santanu',
+  lastName:    'Chowdhury',
+  citizenShip: 'Indian',
+  designation: 'Web Designer',
+  skills : {
+    webDesing:"HTML, CSS, JavaScript"
+  },
+  office:function(){
+   return 'I am working in Webmaddy.com';
+  },
+};
+console.log(me.firstName);
+console.log(me['firstName']);     //Another way
+console.log(me.skills.webDesing);
+console.log(me.office());
+
+Note:
+firstName called key
+'Santanu' called value
+
+
+---------
+ii. Get Object key,values,entries
+---------
+let keys = Object.keys(me);
+let values = Object.values(me);
+let entries = Object.entries(me);
+console.log(keys);
+console.log(values);
+console.log(entries);
+
+---------
+iii. Add Two Object
+---------
+const all = {
+  ...me,
+  ...work
+}
+console.log(all);
+
+---------
+iv. Object Destructuring
+---------
+const {firstName} = me;
+const {firstName:title} = me;
+const {skills:{webDesing}} = me;
+const {skills:{webDesing:all}} = me;
+
+console.log(firstName);
+console.log(title);
+console.log(webDesing);
+console.log(all);
+
+---------
+v. this
+---------
+. With in Object if we use this then it indicate the Parent object.
+
+Example:
+----
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+designation: 'Web Designer',
+summery: function(){
+  console.log('My name is' + ' ' + this.firstName + ' ' + this.lastName); 
+  },
+workSummery: function(){
+  this.summery();
+  console.log('I am a' + ' ' + this.designation);
+  }
+};
+console.log(me.workSummery());
+----
+
+---------
+vii. call()
+---------
+. call is Object method. 
+. Using this method we can call an object method and pass the value
+  form the another Object.
+---------
+Example 1:
+---------
+
+const person1 = {
+     fullName: function() {
+     return this.firstName + " " + this.lastName;
+   }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2));
+
+---------
+** Passing Extra values
+Example 2:
+---------
+const person1 = {
+ fullName: function(skill, citizen) {
+ return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+   }
+}
+const person2 = {
+ firstName:"Santanu",
+ lastName: "Chowdhury",
+}
+
+console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
+
+---------
+viii. Properties can be changed, added, and deleted, 
+---------
+const me = {
+   name : 'Santanu Chowdhury',
+   age  : 32,
+   eye  : 'Black'
+}
+   console.log(me);
+   me.skill = 'HTML5'; // Add key and value
+   me.age = 33 ;       // Edit value
+   delete me.eye;      // Delete eye
+   
+---------
+ix. Adding a Method to an Object
+---------
+const me = {
+   firstName:   'Santanu',
+   lastName:    'Chowdhury',
+};
+    
+me.office = function(){
+   return 'I am working in Webmaddy.com';
+}
+console.log(me.office());
+
+---------
+x. use Built-In Methods on Object Method
+---------
+const me = {
+    firstName :   'Santanu',
+    office : function() {
+       return ('I am working in Webmaddy.com').toUpperCase();
+      }
+    };
+console.log(me.office());   
+
+---------
+Note:
+I.  Immutable:
+    Primitive values are immutable
+    
+II. Mutable:
+    JavaScript Objects are mutable.
+
+--------------
+10. JavaScript Events
+--------------
+syntax:
+<element event="js code">
+
+Common HTML events:
+  onclick
+  onchange
+  onmouseover
+  onmouseout
+  onkeydown
+  onload
+
+---------
+Example 1:
+---------
+<h1 onclick="this.style.color='red'">Hello World!</h1>
+<h1 onclick="this.innerHTML='I love JavaScript'">Hello World!</h1>
+
+---------
+Example 2:
+---------
+<button onclick="notice()">Alert</button>
+<script>
+function notice(){
+  alert('Hello World');
+}
+</script>
+
+---------
+Example 3:
+---------
+<h1 onclick="textChange(this)">Hello World!</h1>
+<script>
+function textChange(test){
+  //console.log(test);
+  test.innerHTML = 'I Love JavaScript';
+}
+</script>
+
+---------
+Example 4:
+---------
+<Button id="buy1">Buy Now</Button>
+<Button id="buy2">Buy Now</Button>
+<script>
+let buy1 = document.querySelector('#buy1');
+buy1.onclick = function(){
+buy1.innerHTML = 'Thank You';
+window.open("https://www.w3schools.com", '_blank');
+}
+
+let buy2 = document.querySelector('#buy2');
+buy2.onclick = function(){
+buy2.innerHTML = 'Thank You';
+window.open("http://www.google.com", '_blank');
+}
+</script>
+
+---------
+** addEventListener
+---------
+. Here we don't need to add JS code under inline HTML.
+
+. syntax:
+  element.addEventListener('event', function, useCapture);
+
+. *** 'event' => 'click' in place of 'onclick'
+
+
+--------------
+11. String Function/Method
+--------------
+i.    length
+ii.   Escape Character \
+iii.  slice()
+iv.   replace()
+v.    toUpperCase()
+vi.   trim()
+vii.  split()
+viii. Array.from()
+ix.   indexOf()
+x.    search()
+xi.   includes()  //true OR false
+
+*** replace with Regular Expressions
+let x = santanu.jpg
+x = x.replace(/.jpg/igm, '.webp');
+
+
+--------------
+12. Templates literals
+--------------
+let name = 'Santanu Chowdhury';
+let work = 'Web Desinger and WordPress Developer';
+let x = `My name is ${name}.
+I am a ${work}`;
+console.log(x);
+
+
+--------------
+13. JavaScript Array
+--------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+
+-------
+i. Access Array
+-------
+let x = me[0];
+console.log(x);
+
+-------
+ii. Change Array Element
+-------
+me[2] = "Pro Indian";
+console.log(me[2]);
+
+-------
+iii. Access Full Array
+-------
+document.getElementById('demo').innerHTML=me;
+
+-------
+iv. Check Array or Object
+-------
+console.log(Array.isArray(me));
+//Output:true
+
+-------
+v. Difference of Array and Object
+-------
+. Array use number index so it can be Iterate one by one
+. Object use named index so it can not Iterate.
+
+> We will use Array, when we want number index and Iterate one by one.
+> We will use Object, when we want name index.
+
+*** Object can not Iterate, But using [Symbol.iterator]() function we can Iterate an Object.
+
+--------------
+14. Array Function/Method
+--------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+
+i.    me.length
+ii.   me[me.length-1];   // last Array 
+iii.  me.push('Coding');
+iv.   me.unshift('Mr');
+v.    me.pop();
+vi.   me.shift();
+vii.  delete me[1];
+viii. me.splice(2,0,'Coding','Yahama');	
+ix.   me.slice(0,2);
+x.    array1.concat(array2,array3); 
+xi.   const all  = [...me, ...more];
+xii.  const copyMe = [...me];
+xiii. sort()
+xiv.  me.toString();
+xv.   me.join("+"); 
+xvi.  Array.from()
+      let x = "Lorem";
+      x = Array.from(x);
+      console.log(x);
+      //['L', 'o', 'r', 'e', 'm']
+
+--------------
+15. Array Destructuring
+--------------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+let [firstName, lastNmae] = me;
+console.log(firstName);
+console.log(lastNmae);
+
+--------------
+16. JavaScript Array Iteration
+--------------
+i. forEach
+-------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.forEach((x,y) => {
+   console.log(x, y);
+});
+      
+-------
+ii. map
+-------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+me.map((x,y) => {
+   console.log(x, y);
+});
+
+-------
+iii. filter
+-------
+const me = [1,2,3,4,5,6];
+const ft = me.filter((x) => {
+  return x>3
+});
+console.log(ft);
+//Output: [4, 5, 6]
+
+
+-------
+iv. find
+-------
+const me = [1,2,3,4,5,6];
+const ft = me.find((x) => {
+  return x>3
+});
+console.log(ft);
+//Output: 4
+
+
+
+--------------
+17. Math Object
+--------------
+i.    Math.round(4.8)  //5
+ii.   Math.ceil(4.4)   //5
+iii.  Math.trunc(4.9)  //4
+iv.   Math.sign(x)     //-1 OR 0 OR 1
+v.    Math.pow(5,2)    //25
+vi.   Math.sqrt(25)    //5
+vii.  Math.abs(-4.5)   //4.5
+viii. Math.min(-4.5,0,5,3,-30);   //-30
+ix.   Math.max(1,10,50,3,-30)     //50
+x.    Math.random()
+
+
+--------------
+18. JavaScript Comparison Operators
+--------------
+
+===   Equal value	
+      and Equal type
+
+&&    and (both)
+
+||    OR (Any fo them)
+
+!     not
+
+-------
+Ternary Operator
+-------
+let x = (condition)?trueValue:falseValue;
+
+-------
+isNaN operator
+-------
+NaN => Not a Number
+Example:
+let age = 10;
+let result = isNaN(age)?"Given valu is not a number.":"Given valu is a number.";
+
+
+--------------
+19. JavaScript Loop
+--------------
+i. For loop in Array
+-------
+const me = ['Santanu', 'Chowdhury', 'Indian'];
+for (let i = 0; i < me.length; i++) {
+console.log(me[i]);
+}
+
+-------
+ii. For in loop in Object
+-------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury'
+};
+
+for(let x in me){
+  console.log(x);
+}
+
+-------
+Iterble
+-------
+. In an array we can read data one by one called Iteration,
+  And the Array called Iterable Object
+
+. Object is not Iterable because order is not it don't has Index Number.
+
+
+--------------
+20. ES6 Arrow Function
+--------------
+i. Basic Arrow function:
+-------
+let name = () =>{
+  console.log('My name is Santanu Chowdhury');
+}
+name();
+
+-------
+ii. Arrow Function with Parameter
+-------
+Example1:
+let name = (x) =>{
+  console.log(`My name is ${x}`);
+}
+
+-------
+iii. Arrow Function with Single Statement
+-------
+let name = (firstName,lastName) => console.log(`My name is  ${firstName} ${lastName}`);
+
+-------
+iv. Arrow Function with Single Parameter
+     and single statement
+-------
+let name = x => console.log(`My name is  ${x}`);
+
+-------
+v. Arrow Function make 'this' eassy
+-------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury',
+designation: ['HTML','CSS','JS'],
+office:function(){
+   this.designation.forEach((x)=>{
+     console.log(`${this.firstName} loves ${x}`)
+   })
+  },
+};
+console.log(me.office());
+
+//output:
+Santanu loves HTML
+Santanu loves CSS
+Santanu loves JS
+
+
+--------------
+21. JavaScript Sets
+--------------
+. Set is a collection of unique values.
+
+. example:
+  const x = new Set(["a","b","c"]);
+  
+. Sets are Objects
+  const x = new Set(["a","b","c"]);
+  console.log(typeof x);		   //object
+  console.log(x instanceof Set);         //true
+  
+
+--------------
+22. JavaScript Maps
+--------------
+. An Object was created with Keys & Valus.
+  A Map holds pairs of key-value where the keys can be any datatype.
+
+. Example:
+  const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+
+. Map are Objects
+  console.log(typeof fruits);
+  console.log(fruits instanceof Map);
+  
+--------------
+23. JavaScript Conversion
+--------------
+Strings to Numbers
+--------------
+i.   Number("3.5")
+
+ii.  Unary + Operator 
+     let x = +"5";
+     console.log(typeof x);
+     
+--------------     
+Numbers to Strings
+--------------
+i.  String(100)
+
+--------------
+Decimal to Binary
+--------------
+let x = (50).toString(2);
+    console.log(x);
+
+--------------
+Binary to Decimal
+*Note:add '0b' before binary number.
+--------------
+let y = (0b110010).toString(10);
+    console.log(y);
+
+
+--------------
+24. Regular Expressions
+--------------
+. To Search text and replace text we use Regular Expessions.
+
+i => It is case-insensitive modifier
+g => It is global match modifier.
+m => It is multiline matching modifier.
+
+Search()    //return index number
+match()     //return Array
+replace() 
+
+Example:
+--------------
+let x = "I love HTML.  html is scripting language";
+    x = x.replace(/html/igm, "JavaScript");
+    console.log(x);
+--------------
+
+Methods:
+. test()    //return True OR False
+. exec() 
+
+Example:
+let x = 'I love HTML.';
+   console.log(/html/i.test(x));
+   //Output : true
+
+
+--------------
+25. JavaScript Errors
+--------------
+   syntax:
+   try {
+    //test code
+   }
+   catch(err) {
+     console.log(err.message); // ERROR MESSAGE
+   }
+
+
+--------------
+26. JavaScript Scope
+--------------
+. After declear any variable, the accessablity of this varibale 
+  define by the JavaScript Scope.
+
+. JavaScript has 3 types of scope:
+  Block scope
+  Function scope
+  Global scope
+   - Automatically Global
+  Local scope
+
+
+--------------
+27. Global Variables
+--------------
+. var is Global varibale because it belong to the Window Object.
+  simply var variable store in Window object.
+
+. let is not Global varibale because it not belong to the Window Object.
+
+. Example
+  var aName1 = "TATA";
+  let acarName2 = "VOLVO";
+      console.dir(window);
+
+
+--------------
+28. this Keyword
+--------------
+. In JavaScript, 'this', is the Object.
+
+. If we use 'this' under a functon then 'this' denote the Global Window Object
+  and strict mode, this under a function returns Undefined.
+. If we use 'this' under any object then, 'this' denote the parent Object.
+. In an event, this refers to the element.
+
+
+--------------
+29. JavaScript Class
+--------------
+. Vanila JavaScript is not Object-oriented programming (OOP) language, so 
+  Vanila JavaScript don't have Class concept.
+. ECMAScript 2015, introduct Class to introduct OOP.
+. Syntax:
+  class ClassName {
+    constructor() {
+        ... 
+     }
+  }
+
+-------
+Example:1
+-------
+class Car {
+  constructor(name, year) {
+     this.name = name;
+     this.year = year;
+  }
+  intro(status='Good'){
+    console.log(`${this.name} is bought in the year ${this.year} with ${status} condition.`)
+  }
+}
+
+const car1 = new Car("TATA", 2023);
+const car2 = new Car("Audi", 2022);
+
+console.log(car1.name);
+console.log(car2.name);
+
+car1.intro('Best');
+car2.intro('well');
+
+
+--------------
+30. JavaScript JSON
+--------------
+. JSON stands for JavaScript Object Notation
+. Using JSON we can get data and display on our web page.
+. JSON is language independent.
+
+JSON.parse();
+JSON.stringify();
+
+
+--------------
+31. JavaScript Object Details
+--------------
+i. Object Accessors ** 
+---------
+. Getters and setters are the Accessors on JavaScript Object.
+. Using Getters and setters we get **Computed Properties**.
+. for better data quality we use get and set
+
+Example: Getter
+---------
+  const me = {
+      firstName:   'Santanu',
+      lastName:    'Chowdhury',
+      get fullName() {
+        return this.firstName + ' ' + this.lastName;
+      }
+    }; 
+    
+---------
+Example: Setter
+---------
+const me = {
+      firstName:   'Santanu',
+      lastName:    'Chowdhury',
+      citizenShip: '',
+      set citizen(citizen) {
+        this.citizenShip = citizen;
+      }
+}; 
+me.citizen = "Indian"
+console.log(me);
+    
+---------     
+ii. Object Constructors ***
+--------- 
+Using a function when we create an Object is called Object Constructor.
+
+Example:
+--------- 
+
+ function Person(first,last,age) {
+      this.firstName = first;
+      this.lastName   = last;
+      this.age  = age;
+      this.fullName = function() {
+        return this.firstName + ' ' + this.lastName;
+      }
+    }
+    const santanu = new Person('Santanu', 'Chowdhury', 32, );
+    const puja    = new Person('Puja', 'Chowdhury', 30, );
+    const mayank    = new Person('Mayank', 'Chowdhury', 1);
+    console.log(santanu);
+    console.log(santanu.firstName);
+    console.log(santanu.fullName());
+    
+--------- 
+Note:
+. * Name of a constructor function start with an upper-case first letter.
+
+
+---------
+iii. Object Prototypes	
+---------
+Using JavaScript 'Prototype' Properties we can add
+new properties and methods to Object constructors.
+   
+Example:   
+------------
+ String.prototype.myname = function() {
+   return 'Santanu Chowdhury';
+ }
+ Number.prototype.myadd = function() {
+   return 'It is my add Function'
+ }
+let x = 'India';
+let y = 10;
+console.dir(x.myname());
+console.dir(y.myadd());
+    
+---------
+iv. call()
+---------
+. call is Object method. 
+. Using call() method we call an object method and pass the value
+  form the another Object.
+---------
+Example 1:
+---------
+
+const person1 = {
+     fullName: function() {
+     return this.firstName + " " + this.lastName;
+   }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2));
+
+---------
+** Passing Extra values
+Example 2:
+---------
+const person1 = {
+ fullName: function(skill, citizen) {
+ return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+   }
+}
+const person2 = {
+ firstName:"Santanu",
+ lastName: "Chowdhury",
+}
+console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
+  
+---------
+v. apply()
+---------
+. apply() is the Updated version of call()
+. In apply() we pass additional parameters using an Array
+
+const person1 = {
+  fullName: function(skill, citizen) {
+    return this.firstName + " " + this.lastName + "," +skill + "," +citizen;
+  }
+}
+const person2 = {
+  firstName:"Santanu",
+  lastName: "Chowdhury",
+}
+console.log(person1.fullName.apply(person2, ['Web Designer', 'Indian']));
+
+--------------------
+Find the lagest value form an Array
+------------
+console.log(Math.max.apply(null,[1,2,3]));
+------------
+Note: 
+  Math.max() do not applicabel for Array but using apply() method
+  we can use Array for Math.max to find large number.
+
+    
+    	
+--------------
+32. JavaScript Closures
+--------------
+. let we have a self-invoking Nested Function
+. Using Closures we can invoke a child function from outside the Parent function and since
+  the function is self-invoked so parent functon code also execute only once.
+  
+  OR
+  
+  Using Closures we can call a child function from outside the self-invoking Nested function.    
+  
+Example:    
+
+let add = (function(){
+      let counter = 0;
+      return function(){
+        counter += 1;
+        console.log(counter);
+        return counter;
+      }
+   })();
+   
+add(); 
+add(); 
+
+--------------
+33. JavaScript Class
+--------------
+** iii. Class Inheritance
+
+--------------
+34. DOM Details
+--------------
+. DOM stands for Document Object Model.
+. Using DOM JavaScript can access HTML elements and can change, add, delete all the elements   .
+. Also we can say DOM works as a interface/Connector between HTML and JavaScript.
+
+---------
+i. addEventListener
+---------
+. Here we don't need to add JS code under inline HTML.
+. syntax:
+  element.addEventListener('event', function, useCapture);
+. *** 'event' => 'click' in place of 'onclick'
+
+---------
+Example 1:
+---------
+<button id="button">Click</button>
+<script>
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    console.log('Hello World!');
+  });
+</script>
+
+---------
+Example 2:
+---------
+<a href="#" id="button">Click</a>
+<script>
+  function myNew() {
+     window.open('http://www.w3schools.com', '_blank');
+     button.innerHTML ="Thank You";
+  }
+  let button = document.getElementById('button');
+  button.addEventListener('click', myNew);
+</script>
+
+---------
+*** Watch More Example
+
+---------
+ii. Event Bubbling or Event Capturing.
+---------
+. In bubbling the inner most element's event is handled first and then the outer. 
+. In capturing the outer most element's event is handled first and then the inner.
+
+---------
+iii. DOM Navigation
+---------
+---------
+** HTMLCollection and NodeList
+---------
+> 'getElementsByTagName()' method returns an HTMLCollection Object.
+> 'querySelectorAll()' method returns an NodeList object.
+
+> HTMLCollection items can be accessed by their name, id, or index number.
+  but NodeList items can only be accessed by their index number.
+  
+  
+  
+--------------
+35. Web API	
+--------------  
+i. Forms API
+---------
+checkValidity() 
+validationMessage
+
+---------
+ii. Web History API
+---------
+back() 
+forward()
+
+---------
+iii. Storage API
+---------
+localStorage.setItem("name", "John Doe");
+sessionStorage.setItem("name", "John Doe");
+
+---------
+iv. Web Worker
+---------
+A web worker is a JavaScript code that runs in background, so that
+it not affecting the performance of the page.
+
+script.js
+--------------
+let w;
+
+function startWorker(){
+ if (typeof Worker !== "undefined") {
+    if(typeof w == "undefined"){
+       w = new Worker("worker.js");
+    }
+   w.onmessage  = function(event){
+      document.getElementById('demo').innerHTML = event.data;
+    }
+  } 
+  else {
+    alert('Your Browser does not support Web Worker')
+  }
+}
+
+function stopWorker(){
+    if (typeof(Worker) !== "undefined") {
+        w.terminate();
+        w = undefined;
+    }
+    else{
+        alert('Your Browser does not support Web Worker')
+    }
+}
+
+
+--------------
+v. Fetch API
+--------------
+Using promise.js
+------------
+const display = document.getElementById('demo');
+
+function getData(){
+    fetch("https://dummyjson.com/users")
+        .then(res => res.text())
+        .then(data => {
+            display.innerText = data;
+        })
+}
+
+
+------------
+Using ASYNC
+------------
+const display = document.getElementById('demo');
+
+async function getData(){
+    const res = await fetch("https://dummyjson.com/users");
+    const data = await res.text();
+
+    display.innerText= data;
+}
+
+
+
+
+
+1. Function Arguments:
+Using Funcion Arguments we can access function parameter within the Function.
+
+2. Anonymous Function:
+Function without a name called anonymous function.
+
+3.Regular Expressions:
+To Search text and replace text we use Regular Expessions.
+
+4. Unary + Operator 
+
+5. Object Accessors
+. Getters and setters are the Accessors on JavaScript Object.
+. Using Getters and setters we get **Computed Properties**.
+. for better data quality we use get and set
+
+6.Object Constructors
+Using a function when we create an Object is called Object Constructor.
+
+7. Object Prototypes	
+
+8 call()
+. call is Object method. 
+. Using call() method we call an object method and pass the value
+  form the another Object.
+
+9. apply()
+
+10. Closures:
+Using Closures we can call a child function from outside the self-invoking Nested Parent function.
+  
+11. Event Bubbling or Event Capturing.
+
+
+
+
+
+
+
+
+
