@@ -1,0 +1,353 @@
+1. create a folder with you plugin name "form_data"
+
+2.inside the folder keep a file with same folder name called "form_data.php"
+it should be the same name and becomes the root file.
+
+3. Basic details of the plugin 
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+?>
+-------------------------------
+
+3. Now add hook for Active and Deactive Plugin.
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+
+register_activation_hook(__FILE__, 'form_data_activate');
+register_deactivation_hook(__FILE__, 'form_data_deactivate');
+
+function form_data_activate(){
+	echo "Activate";
+	die();
+}
+function form_data_deactivate(){
+	echo "Deactivate";
+	die();
+}
+
+?>
+-------------------------------
+
+4. Now we are going to crate a sql query. on the Plugin activation
+   a table will be created on database and on the plugin deactivation
+   table will be removed.
+
+-------------------------------
+function form_data_activate(){
+	global $wpdb;
+	global $table_prefix;	
+	$table=$table_prefix.'form_data_table';
+	$sql = "CREATE TABLE $table (
+	  `id` int(11) NOT NULL,
+	  `name` varchar(500) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table ADD PRIMARY KEY (`id`)";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+	$wpdb->query($sql);
+}
+function form_data_deactivate(){
+	global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="DROP TABLE $table";
+  $wpdb->query($sql);
+}
+-------------------------------
+Full code:
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+
+register_activation_hook(__FILE__, 'form_data_activate');
+register_deactivation_hook(__FILE__, 'form_data_deactivate');
+
+function form_data_activate(){
+	global $wpdb;
+	global $table_prefix;	
+	$table=$table_prefix.'form_data_table';
+	$sql = "CREATE TABLE $table (
+	  `id` int(11) NOT NULL,
+	  `name` varchar(500) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table ADD PRIMARY KEY (`id`)";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+	$wpdb->query($sql);
+}
+function form_data_deactivate(){
+	global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="DROP TABLE $table";
+  $wpdb->query($sql);
+}
+
+?>
+-------------------------------
+
+5. Now we will add Menu option on our Dashboard
+
+-------------------------------
+add_action('admin_menu', 'form_data_menu');
+
+function form_data_menu(){
+	add_menu_page('Form Data', 'Form Data',8,__FILE__,'form_data_list');
+}
+function form_data_list(){
+	echo "Welcome";
+}
+-------------------------------
+Full code:
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+
+register_activation_hook(__FILE__, 'form_data_activate');
+register_deactivation_hook(__FILE__, 'form_data_deactivate');
+
+function form_data_activate(){
+	global $wpdb;
+	global $table_prefix;	
+	$table=$table_prefix.'form_data_table';
+	$sql = "CREATE TABLE $table (
+	  `id` int(11) NOT NULL,
+	  `name` varchar(500) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table ADD PRIMARY KEY (`id`)";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+	$wpdb->query($sql);
+}
+function form_data_deactivate(){
+	global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="DROP TABLE $table";
+  $wpdb->query($sql);
+}
+
+add_action('admin_menu', 'form_data_menu');
+
+function form_data_menu(){
+	add_menu_page('Form Data', 'Form Data',8,__FILE__,'form_data_list');
+}
+function form_data_list(){
+	echo "Welcome";
+}
+
+?>
+-------------------------------
+
+6. create a new page called 'form_data_list.php' under the same folder
+   to display our data. and link this page on 'form_data.php' file in placeof
+   "Welcome"
+
+
+form_data.php
+-------------------------------
+add_action('admin_menu', 'form_data_menu');
+function form_data_menu(){
+	add_menu_page('Form Data', 'Form Data',8,__FILE__,'form_data_list');
+}
+function form_data_list(){
+	include('form_data_list.php');
+}
+
+-------------------------------
+Full code:
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+
+register_activation_hook(__FILE__, 'form_data_activate');
+register_deactivation_hook(__FILE__, 'form_data_deactivate');
+
+function form_data_activate(){
+	global $wpdb;
+	global $table_prefix;	
+	$table=$table_prefix.'form_data_table';
+	$sql = "CREATE TABLE $table (
+	  `id` int(11) NOT NULL,
+	  `name` varchar(500) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table ADD PRIMARY KEY (`id`)";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+	$wpdb->query($sql);
+}
+function form_data_deactivate(){
+	global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="DROP TABLE $table";
+  $wpdb->query($sql);
+}
+
+add_action('admin_menu', 'form_data_menu');
+
+function form_data_menu(){
+	add_menu_page('Form Data', 'Form Data',8,__FILE__,'form_data_list');
+}
+function form_data_list(){
+	include('form_data_list.php');
+}
+
+?>
+
+-------------------------------
+Full code:
+** Add some dummy data on the table "form_data_table"
+form_data_list.php
+-------------------------------
+<?php 
+  global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="select * from $table";
+  $result = $wpdb->get_results($sql);
+  print_r($result);
+?>
+-------------------------------
+
+7. Add table to display our code
+
+-------------------------------
+Full code:
+form_data_list.php
+-------------------------------
+<?php 
+  global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="select * from $table";
+  $result = $wpdb->get_results($sql);
+  //print_r($result);
+?>
+
+<table border="1">
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+	</tr>
+	<?php 
+		foreach($result as $list){
+			?>
+			<tr>
+				<td><?php echo $list->id; ?></td>
+				<td><?php echo $list->name; ?></td>
+			</tr>
+			<?php
+		}
+	?>
+</table>
+
+-------------------------------
+
+8. Add shortcode features to dispaly this deata on
+form_data.php
+
+here 'form_data_list_shortcode' is shortcode name and
+      'form_data_list' is file name
+-------------------------------
+add_shortcode('form_data_list_shortcode', 'form_data_list'); 
+
+-------------------------------
+Full code:
+form_data.php
+-------------------------------
+<?php 
+/*
+Plugin Name: Form Data
+Plugin URI: 
+Description: Form data plugin
+Author: Santanu Chowdhury
+Author URI: santanuchowdhury04@gmail.com
+Version: 1.0
+*/
+
+register_activation_hook(__FILE__, 'form_data_activate');
+register_deactivation_hook(__FILE__, 'form_data_deactivate');
+
+function form_data_activate(){
+	global $wpdb;
+	global $table_prefix;	
+	$table=$table_prefix.'form_data_table';
+	$sql = "CREATE TABLE $table (
+	  `id` int(11) NOT NULL,
+	  `name` varchar(500) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table ADD PRIMARY KEY (`id`)";
+	$wpdb->query($sql);
+	$sql = "ALTER TABLE $table MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+	$wpdb->query($sql);
+}
+function form_data_deactivate(){
+	global $wpdb;
+	global $table_prefix;
+	$table=$table_prefix.'form_data_table';
+	$sql="DROP TABLE $table";
+  $wpdb->query($sql);
+}
+
+add_action('admin_menu', 'form_data_menu');
+
+function form_data_menu(){
+	add_menu_page('Form Data', 'Form Data',8,__FILE__,'form_data_list');
+}
+
+function form_data_list(){
+	include('form_data_list.php');
+}
+
+add_shortcode('form_data_list_shortcode', 'form_data_list'); 
+
+?>
+-------------------------------
