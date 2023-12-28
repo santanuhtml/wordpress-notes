@@ -479,7 +479,8 @@ function basicTheme_custom_post(){
 
             'title','editor','thumbnail','excerpt','revisions','custom-fields','page-attributes'
 
-          )
+          ),
+     'show_in_rest' => true, 
 
 
       ));
