@@ -1,0 +1,741 @@
+==============================
+WP_Query
+==============================
+1. Basic Structure
+2. Useful key parameters
+3. Remove first post
+I. Shorting
+  4. Add order using Custom field
+  5. Just want a post with Meta value 1 (CFS value)
+  6. Get Posts within a range
+II. Comparing
+  7. Get Post with Text value
+  8. Get Post with Size
+III. meta_query()
+  9. Get Post with Price
+  10. Get Post with Price Range
+  11. Get Post with Price and Size
+  12. Get Post with Price OR Size
+  13. Nesting meta_query()
+      i.  Price fixed
+      ii. Size OR Color any of them
+IV. tax_query()
+  14. Basic way
+  15. With tax_query()
+  16. tax_query() with category and tags
+
+V. Basic Filter
+------------------------------
+1. Basic Structure
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => 1,
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h1><?php echo the_title(); ?></h1>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+
+------------------------------
+2. Useful key parameters
+------------------------------
+'post_type' => "post",
+
+'posts_per_page' => 1, 	            // -1 for all posts
+
+'post__not_in' => array($myfirstpostid)
+
+'order' => 'DESC',                  // 'ASC' OR 'DESC'
+
+'category_name' => 'cat',           // using category slug
+
+'cat' => '1',                       // using category id
+
+'tag' => 'featured', 
+        
+'orderby' => 'date',  
+'orderby' => 'modified',            // Modified Date	
+'orderby' => 'title',
+'orderby' => 'comment_count',       
+'orderby' => 'meta_value',          // *** use 'meta_value_num', for Number/Numaric data ***
+'meta_key' => 'custom_field_name',  // custom field name
+'meta_compare' => '=',              // '>', '<', '!=',
+'meta_value' =>1,
+
+'meta_query'  => array(             //** Use meta_query to get correct filter
+  array(
+    'key'     => 'custom_field_name',
+    'value'   => 1500,
+    'compare' => '>',
+    'type'    => 'NUMERIC',
+  ),
+),
+
+'tax_query' => array(
+    array(
+      'taxonomy' => 'category',
+      'field' => 'slug',            //term_id
+      'terms' => array('test-01'),  //array(10, 11) when use term_id
+      'include_children' =>true,    //Default
+      'operator' => 'IN'            //Default, Others Option 'NOTIN'
+      // operator IN => display in this category
+    )
+  )
+
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'post_tag',
+      'field' => 'slug',            
+      'terms' => array('list'),
+      'operator' => 'IN'            
+      // operator IN => display in this category
+    )
+  )  
+
+------------------------------
+3. Remove first post
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => 1,
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    $myfirstpostid = $post->ID;
+    ?>
+      <h1><?php echo the_title(); ?></h1>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'post__not_in' => array($myfirstpostid)
+);
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <p><?php echo the_title(); ?></p>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+4. Add order using Custom field
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value_num',  //Calling Meta Value
+  'meta_key' => 'post_order'      //CFS Name value
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+5. Just want a post with Meta value 1 (CFS value)
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value_num',  // Calling Meta Value
+  'meta_key' => 'post_order',     // CFS Name value
+  'meta_compare' => '=',          // To get only single value
+  'meta_value' =>1
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+
+------------------------------
+6. Get Posts within a range
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value_num',  //Calling Meta Value
+  'meta_key' => 'post_order',     //CFS Name value
+  'meta_compare' => '<',          
+  'meta_value' =>3
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+7. Get Post with Text value
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value',      //Calling Meta Value
+  'meta_key' => 'name',           //CFS Name value
+  'meta_compare' => '=',          //'!=' get value without santanu **
+  'meta_value' =>'santanu'
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+8. Get Post with Product Size
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value',      //Calling Meta Value
+  'meta_key' => 'size',           //CFS Name value
+  'meta_compare' => '=',          //'!=' get value without santanu
+  'meta_value' =>'M'
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+      <p>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+      
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+9. Get Post with Price
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'orderby' => 'meta_value_num',  //Calling Meta Value
+  'meta_key' => 'price',         //CFS Name value 
+  'meta_query'  => array(
+    array(
+      'key'     => 'price',
+      'value'   => 1500,
+      'compare' => '<',
+      'type'    => 'NUMERIC',
+    ),
+  ),
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+      <p>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+      
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+10. Get Post with Price Range
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'orderby' => 'meta_value_num',  //Calling Meta Value
+  'meta_key' => 'price',         //CFS Name value 
+  'meta_query'  => array(
+    array(
+      'key'     => 'price',
+      'value'   => array(0, 1500),
+      'compare' => 'BETWEEN',
+      'type'    => 'NUMERIC',
+    ),
+  ),
+  
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+      <p>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+      
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+11. Get Post with Price and Product Size
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'orderby' => 'meta_value_num',         //Calling Meta Value
+  'meta_key' => array('price', 'size'),  //CFS Name value 
+  'meta_query'  => array(
+    array(
+      'key'     => 'price',
+      'value'   => 1500,
+      'compare' => '>=',
+      'type'    => 'NUMERIC',
+    ),
+    array(
+      'key'     => 'size',
+      'value'   => 'M',
+      'compare' => '=',
+      'type'    => 'CHAR',
+    ),
+  ),
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+      <p>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+      
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+12. Get Post with Price OR Size
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'orderby' => 'meta_value_num',  
+  'meta_key' => array('price', 'size'),
+  'meta_query'  => array(
+    'relation' => 'OR',     //with 'relation' get Any of them
+    array(
+      'key'     => 'price',
+      'value'   => 1500,
+      'compare' => '>=',
+      'type'    => 'NUMERIC',
+    ),
+    array(
+      'key'     => 'size',
+      'value'   => 'M',
+      'compare' => '=',
+      'type'    => 'CHAR',
+    ),
+  ),
+);
+?>
+
+------------------------------
+13. Nesting meta_query
+    i.  Price fixed
+    ii. Size OR Color any of them
+------------------------------
+<?php 
+$args = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'meta_query'  => array(
+    //'relation' => 'OR',
+    array(
+      'key'     => 'price',
+      'value'   => 1500,
+      'compare' => '>=',
+      'type'    => 'NUMERIC',
+    ),
+    array(
+      'relation' => 'OR',
+      array(
+        'key'     => 'size',
+        'value'   => 'M',
+        'compare' => '=',
+        'type'    => 'CHAR',
+      ),
+      array(
+        'key'     => 'color',
+        'value'   => 'RED',
+        'compare' => '=',
+        'type'    => 'CHAR',
+      ),
+    ),
+  ),
+);
+
+$custom_query = new WP_Query($args);
+//print_r($custom_query);
+
+if($custom_query -> have_posts()){
+  while($custom_query -> have_posts()){
+    $custom_query -> the_post();
+    ?>
+      <h3><?php echo the_title(); ?></h3>
+      <p>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+      
+    <?php
+  }
+  // Reset post data 
+  wp_reset_postdata();
+}
+?>
+
+------------------------------
+14. Basic way
+------------------------------
+<?php
+$agrs = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'category_name' => 'test-01'
+);
+
+$custom_query = new WP_Query($agrs);
+
+if($custom_query->have_posts()){
+  while($custom_query->have_posts()){
+    $custom_query->the_post();
+    ?>
+      <p>
+        <?php the_title(); ?>
+        <br>
+        <?php the_category(); ?>
+    </p>
+    <?php
+  }
+}
+?>
+
+------------------------------
+15. With tax_query()
+------------------------------
+<?php
+$agrs = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'category',
+      'field' => 'slug',            //id
+      'terms' => array('test-01'),
+      'include_children' =>true,    //Default
+      'operator' => 'IN'            //Default, Others Option 'NOTIN'
+      // operator IN => display in this category
+    )
+  )
+);
+
+$custom_query = new WP_Query($agrs);
+?>
+
+------------------------------
+16. tax_query() with category and tags
+------------------------------
+<?php
+$agrs = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'tax_query' => array(
+    'relation' => 'AND',            //default
+    array(
+      'taxonomy' => 'category',
+      'field' => 'slug',            //term_id
+      'terms' => array('test-01'),  //array(10, 11) when use term_id
+      'include_children' =>true,    //Default
+      'operator' => 'IN'            //Default, Others Option 'NOTIN'
+      // operator IN => display in this category
+    ),
+    array(
+      'taxonomy' => 'post_tag',
+      'field' => 'slug',            //term_id
+      'terms' => array('list'),
+      'operator' => 'IN'            //Default, Others Option 'NOTIN'
+      // operator IN => display in this category
+    )
+  )
+);
+
+$custom_query = new WP_Query($agrs);
+
+if($custom_query->have_posts()){
+  while($custom_query->have_posts()){
+    $custom_query->the_post();
+    ?>
+      <p>
+        <?php the_title(); ?>
+        <br>
+        <?php the_category(); ?>
+        <br>
+        <?php the_tags(); ?>
+    </p>
+    <?php
+  }
+}
+?>
+
+------------------------------
+V. Basic Filter
+------------------------------
+
+
+<?php 
+  if($_GET['minprice'] && !empty($_GET['minprice'])){
+    $minprice = $_GET['minprice'];
+  } else{
+    $minprice = 0;
+  }
+  if($_GET['maxprice'] && !empty($_GET['maxprice'])){
+    $maxprice = $_GET['maxprice'];
+  }else{
+    $maxprice = 99999;
+  }
+  if($_GET['size'] && !empty($_GET['size'])){
+    $size = $_GET['size'];
+  }
+  if($_GET['color'] && !empty($_GET['color'])){
+    $color = $_GET['color'];
+  }
+?>
+
+<form action="./" method="get">
+  <label for="min">Min</label>
+  <input type="number" name="minprice" id="min" placeholder="MIN" value="<?php echo $_GET['minprice']; ?>">
+  <label for="max">Max</label>
+  <input type="number" name="maxprice" id="max" placeholder="MAX" value="<?php echo $_GET['maxprice']; ?>">
+  <label for="size">size</label>
+  <select name="size" id="size">
+    <option value="<?php echo isset($_GET['size']) ? $_GET['size'] : ''; ?>">
+      <?php echo isset($_GET['size']) && !empty($_GET['size']) ? $_GET['size'] : 'Any'; ?>
+    </option>
+    <option value="S">S</option>
+    <option value="M">M</option>
+    <option value="L">L</option>
+    <option value="XL">XL</option>
+    <option value="XXL">XXL</option>
+  </select>
+  <label for="color">Color</label>
+  <select name="color" id="color">
+    <option value="<?php echo isset($_GET['color']) ? $_GET['color'] : ''; ?>">
+      <?php echo isset($_GET['color']) && !empty($_GET['color']) ? $_GET['color'] : 'Any'; ?>
+    </option>
+    <option value="White">White</option>
+    <option value="Black">Black</option>
+    <option value="red">Red</option>
+    <option value="Blue">Blue</option>
+    <option value="Green">Green</option>
+  </select>
+  <button type="submit" name="">Filter</button>
+  <a href="./">Reset Filters</a>
+</form>
+
+
+<?php
+
+$agrs = array(
+  'post_type' => "post",
+  'posts_per_page' => -1,
+  'orderby' => 'meta_value',
+  'meta_query' => array(
+    array(
+      'key' => 'price',
+      'type'    => 'NUMERIC',
+      'value' => array($minprice, $maxprice),
+      'compare' => 'BETWEEN'
+    ),
+    array(
+      'key' => 'size',
+      'value' => $size,
+      'compare' => !empty($size) ? '=' : 'LIKE', 
+    ),
+    array(
+      'key' => 'color',
+      'value' => $color,
+      'compare' => 'LIKE'
+    )
+  )
+);
+
+$custom_query = new WP_Query($agrs);
+
+if($custom_query->have_posts()){
+  while($custom_query->have_posts()){
+    $custom_query->the_post();
+    ?>
+      <p>
+        <?php the_title(); ?>
+        <br>
+        <?php the_category(); ?>
+        <br>
+        <?php the_tags(); ?>
+        <br>
+        <?php echo CFS()->get( 'price' ); ?> <br>
+        <?php echo CFS()->get( 'color' ); ?> <br>
+        <?php 
+          $values = CFS()->get( 'size' );
+          foreach ( $values as $key => $label ) {
+            echo $label;
+          }
+        ?>
+      </p>
+    <?php
+  }
+}
+?>
+
