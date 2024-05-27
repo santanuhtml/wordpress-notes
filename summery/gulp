@@ -1,0 +1,72 @@
+=================================
+*** Gulp summary:
+=================================
+> Install Gulp globally and locally
+> Under the project directory create a file
+  called 'gulpfile.js'
+> under gulpfile.js file import all
+  packages like gulp, scss, minify, etc
+> Define task() which has Task name, 'src', 'pipe' and 'dist'
+  'src'  => source files for the task
+  'pipe' => define all the task
+  'dist' => processed files destination directory
+> End of all we define task() contain 'series'
+  for above the task.
+  'series' => Using this all tasks will run using
+  single command.
+  
+=================================
+Gulp interview:
+=================================
+Gulp:
+1. What is Gulp?
+   Gulp is a task runner that automates repetitive tasks.
+   Using gulp we can compile SCSS, minify image, js and css file etc.
+   
+2. How do you install Gulp?
+   > npm i -g gulp-cli (globally)
+   use: 
+   This installs the gulp command globally, allowing you to use   
+   the gulp command in your terminal from any directory.
+   note: command-line interface (CLI)
+   
+   > npm i -D gulp (locally)
+   This install gulp locally
+   
+3. Why we should install globally and locally?
+   > npm i -g gulp-cli Install Gulp command line globally 
+   > npm i -D gulp, using this we can use any version of gulp 
+     on our different project.
+     
+4. What is a Gulpfile?
+   > All gulp task define on gulpfile.
+   
+5. List of some Gulp plugins you have used.
+   gulp-sass: Compiles Sass (SCSS) files into CSS.
+   gulp-autoprefixer: add prefixer like -webkit-, -moz-
+   gulp-rename: Renames files to xyz.min
+   gulp-sourcemaps : Creates source maps for your CSS and JavaScript files, 
+   helping you debug the original source code in the browser.
+   gulp-minify/gulp-uglify: Reduces the size of JavaScript files by removing unnecessary whitespace and code.
+   gulp-plumber: Keeps Gulp tasks running even when errors are encountered, making debugging easier.
+   del: Deletes files and directories before generate new file and directories.
+   gulp-clean-css: Compresses CSS files to reduce file size, improving performance.
+   gulp-images-resizer: Adjusts image dimensions as needed, ex: 20X20 for thumbnail.
+   gulp-imagemin: Reduces the size of image files without losing quality, improving loading times.
+   gulp-webp: Converts images to WebP format.
+   browser-sync: Automatically reloads the browser whenever files change
+   
+6. Similar task runner
+   Grunt
+   
+7. Best use case in Gulp.
+   > SCSS compile
+   > minify css, js
+   > optimize images
+
+9. How do you handle errors in Gulp tasks?
+   > we can use plugin like gulp-plumber   
+   
+10. Explain how to create a Gulp task that depends on other tasks?
+    > Use gulp.series   
+   
