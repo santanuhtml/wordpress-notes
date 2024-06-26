@@ -471,12 +471,10 @@ console.log(me.workSummery());
 vii. call()
 ---------
 . call is Object method. 
-. Using this method we can call an object method and pass the value
-  form the another Object.
+. Using call(), an object can use a method belonging to another object.
 ---------
 Example 1:
 ---------
-
 const person1 = {
      fullName: function() {
      return this.firstName + " " + this.lastName;
