@@ -581,17 +581,6 @@ function notice(){
 ---------
 Example 3:
 ---------
-<button onclick="test(event)">Alert</button>
-  <p onclick="test(event)">Alert</p>
-  <script>
-  function test(e){
-   e.target.innerHTML = "test"
-  }
-  </script>  
-
----------
-Example 4:
----------
 <button onclick="test(this)">Alert</button>
   <p onclick="test(this)">Alert</p>
   <script>
@@ -599,6 +588,17 @@ Example 4:
    e.innerHTML = "test"
   }
 </script>
+
+---------
+Example 4:
+---------
+<button onclick="test(event)">Alert</button>
+  <p onclick="test(event)">Alert</p>
+  <script>
+  function test(e){
+   e.target.innerHTML = "test"
+  }
+  </script>  
 
 ---------
 Example 5:
