@@ -102,11 +102,12 @@ Example 2
 --------------
 3. JavaScript Output  
 --------------
-i.    innerHTML
-ii.   console.log();
-iii.  alert();
-iv.   window.print();
-v.    document.write();
+i.   console.log();
+ii.  console.dir();
+iii. innerHTML
+iv.  alert();
+v.   window.print();
+vi.  document.write();
 
 --------------
 4. JavaScript Variable
