@@ -76,7 +76,7 @@ document.querySelectorAll('.class | #id | elementName')
 ** document.querySelectorAll()     => This method returns an NodeList object.
 
 ------------
-List of DOM Properties:
+iii. List of DOM Properties:
 ------------
 i.   HTML content using      .innerHTML
 ii.  HTML css using          .style
@@ -84,7 +84,15 @@ iii. HTML attribute using    .src
 iv.  HTML form attribut      .type
 v.   HTML form input		     .value
 vi.  HTML page URL		       .URL
-  
+
+------------
+iii. DOM Event
+------------
+some of DOM Event are:
+onclick
+onmouseover
+onmouseout
+
 --------------
 Example 1
 --------------   
