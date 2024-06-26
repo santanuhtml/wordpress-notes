@@ -417,6 +417,7 @@ document.getElementById("demo").innerHTML = text;
 --------------
 let keys = Object.keys(me);
 console.log(keys);
+
 --------------
 5. Object.values()
 --------------
@@ -580,16 +581,27 @@ function notice(){
 ---------
 Example 3:
 ---------
-<h1 onclick="textChange(this)">Hello World!</h1>
-<script>
-function textChange(test){
-  //console.log(test);
-  test.innerHTML = 'I Love JavaScript';
-}
-</script>
+<button onclick="test(event)">Alert</button>
+  <p onclick="test(event)">Alert</p>
+  <script>
+  function test(e){
+   e.target.innerHTML = "test"
+  }
+  </script>  
 
 ---------
 Example 4:
+---------
+<button onclick="test(this)">Alert</button>
+  <p onclick="test(this)">Alert</p>
+  <script>
+  function test(e){
+   e.innerHTML = "test"
+  }
+</script>
+
+---------
+Example 5:
 ---------
 <Button id="buy1">Buy Now</Button>
 <Button id="buy2">Buy Now</Button>
