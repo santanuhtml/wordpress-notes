@@ -74,6 +74,16 @@ document.querySelectorAll('.class | #id | elementName')
 
 ** document.getElementsByTagName() => This method returns an HTMLCollection Object
 ** document.querySelectorAll()     => This method returns an NodeList object.
+
+------------
+List of DOM Properties:
+------------
+i.   HTML content using      .innerHTML
+ii.  HTML css using          .style
+iii. HTML attribute using    .src 
+iv.  HTML form attribut      .type
+v.   HTML form input		     .value
+vi.  HTML page URL		       .URL
   
 --------------
 Example 1
