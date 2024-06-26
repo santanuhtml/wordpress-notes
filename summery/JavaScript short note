@@ -629,6 +629,32 @@ window.open("http://www.google.com", '_blank');
 
 . *** 'event' => 'click' in place of 'onclick'
 
+---------
+Example: 1
+---------
+<button id="button">Click</button>
+<script>
+  let button = document.getElementById('button');
+  button.addEventListener('click', function(){
+    console.log('Hello World!');
+  });
+</script>
+
+----------
+* Bubbling(Default) and Capturing:
+----------
+. In bubbling the inner most element's event is handled first and then the outer. 
+  Example:	
+  the <p> element's click event is handled first, then the <div> element's click event.
+
+. In capturing the outer most element's event is handled first and then the inner.
+  Example:
+  the <div> element's click event will be handled first, then the <p> element's click event.
+  
+  example:
+  button.addEventListener('click', function(){
+  }, true);
+
 
 --------------
 11. String Function/Method
