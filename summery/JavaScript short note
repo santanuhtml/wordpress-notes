@@ -338,14 +338,90 @@ firstName called key
 
 
 ---------
-ii. Get Object key,values,entries
+ii. Object Methods
 ---------
+1. Object.assign(target, source)		
+   > use to Copy key and value from source object to target object
+
+2. Object.entries()
+   > returns key and value as an array with in a object.[Object to MAP]
+   > make it simple for object loop.
+
+3. Object.fromEntries()
+   > Map to Object
+   
+4. Object.keys()
+
+5. Object.values()
+
+Example:
+--------------
+1. Object.assign()
+--------------
+<script>
+  const details = {
+    firstName : "Santanu",
+    lastName  : "Chowdhury"
+  }
+  const skills = {
+    primarySkill : "HTML5",
+    secondarySkill: "JavaScr"
+  }
+  console.log(Object.assign(details, skills));
+  console.log(details);
+</script>
+
+--------------
+2. Object.entries()
+   Object to Map
+--------------
+<script>
+const details = {
+   firstName : "Santanu",
+   lastName  : "Chowdhury"
+}
+console.log(Object.entries(details));
+</script>
+
+--------------
+object loop
+--------------
+<p id="demo"></p>
+<script>
+const me = {
+name:"Santanu Chowdhury", 
+Skills:"HTML5, CSS3, SCSS, JavaScript", 
+}; 
+let text = "";
+for (let [k, v] of Object.entries(me)) {
+text += k + ": " + v + "<br>";
+}
+document.getElementById("demo").innerHTML = text;
+</script>
+
+--------------
+3. Object.fromEntries()
+   > Map to Object
+--------------
+<script>
+  const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+  console.log(Object.fromEntries(fruits));
+</script>
+
+--------------
+4. Object.keys()
+--------------
 let keys = Object.keys(me);
-let values = Object.values(me);
-let entries = Object.entries(me);
 console.log(keys);
+--------------
+5. Object.values()
+--------------
+let values = Object.values(me);
 console.log(values);
-console.log(entries);
 
 ---------
 iii. Add Two Object
