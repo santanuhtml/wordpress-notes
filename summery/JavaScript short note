@@ -248,9 +248,41 @@ function name(firstName,lastName){
     console.log('My name is'+ ' ' + firstName + ' ' + lastName);
   }
 name('Santanu', 'Chowdhury');  
+
+
+------------
+ii. Function Return
+------------
+. When JavaScript function reaches a  'return' statement, then the 
+  function stops executing. If this function call from a statement, then
+  return that value.
+. If we use 'return'  then we can store the return value under a variable.
+
+Example1:
+function name(firstName,lastName){
+  return firstName + ' ' + lastName;
+  console.log('This will not print');
+}
+let x = name('Santanu', 'Chowdhury');
+console.log(x);
+//output: Santanu Chowdhury
+
+------------
+Note: 
+Under any function if we do not use 'return', then the function itself return
+a 'undefined' value.
+------------
+function name(firstName,lastName){
+console.log(firstName + ' ' + lastName);
+}
+let x = name('Santanu', 'Chowdhury');
+console.log(x);
+
+//output: Santanu Chowdhury
+  	  undefined
   
 ---------
-ii. Anonymous Function:
+iii. Anonymous Function:
 ---------
 Function without a name called anonymous function.
 
@@ -263,7 +295,7 @@ Example:
 
 
 ---------
-iii. Self-Invoking Functions / IIFE
+iv. Self-Invoking Functions / IIFE
 ---------
 (function() {
   console.log('Hello World');
