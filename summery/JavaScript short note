@@ -146,6 +146,17 @@ let fullName  = firstName + " " + lastName;
 --------------
 7. JavaScript Data Types
 --------------
+> JavaScript has 8 Datatypes
+  . Numbers
+  . Strings
+  . Booleans
+  . Object
+  . Array
+  . Date
+  . Undefined
+  . Null
+
+---------
 i. Undefined
 ---------
 A variable without a value, has the value undefined.
