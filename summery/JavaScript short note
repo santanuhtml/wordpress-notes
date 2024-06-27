@@ -1375,12 +1375,9 @@ iii. DOM Navigation
 --------------
 36. JS Async
 -------------- 
- -----------------------------------
-. JS Async
-    i. Asynchronous JavaScript
-    ii.  Callbacks
-    iii. Async/Await 
-   
+i. Asynchronous JavaScript
+ii.  Callbacks
+iii. Async/Await 
 --------------------
 i. Asynchronous JavaScript
 --------------------
@@ -1469,14 +1466,17 @@ i.   Fetch API
 ------------
 > Using ASYNC
 ------------
-const display = document.getElementById('demo');
-
-async function getData(){
-    const res = await fetch("https://dummyjson.com/users");
-    const data = await res.text();
-
-    display.innerText= data;
-}
+<button onclick="getData()">Get Data</button>
+<div id="demo"></div>
+<script>
+  const x = document.getElementById('demo');
+  async function getData(){
+      const response = await fetch("https://dummyjson.com/users");
+      const data = await response.text(); 
+      console.log(data);
+      x.innerText= data; 
+  }
+</script>
 
 -------------
 ii.  worker API
