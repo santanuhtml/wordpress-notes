@@ -1412,13 +1412,16 @@ without affecting the performance of the page.
 -------------
 STEPs:
 -------------
+-------------
+ii. worker API
+-------------
 > define Web Worker using 
   new Worker("js/worker.js")
 
 > On 'worker.js' when task done, send data using
   postMessage()
   
-> when the message is received, 'onmessage' event handler triggered .	
+> when message received, 'onmessage' event handler triggered .	
  
 > This event handler updates the data.
 
@@ -1443,7 +1446,6 @@ while (i<1000000000){
 }
 postMessage(i);
 
-
 ---------
 iii. Forms API
 ---------
@@ -1455,7 +1457,6 @@ iv.  Web History API
 ---------
 back() 
 forward()
-
 ---------
 v.   Storage API
 ---------
