@@ -1372,6 +1372,8 @@ iii. DOM Navigation
 --------------  
 i.  Fetch API
 ii. worker API
+iii. 
+
 
 --------------
 i.  Fetch API
@@ -1402,6 +1404,11 @@ async function getData(){
 
 -------------
 ii. worker API
+-------------
+It is a JavaScript process that runs in the background,
+without affecting the performance of the page.
+-------------
+STEPs:
 -------------
 > define Web Worker using 
   new Worker("js/worker.js")
@@ -1452,40 +1459,6 @@ iii. Storage API
 ---------
 localStorage.setItem("name", "John Doe");
 sessionStorage.setItem("name", "John Doe");
-
----------
-iv. Web Worker
----------
-A web worker is a JavaScript code that runs in background, so that
-it not affecting the performance of the page.
-
-script.js
---------------
-let w;
-
-function startWorker(){
- if (typeof Worker !== "undefined") {
-    if(typeof w == "undefined"){
-       w = new Worker("worker.js");
-    }
-   w.onmessage  = function(event){
-      document.getElementById('demo').innerHTML = event.data;
-    }
-  } 
-  else {
-    alert('Your Browser does not support Web Worker')
-  }
-}
-
-function stopWorker(){
-    if (typeof(Worker) !== "undefined") {
-        w.terminate();
-        w = undefined;
-    }
-    else{
-        alert('Your Browser does not support Web Worker')
-    }
-}
 
 
 
