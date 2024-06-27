@@ -34,6 +34,7 @@ JavaScript short note
 33. JavaScript Class
 34. DOM Details
 35. Web API	
+36. Summery
 --------------
 1. Introduction
 --------------
@@ -1370,13 +1371,14 @@ iii. DOM Navigation
 --------------
 35. Web API	
 --------------  
-i.  Fetch API
-ii. worker API
-iii. 
-
+i.   Fetch API
+ii.  worker API
+iii. Forms API
+iv.  Web History API
+v.   Storage API
 
 --------------
-i.  Fetch API
+i.   Fetch API
 --------------
 > Using promise.js
 ------------
@@ -1403,7 +1405,7 @@ async function getData(){
 }
 
 -------------
-ii. worker API
+ii.  worker API
 -------------
 It is a JavaScript process that runs in the background,
 without affecting the performance of the page.
@@ -1443,30 +1445,26 @@ postMessage(i);
 
 
 ---------
-i. Forms API
+iii. Forms API
 ---------
 checkValidity() 
 validationMessage
 
 ---------
-ii. Web History API
+iv.  Web History API
 ---------
 back() 
 forward()
 
 ---------
-iii. Storage API
+v.   Storage API
 ---------
 localStorage.setItem("name", "John Doe");
 sessionStorage.setItem("name", "John Doe");
 
-
-
-
-
-
-
-
+--------------
+36. Summery
+--------------
 1. Function Arguments:
 Using Funcion Arguments we can access function parameter within the Function.
 
