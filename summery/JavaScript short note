@@ -1370,6 +1370,38 @@ iii. DOM Navigation
 --------------
 35. Web API	
 --------------  
+i. Fetch API
+
+--------------
+i. Fetch API
+--------------
+> Using promise.js
+------------
+const display = document.getElementById('demo');
+
+function getData(){
+    fetch("https://dummyjson.com/users")
+        .then(res => res.text())
+        .then(data => {
+            display.innerText = data;
+        })
+}
+
+------------
+> Using ASYNC
+------------
+const display = document.getElementById('demo');
+
+async function getData(){
+    const res = await fetch("https://dummyjson.com/users");
+    const data = await res.text();
+
+    display.innerText= data;
+}
+
+
+
+---------
 i. Forms API
 ---------
 checkValidity() 
@@ -1422,33 +1454,7 @@ function stopWorker(){
 }
 
 
---------------
-v. Fetch API
---------------
-Using promise.js
-------------
-const display = document.getElementById('demo');
 
-function getData(){
-    fetch("https://dummyjson.com/users")
-        .then(res => res.text())
-        .then(data => {
-            display.innerText = data;
-        })
-}
-
-
-------------
-Using ASYNC
-------------
-const display = document.getElementById('demo');
-
-async function getData(){
-    const res = await fetch("https://dummyjson.com/users");
-    const data = await res.text();
-
-    display.innerText= data;
-}
 
 
 
