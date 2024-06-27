@@ -579,6 +579,7 @@ Common HTML events:
   onmouseout
   onkeydown
   onload
+  addEventListener
 
 ---------
 Example 1:
@@ -638,7 +639,7 @@ window.open("http://www.google.com", '_blank');
 </script>
 
 ---------
-** addEventListener
+addEventListener
 ---------
 . Here we don't need to add JS code under inline HTML.
 
