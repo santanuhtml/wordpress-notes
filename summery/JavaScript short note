@@ -36,7 +36,7 @@ JavaScript short note
 35. setInterval() and setTimeout()
 36. JS Async
 37. Web API	
-36. Summery
+38. Summery
 --------------
 1. Introduction
 --------------
@@ -1453,7 +1453,7 @@ getData();
 </script>
 
 --------------
-35. Web API	
+37. Web API	
 --------------  
 i.   Fetch API
 ii.  worker API
@@ -1537,7 +1537,7 @@ localStorage.setItem("name", "John Doe");
 sessionStorage.setItem("name", "John Doe");
 
 --------------
-36. Summery
+38. Summery
 --------------
 1. Function Arguments:
 Using Funcion Arguments we can access function parameter within the Function.
