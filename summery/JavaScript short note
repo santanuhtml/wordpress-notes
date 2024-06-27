@@ -33,7 +33,9 @@ JavaScript short note
 32. JavaScript Closures
 33. JavaScript Class
 34. DOM Details
-35. Web API	
+35. setInterval() and setTimeout()
+36. JS Async
+37. Web API	
 36. Summery
 --------------
 1. Introduction
@@ -1366,8 +1368,93 @@ iii. DOM Navigation
 > HTMLCollection items can be accessed by their name, id, or index number.
   but NodeList items can only be accessed by their index number.
   
-  
-  
+--------------
+35. setInterval() and setTimeout()
+--------------  
+
+--------------
+36. JS Async
+-------------- 
+ -----------------------------------
+. JS Async
+    i. Asynchronous JavaScript
+    ii.  Callbacks
+    iii. Async/Await 
+   
+--------------------
+i. Asynchronous JavaScript
+--------------------
+. JavaScript is Synchronous, means it read code step by setp.
+. If any { part of code } we need to execute leter then we have to 
+  use setTimeout() function to make JavaScript Asynchronous.
+
+------------
+Example 1:
+Synchronous
+------------
+console.log('Print line 1.');
+console.log('Print line 2.');
+console.log('Print line 3.');
+
+------------
+Example 2:
+JavaScript Asynchronous behaviour using setTimeout()
+------------
+console.log('Print line 1.');
+setTimeout(function(){
+  console.log('Print line 2.');
+},0)
+console.log('Print line 3.');
+
+------------
+Example 3:
+JavaScript Asynchronous behaviour using setInterval()
+------------
+console.log('Print line 1.');
+setInterval(function(){
+    console.log('Print line 2.');
+},1000)
+console.log('Print line 3.');
+
+--------------------
+ii.  Callbacks
+--------------------
+. In JavaScript we crate independent function for each task.
+. to perform any single task we may connect two independent function 
+  using callback features.
+. for callback features, use a function as a paramater to another function.
+---------
+<script>
+function display(some) {
+  console.log(some);
+}
+function calculator(num1, num2, testcallback) {
+  let sum = num1 + num2;
+  if(testcallback){
+    testcallback(sum);
+  }
+}
+calculator(5, 5, display);
+</script>
+
+--------------------
+iii. Async/Await 
+--------------------
+. If we add 'async' before a function, then the function 
+  becomes Asynchronous
+. since the function becomes Asynchronous, so to maintain 
+  the order we use 'Await' within the function.
+
+---------
+<script>
+async function getData(){
+  const response = await fetch("https://dummyjson.com/users");
+  const data = await response.text(); 
+  console.log(data);
+}
+getData();
+</script>
+
 --------------
 35. Web API	
 --------------  
@@ -1379,19 +1466,6 @@ v.   Storage API
 
 --------------
 i.   Fetch API
---------------
-> Using promise.js
-------------
-const display = document.getElementById('demo');
-
-function getData(){
-    fetch("https://dummyjson.com/users")
-        .then(res => res.text())
-        .then(data => {
-            display.innerText = data;
-        })
-}
-
 ------------
 > Using ASYNC
 ------------
@@ -1411,7 +1485,6 @@ It is a JavaScript process that runs in the background,
 without affecting the performance of the page.
 -------------
 STEPs:
--------------
 -------------
 ii. worker API
 -------------
