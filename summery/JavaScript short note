@@ -1370,10 +1370,11 @@ iii. DOM Navigation
 --------------
 35. Web API	
 --------------  
-i. Fetch API
+i.  Fetch API
+ii. worker API
 
 --------------
-i. Fetch API
+i.  Fetch API
 --------------
 > Using promise.js
 ------------
@@ -1399,6 +1400,39 @@ async function getData(){
     display.innerText= data;
 }
 
+-------------
+ii. worker API
+-------------
+> define Web Worker using 
+  new Worker("js/worker.js")
+
+> On 'worker.js' when task done, send data using
+  postMessage()
+  
+> when the message is received, 'onmessage' event handler triggered .	
+ 
+> This event handler updates the data.
+
+-------------
+Example:
+-------------
+<button onclick="alert('Hellow')">Alert</button>
+<p id="demo"></p>
+<script>
+let w = new Worker("js/worker.js");
+w.onmessage  = function(event){
+  document.getElementById('demo').innerHTML = event.data;
+}
+</script>
+
+-------------
+js/worker.js
+-------------
+let i = 0;
+while (i<1000000000){
+    i++;
+}
+postMessage(i);
 
 
 ---------
