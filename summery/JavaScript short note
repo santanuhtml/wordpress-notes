@@ -1371,6 +1371,13 @@ iii. DOM Navigation
 --------------
 35. setInterval() and setTimeout()
 --------------  
+setTimeout(function(){
+  console.log('test')
+},3000);							
+
+setInterval(function(){
+  console.log('test')
+},3000);									
 
 --------------
 36. JS Async
