@@ -662,6 +662,14 @@ Example: 1
   });
 </script>
 
+---------
+Example: 2
+DOMContentLoaded event fires when the HTML document has been completely
+---------
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+});
+
 ----------
 * Bubbling(Default) and Capturing:
 ----------
