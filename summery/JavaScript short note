@@ -75,8 +75,8 @@ i.   HTML content using      .innerHTML
 ii.  HTML css using          .style
 iii. HTML attribute using    .src 
 iv.  HTML form attribut      .type
-v.   HTML form input	       .value
-vi.  HTML page URL	         .URL
+v.   HTML form input	      .value
+vi.  HTML page URL	      .URL
 
 --------------
 Example 1
@@ -1058,6 +1058,79 @@ let y = (0b110010).toString(10);
   Global scope
    - Automatically Global
   Local scope
+
+--------
+Block Scope
+--------
+. let and const are Block Scope.
+
+. Variables with 'let' and 'const' declared inside a { } block 
+  cannot be accessed outside the block:
+. Example:
+  {
+    let x = 2;
+  }
+   // x can NOT be used here
+
+. var not a block scope.
+
+. Varibale declear with var  inside a { } block 
+  can be accessed from outside the block.
+. Example:
+  {
+    var x = 2;
+  }
+  // x CAN be used here
+
+--------
+Function Scope
+--------
+. Variables defined inside a function with 'var', 'let' and 'const'
+  are not accessible (visible) from outside the function.
+
+  They all have Function Scope.
+
+. Example:
+  ------------
+  function myFunction() {
+     var carName = "Volvo";   // Function Scope
+  }
+  ------------
+  function myFunction() {
+    let carName = "Volvo";   // Function Scope
+  }
+  ------------
+  function myFunction() {
+   const carName = "Volvo";   // Function Scope
+  }
+  ------------
+
+Note:
+. ** Var function scope.
+. ** let and const is block scope and function scope.
+
+--------------------
+Global Scope
+--------------------
+. Variables declared outside any function and block Scope have Global Scope.
+. Global variables can be accessed from anywhere in a JavaScript program.
+
+--------------------
+Automatically Global
+--------------------
+. Inside a function if we assign a variable without declared it,
+  then it will be automatically GLOBAL variable.
+
+Example:
+--------------------
+function myFunction() {
+  carName = "Volvo";
+}
+
+// code here can use carName
+
+myFunction();
+
 
 
 --------------
