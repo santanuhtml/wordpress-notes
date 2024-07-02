@@ -113,6 +113,41 @@ x = 5; [variable assin]
 var x = 5; [variable Initialize]
 let x = 5; [variable Initialize]
 
+
+------------
+I. var
+------------
+Example:
+var x = 5;
+var x = 10;
+console.log(x);
+//output: 10
+
+------------
+II. let
+------------
+i. Variable define with 'let' can not redefine but we can assign it.
+
+Example:
+let x = 5;   
+let x = 10;  // X Again redeclear not applicable
+console.log(x);
+[Syntex Error: x has already decleared]
+
+
+let x = 5;
+var x = 10;
+console.log(x);
+[Syntex Error: x has already decleared]
+
+
+Correct Way:
+Example:
+let x = 5;
+    x = 10;
+console.log(x);
+
+
 ----
 Variable Hoting:
 ----
