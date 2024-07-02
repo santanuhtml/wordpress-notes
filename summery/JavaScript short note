@@ -10,6 +10,7 @@ JavaScript short note
 9. JavaScript Object
 10. JavaScript Events
 11. String Function/Method
+24. Regular Expressions
 12. Templates literals
 13. JavaScript Array
 14. Array Function/Method
@@ -22,7 +23,6 @@ JavaScript short note
 21. JavaScript Sets
 22. JavaScript Maps
 23. JavaScript Conversion
-24. Regular Expressions
 25. JavaScript Errors
 26. JavaScript Scope
 27. Global Variables
@@ -32,7 +32,7 @@ JavaScript short note
 31. JavaScript Object Details
 32. JavaScript Closures
 33. JavaScript Class
-34. DOM Details
+34. DOM
 35. setInterval() and setTimeout()
 36. JS Async
 37. Web API	
@@ -50,24 +50,11 @@ JavaScript short note
 2. DOM
 --------------
 . DOM stands for Document Object Model.
-
-<p id="demo">Replace This</p>
-<script>
-  document.getElementById('demo').innerHTML = "Hello World!";
-</script>
+. Using DOM JavaScript can access HTML elements and can change, add, delete all the elements   .
+. Also we can say DOM works as a interface/Connector between HTML and JavaScript.
 
 --------------
-i. JavaScript can change -
---------------
-  i.   HTML content using      .innerHTML
-  ii.  HTML css using          .style
-  iii. HTML attribute using    .src 
-  iv.  HTML form attribut      .type
-  v.   HTML form input		.value
-  vi.  HTML page URL		.URL
-  
---------------
-ii. List of DOM methods:
+i. List of DOM methods:
 --------------  
 document.getElementById(id)	
 document.getElementsByClassName(name)
@@ -78,23 +65,18 @@ document.querySelectorAll('.class | #id | elementName')
 ** document.getElementsByTagName() => This method returns an HTMLCollection Object
 ** document.querySelectorAll()     => This method returns an NodeList object.
 
+> HTMLCollection items can be accessed by their name, id, or index number.
+  but NodeList items can only be accessed by their index number.
+
 ------------
-iii. List of DOM Properties:
+ii. List of DOM Properties: using those we can change html code
 ------------
 i.   HTML content using      .innerHTML
 ii.  HTML css using          .style
 iii. HTML attribute using    .src 
 iv.  HTML form attribut      .type
-v.   HTML form input		     .value
-vi.  HTML page URL		       .URL
-
-------------
-iii. DOM Event
-------------
-some of DOM Event are:
-onclick
-onmouseover
-onmouseout
+v.   HTML form input	       .value
+vi.  HTML page URL	         .URL
 
 --------------
 Example 1
@@ -105,21 +87,7 @@ let p = document.querySelector('p');
 p.style.color="#f00";
 p.style.fontSize="30px";
 </script>
-  
---------------
-Example 2
---------------   
-<input type="text" id="demo" name="number" placeholder="Type Number" />
-<input type="submit" onclick="myFunction()">
-<div id="result"></div>
-<script>
- function myFunction(){
-    let x = document.getElementById('demo').value;
-    x = x.toUpperCase();
-    document.getElementById('result').innerHTML = x;
- }
-</script>  
-  
+    
 --------------
 3. JavaScript Output  
 --------------
@@ -236,14 +204,17 @@ typeof null                // object
 --------------
 8. JavaScript Function:
 --------------
-Basic Example1:
+i. Default Parameter
+--------------
 function name(firstName='Santanu',lastName){
   console.log('My name is'+ ' ' + firstName + ' ' + lastName);
 }
 name('Santanu', 'Chowdhury');
 //output: My name is Santanu Chowdhury.
 
-Basic Example2:
+--------------
+ii. (...params)
+--------------
 function name(firstName,...params){
   console.log(firstName);
   console.log(params);
@@ -254,9 +225,8 @@ name('Santanu', 1,2,3,4,5);
 Santanu
 [1, 2, 3, 4, 5]
 6
-
 ---------
-i. Function Arguments:
+iii. Function Arguments:
 ---------
 . Using Funcion Arguments we can access function parameter within
   the Function.
@@ -272,12 +242,12 @@ name('Santanu', 'Chowdhury');
 
 
 ------------
-ii. Function Return
+iv. Function Return
 ------------
 . When JavaScript function reaches a  'return' statement, then the 
   function stops executing. If this function call from a statement, then
   return that value.
-. If we use 'return'  then we can store the return value under a variable.
+. If we use 'return' then we can store the return value under a variable.
 
 Example1:
 function name(firstName,lastName){
@@ -303,7 +273,7 @@ console.log(x);
   	  undefined
   
 ---------
-iii. Anonymous Function:
+v. Anonymous Function:
 ---------
 Function without a name called anonymous function.
 
@@ -316,7 +286,7 @@ Example:
 
 
 ---------
-iv. Self-Invoking Functions / IIFE
+vi. Self-Invoking Functions / IIFE
 ---------
 (function() {
   console.log('Hello World');
@@ -324,7 +294,6 @@ iv. Self-Invoking Functions / IIFE
 
 Note:
 . It is also a Anonymous function 
-
 
 --------------
 9. JavaScript Object
@@ -354,30 +323,30 @@ console.log(me.skills.webDesing);
 console.log(me.office());
 
 Note:
-firstName called key
-'Santanu' called value
+'firstName' called key
+'Santanu'   called value
 
 
 ---------
 ii. Object Methods
 ---------
-1. Object.assign(target, source)		
+I. Object.assign(target, source)		
    > use to Copy key and value from source object to target object
 
-2. Object.entries()
+II. Object.entries()
    > returns key and value as an array with in a object.[Object to MAP]
    > make it simple for object loop.
 
-3. Object.fromEntries()
+III. Object.fromEntries()
    > Map to Object
    
-4. Object.keys()
+IV. Object.keys()
 
-5. Object.values()
+V. Object.values()
 
 Example:
 --------------
-1. Object.assign()
+I. Object.assign()
 --------------
 <script>
   const details = {
@@ -393,8 +362,8 @@ Example:
 </script>
 
 --------------
-2. Object.entries()
-   Object to Map
+II. Object.entries()
+    Object to Map
 --------------
 <script>
 const details = {
@@ -421,7 +390,7 @@ document.getElementById("demo").innerHTML = text;
 </script>
 
 --------------
-3. Object.fromEntries()
+III. Object.fromEntries()
    > Map to Object
 --------------
 <script>
@@ -434,13 +403,13 @@ document.getElementById("demo").innerHTML = text;
 </script>
 
 --------------
-4. Object.keys()
+IV. Object.keys()
 --------------
 let keys = Object.keys(me);
 console.log(keys);
 
 --------------
-5. Object.values()
+V. Object.values()
 --------------
 let values = Object.values(me);
 console.log(values);
@@ -467,8 +436,20 @@ console.log(title);
 console.log(webDesing);
 console.log(all);
 
+-------
+v. For in loop in Object
+-------
+const me = {
+firstName:   'Santanu',
+lastName:    'Chowdhury'
+};
+
+for(let x in me){
+  console.log(x);
+}
+
 ---------
-v. this
+vi. this
 ---------
 . With in Object if we use this then it indicate the Parent object.
 
@@ -490,7 +471,7 @@ console.log(me.workSummery());
 ----
 
 ---------
-vii. call()
+viii. call()
 ---------
 . call is Object method. 
 . Using call(), an object can use a method belonging to another object.
@@ -525,7 +506,7 @@ const person2 = {
 console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
 
 ---------
-viii. Properties can be changed, added, and deleted, 
+ix. Properties can be changed, added, and deleted, 
 ---------
 const me = {
    name : 'Santanu Chowdhury',
@@ -538,7 +519,7 @@ const me = {
    delete me.eye;      // Delete eye
    
 ---------
-ix. Adding a Method to an Object
+x. Adding a Method to an Object
 ---------
 const me = {
    firstName:   'Santanu',
@@ -551,7 +532,7 @@ me.office = function(){
 console.log(me.office());
 
 ---------
-x. use Built-In Methods on Object Method
+xi. use Built-In Methods on Object Method
 ---------
 const me = {
     firstName :   'Santanu',
@@ -572,9 +553,6 @@ II. Mutable:
 --------------
 10. JavaScript Events
 --------------
-syntax:
-<element event="js code">
-
 Common HTML events:
   onclick
   onchange
@@ -582,16 +560,10 @@ Common HTML events:
   onmouseout
   onkeydown
   onload
-  addEventListener
+  > addEventListener
 
 ---------
 Example 1:
----------
-<h1 onclick="this.style.color='red'">Hello World!</h1>
-<h1 onclick="this.innerHTML='I love JavaScript'">Hello World!</h1>
-
----------
-Example 2:
 ---------
 <button onclick="notice()">Alert</button>
 <script>
@@ -600,30 +572,50 @@ function notice(){
 }
 </script>
 
+--------------
+Example 2:
+--------------   
+<input type="text" id="demo" name="number" placeholder="Type Number" />
+<input type="submit" onclick="myFunction()">
+<div id="result"></div>
+<script>
+ function myFunction(){
+    let x = document.getElementById('demo').value;
+    x = x.toUpperCase();
+    document.getElementById('result').innerHTML = x;
+ }
+</script>  
+
 ---------
 Example 3:
 ---------
+<h1 onclick="this.style.color='red'">Hello World!</h1>
+<h1 onclick="this.innerHTML='I love JavaScript'">Hello World!</h1>
+
+---------
+Example 4:
+---------
 <button onclick="test(this)">Alert</button>
-  <p onclick="test(this)">Alert</p>
-  <script>
+<p onclick="test(this)">Alert</p>
+<script>
   function test(e){
    e.innerHTML = "test"
   }
 </script>
 
 ---------
-Example 4:
+Example 5:
 ---------
 <button onclick="test(event)">Alert</button>
-  <p onclick="test(event)">Alert</p>
-  <script>
+<p onclick="test(event)">Alert</p>
+<script>
   function test(e){
-   e.target.innerHTML = "test"
+    e.target.innerHTML = "test"
   }
-  </script>  
+</script>  
 
 ---------
-Example 5:
+Example 6:
 ---------
 <Button id="buy1">Buy Now</Button>
 <Button id="buy2">Buy Now</Button>
@@ -642,13 +634,11 @@ window.open("http://www.google.com", '_blank');
 </script>
 
 ---------
-addEventListener
+> addEventListener
 ---------
 . Here we don't need to add JS code under inline HTML.
-
 . syntax:
   element.addEventListener('event', function, useCapture);
-
 . *** 'event' => 'click' in place of 'onclick'
 
 ---------
@@ -664,7 +654,7 @@ Example: 1
 
 ---------
 Example: 2
-DOMContentLoaded event fires when the HTML document has been completely
+DOMContentLoaded event fires when the HTML document has been loaded completely
 ---------
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
@@ -704,6 +694,36 @@ xi.   includes()  //true OR false
 *** replace with Regular Expressions
 let x = santanu.jpg
 x = x.replace(/.jpg/igm, '.webp');
+
+
+--------------
+24. Regular Expressions
+--------------
+. To Search text and replace text we use Regular Expessions.
+
+i => It is case-insensitive modifier
+g => It is global match modifier.
+m => It is multiline matching modifier.
+
+Search()    //return index number
+match()     //return Array
+replace() 
+
+Example:
+--------------
+let x = "I love HTML.  html is scripting language";
+    x = x.replace(/html/igm, "JavaScript");
+    console.log(x);
+--------------
+
+Methods:
+. test()    //return True OR False
+. exec() 
+
+Example:
+let x = 'I love HTML.';
+   console.log(/html/i.test(x));
+   //Output : true
 
 
 --------------
@@ -761,21 +781,21 @@ v. Difference of Array and Object
 const me = ['Santanu', 'Chowdhury', 'Indian'];
 
 i.    me.length
-ii.   me[me.length-1];   // last Array 
-iii.  me.push('Coding');
-iv.   me.unshift('Mr');
-v.    me.pop();
-vi.   me.shift();
+ii.   me[me.length-1];   	// last Array 
+iii.  me.push('Coding'); 	// Add from last
+iv.   me.unshift('Mr');  	// Add from fast
+v.    me.pop();          	// Remove from last
+vi.   me.shift();        	// Remove from fast
 vii.  delete me[1];
-viii. me.splice(2,0,'Coding','Yahama');	
+viii. me.splice(2,0,'Code','Car');	
 ix.   me.slice(0,2);
 x.    array1.concat(array2,array3); 
 xi.   const all  = [...me, ...more];
 xii.  const copyMe = [...me];
-xiii. sort()
-xiv.  me.toString();
+xiii. sort()			//Alphabet short
+xiv.  me.toString();     	//boolean to binary and binary and boolean
 xv.   me.join("+"); 
-xvi.  Array.from()
+xvi.  Array.from()		//String to Array	
       let x = "Lorem";
       x = Array.from(x);
       console.log(x);
@@ -1015,36 +1035,6 @@ let y = (0b110010).toString(10);
 
 
 --------------
-24. Regular Expressions
---------------
-. To Search text and replace text we use Regular Expessions.
-
-i => It is case-insensitive modifier
-g => It is global match modifier.
-m => It is multiline matching modifier.
-
-Search()    //return index number
-match()     //return Array
-replace() 
-
-Example:
---------------
-let x = "I love HTML.  html is scripting language";
-    x = x.replace(/html/igm, "JavaScript");
-    console.log(x);
---------------
-
-Methods:
-. test()    //return True OR False
-. exec() 
-
-Example:
-let x = 'I love HTML.';
-   console.log(/html/i.test(x));
-   //Output : true
-
-
---------------
 25. JavaScript Errors
 --------------
    syntax:
@@ -1073,10 +1063,10 @@ let x = 'I love HTML.';
 --------------
 27. Global Variables
 --------------
-. var is Global varibale because it belong to the Window Object.
+. 'var' is Global varibale because it belong to the Window Object.
   simply var variable store in Window object.
 
-. let is not Global varibale because it not belong to the Window Object.
+. 'let' is not Global varibale because it not belong to the Window Object.
 
 . Example
   var aName1 = "TATA";
@@ -1108,6 +1098,7 @@ let x = 'I love HTML.';
      }
   }
 
+. class is the buleprint for each object.
 -------
 Example:1
 -------
@@ -1226,8 +1217,7 @@ console.dir(y.myadd());
 iv. call()
 ---------
 . call is Object method. 
-. Using call() method we call an object method and pass the value
-  form the another Object.
+. Using call(), an object can use a method belonging to another object.
 ---------
 Example 1:
 ---------
@@ -1316,66 +1306,6 @@ add();
 --------------
 ** iii. Class Inheritance
 
---------------
-34. DOM Details
---------------
-. DOM stands for Document Object Model.
-. Using DOM JavaScript can access HTML elements and can change, add, delete all the elements   .
-. Also we can say DOM works as a interface/Connector between HTML and JavaScript.
-
----------
-i. addEventListener
----------
-. Here we don't need to add JS code under inline HTML.
-. syntax:
-  element.addEventListener('event', function, useCapture);
-. *** 'event' => 'click' in place of 'onclick'
-
----------
-Example 1:
----------
-<button id="button">Click</button>
-<script>
-  let button = document.getElementById('button');
-  button.addEventListener('click', function(){
-    console.log('Hello World!');
-  });
-</script>
-
----------
-Example 2:
----------
-<a href="#" id="button">Click</a>
-<script>
-  function myNew() {
-     window.open('http://www.w3schools.com', '_blank');
-     button.innerHTML ="Thank You";
-  }
-  let button = document.getElementById('button');
-  button.addEventListener('click', myNew);
-</script>
-
----------
-*** Watch More Example
-
----------
-ii. Event Bubbling or Event Capturing.
----------
-. In bubbling the inner most element's event is handled first and then the outer. 
-. In capturing the outer most element's event is handled first and then the inner.
-
----------
-iii. DOM Navigation
----------
----------
-** HTMLCollection and NodeList
----------
-> 'getElementsByTagName()' method returns an HTMLCollection Object.
-> 'querySelectorAll()' method returns an NodeList object.
-
-> HTMLCollection items can be accessed by their name, id, or index number.
-  but NodeList items can only be accessed by their index number.
-  
 --------------
 35. setInterval() and setTimeout()
 --------------  
@@ -1496,7 +1426,7 @@ i.   Fetch API
 -------------
 ii.  worker API
 -------------
-It is a JavaScript process that runs in the background,
+It is a 'JavaScript Process' that runs in the background,
 without affecting the performance of the page.
 -------------
 STEPs:
@@ -1577,19 +1507,45 @@ Using a function when we create an Object is called Object Constructor.
 
 8 call()
 . call is Object method. 
-. Using call() method we call an object method and pass the value
-  form the another Object.
 
 9. apply()
 
 10. Closures:
 Using Closures we can call a child function from outside the self-invoking Nested Parent function.
   
-11. Event Bubbling or Event Capturing.
+11. Event Bubbling(Default) or Event Capturing.
 
+--------------
+39. FAQ
+--------------
+How to remove duplicates from an array?
+In JavaScript all functions are Method?
+Find the largest value from an Array?
+--------------
+How to remove duplicates from an array?
 
+const x = ['HTML','CSS','JavaScript', 'HTML', 'Bootstrap']  
+console.log(new Set([...x]));
+//output: ['HTML', 'CSS', 'JavaScript', 'Bootstrap']
 
+--------------
+In JavaScript all functions are Method?
+--------------
+A function belogn to any object called Method. 
+since a simple function also belog to the Window Object, 
+then the simple function also a Method.
+So, Yes all function in JavaScript are Methods.
 
+function myFunction() {
+  console.log('This is Function Declarations')
+}
+myFunction();
+window.myFunction();
+
+--------------
+Find the largest value from an Array?
+--------------
+console.log(Math.max.apply(null,[1,2,3]));
 
 
 
