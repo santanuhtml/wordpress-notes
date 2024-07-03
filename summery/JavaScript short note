@@ -104,7 +104,7 @@ I. Creating new HTML element using Node
 </script>
 
 ------------
-I. Creating new HTML element anywere - insertBefore()
+II. Creating new HTML element anywere - insertBefore()
 ---------
 <div id="div1">
   <p id="p1">This is a paragraph.</p>
