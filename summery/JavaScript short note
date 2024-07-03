@@ -506,39 +506,109 @@ console.log(me.workSummery());
 ----
 
 ---------
-viii. call()
+call()
 ---------
-. call is Object method. 
-. Using call(), an object can use a method belonging to another object.
+> With the call() method, an object can borrow a method from another object.
+> Here we can add more arguments/parameters separately
 ---------
 Example 1:
 ---------
-const person1 = {
-     fullName: function() {
-     return this.firstName + " " + this.lastName;
-   }
-}
-const person2 = {
-  firstName:"Santanu",
-  lastName: "Chowdhury",
-}
-console.log(person1.fullName.call(person2));
+    const globalMethod = {
+      fullName: function(skill="", citizen="") {
+        return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+      }
+    }
+    const person1 = {
+      firstName:"Santanu",
+      lastName: "Chowdhury",
+    }
+    const person2 = {
+      firstName:"Mayank",
+      lastName: "Chowdhury",
+    }
+   const x = globalMethod.fullName.call(person1);
+   console.log(x);
 
 ---------
 ** Passing Extra values
 Example 2:
 ---------
+    const globalMethod = {
+      fullName: function(skill="", citizen="") {
+        return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+      }
+    }
+    const person1 = {
+      firstName:"Santanu",
+      lastName: "Chowdhury",
+    }
+    const person2 = {
+      firstName:"Mayank",
+      lastName: "Chowdhury",
+    }
+   const x = globalMethod.fullName.call(person1, "HTML5", "CSS3");
+   console.log(x);
+
+
+---------
+apply()
+---------
+> With the apply() method, an object can borrow a method from another object.
+> Here we can add more arguments/parameters as an Array.
+> We can find max value for an Array
+  Math.max.apply(null, [Array]);
+  
+---------
+Example 1:
+---------  
+const globalMethod = {
+  fullName: function(skill="", citizen="") {
+   return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+  }
+}
 const person1 = {
- fullName: function(skill, citizen) {
- return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
-   }
+  firstName:"Santanu",
+  lastName: "Chowdhury",
 }
 const person2 = {
- firstName:"Santanu",
- lastName: "Chowdhury",
+  firstName:"Mayank",
+  lastName: "Chowdhury",
 }
+const x = globalMethod.fullName.call(person1, ['HTML5', 'CSS3']);
+console.log(x);
 
-console.log(person1.fullName.call(person2, 'Web Designer', 'Indian'));
+---------
+Example 2: Find the lagest value form an Array
+--------- 
+console.log(Math.max.apply(null,[1,2,3]));
+
+  
+---------
+bind()
+---------
+> With the bind() method, an object can borrow a method from another object.
+> Here it is to create a new function. 
+
+---------
+Example 1:
+--------- 
+const globalMethod = {
+      fullName: function(skill="", citizen="") {
+        return this.firstName + " " + this.lastName + " " +skill + " " +citizen;
+      }
+    }
+    const person1 = {
+      firstName:"Santanu",
+      lastName: "Chowdhury",
+    }
+    const person2 = {
+      firstName:"Mayank",
+      lastName: "Chowdhury",
+    }
+   const x = globalMethod.fullName.bind(person1);
+   console.log( x('HTML5', 'CSS3'));
+
+--------- 
 
 ---------
 ix. Properties can be changed, added, and deleted, 
@@ -1654,8 +1724,3 @@ window.myFunction();
 Find the largest value from an Array?
 --------------
 console.log(Math.max.apply(null,[1,2,3]));
-
-
-
-
-
