@@ -87,7 +87,39 @@ let p = document.querySelector('p');
 p.style.color="#f00";
 p.style.fontSize="30px";
 </script>
-    
+
+------------
+iii. DOM Node
+------------
+I. Creating new HTML element using Node
+---------
+<div id="div1">
+</div>
+<script>
+  let addPara = document.createElement('p');
+  let addText = document.createTextNode('Hello World');
+      addPara.appendChild(addText);
+  let parent = document.getElementById('div1');
+      parent.appendChild(addPara);
+</script>
+
+------------
+I. Creating new HTML element anywere - insertBefore()
+---------
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+  <p id="p3">This is another paragraph.</p>
+</div>
+<script>
+  let addPara = document.createElement('p');
+  let addText = document.createTextNode('Hello World');
+      addPara.appendChild(addText);
+  let parent = document.getElementById('div1');
+  let p2 = document.getElementById('p2');
+      parent.insertBefore(addPara, p2);
+</script>
+
 --------------
 3. JavaScript Output  
 --------------
