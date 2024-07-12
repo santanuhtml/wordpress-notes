@@ -1,0 +1,279 @@
+--------------
+MCQ:1
+--------------
+(function(){
+    var a = b = 3;
+})();
+
+console.log(typeof a);  //undefined
+console.log(typeof b);  //number
+
+> a is function scope so not accable outside the functoin.
+> b is not declared under the function so it becoms Gloal scope and
+can accable anyware
+
+--------------
+MCQ:2
+--------------
+var myArray = ['a', 'b', 'c', 'd', 'e'];
+myArray.length = 3;
+console.log(myArray); // ['a','b','c']
+
+--------------
+MCQ:3
+--------------
+let arr = [1, 2, 3];
+arr[10] = 99;
+console.log(arr.length); //11
+
+
+--------------
+MCQ:4
+--------------
+var foo = [];
+foo[13] = 42;
+console.log(foo.length); //14
+
+> on empty array we assing value 42 at the position 14 (index 13)
+
+--------------
+MCQ:5
+--------------
+let a = 1;
+let b = 1;
+console.log(a == b);  //true
+console.log(a === b); //true
+
+> Since both a and b are primitive values (numbers) and 
+  they hold the same value so true both case
+
+--------------
+MCQ:6
+--------------
+let a = [1, 2, 3];
+let b = [1, 2, 3];
+console.log(a == b);  //false
+console.log(a === b); //false
+  
+> Even though a and b contain the same elements, 
+  they are different objects in memory.   
+
+> Since a and b are different objects, the result will be false.
+  for both case
+
+
+--------------
+MCQ:6
+--------------
+let x = 21;
+let girl = function () {
+    console.log(x);
+    let x = 20;
+};
+girl();
+
+// ReferenceError
+
+--------------
+MCQ:7
+--------------
+function sayHello() {
+    return (() => 0)();
+}
+console.log(typeof sayHello()); //number
+
+> since (function() => 0)(); is IIFE,  it's immediately executes and returns 0.
+
+--------------
+MCQ:8
+--------------
+console.log(typeof NaN); //number
+
+
+--------------
+MCQ:9
+--------------
+let a = 10;
+let b = a;
+b = 20;
+console.log(a);
+
+--------------
+MCQ:10
+--------------
+let a = [1, 2, 3];
+let b = a;
+b.push(4);
+console.log(a);
+//[1, 2, 3, 4]
+
+--------------
+MCQ:11
+--------------
+let a = [1, 2, 3];
+let b = [...a];
+b.push(4);
+console.log(a);
+//[1, 2, 3]
+
+--------------
+MCQ:12
+--------------
+let a = [1, 2, 3];
+let b = a;
+b.push(4);
+console.log(a);
+console.log(b);
+//[1, 2, 3, 4]
+//[1, 2, 3, 4]
+
+--------------
+MCQ:13
+--------------
+let a = [1, 2, 3];
+let b = a;
+b = [1, 2, 3, 4];
+console.log(a);
+console.log(b);
+//[1, 2, 3]
+//[1, 2, 3, 4]
+
+--------------
+MCQ:14
+--------------
+let x = 5;
+let y = "5";
+console.log(x == y);   //true
+console.log(x === y);  //false
+
+
+--------------
+MCQ:15
+--------------
+for (var i = 0; i < 3; i++) {
+    console.log(i);
+}
+//1 2 3
+
+
+--------------
+MCQ:16
+--------------
+for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 1000);
+}
+
+//3 3 3
+
+--------------
+MCQ:17
+--------------
+console.log(typeof null); //object
+
+--------------
+MCQ:18
+--------------
+let obj = {
+    a: 1,
+    b: 2,
+    a: 3
+};
+console.log(obj.a); // 3	
+
+--------------
+MCQ:19
+--------------
+When an operation like subtraction (-), multiplication (*), 
+division (/), or modulus (%) is performed, all the values that 
+are not numbers are converted into the number data type, as these 
+operations can be performed between numbers only.
+
+let w = 10 - '5';
+let x = 10 * '5';
+let y = 10 / '5';
+let z = 10 % '5';
+
+console.log(w); // 5
+console.log(x); // 50 
+console.log(y); // 2 
+console.log(z); // 0
+
+
+--------------
+MCQ:20
+--------------
+ let foo = "Hello";
+(function() {
+    let foo = "World";
+    console.log(foo);
+})();
+console.log(foo);
+//World
+//Hello
+
+--------------
+MCQ:21
+--------------
+function foo() {
+  return 2;
+}
+console.log(foo()); 
+//2
+
+--------------
+MCQ:22
+--------------
+function test() {
+  console.log(a);
+  console.log(foo());
+  var a = 1;
+  function foo() {
+    return 2;
+  }
+}
+test();
+
+//undefined
+//2
+
+--------------
+MCQ:23
+--------------
+console.log(1 < 2 < 3);  //true
+console.log(3 > 2 > 1);  //false
+
+--------------
+MCQ:24
+--------------
+What is null in JavaScript?
+> absence of value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
