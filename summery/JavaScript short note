@@ -120,6 +120,14 @@ II. Creating new HTML element anywere - insertBefore()
       parent.insertBefore(addPara, p2);
 </script>
 
+------------
+III. Other Node uses:
+---------
+x.classList.add('className');
+e.target.classList.toggle('checked');
+e.target.parentElement.remove();
+
+
 --------------
 3. JavaScript Output  
 --------------
@@ -1339,8 +1347,29 @@ car2.intro('well');
 . Using JSON we can get data and display on our web page.
 . JSON is language independent.
 
-JSON.parse();
-JSON.stringify();
+. JSON string:
+  let x = '{"name":"John", "age":30, "car":null}'
+
+. JSON strings into JavaScript objects:
+  JSON.parse(x)
+
+. object into a JSON string:
+  JSON.stringify(x)
+
+* Local storage accept JSON data as a string so we use 
+  JSON.stringify() to add local storage.
+---------------
+Example:
+---------------
+ <script>
+  let x = `{"name": "Santanu", "email": "santanuchowdhury04@gmail.com", "age":30, "car":null}`;
+  console.log(x);
+  let j = JSON.parse(x);
+  console.log(j)
+  let s = JSON.stringify(j);
+  console.log(s)
+</script>
+
 
 
 --------------
@@ -1596,16 +1625,38 @@ iii. Async/Await
   becomes Asynchronous
 . since the function becomes Asynchronous, so to maintain 
   the order we use 'Await' within the function.
+. Asynchronous function returns Promice, 
+  so to get value use .then  
 
 ---------
+Basic Structure
+---------
 <script>
-async function getData(){
-  const response = await fetch("https://dummyjson.com/users");
-  const data = await response.text(); 
-  console.log(data);
+ async function xyz(){
+   return "abc";
 }
-getData();
+xyz().then(res=>{
+  console.log(res);
+})
 </script>
+
+---------
+Example:
+---------
+<script>
+ async function getData(){
+  const response = await fetch("https://dummyjson.com/users");
+  const data = await response.json(); 
+  return data;
+}
+getData().then(res=>{
+  console.log(res);
+  res.users.map(x=>{
+  console.log(x.id);
+  })
+})
+</script>
+
 
 --------------
 37. Web API	
@@ -1688,8 +1739,135 @@ forward()
 ---------
 v.   Storage API
 ---------
-localStorage.setItem("name", "John Doe");
-sessionStorage.setItem("name", "John Doe");
+localStorage.setItem(data, "John Doe");
+sessionStorage.setItem(data, "John Doe");
+
+Example:
+--------------
+localStorage
+--------------
+<input type="text" id="js-valu1" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu2" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu3" placeholder="Add Location">
+  <br>
+  <button onclick="weatherCheck()">Button</button>
+  <script>
+   let value1 = document.getElementById('js-valu1');
+   let value2 = document.getElementById('js-valu2');
+   let value3 = document.getElementById('js-valu3');
+   function weatherCheck(){
+      saveData(value1.value, value2.value, value3.value, );
+    }
+   function saveData(v1, v2, v3){
+     localStorage.setItem('setv1', v1);
+     localStorage.setItem('setv2', v2);
+     localStorage.setItem('setv3', v3);
+   }
+   function showData(){
+    value1.value = localStorage.getItem('setv1');
+    value2.value = localStorage.getItem('setv2');
+    value3.value = localStorage.getItem('setv3');
+   }
+  showData();
+  </script>
+
+--------------
+localStorage with JSON
+--------------
+  <input type="text" id="js-valu1" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu2" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu3" placeholder="Add Location">
+  <br>
+  <button onclick="weatherCheck()">Button</button>
+  <button onclick="deleteStorage()">Delete Local Storage</button>
+  <script>
+   let value1 = document.getElementById('js-valu1');
+   let value2 = document.getElementById('js-valu2');
+   let value3 = document.getElementById('js-valu3');
+   function weatherCheck(){
+      saveData({'v1':value1.value, 'v2':value2.value, 'v3':value3.value});
+    }
+   function saveData(data){
+     localStorage.setItem('inputData', JSON.stringify(data));
+   }
+   function showData(){
+     let storeData = localStorage.getItem('inputData');
+     let data = JSON.parse(storeData);
+     value1.value = data.v1;
+     value2.value = data.v2;
+     value3.value = data.v3;
+   }
+  showData();
+  function deleteStorage(){
+    localStorage.removeItem('inputData');
+  }
+  </script>
+  
+--------------
+Delete localStorage
+-------------- 
+  <input type="text" id="js-valu1" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu2" placeholder="Add Location">
+  <br>
+  <input type="text" id="js-valu3" placeholder="Add Location">
+  <br>
+  <button onclick="weatherCheck()">Button</button>
+  <button onclick="deleteLocalStorage()">Delete Local Storage</button>
+  <script>
+   let value1 = document.getElementById('js-valu1');
+   let value2 = document.getElementById('js-valu2');
+   let value3 = document.getElementById('js-valu3');
+   function weatherCheck(){
+      saveData(value1.value, value2.value, value3.value, );
+    }
+   function saveData(v1, v2, v3){
+     localStorage.setItem('setv1', v1);
+     localStorage.setItem('setv2', v2);
+     localStorage.setItem('setv3', v3);
+   }
+   function showData(){
+    value1.value = localStorage.getItem('setv1');
+    value2.value = localStorage.getItem('setv2');
+    value3.value = localStorage.getItem('setv3');
+   }
+  showData();
+
+  function deleteLocalStorage(){
+    localStorage.removeItem('setv1');
+    localStorage.removeItem('setv2');
+    localStorage.removeItem('setv3');
+    value1.value="";
+    value2.value="";
+    value3.value="";
+  }
+  </script>
+
+--------------
+sessionStorage
+--------------
+<input type="text" id="js-valu1" placeholder="Add Location">
+  <br>
+  <button onclick="weatherCheck()">Button</button>
+  <script>
+   let value1 = document.getElementById('js-valu1');
+   function weatherCheck(){
+      saveData(value1.value);
+    }
+   function saveData(v1){
+     sessionStorage.setItem('setv1', v1);
+   }
+   function showData(){
+    value1.value = sessionStorage.getItem('setv1');
+   }
+  showData();
+  </script>
+
+
 
 --------------
 38. Summery
