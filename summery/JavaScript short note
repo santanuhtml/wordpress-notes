@@ -88,6 +88,26 @@ p.style.color="#f00";
 p.style.fontSize="30px";
 </script>
 
+--------------
+Example 2
+Select multiple elements with same class
+-------------- 
+<div class="list">
+1 
+</div>
+<div class="list">
+2 
+</div>
+<div class="list">
+3
+</div>
+<script>
+let lists = document.getElementsByClassName('list');
+for(list of lists){
+  console.log(list);
+}
+</script>
+
 ------------
 iii. DOM Node
 ------------
@@ -804,6 +824,30 @@ DOMContentLoaded event fires when the HTML document has been loaded completely
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
 });
+
+---------
+Example: 3
+select multiple element with class and add event
+---------
+<div class="list">
+1 
+</div>
+<div class="list">
+2 
+</div>
+<div class="list">
+3
+</div>
+<script>
+let lists = document.getElementsByClassName('list');
+for(list of lists){
+console.log(list);
+list.addEventListener('click', function(e){
+  e.target.style.color="#f00";
+  console.log(e.target);
+})
+}
+</script>
 
 ----------
 * Bubbling(Default) and Capturing:
@@ -1934,3 +1978,28 @@ window.myFunction();
 Find the largest value from an Array?
 --------------
 console.log(Math.max.apply(null,[1,2,3]));
+
+
+--------------
+Click Count
+--------------
+<button id="add" onclick="add()">Click Count 0 </button>
+<script>
+let x = document.getElementById('add');
+let c = 0;
+x.addEventListener('click', function(){
+c++;
+x.innerHTML = `Click Count ${c}`;
+})
+</script>
+
+--------------
+use of 'name' attribute
+--------------
+<form>
+<input type="text" name="display">
+<input type="button" value="1" onclick="display.value += '1'" />
+<input type="button" value="2" onclick="display.value += '2'" />
+<input type="button" value="+" onclick="display.value += '+'" />
+<input type="button" value="-" onclick="display.value += '-'" />
+</form>
