@@ -1084,7 +1084,22 @@ let result = isNaN(age)?"Given valu is not a number.":"Given valu is a number.";
 --------------
 19. JavaScript Loop
 --------------
-i. For loop in Array
+MAP Method:
+info.map(()=>());             //without curly braces {} use for a single expression. 
+info.map(() =>{return()})     //with curly braces {} must use return()  
+--------------
+const info = [
+    { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
+    { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
+    { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
+  ];
+  info.map((index, key) => (
+      console.log(`Name is` + ' ' + index.name),
+      console.log(`Price is` + ' ' + index.price),
+      console.log(`Product ID` + ' ' +key)
+  ));
+--------------
+ii. For loop in Array
 -------
 const me = ['Santanu', 'Chowdhury', 'Indian'];
 for (let i = 0; i < me.length; i++) {
@@ -1092,7 +1107,7 @@ console.log(me[i]);
 }
 
 -------
-ii. For in loop in Object
+iii. For in loop in Object
 -------
 const me = {
 firstName:   'Santanu',
