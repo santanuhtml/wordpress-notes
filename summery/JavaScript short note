@@ -1716,6 +1716,27 @@ getData().then(res=>{
 })
 </script>
 
+---------
+Example:
+fetch with try{} catch(error){}
+---------
+  async function getData(){
+    let url = `https://dummyjson.com/users`;
+    try{
+      const res = await fetch(url);
+      // if (!res.ok) {
+      //   throw new Error(`HTTP error! status: ${res.status}`);
+      // }
+      const data = await res.json();
+      return data;
+    }
+    catch(error){
+      console.error(error.message)
+    }
+  }
+  getData().then((data)=>{
+    console.log(data);
+  })
 
 --------------
 37. Web API	
