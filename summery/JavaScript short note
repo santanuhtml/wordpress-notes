@@ -69,6 +69,63 @@ document.querySelectorAll('.class | #id | elementName')
   but NodeList items can only be accessed by their index number.
 
 ------------
+Examples:
+------------ 
+document.getElementsByClassName()
+Note:Select All matched class
+------------ 
+<h2 class="example">A heading</h2>
+<p class="example">A paragraph.</p> 
+<script>
+const className = document.getElementsByClassName("example");
+console.log(className);
+console.log(className[0])
+for (let i = 0; i < className.length; i++) {
+className[i].style.backgroundColor = "red";
+}
+</script>
+
+------------
+document.getElementsByTagName()
+Note:Select first matched element
+------------
+<h2 class="example">A heading</h2>
+<p class="example">A paragraph.</p> 
+<script>
+const firstNode = document.querySelector(".example");
+firstNode.style.backgroundColor = "red";
+</script>
+
+------------
+document.querySelectorAll()
+Note: Select all matched class OR element
+------------
+<h2 class="example">A heading</h2>
+<p class="example">A paragraph.</p> 
+<script>
+const nodeList = document.querySelectorAll(".example");
+console.log(nodeList);
+console.log(nodeList[0])
+for (let i = 0; i < nodeList.length; i++) {
+  nodeList[i].style.backgroundColor = "red";
+}
+</script>
+------------
+document.getElementsByTagName()
+Note: Select all matched Element
+------------
+<h2 class="example">A heading</h2>
+<h2 class="example">A paragraph.</h2> 
+<script>
+const htmlCollection = document.getElementsByTagName("h2");
+console.log(htmlCollection);
+console.log(htmlCollection[0])
+for (let i = 0; i < htmlCollection.length; i++) {
+htmlCollection[i].style.backgroundColor = "red";
+}
+</script> 
+------------
+------------
 ii. List of DOM Properties: using those we can change html code
 ------------
 i.   HTML content using      .innerHTML
