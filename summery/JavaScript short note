@@ -561,6 +561,27 @@ console.log(objectDataType);
 </script>
 
 --------------
+IV. Object.freeze()
+    use to Freezing an object
+--------------
+const me = {
+  name: "Santnau",
+  age: 31,
+};
+
+me.age = 32;
+console.log(me)
+// Expected output: 32
+
+//freezeing the object
+Object.freeze(me);
+
+me.age = 33;
+console.log(me)
+// Expected output: 32
+
+
+--------------
 IV. Object.keys()
 --------------
 let keys = Object.keys(me);
