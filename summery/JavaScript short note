@@ -133,7 +133,7 @@ ii.  HTML css using          .style
 iii. HTML attribute using    .src 
 iv.  HTML form attribut      .type
 v.   HTML form input	      .value
-vi.  HTML page URL	      .URL
+vi.  HTML page URL	       .URL
 
 --------------
 Example 1
@@ -504,16 +504,19 @@ Example:
 I. Object.assign()
 --------------
 <script>
-  const details = {
-    firstName : "Santanu",
-    lastName  : "Chowdhury"
-  }
-  const skills = {
-    primarySkill : "HTML5",
-    secondarySkill: "JavaScr"
-  }
-  console.log(Object.assign(details, skills));
-  console.log(details);
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log(target);
+// Expected output: Object { a: 1, b: 4, c: 5 }
+
+console.log(returnedTarget);
+// Expected output: Object { a: 1, b: 4, c: 5 }
+
+console.log(returnedTarget === target);
+// Expected output: true
 </script>
 
 --------------
@@ -521,11 +524,20 @@ II. Object.entries()
     Object to Map
 --------------
 <script>
-const details = {
-   firstName : "Santanu",
-   lastName  : "Chowdhury"
+const me = {
+  name: "Santnau",
+  age: 32,
+};
+
+let mapDataType = Object.entries(me);
+console.log(mapDataType);
+
+for(let[key,value] of mapDataType){
+  console.log(`${key}:${value}`)
 }
-console.log(Object.entries(details));
+//Expected output:
+//name : Santanu
+//age  : 32
 </script>
 
 --------------
