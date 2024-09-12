@@ -495,10 +495,19 @@ III. Object.fromEntries()
    > Use to convert Map to Object datatype
 
 IV. Object.freeze()
-   
-IV. Object.keys()
+    use to Freezing an object
 
-V. Object.values()
+V. Object.isFrozen()
+   Check any Object frozen or not
+
+VII. Object.hasOwn()
+   Check any property exist or not
+
+VIII. Object.keys()
+   Get object Keys as a Array
+
+IX. Object.values()
+  Get object Values as a Array
 
 Example:
 --------------
@@ -576,22 +585,67 @@ console.log(me)
 //freezeing the object
 Object.freeze(me);
 
-me.age = 33;
+me.age = 33;  // Cannot change when freeze
 console.log(me)
 // Expected output: 32
 
+delete me.age  // Cannot delete when freeze
+console.log(me);
+//Expected output: 32
+
+--------------
+V. Object.isFrozen()
+   Check any Object frozen or not
+--------------
+const me = {
+  name: "Santnau",
+  age: 31,
+};
+//freezeing the object
+Object.freeze(me);
+
+//Check Frozen or not
+console.log(Object.isFrozen());
+// Expected output: true
+
+--------------
+VII. Object.hasOwn()
+     Check any property exist or not
+--------------
+const me = {
+  name: "Santnau",
+  age: 31,
+};
+
+console.log(Object.hasOwn(me, 'name'));
+// Expected output: true
+
+console.log(Object.hasOwn(me, 'skills'));
+// Expected output: false
 
 --------------
 IV. Object.keys()
+     Get object Keys as a Array
 --------------
-let keys = Object.keys(me);
-console.log(keys);
+const me = {
+  name: "Santnau",
+  age: 31,
+};
+let arrayDataType = Object.keys(me);
+console.log(arrayDataType);
+// Expected output:  ['name', 'age']
 
 --------------
 V. Object.values()
+   Get object Values as a Array
 --------------
-let values = Object.values(me);
-console.log(values);
+const me = {
+  name: "Santnau",
+  age: 31,
+};
+let arrayDataType = Object.values(me);
+console.log(arrayDataType);
+// Expected output:  ['Santnau', 31]
 
 ---------
 iii. Add Two Object
