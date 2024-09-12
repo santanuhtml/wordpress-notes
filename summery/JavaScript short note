@@ -486,14 +486,15 @@ Note:
 ii. Object Methods
 ---------
 I. Object.assign(target, source)		
-   > use to Copy key and value from source object to target object
+   > use to Copy source object to target object
 
 II. Object.entries()
-   > returns key and value as an array with in a object.[Object to MAP]
-   > make it simple for object loop.
+   > use to convert Object to Map datatype 
 
 III. Object.fromEntries()
-   > Map to Object
+   > Use to convert Map to Object datatype
+
+IV. Object.freeze()
    
 IV. Object.keys()
 
@@ -541,32 +542,22 @@ for(let[key,value] of mapDataType){
 </script>
 
 --------------
-object loop
---------------
-<p id="demo"></p>
-<script>
-const me = {
-name:"Santanu Chowdhury", 
-Skills:"HTML5, CSS3, SCSS, JavaScript", 
-}; 
-let text = "";
-for (let [k, v] of Object.entries(me)) {
-text += k + ": " + v + "<br>";
-}
-document.getElementById("demo").innerHTML = text;
-</script>
-
---------------
 III. Object.fromEntries()
    > Map to Object
 --------------
 <script>
-  const fruits = new Map([
-    ["apples", 500],
-    ["bananas", 300],
-    ["oranges", 200]
-  ]);
-  console.log(Object.fromEntries(fruits));
+const mapDataType = new Map([
+  ["apples", 500],
+  ["bananas", 300],
+  ["oranges", 200]
+]);
+
+//Map to Object Datatype
+let objectDataType = Object.fromEntries(mapDataType);
+console.log(objectDataType);
+
+//Expected output:
+//{apples: 500, bananas: 300, oranges: 200}
 </script>
 
 --------------
