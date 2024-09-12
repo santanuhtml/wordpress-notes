@@ -86,7 +86,7 @@ className[i].style.backgroundColor = "red";
 </script>
 
 ------------
-document.getElementsByTagName()
+document.querySelector()
 Note:Select first matched element
 ------------
 <h2 class="example">A heading</h2>
@@ -150,19 +150,22 @@ Example 2
 Select multiple elements with same class
 -------------- 
 <div class="list">
-1 
+  1 
 </div>
 <div class="list">
-2 
+  2 
 </div>
 <div class="list">
-3
+  3
 </div>
+<div id="demo"></div>
 <script>
-let lists = document.getElementsByClassName('list');
-for(list of lists){
-  console.log(list);
-}
+  let x = document.getElementsByClassName('list');
+  let add = '';
+  for (let i = 0; i < x.length; i++) {
+    add += x[i].innerHTML;
+  }
+  document.getElementById('demo').innerHTML = add;
 </script>
 
 ------------
@@ -1422,6 +1425,31 @@ myFunction();
 --------------
 29. JavaScript Class
 --------------
+Concept of Class:
+--------------
+> In programming, everything is an entity/object.
+  Each entity/object belongs to a specific 'Class'.
+
+> For example, let’s say we have three entities: Laptop, Mobile, and Tablet.
+  These three entities represent different classes.
+
+> Every entity/object, like Laptop, Mobile, and Tablet,
+  has different properties and methods, which are defined in their specific class.
+
+> Now, if I have two laptops, Dell and Lenovo,
+  both of these objects belong to the 'Laptop' class.
+
+> Similarly, if I have two mobile phones, Samsung and Mi,
+  these objects belong to the 'Mobile' class.
+
+> In short, Laptop, Mobile, and Tablet are classes, and:
+   . Dell and Lenovo belong to the 'Laptop' class.
+   . Samsung and Mi belong to the 'Mobile' class.
+
+> Before defining a class for any object, think about its properties (attributes) 
+  and methods (behaviors or functions).
+--------------
+
 . Vanila JavaScript is not Object-oriented programming (OOP) language, so 
   Vanila JavaScript don't have Class concept.
 . ECMAScript 2015, introduct Class to introduct OOP.
