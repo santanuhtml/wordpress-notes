@@ -677,8 +677,8 @@ firstName:   'Santanu',
 lastName:    'Chowdhury'
 };
 
-for(let x in me){
-  console.log(x);
+for(let key in me){
+  console.log(key, me[key]);
 }
 
 ---------
