@@ -1592,8 +1592,6 @@ Example:
   console.log(s)
 </script>
 
-
-
 --------------
 31. JavaScript Object Details
 --------------
@@ -1634,7 +1632,6 @@ Using a function when we create an Object is called Object Constructor.
 
 Example:
 --------- 
-
  function Person(first,last,age) {
       this.firstName = first;
       this.lastName   = last;
@@ -1735,8 +1732,6 @@ Note:
   Math.max() do not applicabel for Array but using apply() method
   we can use Array for Math.max to find large number.
 
-    
-    	
 --------------
 32. JavaScript Closures
 --------------
@@ -1827,7 +1822,6 @@ II. Asynchronous:
 . A callback is a function to be executed later.
 
 . Here setTimeout() use as a Callback function.
-
 ------------
 Code:
 ------------
@@ -1839,18 +1833,14 @@ setTimeout(function() {
 }, 2000);
 
 console.log("3. End");
-
 ------------
 Note: Callback functions can lead to 'callback hell' if nested deeply, 
       which makes code hard to manage. This led to the adoption of Promises.
-
 ------------
 2. Promises
 ------------
 . A Promise ensures a result, whether it’s successful (resolve) or an error (reject).
-
 . Promises can be handled using .then() for success and .catch() for errors.
-
 ------------
 Code
 ------------
@@ -1907,7 +1897,6 @@ Await:
 . When we use 'await' JavaScript pauses the execution of async function
   code until the promise settles.
 
-
 ------------
 code:
 ------------
@@ -1922,7 +1911,6 @@ getData().then(res=>{
   console.log(x.id);
   })
 })
-
 ------------
 Explain:
 . fetch() is an asynchronous operation and returns a promise.
@@ -1976,9 +1964,6 @@ async function getWeather() {
 }
 
 getWeather();
-
-------------
-
 
 --------------
 37. Web API	
