@@ -34,7 +34,7 @@ JavaScript short note
 33. JavaScript Class
 34. DOM
 35. setInterval() and setTimeout()
-36. JS Async
+36. Synchronous and Asynchronous JavaScript:
 37. Web API	
 38. Summery
 --------------
@@ -1778,88 +1778,232 @@ setInterval(function(){
   console.log('test')
 },3000);									
 
---------------
-36. JS Async
 -------------- 
-i. Asynchronous JavaScript
-ii.  Callbacks
-iii. Async/Await 
---------------------
-i. Asynchronous JavaScript
---------------------
-. JavaScript is Synchronous, means it read code step by setp.
-. If any { part of code } we need to execute leter then we have to 
-  use setTimeout() function to make JavaScript Asynchronous.
+36. Synchronous and Asynchronous JavaScript:
+  1. Callbacks
+  2. Promises
+  3. Async/Await
+-------------- 
+. JavaScript is single-threaded, meaning it can only do one task at a time, 
+  but it has asynchronous capabilities to handle multiple tasks efficiently.
+  
+------------
+I. Synchronous:
+------------
+. Synchronous code is executed sequentially, meaning one line runs after 
+  the previous one has finished.
 
+. If one operation takes time (like a long loop or a network request), 
+  the entire script will stop until that task completes.
+   
+. This behavior is referred to as "blocking".
+   
 ------------
-Example 1:
-Synchronous
+Synchronous code:
 ------------
-console.log('Print line 1.');
-console.log('Print line 2.');
-console.log('Print line 3.');
-
-------------
-Example 2:
-JavaScript Asynchronous behaviour using setTimeout()
-------------
-console.log('Print line 1.');
-setTimeout(function(){
-  console.log('Print line 2.');
-},0)
-console.log('Print line 3.');
-
-------------
-Example 3:
-JavaScript Asynchronous behaviour using setInterval()
-------------
-console.log('Print line 1.');
-setInterval(function(){
-    console.log('Print line 2.');
-},1000)
-console.log('Print line 3.');
-
---------------------
-ii.  Callbacks
---------------------
-. In JavaScript we crate independent function for each task.
-. to perform any single task we may connect two independent function 
-  using callback features.
-. for callback features, use a function as a paramater to another function.
----------
-<script>
-function display(some) {
-  console.log(some);
+console.log("1. Start");
+for (let i = 1; i <= 5; i++) {
+    console.log(`2. Loop iteration: ${i}`);
 }
-function calculator(num1, num2, testcallback) {
-  let sum = num1 + num2;
-  if(testcallback){
-    testcallback(sum);
-  }
-}
-calculator(5, 5, display);
-</script>
+console.log("3. End");
 
---------------------
-iii. Async/Await 
---------------------
-. If we add 'async' before a function, then the function 
-  becomes Asynchronous
-. since the function becomes Asynchronous, so to maintain 
-  the order we use 'Await' within the function.
-. Asynchronous function returns Promice, 
-  so to get value use .then  
+------------
+II. Asynchronous:
+------------ 
+. JavaScript can also handle asynchronous operations.
 
----------
-Basic Structure
----------
-<script>
- async function xyz(){
-   return "abc";
+. Even though JavaScript is single-threaded and synchronous, asynchronous 
+  behavior allows it to perform tasks in the background without blocking 
+  the main program.
+
+. There are three common ways to work with asynchronous JavaScript:
+  1. Callbacks
+  2. Promises
+  3. Async/Await
+  
+------------
+1. Callbacks 
+------------
+. A callback is a function to be executed later.
+
+. Here setTimeout() use as a Callback function.
+
+------------
+Code:
+------------
+console.log("1. Start");
+
+// Let an API call that takes 2 seconds
+setTimeout(function() {
+    console.log("2. Data fetched from server");
+}, 2000);
+
+console.log("3. End");
+
+------------
+Note: Callback functions can lead to 'callback hell' if nested deeply, 
+      which makes code hard to manage. This led to the adoption of Promises.
+
+------------
+2. Promises
+------------
+. A Promise ensures a result, whether it’s successful (resolve) or an error (reject).
+
+. Promises can be handled using .then() for success and .catch() for errors.
+
+------------
+Code
+------------
+console.log("1. Start");
+
+const fetchData = new Promise((resolve, reject) => {
+    // Simulating an API call that takes 2 seconds
+    setTimeout(() => {
+        resolve("2. Data fetched from server");
+    }, 2000);
+});
+
+fetchData.then((data) => {
+    console.log(data);
+}).catch((error) => {
+    console.log(error);
+});
+
+------------
+Note:
+Promises used to avoid 'callback hell', but the syntax become complex.
+
+------------
+3. Async/Await
+------------
+. Async/Await syntax is clean and readable way to work with promises.
+
+------------
+Async:
+------------
+. If we Add 'async' befor a function it becomes an asynchronous function 
+  and returns a promise.
+  
+. since it returns a promise, can be handled using .then() for success 
+  and .catch() for errors.
+
+------------
+basic structure using async
+------------
+async function exampleFunction() {
+    return "Hello, World!";
 }
-xyz().then(res=>{
+exampleFunction().then((result) => {
+    console.log(result); // Outputs: Hello, World!
+});
+
+------------
+Await:
+------------
+. The await keyword is used inside an async function
+
+. 'await' is used to wait for a promise to get resolve or reject. 
+
+. When we use 'await' JavaScript pauses the execution of async function
+  code until the promise settles.
+
+
+------------
+code:
+------------
+ async function getData(){
+  const response = await fetch("https://dummyjson.com/users");
+  const data = await response.json(); 
+  return data;
+}
+getData().then(res=>{
   console.log(res);
+  res.users.map(x=>{
+  console.log(x.id);
+  })
 })
+
+------------
+Explain:
+. fetch() is an asynchronous operation and returns a promise.
+
+. The await keyword pauses the execution of the getData() function 
+  until the fetch() promise resolves.
+
+. ** Both fetch() and .json() are asynchronous and return promises.
+
+. Since fetch() returns a promise, we may handel it using .then() OR .catch() methods
+
+------------
+Example:
+------------
+function getData(){
+  fetch(`https://dummyjson.com/users`)
+  .then((res)=>{return res.json()})
+  .then((data)=>{console.log(data)})
+  .catch((error) => {console.log(error.message)})        
+}
+getData();
+
+------------
+Handling Multiple Asynchronous Operations 
+(Example: Fetching Data Sequentially):
+------------
+. Let’s say we’re building a weather application that requires two 
+  asynchronous API requests:
+   1. First, to get the user’s location.
+   2. Second, to fetch the weather based on the location.
+  
+. These calls should be made one after another because the second call 
+  depends on the result of the first.
+
+Example:
+------------
+async function getWeather() {
+    try {
+        // Fetch location
+        const locationResponse = await fetch("https://api.example.com/location");
+        const location = await locationResponse.json();
+        console.log("User location:", location);
+
+        // Fetch weather using the location data
+        const weatherResponse = await fetch(`https://api.example.com/weather?lat=${location.lat}&lon=${location.lon}`);
+        const weather = await weatherResponse.json();
+        console.log("Weather Data:", weather);
+    } catch (error) {
+        console.error("Failed to fetch weather data:", error);
+    }
+}
+
+getWeather();
+
+------------
+
+
+--------------
+37. Web API	
+--------------  
+i.   Fetch API
+ii.  worker API
+iii. Forms API
+iv.  Web History API
+v.   Storage API
+
+--------------
+i.   Fetch API
+------------
+> Using ASYNC
+------------
+<button onclick="getData()">Get Data</button>
+<div id="demo"></div>
+<script>
+  const x = document.getElementById('demo');
+  async function getData(){
+      const response = await fetch("https://dummyjson.com/users");
+      const data = await response.text(); 
+      console.log(data);
+      x.innerText= data; 
+  }
 </script>
 
 ---------
@@ -1900,32 +2044,6 @@ fetch with try{} catch(error){}
   getData().then((data)=>{
     console.log(data);
   })
-
---------------
-37. Web API	
---------------  
-i.   Fetch API
-ii.  worker API
-iii. Forms API
-iv.  Web History API
-v.   Storage API
-
---------------
-i.   Fetch API
-------------
-> Using ASYNC
-------------
-<button onclick="getData()">Get Data</button>
-<div id="demo"></div>
-<script>
-  const x = document.getElementById('demo');
-  async function getData(){
-      const response = await fetch("https://dummyjson.com/users");
-      const data = await response.text(); 
-      console.log(data);
-      x.innerText= data; 
-  }
-</script>
 
 -------------
 ii.  worker API
