@@ -1140,42 +1140,65 @@ console.log(lastNmae);
 16. JavaScript Array Iteration
 --------------
 i. forEach
--------
+--------------
 const me = ['Santanu', 'Chowdhury', 'Indian'];
 me.forEach((x,y) => {
    console.log(x, y);
 });
       
--------
+--------------
 ii. map
--------
+--------------
 const me = ['Santanu', 'Chowdhury', 'Indian'];
 me.map((x,y) => {
    console.log(x, y);
 });
 
--------
-iii. filter
--------
-const me = [1,2,3,4,5,6];
-const ft = me.filter((x) => {
-  return x>3
-});
-console.log(ft);
-//Output: [4, 5, 6]
+--------------
+iii. find(): 
+> This method returns first element that passes a test
+  and undefined if no elements are found.
+---------
+Example:1
+---------
+  const arr = [10,20,30,40,50];
+  const result = arr.find((e)=>{
+    return e > 30;
+  })
+  console.log(result); // 40
 
-
 -------
-iv. find
+Example:2
 -------
-const me = [1,2,3,4,5,6];
-const ft = me.find((x) => {
-  return x>3
-});
-console.log(ft);
-//Output: 4
+  const me = [
+    { name: "apples", quantity: 2 },
+    { name: "bananas", quantity: 0 },
+    { name: "cherries", quantity: 5 },
+  ];
+  const result = me.find((object)=>( object.name === "apples"))
+  console.log(result);      //{name: 'apples', quantity: 2}
+  console.log(result.name); //apples
 
+--------------
+iv. findIndex() 
+> This method returns index of first element that passes a test.
+--------------
+  const arr = [10,20,30,40,50];
+  const result = arr.findIndex((e)=>{
+    return e > 30;
+  })
+  console.log(result); // 3
 
+--------------
+v. filter(): ]
+> This method returns all element that passes a test 
+  and creates a new array with them.
+--------------
+ const arr = [10,20,30,40,50];
+  const result = arr.filter((e)=>{
+    return e >= 30;
+  })
+  console.log(result); // [30, 40, 50]
 
 --------------
 17. Math Object
