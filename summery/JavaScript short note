@@ -1992,6 +1992,7 @@ getWeather();
 37. Web API	
 --------------  
 i.   Fetch API
+     Axios API
 ii.  worker API
 iii. Forms API
 iv.  Web History API
@@ -2052,6 +2053,52 @@ fetch with try{} catch(error){}
   getData().then((data)=>{
     console.log(data);
   })
+
+-------------
+Axios API
+-------------
+. Axios is use for HTTP requests, similar to fetch()
+. Axios automatically converts response data to JSON where
+  fetch() requires .json() manually.
+. Axios has better compatibility with older browsers (like IE11).
+
+-------------
+Install:
+-------------
+> npm i axios
+
+-------------
+Add in Project:
+-------------
+> import axios from 'axios';
+
+-------------
+Basic Code Structure
+-------------
+ async function getData(){
+   const response = await axios.get('https://dummyjson.com/posts');
+   return response;
+};
+getData().then((response)=>{
+   console.log(response.data.posts);
+   response.data.posts.map((index, key)=>{
+     console.log(index.id);
+   })
+});
+
+-------------
+Explain:
+. axios.get() Also an asynchronous operation and returns a promise and
+  we may handel it using .then() OR .catch() methods
+-------------
+Example:
+-------------
+function getData(){
+axios.get('https://dummyjson.com/posts')
+   .then(res => console.log(res.data.posts))
+   .catch((error) => {console.log(error.message)})  
+};
+getData();
 
 -------------
 ii.  worker API
