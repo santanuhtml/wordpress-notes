@@ -1943,18 +1943,16 @@ Explain:
 
 . ** Both fetch() and .json() are asynchronous and return promises.
 
-. Since fetch() returns a promise, we may handel it using .then() OR .catch() methods
+. Since fetch() returns a promise, we may handel it using .then() and .catch() methods
 
 ------------
 Example:
+*Here we do not wrap with getData() function.
 ------------
-function getData(){
-  fetch(`https://dummyjson.com/users`)
-  .then((res)=>{return res.json()})
-  .then((data)=>{console.log(data)})
-  .catch((error) => {console.log(error.message)})        
-}
-getData();
+fetch(`https://dummyjson.com/users`)
+.then((res)=> res.json())
+.then((data)=> console.log(data))
+.catch((error) => console.log(error.message))
 
 ------------
 Handling Multiple Asynchronous Operations 
