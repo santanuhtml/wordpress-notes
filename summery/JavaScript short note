@@ -31,7 +31,7 @@ JavaScript short note
 30. JavaScript JSON
 31. JavaScript Object Details
 32. JavaScript Closures
-33. JavaScript Class
+33. fetch() API
 34. DOM
 35. setInterval() and setTimeout()
 36. Synchronous and Asynchronous JavaScript:
@@ -1781,9 +1781,105 @@ add();
 add(); 
 
 --------------
-33. JavaScript Class
+33. fetch() API
 --------------
-** iii. Class Inheritance
+
+. The fetch() function use to make HTTP requests. 
+. fetch() is asynchronous and return promises.
+. Since fetch() returns a promise, we may handel it using .then() and .catch() methods
+. fetech() supports various methods like GET, POST, PUT, DELETE, PATCH
+
+----------------
+Basic Syntax:
+----------------
+fetch(url, options)
+  .then((res) => res.json())  
+  .then((data) => console.log(data)) 
+  .catch((error) => console.error('Error:', error));
+  
+----------------
+1. GET Request
+----------------
+A GET request is used to get data from a server.
+This is the default request
+
+----------------
+
+fetch(`https://dummyjson.com/users`)
+.then(res=> res.json())
+.then(data=> console.log(data))
+.catch(error => console.log(error.message))
+
+----------------
+2. POST Request
+----------------
+A POST request is used to send data to a server.
+
+----------------
+fetch(`https://dummyjson.com/users/add`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify({
+    firstName: 'Santanu',
+    lastName: 'Chowdhury',
+    age: 30,
+  }),
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(error => console.log(error.message));
+
+----------------
+3. PUT Request
+----------------
+PUT use to update data
+----------------
+fetch('https://dummyjson.com/users/add/209', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstName: 'Santanu',
+    lastName: 'Chowdhury',
+    age: 34,
+  }),
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+----------------
+4. DELETE Request
+----------------
+fetch('https://dummyjson.com/users/add/209', {
+  method: 'DELETE',
+})
+  .then(response => response.json())
+  .then(data => console.log('Deleted:', data))
+  .catch(error => console.error('Error:', error));
+
+----------------
+5. PATCH Request
+----------------
+A PATCH request is same as PUT, but we do not want to send
+entire object, just send changabel fields
+
+----------------
+fetch('https://dummyjson.com/users/add/209', {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    age: 32,
+  }),
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 
 --------------
 35. setInterval() and setTimeout()
