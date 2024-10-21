@@ -250,14 +250,31 @@ MCQ:24
 What is null in JavaScript?
 > absence of value
 
+--------------
+MCQ:25
+--------------
+How Do You Find the Largest Number in an Array?
+Input: [1, 5, 3, 9, 2]
+Output: 9
+> Answer:
 
+function findLargest(arr) {
+  return Math.max(...arr);
+}
+console.log(findLargest([1, 5, 3, 9, 2])); // 9
 
+--------------
+MCQ:26
+--------------
+How Do You Remove Duplicates from an Array?
+Input: [1, 2, 2, 3, 4, 4, 5]
+Output: [1, 2, 3, 4, 5]
+> Answer:
 
-
-
-
-
-
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+console.log(removeDuplicates([1, 2, 2, 3, 4, 4, 5])); // Output: [1, 2, 3, 4, 5]
 
 
 
