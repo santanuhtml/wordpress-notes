@@ -296,7 +296,7 @@ To use an HTML button as a link, you have to add some JavaScript code. Example:
 
 32. HTML Links - Create Bookmarks
 <p><a href="#C4">Jump to Chapter 4</a></p>
-……..
+Â…Â…..
 <h2 id="C4">Chapter 4</h2>
 <p>This chapter explains ba bla bla</p>
 
@@ -620,16 +620,81 @@ Both will be treated as HTML by any web browser and web server.
 <	less than	&lt;	
 >	greater than	&gt;	
 &	ampersand	&amp;
-©	copyright	&copy;	
-®	R trademark	&reg;
+Â©	copyright	&copy;	
+Â®	R trademark	&reg;
 
 48. The HTML charset Attribute
 In HTML5 The default character encoding  is UTF-8.
 Unicode enables processing, storage, and transport of text independent of platform and language. 
 Emojis are characters from the UTF-8 character set
 
+49. New in HTML
+49.1. Listing
+<ol start="1">
+  <li>Santanu</li>
+  <li>Puja</li>
+  <li>Hunny</li>
+<ol>
+//start, end, reversed
 
-49. HTML Forms
+49.2. Content Editable
+<div contenteditable="true">
+  Santanu Chowdhury
+</div>
+
+49.3. Accordion
+<details>
+  <summary>Q1: What is your name?</summary>
+  <p>Santanu Chowdhury</p>
+</details>
+<details>
+  <summary>Q2: About me.</summary>
+  <p>I am a Front-end Developer with skills Html5, CSS3, SCSS, JavaScript, Bootstrap etc.</p>
+</details>
+
+49.4. File Upload
+<input type="file" accept=".png, .jpg, .jpeg">
+
+Note: 
+> only .png and .jpg will accept here.
+> It is clinet side only, so for more sequre we may use servide
+  validatoin also.
+
+49.5. Text Direction
+<div dir="ltr">
+  <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, 
+     international pavilions, award-winning fireworks and seasonal special events.
+   </p>
+</div>
+<div dir="rtl">
+  <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, 
+     international pavilions, award-winning fireworks and seasonal special events.
+   </p>
+</div>
+
+Note:
+ltr = left to right
+rtl = right to left
+
+49.6. Lazy Loding
+<img src="https://placehold.co/480x400/000000/FFF" loading="lazy" width="100" height="100" />
+
+49.7. Picture tag
+<picture>
+  <source srcset="https://placehold.co/1900x400/000000/FFF" media="(min-width: 1600px)">
+  <source srcset="https://placehold.co/1600x400/000000/FFF" media="(min-width: 1200px)">
+  <source srcset="https://placehold.co/1200x400/000000/FFF" media="(min-width: 768px)">
+  <source srcset="https://placehold.co/768x400/000000/FFF" media="(min-width: 480px)">
+  <img src="https://placehold.co/480x400/000000/FFF" alt="Fully responsive image with min-width queries">
+</picture>
+
+49.8. Video Poster:
+<video controls width="600" poster="https://placehold.co/600x400">
+  <source src="https://cdn.pixabay.com/video/2023/07/04/169951-842348732_large.mp4" type="video/mp4">
+</video>
+
+
+50. HTML Forms
 The HTML <input> element is the most used form element.
 An <input> element can be displayed in many ways, depending on the type attribute.
 <input type="text">	
@@ -826,5 +891,7 @@ Radio buttons let a user select ONLY ONE of a limited number of choices
 </form>
 --------------------
 Note: ** All names are same under same radio option
+
+
 
 
