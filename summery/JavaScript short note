@@ -136,7 +136,7 @@ ii.  HTML css using          .style
 iii. HTML attribute using    .src 
 iv.  HTML form attribut      .type
 v.   HTML form input	     .value
-vi.  HTML page URL	       .URL
+vi.  HTML page URL	     .URL
 
 --------------
 Example 1
@@ -153,22 +153,22 @@ Example 2
 Select multiple elements with same class
 -------------- 
 <div class="list">
-  1 
+1 
 </div>
 <div class="list">
-  2 
+2 
 </div>
 <div class="list">
-  3
+3
 </div>
 <div id="demo"></div>
 <script>
-  let x = document.getElementsByClassName('list');
-  let add = '';
-  for (let i = 0; i < x.length; i++) {
-    add += x[i].innerHTML;
-  }
-  document.getElementById('demo').innerHTML = add;
+let list = document.getElementsByClassName('list');
+let add = '';
+for(let x of list){
+    add += x.innerHTML;
+}
+document.getElementById('demo').innerHTML = add;
 </script>
 
 ------------
