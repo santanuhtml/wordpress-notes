@@ -580,20 +580,21 @@ const me = {
   name: "Santnau",
   age: 31,
 };
+console.log(me.age)
 
 me.age = 32;
-console.log(me)
+console.log(me.age)
 // Expected output: 32
 
 //freezeing the object
 Object.freeze(me);
 
 me.age = 33;  // Cannot change when freeze
-console.log(me)
+console.log(me.age)
 // Expected output: 32
 
 delete me.age  // Cannot delete when freeze
-console.log(me);
+console.log(me.age);
 //Expected output: 32
 
 --------------
@@ -608,7 +609,7 @@ const me = {
 Object.freeze(me);
 
 //Check Frozen or not
-console.log(Object.isFrozen());
+console.log(Object.isFrozen(me));
 // Expected output: true
 
 --------------
