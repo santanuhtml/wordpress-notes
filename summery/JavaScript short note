@@ -62,11 +62,13 @@ document.getElementsByTagName(name)
 document.querySelector('.class | #id | elementName')
 document.querySelectorAll('.class | #id | elementName') 
 
-** document.getElementsByTagName() => This method returns an HTMLCollection Object
-** document.querySelectorAll()     => This method returns an NodeList object.
+# document.getElementsByClassName():
+  . It returns an HTMLCollection, which is Live array-like element (but not true array).
 
-> HTMLCollection items can be accessed by their name, id, or index number.
-  but NodeList items can only be accessed by their index number.
+# document.getElementsByTagName() => This method returns an HTMLCollection Object
+# document.querySelectorAll()     => This method returns an NodeList object.
+
+*** We can access everyone's 'Value' using for...of Loop
 
 ------------
 Examples:
@@ -78,10 +80,9 @@ Note:Select All matched class
 <p class="example">A paragraph.</p> 
 <script>
 const className = document.getElementsByClassName("example");
-console.log(className);
-console.log(className[0])
-for (let i = 0; i < className.length; i++) {
-className[i].style.backgroundColor = "red";
+for(let x of className){
+    console.log(x);
+    x.style.backgroundColor='red';
 }
 </script>
 
@@ -106,8 +107,9 @@ Note: Select all matched class OR element
 const nodeList = document.querySelectorAll(".example");
 console.log(nodeList);
 console.log(nodeList[0])
-for (let i = 0; i < nodeList.length; i++) {
-  nodeList[i].style.backgroundColor = "red";
+for(let x of nodeList){
+    console.log(x);
+    x.style.backgroundColor='red';
 }
 </script>
 ------------
@@ -120,8 +122,9 @@ Note: Select all matched Element
 const htmlCollection = document.getElementsByTagName("h2");
 console.log(htmlCollection);
 console.log(htmlCollection[0])
-for (let i = 0; i < htmlCollection.length; i++) {
-htmlCollection[i].style.backgroundColor = "red";
+for(let x of htmlCollection){
+    console.log(x);
+    x.style.backgroundColor='red';
 }
 </script> 
 ------------
