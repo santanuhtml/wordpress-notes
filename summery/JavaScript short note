@@ -135,8 +135,8 @@ i.   HTML content using      .innerHTML
 ii.  HTML css using          .style
 iii. HTML attribute using    .src 
 iv.  HTML form attribut      .type
-v.   HTML form input	       .value
-vi.  HTML page URL	         .URL
+v.   HTML form input	     .value
+vi.  HTML page URL	       .URL
 
 --------------
 Example 1
